@@ -6,20 +6,20 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 22:58:02 by moska             #+#    #+#             */
-/*   Updated: 2017/02/08 23:19:16 by moska            ###   ########.fr       */
+/*   Updated: 2017/02/17 15:58:36 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_strisblank(char *str)
+int	ft_strisblank(char *str)
 {
-  while (*str && *(str + 1))
-  {
-    if (((int)(*str) == 9) || ((int)(*str) == 32))
-      str++;
-    else
-      return (0);
-  }
-  return (1);
+	while (*str && *(str + 1))
+	{
+		if (((int)(*str) == 9) || ((int)(*str) == 32))
+			str++;
+		else
+			return (0);
+	}
+	return (1);
 }

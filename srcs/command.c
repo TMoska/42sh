@@ -6,13 +6,13 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 21:42:06 by moska             #+#    #+#             */
-/*   Updated: 2017/02/16 22:02:17 by moska            ###   ########.fr       */
+/*   Updated: 2017/02/17 16:06:33 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void construct_command(t_shell *shell)
+void	construct_command(t_shell *shell)
 {
-  shell->cmd = ft_strsplit(shell->buff, ' ');
+	shell->cmd = ft_strsplit(shell->buff, ' ');
 }

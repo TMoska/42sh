@@ -6,20 +6,20 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 12:14:20 by moska             #+#    #+#             */
-/*   Updated: 2017/02/17 12:16:47 by moska            ###   ########.fr       */
+/*   Updated: 2017/02/17 15:59:03 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t  ft_str2len(const char *tab)
+size_t	ft_str2len(char **tab)
 {
-  size_t i;
+	size_t i;
 
-  i = 0;
-  if (!tab)
-    return (0);
-  while (tab[i])
-    i++;
-  return (i);
+	i = 0;
+	if (!tab)
+		return (0);
+	while (tab[i])
+		i++;
+	return (i);
 }

@@ -6,23 +6,24 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 22:13:47 by moska             #+#    #+#             */
-/*   Updated: 2017/02/16 22:20:51 by moska            ###   ########.fr       */
+/*   Updated: 2017/02/17 16:00:44 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-void  ft_str2del(char **tab)
+void	ft_str2del(char **tab)
 {
-  int i;
+	int i;
 
-  i = 0;
-  if (tab)
-  {
-    while (tab[i])
-    {
-      free(tab[i]);
-      i++;
-    }
-    free(tab);
-  }
+	i = 0;
+	if (tab)
+	{
+		while (tab[i])
+		{
+			free(tab[i]);
+			i++;
+		}
+		free(tab);
+	}
 }

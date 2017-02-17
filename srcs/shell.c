@@ -6,13 +6,13 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:29:07 by moska             #+#    #+#             */
-/*   Updated: 2017/02/08 21:33:20 by moska            ###   ########.fr       */
+/*   Updated: 2017/02/17 17:05:06 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void  create_shell(t_shell **shell)
+void	create_shell(t_shell **shell)
 {
-  *shell = ft_memalloc(sizeof(t_shell));
+	*shell = ft_memalloc(sizeof(t_shell));
 }
