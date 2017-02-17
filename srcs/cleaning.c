@@ -12,8 +12,13 @@
 
 #include "minishell.h"
 
-void	clean_shell(t_shell **shell)
+void	mid_clean_shell(t_shell **shell)
 {
 	ft_strdel(&((*shell)->buff));
 	ft_str2del((*shell)->cmd);
+}
+
+void	clean_shell(t_shell **shell)
+{
+	ft_str2del((*shell)->env);
 }

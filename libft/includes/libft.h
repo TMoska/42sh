@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:33:19 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/17 15:59:59 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/17 18:10:11 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,4 +129,7 @@ int					ft_strisblank(char *str);
 char				*ft_clean_str_around(char *str, char c);
 void				ft_str2del(char **tab);
 size_t				ft_str2len(char **tab);
+char				**ft_str2new(size_t size);
+char				**ft_str2dup(char **str);
+int					get_next_line(const int fd, char **line);
 #endif

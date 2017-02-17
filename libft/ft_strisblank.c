@@ -14,7 +14,7 @@
 
 int	ft_strisblank(char *str)
 {
-	while (*str && *(str + 1))
+	while (*str)
 	{
 		if (((int)(*str) == 9) || ((int)(*str) == 32))
 			str++;

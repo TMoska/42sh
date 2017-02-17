@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 22:56:19 by moska             #+#    #+#             */
-/*   Updated: 2017/02/17 16:05:14 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/17 18:28:55 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	try_a_builtin(t_shell **shell)
 	cmd = (*shell)->cmd[0];
 	if (ft_strcmp(cmd, "exit") == 0)
 		builtin_exit(shell);
-	// else if (ft_strcmp(cmd, "env") == 0)
-	//   builtin_env(shell);
+	else if (ft_strcmp(cmd, "env") == 0)
+		builtin_env(shell);
 	// else if (ft_strcmp(cmd, "cd") == 0)
 	//   builtin_cd(shell);
 	// else if (ft_strcmp(cmd, "getenv") == 0)

@@ -18,7 +18,11 @@ void	print_prompt(int terminated)
 	if (terminated)
 		write(1, "\n> ", 3);
 	else
+	{
+		ft_putstr("\033[0;32m");
 		write(1, "moska prompt $> ", 16);
+		ft_putstr("\033[0m");
+	}
 }
 
 void	command_not_found(t_shell **shell)
