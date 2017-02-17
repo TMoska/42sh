@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:33:19 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/08 23:09:45 by moska            ###   ########.fr       */
+/*   Updated: 2017/02/17 12:15:52 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,4 +126,7 @@ int   ft_lstadd_back(t_list **alst, t_list *new);
 void    ft_lst_clear(void **list_content, size_t *content_size);
 int ft_char_arr_len(char **arr);
 int ft_strisblank(char *str);
+char *ft_clean_str_around(char *str, char c);
+void  ft_str2del(char **tab);
+size_t			ft_str2len(const char *tab);
 #endif

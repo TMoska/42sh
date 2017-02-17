@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   interpreting.c                                     :+:      :+:    :+:   */
+/*   ft_str2del.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/02/17 13:11:41 by moska            ###   ########.fr       */
+/*   Created: 2017/02/16 22:13:47 by moska             #+#    #+#             */
+/*   Updated: 2017/02/16 22:20:51 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "minishell.h"
-
-void  print_tab(char **cmd)
+void  ft_str2del(char **tab)
 {
-  int i = 0;
+  int i;
 
-  while (cmd[i])
+  i = 0;
+  if (tab)
   {
-    printf("%s\n", cmd[i]);
-    i++;
+    while (tab[i])
+    {
+      free(tab[i]);
+      i++;
+    }
+    free(tab);
   }
-}
-
-void  interpret_line(t_shell **shell)
-{
-  // print_tab((*shell)->cmd);
-
-  // interpretor ??
-  if (try_a_builtin(shell))
-    return ;
-  // else if()
-  //   // Fork and look for executable
-  else
-    command_not_found(shell);
 }

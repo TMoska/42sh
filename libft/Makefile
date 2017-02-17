@@ -6,7 +6,7 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/22 15:11:22 by tmoska            #+#    #+#              #
-#    Updated: 2017/02/09 00:38:22 by moska            ###   ########.fr        #
+#    Updated: 2017/02/17 12:16:16 by moska            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SOURCES =	ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 					ft_lst_remove_if.c ft_count_umax_digits.c ft_itoa_ularge.c \
 					ft_put_justified_str.c ft_put_justified_nbr.c ft_putchar_if.c \
 					ft_lst_in_list.c ft_lstadd_back.c ft_lst_clear.c ft_char_arr_len.c \
-					ft_strisblank.c ft_clean_str_around.c
+					ft_strisblank.c ft_clean_str_around.c ft_str2del.c ft_str2len.c \
 
 OBJECTS = $(SOURCES:.c=.o)
 

@@ -1,37 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   interpreting.c                                     :+:      :+:    :+:   */
+/*   cleaning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/02/17 13:11:41 by moska            ###   ########.fr       */
+/*   Created: 2017/02/16 22:11:46 by moska             #+#    #+#             */
+/*   Updated: 2017/02/16 22:21:43 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void  print_tab(char **cmd)
+void  clean_shell(t_shell **shell)
 {
-  int i = 0;
-
-  while (cmd[i])
-  {
-    printf("%s\n", cmd[i]);
-    i++;
-  }
-}
-
-void  interpret_line(t_shell **shell)
-{
-  // print_tab((*shell)->cmd);
-
-  // interpretor ??
-  if (try_a_builtin(shell))
-    return ;
-  // else if()
-  //   // Fork and look for executable
-  else
-    command_not_found(shell);
+  ft_strdel(&((*shell)->buff));
+  ft_str2del((*shell)->cmd);
 }

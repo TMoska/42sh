@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   interpreting.c                                     :+:      :+:    :+:   */
+/*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/02/17 13:11:41 by moska            ###   ########.fr       */
+/*   Created: 2017/02/16 23:32:19 by moska             #+#    #+#             */
+/*   Updated: 2017/02/17 13:05:52 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void  print_tab(char **cmd)
+static void manage_return_code(t_shell **shell, int cmd_len)
 {
-  int i = 0;
+  int arg;
 
-  while (cmd[i])
+  if (arg = ft_atoi((*shell)->cmd[1]))
   {
-    printf("%s\n", cmd[i]);
-    i++;
+    (*shell)->ret = arg;
+    if (cmd_len > 2)
+      ft_putstr_fd("exit: too many arguments\n", 2);
   }
+  // Todo: non numeric argument errors
 }
 
-void  interpret_line(t_shell **shell)
+void  builtin_exit(t_shell **shell)
 {
-  // print_tab((*shell)->cmd);
+  int   cmd_len;
 
-  // interpretor ??
-  if (try_a_builtin(shell))
-    return ;
-  // else if()
-  //   // Fork and look for executable
-  else
-    command_not_found(shell);
+  cmd_len = ft_str2len((*shell)->cmd);
+  if (cmd_len > 1)
+    manage_return_code(shell, cmd_len);
+  (*shell)->exit = 1;
 }
