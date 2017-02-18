@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:29:07 by moska             #+#    #+#             */
-/*   Updated: 2017/02/17 18:19:31 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/18 20:26:42 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	set_env(t_shell **shell, char **env)
 {
-	char **tmp_env;
+	char	**tmp_env;
 
 	tmp_env = NULL;
 	(*shell)->env = ft_str2dup(env);
@@ -31,7 +31,6 @@ static void	set_env(t_shell **shell, char **env)
 			env++;
 		}
 	}
-
 }
 
 void		create_shell(t_shell **shell, char **env)

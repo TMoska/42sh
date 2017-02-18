@@ -132,4 +132,5 @@ size_t				ft_str2len(char **tab);
 char				**ft_str2new(size_t size);
 char				**ft_str2dup(char **str);
 int					get_next_line(const int fd, char **line);
+char				*ft_str3join(char *s1, char *s2, char *s3);
 #endif

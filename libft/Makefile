@@ -32,7 +32,7 @@ SOURCES =	ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 					ft_put_justified_str.c ft_put_justified_nbr.c ft_putchar_if.c \
 					ft_lst_in_list.c ft_lstadd_back.c ft_lst_clear.c ft_char_arr_len.c \
 					ft_strisblank.c ft_clean_str_around.c ft_str2del.c ft_str2len.c \
-					ft_str2new.c ft_str2dup.c get_next_line.c
+					ft_str2new.c ft_str2dup.c get_next_line.c ft_str3join.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
