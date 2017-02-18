@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 09:18:00 by tmoska            #+#    #+#             */
-/*   Updated: 2016/11/18 14:52:07 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/18 22:51:24 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ char		**ft_strsplit(char const *s, char c)
 	if (!s)
 		return (0);
 	size = word_count(s, c);
-	if ((table = (char **)malloc(sizeof(*table) * (size + 1))))
+	if ((table = (char **)malloc(sizeof(*table) * size + sizeof(0))))
 	{
 		table[size] = 0;
 		table = allocate_word_memory(table, (char *)s, c);
