@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:33:19 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/17 18:10:11 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/18 23:04:48 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ int					ft_lstadd_back(t_list **alst, t_list *new);
 void				ft_lst_clear(void **list_content, size_t *content_size);
 int					ft_char_arr_len(char **arr);
 int					ft_strisblank(char *str);
-char				*ft_clean_str_around(char *str, char c);
 void				ft_str2del(char **tab);
 size_t				ft_str2len(char **tab);
 char				**ft_str2new(size_t size);
