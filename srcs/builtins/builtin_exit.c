@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 23:32:19 by moska             #+#    #+#             */
-/*   Updated: 2017/02/19 20:56:53 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/19 23:34:15 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,7 @@ void		builtin_exit(t_shell **shell)
 	}
 	else if ((*shell)->cmd_len == 2)
 		manage_return_code(shell);
+	mid_clean_shell(shell);
+	clean_shell(shell);
 	exit((*shell)->ret);
 }
