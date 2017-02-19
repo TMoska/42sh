@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 09:18:00 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/19 16:47:51 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/19 23:05:02 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char		**ft_strsplit(char const *s, char c)
 		while (*s == c && *s != '\0')
 			s++;
 		substr_len = ft_strlen_until(s, c);
-		table[i] = ft_strsub(s, 0, substr_len);
+		table[i] = ft_strncpy(ft_strnew(substr_len), s, substr_len);
 		if (!table[i])
 			return (NULL);
 		s += substr_len;
