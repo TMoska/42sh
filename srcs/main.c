@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 21:39:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/19 17:52:22 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/19 20:56:43 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 void	sig_callback(int s_num)
 {
 	if (s_num == SIGINT) // Todo: Support more terimnation signals
-	{
-		// print_prompt(NULL, 1);
 		exit(0);
-	}
 }
 
 int		run_shell(t_shell **shell)

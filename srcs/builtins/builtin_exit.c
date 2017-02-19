@@ -6,28 +6,44 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 23:32:19 by moska             #+#    #+#             */
-/*   Updated: 2017/02/19 17:33:06 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/19 20:56:53 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static int is_all_int(char *cmd)
+{
+	while (*cmd)
+	{
+		if (!ft_isdigit(*cmd))
+			return (0);
+		cmd++;
+	}
+	return (1);
+}
+
 static void	manage_return_code(t_shell **shell)
 {
 	int arg;
 
-	if ((arg = ft_atoi((*shell)->cmd[1])))
+	if (!is_all_int((*shell)->cmd[1]))
 	{
-		(*shell)->ret = arg;
-		if ((*shell)->cmd_len > 2)
-			ft_putstr_fd("exit: too many arguments\n", 2);
+		ft_putstr_fd("exit: numeric argument required\n", 2);
+		(*shell)->ret = 2;
 	}
-	// Todo: non numeric argument errors
+	else if ((arg = ft_atoi((*shell)->cmd[1])))
+		(*shell)->ret = arg;
 }
 
 void		builtin_exit(t_shell **shell)
 {
-	if ((*shell)->cmd_len > 1)
+	if ((*shell)->cmd_len > 2)
+	{
+		ft_putstr_fd("exit: too many arguments\n", 2);
+		return ;
+	}
+	else if ((*shell)->cmd_len == 2)
 		manage_return_code(shell);
-	(*shell)->exit = 1;
+	exit((*shell)->ret);
 }
