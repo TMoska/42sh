@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/02/18 20:22:43 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/19 22:30:01 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*get_full_executable(t_shell **shell)
 			ft_str2del(paths);
 			return (tmp);
 		}
-		free(tmp);
+		ft_strdel(&tmp);
 		i++;
 	}
 	ft_str2del(paths);
@@ -79,7 +79,10 @@ void		interpret_line(t_shell **shell)
 	if (try_a_builtin(shell))
 		return ;
 	else if ((exec = get_full_executable(shell)))
+	{
 		fork_and_execute(shell, exec);
+		ft_strdel(&exec);
+	}
 	else
 		command_not_found(shell);
 }

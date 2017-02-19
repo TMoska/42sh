@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 08:03:49 by tmoska            #+#    #+#             */
-/*   Updated: 2016/11/18 08:25:56 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/19 22:21:46 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,20 @@
 
 char	*ft_strtrim(char const *s)
 {
-	char	*str;
-	size_t	i;
+	char	*res;
+	size_t	beg;
+	size_t	end;
 
 	if (!s)
 		return (0);
-	if ((str = ft_strdup((char *)s)))
-	{
-		while (*str == ' ' || *str == '\n' || *str == '\t')
-			str++;
-		i = ft_strlen(str) - 1;
-		while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t')
-			i--;
-		str[++i] = '\0';
-		return (ft_strdup(str));
-	}
-	else
-		return (0);
-	return (0);
+	beg = 0;
+	end = 0;
+	end = ft_strlen(s);
+	while (s[beg] == ' ' || s[beg] == '\n' || s[beg] == '\t')
+		beg++;
+	while (s[end - 1] == ' ' || s[end - 1] == '\n' || s[end - 1] == '\t')
+		end--;
+	if ((res = ft_strncpy(ft_strnew(end - beg), &s[beg], end - beg)))
+		return (res);
+	return (NULL);
 }
