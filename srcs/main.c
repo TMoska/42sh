@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 21:39:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/19 16:33:30 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/19 17:52:22 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,7 @@ int		run_shell(t_shell **shell)
 		interpret_line(shell);
 		mid_clean_shell(shell);
 		if ((*shell)->exit == 1)
-		{
-			printf("EXIT\n");
 			return (0);
-		}
 	}
 }
 

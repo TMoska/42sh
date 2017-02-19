@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 18:27:17 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/17 19:20:46 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/19 17:33:35 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	builtin_env(t_shell **shell)
 	else
 	{
 		// Todo: support options
-		printf("Sorry, don't support options yet.\n");
 		print_env(shell);
 	}
 }

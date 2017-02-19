@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 23:32:19 by moska             #+#    #+#             */
-/*   Updated: 2017/02/17 17:08:42 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/19 17:33:06 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ void		builtin_exit(t_shell **shell)
 {
 	if ((*shell)->cmd_len > 1)
 		manage_return_code(shell);
-	printf("2\n");
 	(*shell)->exit = 1;
 }
