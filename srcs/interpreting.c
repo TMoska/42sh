@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/02/19 22:30:01 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/19 23:29:18 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	*get_full_executable(t_shell **shell)
 
 	i = 0;
 	if (access((*shell)->cmd[0], F_OK) == 0)
-		return ((*shell)->cmd[0]);
+		return (ft_strdup((*shell)->cmd[0]));
 	tmp = get_env_val((*shell)->env_list, "PATH");
 	paths = ft_strsplit(tmp, ':');
 	paths_count = ft_str2len(paths);
@@ -30,13 +30,13 @@ static char	*get_full_executable(t_shell **shell)
 		tmp = ft_str3join(paths[i], "/", (*shell)->cmd[0]);
 		if (access(tmp, F_OK) == 0)
 		{
-			ft_str2del(paths);
+			ft_str2del(&paths);
 			return (tmp);
 		}
 		ft_strdel(&tmp);
 		i++;
 	}
-	ft_str2del(paths);
+	ft_str2del(&paths);
 	return (NULL);
 }
 

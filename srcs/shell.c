@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:29:07 by moska             #+#    #+#             */
-/*   Updated: 2017/02/19 22:30:08 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/19 23:19:19 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	set_env(t_shell **shell, char **env)
 		{
 			tmp_env = ft_strsplit(*env, '=');
 			envladd_back(&(*shell)->env_list, envlnew(tmp_env[0], tmp_env[1]));
-			ft_str2del(tmp_env);
+			ft_str2del(&tmp_env);
 			env++;
 		}
 	}
