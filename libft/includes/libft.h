@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:33:19 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/18 23:04:48 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/19 16:42:31 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,4 +132,5 @@ char				**ft_str2new(size_t size);
 char				**ft_str2dup(char **str);
 int					get_next_line(const int fd, char **line);
 char				*ft_str3join(char *s1, char *s2, char *s3);
+size_t				ft_strlen_until(const char *str, char c);
 #endif
