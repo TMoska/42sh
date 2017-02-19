@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/18 20:25:40 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/19 22:38:47 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct		s_shell
 	t_envl			*env_list;
 }					t_shell;
 
-void				print_prompt(t_shell **shell, int terminated);
+void				print_prompt(t_shell **shell);
 void				read_line(t_shell **shell);
 void				create_shell(t_shell **shell, char **env);
 int					validate_and_prep_cmd(t_shell **shell);

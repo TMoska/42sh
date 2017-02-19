@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:29:48 by moska             #+#    #+#             */
-/*   Updated: 2017/02/18 20:22:22 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/19 22:38:58 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	fill_line(t_shell **shell, char **buff, char **overlay, int ret)
 	}
 	else if ((ft_strlen(*buff) == 1) && *buff[0] == '\n')
 	{
-		print_prompt(shell, 0);
+		print_prompt(shell);
 		ft_bzero(*buff, ft_strlen(*buff));
 	}
 	else

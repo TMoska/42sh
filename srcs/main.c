@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 21:39:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/19 20:56:43 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/19 22:38:53 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		run_shell(t_shell **shell)
 {
 	while (1)
 	{
-		print_prompt(shell, 0);
+		print_prompt(shell);
 		signal(SIGINT, sig_callback);
 		if (get_next_line(0, &((*shell)->buff)) == 0)
 			exit(0);

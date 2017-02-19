@@ -6,24 +6,18 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 18:33:26 by moska             #+#    #+#             */
-/*   Updated: 2017/02/18 21:31:31 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/19 22:38:31 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_prompt(t_shell **shell, int terminated)
+void	print_prompt(t_shell **shell)
 {
-	// Todo: show working directory on the left
-	if (terminated)
-		write(1, "\n> ", 3);
-	else
-	{
-		ft_putstr("\033[0;32m");
-		ft_putstr(get_env_val((*shell)->env_list, "PWD"));
-		ft_putstr("> ");
-		ft_putstr("\033[0m");
-	}
+	ft_putstr("\033[0;32m");
+	ft_putstr(get_env_val((*shell)->env_list, "PWD"));
+	ft_putstr("> ");
+	ft_putstr("\033[0m");
 }
 
 void	command_not_found(t_shell **shell)
