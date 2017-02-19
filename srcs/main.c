@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 21:39:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/18 21:39:43 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/19 16:33:30 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int		run_shell(t_shell **shell)
 	{
 		print_prompt(shell, 0);
 		signal(SIGINT, sig_callback);
-		get_next_line(0, &((*shell)->buff));
+		if (get_next_line(0, &((*shell)->buff)) == 0)
+			exit(0);
 		if (!validate_and_prep_cmd(shell))
 		{
 			ft_strdel(&((*shell)->buff));
