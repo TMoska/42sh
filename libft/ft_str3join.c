@@ -6,13 +6,13 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 16:18:47 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/21 15:17:31 by moska            ###   ########.fr       */
+/*   Updated: 2017/02/22 21:08:09 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_str3join(char *s1, char *s2, char *s3)
+char	*ft_str3join(char *s1, char *s2, char *s3)
 {
 	char	*result;
 	int		length;

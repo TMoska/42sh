@@ -6,13 +6,13 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 23:32:19 by moska             #+#    #+#             */
-/*   Updated: 2017/02/19 23:34:15 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/22 20:57:40 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int is_all_int(char *cmd)
+static int	is_all_int(char *cmd)
 {
 	while (*cmd)
 	{
@@ -31,9 +31,13 @@ static void	manage_return_code(t_shell **shell)
 	{
 		ft_putstr_fd("exit: numeric argument required\n", 2);
 		(*shell)->ret = 2;
+		g_exit_code = 2;
 	}
 	else if ((arg = ft_atoi((*shell)->cmd[1])))
+	{
 		(*shell)->ret = arg;
+		g_exit_code = arg;
+	}
 }
 
 void		builtin_exit(t_shell **shell)

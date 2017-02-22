@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 22:30:50 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/21 15:11:31 by moska            ###   ########.fr       */
+/*   Updated: 2017/02/22 21:02:17 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_envl	*envlnew(char *name, char *value)
+t_envl		*envlnew(char *name, char *value)
 {
 	t_envl *lst;
 	size_t size;
@@ -40,7 +40,7 @@ t_envl	*envlnew(char *name, char *value)
 	return (lst);
 }
 
-char	*get_env_val(t_envl *begin_list, char *name)
+char		*get_env_val(t_envl *begin_list, char *name)
 {
 	while (begin_list)
 	{
@@ -52,7 +52,7 @@ char	*get_env_val(t_envl *begin_list, char *name)
 	return (NULL);
 }
 
-int		env_lst_size(t_envl *begin_list)
+int			env_lst_size(t_envl *begin_list)
 {
 	int size;
 
@@ -65,27 +65,13 @@ int		env_lst_size(t_envl *begin_list)
 	return (size);
 }
 
-void	clean_env_list(t_envl **begin_list)
-{
-	t_envl *tmp;
-
-	while (*begin_list)
-	{
-		tmp = *begin_list;
-		ft_strdel(&((*begin_list)->name));
-		ft_strdel(&((*begin_list)->value));
-		free(*begin_list);
-		*begin_list = tmp->next;
-	}
-}
-
-void	envladd(t_envl **begin_list, t_envl *new)
+void		envladd(t_envl **begin_list, t_envl *new)
 {
 	new->next = *begin_list;
 	*begin_list = new;
 }
 
-int		envladd_back(t_envl **begin_list, t_envl *new)
+int			envladd_back(t_envl **begin_list, t_envl *new)
 {
 	t_envl *tmp;
 

@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 18:33:26 by moska             #+#    #+#             */
-/*   Updated: 2017/02/19 22:38:31 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/22 20:16:37 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,14 @@ void	command_not_found(t_shell **shell)
 {
 	ft_putstr_fd((*shell)->cmd[0], 2);
 	ft_putstr_fd(": command not found\n", 2);
+	(*shell)->ret = -1;
+	g_exit_code = -1;
 }
 
 void	permission_denied(t_shell **shell)
 {
 	ft_putstr_fd((*shell)->cmd[0], 2);
 	ft_putstr_fd(": Permission denied\n", 2);
+	(*shell)->ret = -1;
+	g_exit_code = -1;
 }

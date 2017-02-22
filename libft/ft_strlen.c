@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:23:21 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/21 15:15:11 by moska            ###   ########.fr       */
+/*   Updated: 2017/02/22 21:08:35 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ size_t	ft_strlen(const char *str)
 {
 	const char *s;
 
-  if (!str)
-    return (0);
+	if (!str)
+		return (0);
 	s = str;
 	while (*s)
 		++s;
