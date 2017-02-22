@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 22:30:50 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/22 21:02:17 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/22 22:21:22 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,11 @@ t_envl		*envlnew(char *name, char *value)
 	return (lst);
 }
 
-char		*get_env_val(t_envl *begin_list, char *name)
+char		*get_env_val(t_shell **shell, char *name)
 {
+	t_envl *begin_list;
+
+	begin_list = (*shell)->env_list;
 	while (begin_list)
 	{
 		if (ft_strcmp(begin_list->name, name) == 0)

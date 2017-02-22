@@ -6,13 +6,13 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 14:00:23 by moska             #+#    #+#             */
-/*   Updated: 2017/02/22 20:59:00 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/22 23:08:39 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	do_setenv(t_shell **shell, char *name, char *value)
+void	do_setenv(t_shell **shell, char *name, char *value)
 {
 	t_envl	*tmp;
 
@@ -30,7 +30,7 @@ static void	do_setenv(t_shell **shell, char *name, char *value)
 	envladd_back(&(*shell)->env_list, envlnew(name, value));
 }
 
-void		builtin_setenv(t_shell **shell)
+void	builtin_setenv(t_shell **shell)
 {
 	size_t	len;
 

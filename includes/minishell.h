@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/22 20:50:32 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/22 22:54:42 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <unistd.h>
 # include <sys/stat.h>
 
-# define BUFF_SIZE 2
+# define BUFF_SIZE 1024
 
 extern int g_exit_code;
 
@@ -59,11 +59,12 @@ void				clean_shell(t_shell **shell);
 void				command_not_found(t_shell **shell);
 void				construct_command(t_shell **shell);
 void				mid_clean_shell(t_shell **shell);
-void				permission_denied(t_shell **shell);
+void				permission_denied(t_shell **shell, char *path);
 void				must_exec(t_shell **shell, char *exec, \
 					char **ptr, char **env);
 void				print_env(t_envl *env_list);
 t_envl				*built_env_list(char **env);
+void				no_file_or_dir(t_shell **shell);
 
 /*
 **	Environment list custom struct & functions
@@ -72,7 +73,7 @@ t_envl				*built_env_list(char **env);
 void				envladd(t_envl **begin_list, t_envl *new);
 t_envl				*envlnew(char *name, char *value);
 int					envladd_back(t_envl **begin_list, t_envl *new);
-char				*get_env_val(t_envl *begin_list, char *name);
+char				*get_env_val(t_shell **shell, char *name);
 void				clean_env_list(t_envl **begin_list);
 int					env_lst_size(t_envl *begin_list);
 void				rebuild_str2env(t_shell **shell);
@@ -87,6 +88,7 @@ void				builtin_env(t_shell **shell);
 void				builtin_getenv (t_shell **shell);
 void				builtin_setenv(t_shell **shell);
 void				builtin_unsetenv(t_shell **shell);
+void				builtin_cd(t_shell **shell);
 int					op_null(char **cmd);
 int					op_unset(char **cmd);
 int					op_setenv(char **cmd);
@@ -100,4 +102,5 @@ void				print_setenv(char **cmd);
 void				work_as_newenv(char **cmd, t_shell **shell);
 void				work_with_alterenv(char **cmd, t_shell **shell);
 void				work_environ_and_display(char **cmd, t_shell **shell);
+void				do_setenv(t_shell **shell, char *name, char *value);
 #endif

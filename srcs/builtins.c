@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 22:56:19 by moska             #+#    #+#             */
-/*   Updated: 2017/02/22 21:00:20 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/22 22:02:18 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	try_a_builtin(t_shell **shell)
 		builtin_setenv(shell);
 	else if (ft_strcmp(cmd, "unsetenv") == 0)
 		builtin_unsetenv(shell);
-	// else if (ft_strcmp(cmd, "cd") == 0)
-	//   builtin_cd(shell);
+	else if (ft_strcmp(cmd, "cd") == 0)
+		builtin_cd(shell);
 	else
 		ret = 0;
 	return (ret);
