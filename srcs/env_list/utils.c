@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 22:30:50 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/18 20:28:43 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/21 15:11:31 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,19 @@ char	*get_env_val(t_envl *begin_list, char *name)
 			begin_list = begin_list->next;
 	}
 	return (NULL);
+}
 
+int		env_lst_size(t_envl *begin_list)
+{
+	int size;
+
+	size = 0;
+	while (begin_list)
+	{
+		size++;
+		begin_list = begin_list->next;
+	}
+	return (size);
 }
 
 void	clean_env_list(t_envl **begin_list)

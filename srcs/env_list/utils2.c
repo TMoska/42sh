@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/17 16:23:21 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/21 15:15:11 by moska            ###   ########.fr       */
+/*   Created: 2017/02/21 20:53:21 by moska             #+#    #+#             */
+/*   Updated: 2017/02/21 20:55:54 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-size_t	ft_strlen(const char *str)
+void rebuild_str2env(t_shell **shell)
 {
-	const char *s;
+  t_envl  *tmp;
+  char    **new;
+  int     i;
 
-  if (!str)
-    return (0);
-	s = str;
-	while (*s)
-		++s;
-	return (s - str);
+  i = 0;
+  tmp = (*shell)->env_list;
+  new = ft_str2new(env_lst_size(tmp));
+  while (tmp)
+  {
+    new[i] = ft_str3join(tmp->name, "=", tmp->value);
+    tmp = tmp->next;
+    i++;
+  }
+  ft_str2del(&(*shell)->env);
+  (*shell)->env = new;
 }

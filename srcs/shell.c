@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:29:07 by moska             #+#    #+#             */
-/*   Updated: 2017/02/19 23:19:19 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/21 21:14:21 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static void	set_env(t_shell **shell, char **env)
 		while (*env)
 		{
 			tmp_env = ft_strsplit(*env, '=');
-			envladd_back(&(*shell)->env_list, envlnew(tmp_env[0], tmp_env[1]));
+			if (ft_strcmp(tmp_env[0], "OLDPWD") != 0)
+				envladd_back(&(*shell)->env_list, envlnew(tmp_env[0], tmp_env[1]));
 			ft_str2del(&tmp_env);
 			env++;
 		}

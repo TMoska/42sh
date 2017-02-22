@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str3join.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 16:18:47 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/18 16:18:50 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/21 15:17:31 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ char *ft_str3join(char *s1, char *s2, char *s3)
 	length = ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3);
 	if ((result = ft_strnew(length)))
 	{
-		while (*s1)
+		while (s1 && *s1)
 			result[i++] = *s1++;
-		while (*s2)
+		while (s2 && *s2)
 			result[i++] = *s2++;
-		while (*s3)
+		while (s3 && *s3)
 			result[i++] = *s3++;
 		return (result);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   interpreting.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/02/19 23:29:18 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/20 11:32:12 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	fork_and_execute(t_shell **shell, char *exec)
 	{
 		if ((access(exec, X_OK) != 0))
 			permission_denied(shell);
-		if (S_ISREG(st.st_mode) && st.st_mode)
+		else if (S_ISREG(st.st_mode) && st.st_mode)
 			execute(shell, exec);
 	}
 }

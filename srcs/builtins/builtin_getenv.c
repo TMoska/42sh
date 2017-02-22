@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   builtin_getenv.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/17 16:23:21 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/21 15:15:11 by moska            ###   ########.fr       */
+/*   Created: 2017/02/21 13:31:37 by moska             #+#    #+#             */
+/*   Updated: 2017/02/21 14:52:13 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-size_t	ft_strlen(const char *str)
+void builtin_getenv (t_shell **shell)
 {
-	const char *s;
+  size_t  len;
+  char    *val;
 
-  if (!str)
-    return (0);
-	s = str;
-	while (*s)
-		++s;
-	return (s - str);
+  len = ft_str2len((*shell)->cmd);
+  if (len > 2)
+  {
+    ft_putendl_fd("getenv: too many arguments", 2);
+    (*shell)->ret = 2;
+  }
+  else if (len == 2 && 
+    (val = get_env_val((*shell)->env_list, (*shell)->cmd[1])))
+    ft_putendl_fd(val, 2);
 }

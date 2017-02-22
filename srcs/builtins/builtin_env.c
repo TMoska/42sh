@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 18:27:17 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/19 17:33:35 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/22 10:42:46 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,53 @@ static void	print_env(t_shell **shell)
 	}
 }
 
+static t_env_s	*create_env_struct(char **cmd)
+{
+	t_env_s *env_s;
+
+	if ((env_s = (t_env_s *)malloc(sizeof(t_env_s))))
+	{
+		env_s->null = op_null(cmd);
+		env_s->unset = op_unset(cmd);
+		env_s->set = op_setenv(cmd);
+		env_s->ignore = op_ignore(cmd);
+		env_s->cmd = op_cmd(cmd);
+	}
+	return(env_s);
+}
+
+int		has_errors(t_env_s *env_s)
+{
+	int	ret;
+
+	ret = 0;
+	if (env_s->unset == -1 && (ret = 1))
+		ft_putendl_fd("env: option requires an argument -- 'u'", 2);
+	else if (env_s->null == 1 && env_s->cmd == 1 && (ret = 1))
+		ft_putendl_fd("env: cannot specify --null (-0) with command", 2);
+	return (ret);
+}
+
 void	builtin_env(t_shell **shell)
 {
 	char **env;
+	t_env_s *env_s;
 
 	env = (*shell)->env;
 	if ((*shell)->cmd_len == 1)
 		print_env(shell);
-	else
+	else if ((env_s = create_env_struct((*shell)->cmd)))
 	{
-		// Todo: support options
-		print_env(shell);
+		if (has_errors(env_s))
+			return ;
+		else if (env_s->ignore == 1 && env_s->cmd == 0 && env_s->set == 1)
+			// display_only_setenv(command, env_s->null ? 0 : 1);
+		else if (env_s->ignore == 1 && env_s->cmd == 1)
+			// run_under_new_environ(command, shell);
+		else if (env_s->cmd == 1)
+			// run_under_alter_environ(command, shell);
+		else if (env_s->cmd == 0)
+			// alter_environ_and_display(command, shell, env_s->null ? 0 : 1);
+		free(env_s);
 	}
 }

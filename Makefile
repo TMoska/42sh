@@ -6,7 +6,7 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/02/17 18:29:30 by tmoska           ###   ########.fr        #
+#    Updated: 2017/02/21 23:38:25 by moska            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,11 @@ INC_DIR 	= includes
 INC_FLAGS 	= -I./includes -I $(LIB_PATH)/includes
 
 SRC_DIR 	= srcs
-SRC_FILES 	= main.c prompt.c reading.c shell.c interpreting.c validating.c \
-			command.c cleaning.c builtins.c builtins/builtin_exit.c \
-			builtins/builtin_env.c env_list/utils.c
+SRC_FILES = main.c prompt.c reading.c shell.c interpreting.c validating.c \
+command.c cleaning.c builtins.c builtins/builtin_exit.c builtins/builtin_env.c \
+builtins/builtin_getenv.c env_list/utils.c env_list/utils2.c \
+builtins/builtin_setenv.c builtins/builtin_unsetenv.c \
+builtins/builtin_env_utilities.c
 
 SOURCES		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
