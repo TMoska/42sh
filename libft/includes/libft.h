@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:33:19 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/22 21:10:01 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/23 23:01:44 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,4 +134,5 @@ int					get_next_line(const int fd, char **line);
 char				*ft_str3join(char *s1, char *s2, char *s3);
 size_t				ft_strlen_until(const char *str, char c);
 char				**ft_str2join(char **s1, char **s2);
+char				*ft_strtrim_char(char const *s, char c);
 #endif
