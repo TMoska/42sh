@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/23 22:11:31 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/23 22:39:26 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,5 @@ void				work_environ_and_display(char **cmd, t_shell **shell);
 void				do_setenv(t_shell **shell, char *name, char *value);
 void				change_symlink_directory(t_shell **shell, char *path);
 void				prep_and_change(t_shell **shell);
+void				builtin_echo(t_shell **shell);
 #endif
