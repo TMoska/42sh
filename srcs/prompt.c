@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 18:33:26 by moska             #+#    #+#             */
-/*   Updated: 2017/02/22 22:56:17 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/23 18:02:35 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,15 @@ void	permission_denied(t_shell **shell, char *path)
 void	no_file_or_dir(t_shell **shell)
 {
 	ft_putstr_fd((*shell)->cmd[0], 2);
-	ft_putstr_fd(": no such file or directory: ", 2);
-	ft_putendl_fd((*shell)->cmd[1], 2);
+	ft_putendl_fd(": no such file or directory", 2);
+	(*shell)->ret = -1;
+	g_exit_code = -1;
+}
+
+void	not_a_dir(t_shell **shell)
+{
+	ft_putstr_fd((*shell)->cmd[0], 2);
+	ft_putendl_fd(": not a directory", 2);
 	(*shell)->ret = -1;
 	g_exit_code = -1;
 }

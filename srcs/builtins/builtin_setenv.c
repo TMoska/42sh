@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 14:00:23 by moska             #+#    #+#             */
-/*   Updated: 2017/02/22 23:08:39 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/23 22:05:49 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	do_setenv(t_shell **shell, char *name, char *value)
 		tmp = tmp->next;
 	}
 	envladd_back(&(*shell)->env_list, envlnew(name, value));
+	rebuild_str2env(shell);
 }
 
 void	builtin_setenv(t_shell **shell)
@@ -45,14 +46,14 @@ void	builtin_setenv(t_shell **shell)
 	}
 	else
 	{
-		if (!(ft_isalpha((*shell)->cmd[1][0])))
+		if (!(ft_isalpha((*shell)->cmd[1][0]) || (*shell)->cmd[1][0] == '_'))
 		{
 			ft_putstr_fd("setenv: not an identifier: ", 2);
 			ft_putendl_fd((*shell)->cmd[1], 2);
 			(*shell)->ret = -1;
 			g_exit_code = -1;
 		}
-		do_setenv(shell, (*shell)->cmd[1], (*shell)->cmd[2]);
-		rebuild_str2env(shell);
+		else
+			do_setenv(shell, (*shell)->cmd[1], (*shell)->cmd[2]);
 	}
 }
