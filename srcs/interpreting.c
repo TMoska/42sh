@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   interpreting.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/02/22 22:54:34 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/23 06:57:34 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ static char	*get_full_executable(t_shell **shell, char *exec, char *path)
 	paths_count = ft_str2len(paths);
 	while (i < paths_count)
 	{
-		tmp = ft_str3join(paths[i], "/", cmd);
+		if (i == 0)
+			tmp = ft_str3join(paths[i] + 5, "/", cmd);
+		else
+			tmp = ft_str3join(paths[i], "/", cmd);
 		if (access(tmp, F_OK) == 0)
 		{
 			ft_str2del(&paths);
