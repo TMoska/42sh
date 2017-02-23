@@ -6,7 +6,7 @@
 #    By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/02/22 22:07:01 by tmoska           ###   ########.fr        #
+#    Updated: 2017/02/23 22:11:02 by tmoska           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ command.c cleaning.c builtins.c builtins/builtin_exit.c builtins/builtin_env.c \
 builtins/builtin_getenv.c env_list/utils.c env_list/utils2.c \
 builtins/builtin_setenv.c builtins/builtin_unsetenv.c \
 builtins/builtin_env_utilities.c builtins/builtin_env_utilities2.c \
-builtins/builtin_env_prints.c builtins/builtin_cd.c
+builtins/builtin_env_prints.c builtins/builtin_cd.c \
+builtins/builtin_cd_utilities.c builtins/builtin_cd_utilities2.c
 
 SOURCES		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 

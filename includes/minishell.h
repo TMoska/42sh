@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/22 22:54:42 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/23 22:11:31 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void				must_exec(t_shell **shell, char *exec, \
 void				print_env(t_envl *env_list);
 t_envl				*built_env_list(char **env);
 void				no_file_or_dir(t_shell **shell);
+void				not_a_dir(t_shell **shell);
 
 /*
 **	Environment list custom struct & functions
@@ -103,4 +104,6 @@ void				work_as_newenv(char **cmd, t_shell **shell);
 void				work_with_alterenv(char **cmd, t_shell **shell);
 void				work_environ_and_display(char **cmd, t_shell **shell);
 void				do_setenv(t_shell **shell, char *name, char *value);
+void				change_symlink_directory(t_shell **shell, char *path);
+void				prep_and_change(t_shell **shell);
 #endif
