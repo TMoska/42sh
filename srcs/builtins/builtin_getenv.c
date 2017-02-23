@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 13:31:37 by moska             #+#    #+#             */
-/*   Updated: 2017/02/22 22:20:06 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/23 22:53:57 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void	builtin_getenv(t_shell **shell)
 	}
 	else if (len == 2 &&
 			(val = get_env_val(shell, (*shell)->cmd[1])))
-		ft_putendl_fd(val, 2);
+		ft_putendl(val);
 }
