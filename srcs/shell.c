@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:29:07 by moska             #+#    #+#             */
-/*   Updated: 2017/02/22 21:06:05 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/24 15:45:47 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void		create_shell(t_shell **shell, char **env)
 		(*shell)->ret = 0;
 		g_exit_code = 0;
 		(*shell)->cmd_len = 0;
+		ft_bzero(&(*shell)->commands, sizeof((*shell)->commands));
 	}
 	set_env(shell, env);
 }

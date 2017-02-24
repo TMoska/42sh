@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 21:39:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/22 21:04:59 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/24 15:56:06 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,15 @@ int		run_shell(t_shell **shell)
 			continue ;
 		}
 		construct_command(shell);
-		interpret_line(shell);
-		mid_clean_shell(shell);
+		while ((*shell)->commands)
+		{
+			(*shell)->cmd = ft_strsplit((*shell)->commands->content, ' ');
+			(*shell)->cmd_len = ft_str2len((*shell)->cmd);
+			interpret_line(shell);
+			ft_str2del(&(*shell)->cmd);
+			(*shell)->commands = (*shell)->commands->next;
+		}
+		ft_strdel(&((*shell)->buff));
 		if ((*shell)->exit == 1)
 			return ((*shell)->ret);
 	}
