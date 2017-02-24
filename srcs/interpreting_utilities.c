@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleaning.c                                         :+:      :+:    :+:   */
+/*   interpreting_utilities.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/16 22:11:46 by moska             #+#    #+#             */
-/*   Updated: 2017/02/24 17:38:59 by tmoska           ###   ########.fr       */
+/*   Created: 2017/02/24 17:52:25 by tmoska            #+#    #+#             */
+/*   Updated: 2017/02/24 17:59:17 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	clean_list(void **a, size_t *b)
+char	*loop_through_paths(char ***paths, int *i, char *cmd)
 {
-	(void)b;
-	ft_strdel((char**)a);
-}
+	char	*tmp;
+	int		paths_count;
 
-void	mid_clean_shell(t_shell **shell)
-{
-	(void)shell;
-	ft_lstdel(&(*shell)->commands, clean_list);
-	ft_strdel(&((*shell)->buff));
-}
-
-void	clean_shell(t_shell **shell)
-{
-	ft_str2del(&(*shell)->env);
-	clean_env_list(&(*shell)->env_list);
+	paths_count = (int)ft_str2len(*paths);
+	while (*i < paths_count)
+	{
+		if (*i == 0)
+			tmp = ft_str3join(*paths[*i] + 5, "/", cmd);
+		else
+			tmp = ft_str3join(*paths[*i], "/", cmd);
+		if (access(tmp, F_OK) == 0)
+		{
+			ft_str2del(paths);
+			return (tmp);
+		}
+		ft_strdel(&tmp);
+		(*i)++;
+	}
+	return (0);
 }

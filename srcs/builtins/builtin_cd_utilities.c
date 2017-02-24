@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 22:08:30 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/23 22:18:46 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/24 17:37:32 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static char		*join_strings_by_slash(char **split_tab, int size)
 {
 	char	*new;
+	char	*tmp;
 	int		i;
 
 	i = 0;
@@ -22,22 +23,21 @@ static char		*join_strings_by_slash(char **split_tab, int size)
 	new = NULL;
 	while (!split_tab[i])
 		i++;
-	if (i > 0)
-		new = ft_strjoin("/", split_tab[i]);
+	new = ((i > 0) ? ft_strjoin("/", split_tab[i]) : NULL);
 	if (i + 1 >= size)
 		return (new);
 	else
-		new = (new ? (ft_str3join(new, "/", split_tab[i + 1])) :
-			ft_str3join(split_tab[i], "/", split_tab[i + 1]));
-	i += 2;
-	while (size != 1)
 	{
-		if (split_tab[i])
-			new = ft_str3join(new, "/", split_tab[i]);
-		i++;
-		size--;
+		if (new)
+		{
+			tmp = new;
+			new = ft_str3join(new, "/", split_tab[i + 1]);
+			ft_strdel(&tmp);
+		}
+		else
+			new = ft_str3join(split_tab[i], "/", split_tab[i + 1]);
 	}
-	ft_str2del(&split_tab);
+	join_back(&split_tab, &new, &size, &i);
 	return (new);
 }
 
@@ -46,13 +46,11 @@ static void		solve_dotted_path(char ***split_tab, int dots, int i)
 	int	tmp_i;
 
 	tmp_i = 0;
-	ft_strdel(split_tab[i]);
 	if (dots == 2 && i > 0)
 	{
 		tmp_i = i - 1;
 		while (tmp_i > 0 && !*split_tab[tmp_i])
 			tmp_i--;
-		ft_strdel(split_tab[tmp_i]);
 	}
 }
 
@@ -76,17 +74,24 @@ static char		*deal_with_dots(char **split_tab)
 		dots = 0;
 		i++;
 	}
-	return ((size > 1) ? join_strings_by_slash(split_tab, size) : split_tab[0]);
+	if (size > 1)
+		return (join_strings_by_slash(split_tab, size));
+	else
+		return (ft_strdup(split_tab[0]));
 }
 
 static char		*get_symlink_path(char *path, char *tmp_pwd)
 {
 	char	*tmp;
+	char	*ret;
 	char	**split_tab;
 
 	tmp = ft_str3join(tmp_pwd, "/", path);
 	split_tab = ft_strsplit(tmp, '/');
-	return (deal_with_dots(split_tab));
+	ft_strdel(&tmp);
+	ret = deal_with_dots(split_tab);
+	ft_str2del(&split_tab);
+	return (ret);
 }
 
 void			change_symlink_directory(t_shell **shell, char *path)

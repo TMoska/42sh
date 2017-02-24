@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 22:10:26 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/23 22:24:33 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/24 17:04:32 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	change_directory(t_shell **shell, char *path)
 			(*shell)->ret = ret;
 			g_exit_code = ret;
 		}
-		free(rdr);
+		ft_strdel(&rdr);
 	}
 }
 
@@ -99,5 +99,6 @@ void		prep_and_change(t_shell **shell)
 		}
 		else
 			handle_errors(shell, path, stats);
+		free(stats);
 	}
 }

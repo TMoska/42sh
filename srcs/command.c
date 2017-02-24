@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 21:42:06 by moska             #+#    #+#             */
-/*   Updated: 2017/02/24 16:35:39 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/24 17:45:51 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 
 void	construct_command(t_shell **shell)
 {
-  char	**tmp;
-  int		i;
+	char	**tmp;
+	int		i;
 
-  i = 0;
-  tmp = ft_strsplit((*shell)->buff, ';');
-  while (tmp[i])
-  {
-  	ft_lstadd_back(&(*shell)->commands, ft_lstnew(tmp[i], ft_strlen(tmp[i]) + 1));
-  	i++;
-  }
+	i = 0;
+	tmp = ft_strsplit((*shell)->buff, ';');
+	while (tmp[i])
+	{
+		ft_lstadd_back(&(*shell)->commands, ft_lstnew(tmp[i],\
+			ft_strlen(tmp[i]) + 1));
+		i++;
+	}
 	ft_str2del(&tmp);
 }

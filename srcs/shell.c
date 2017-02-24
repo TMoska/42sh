@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:29:07 by moska             #+#    #+#             */
-/*   Updated: 2017/02/24 16:17:11 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/24 17:20:14 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,7 @@ t_envl		*built_env_list(char **env)
 static void	set_env(t_shell **shell, char **env)
 {
 	(*shell)->env = ft_str2dup(env);
-	if (ft_str2len(env) == 0)
-	{
-		// Todo: handle empty environment
-	}
-	else
-		(*shell)->env_list = built_env_list((*shell)->env);
+	(*shell)->env_list = built_env_list((*shell)->env);
 }
 
 void		create_shell(t_shell **shell, char **env)

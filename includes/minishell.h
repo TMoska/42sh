@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/24 15:42:08 by moska            ###   ########.fr       */
+/*   Updated: 2017/02/24 17:58:35 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct		s_envl
 typedef struct		s_shell
 {
 	char			*buff;
-	t_list		*commands;
+	t_list			*commands;
 	char			**cmd;
 	int				cmd_len;
 	int				ret;
@@ -52,10 +52,10 @@ typedef struct		s_env_s
 }					t_env_s;
 
 void				print_prompt(t_shell **shell);
-void				read_line(t_shell **shell);
 void				create_shell(t_shell **shell, char **env);
 int					validate_and_prep_cmd(t_shell **shell);
 void				interpret_line(t_shell **shell);
+char				*loop_through_paths(char ***paths, int *i, char *cmd);
 void				clean_shell(t_shell **shell);
 void				command_not_found(t_shell **shell);
 void				construct_command(t_shell **shell);
@@ -108,4 +108,5 @@ void				do_setenv(t_shell **shell, char *name, char *value);
 void				change_symlink_directory(t_shell **shell, char *path);
 void				prep_and_change(t_shell **shell);
 void				builtin_echo(t_shell **shell);
+void				join_back(char ***split_tab, char **new, int *size, int *i);
 #endif

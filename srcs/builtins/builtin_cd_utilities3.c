@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleaning.c                                         :+:      :+:    :+:   */
+/*   builtin_cd_utilities3.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/16 22:11:46 by moska             #+#    #+#             */
-/*   Updated: 2017/02/24 17:38:59 by tmoska           ###   ########.fr       */
+/*   Created: 2017/02/24 17:37:21 by tmoska            #+#    #+#             */
+/*   Updated: 2017/02/24 17:38:31 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	clean_list(void **a, size_t *b)
+void	join_back(char ***split_tab, char **new, int *size, int *i)
 {
-	(void)b;
-	ft_strdel((char**)a);
-}
+	char *tmp;
 
-void	mid_clean_shell(t_shell **shell)
-{
-	(void)shell;
-	ft_lstdel(&(*shell)->commands, clean_list);
-	ft_strdel(&((*shell)->buff));
-}
-
-void	clean_shell(t_shell **shell)
-{
-	ft_str2del(&(*shell)->env);
-	clean_env_list(&(*shell)->env_list);
+	tmp = NULL;
+	*i += 2;
+	while (*size != 1)
+	{
+		if (*split_tab[*i])
+		{
+			tmp = *new;
+			*new = ft_str3join(*new, "/", *split_tab[*i]);
+			ft_strdel(&tmp);
+		}
+		(*i)++;
+		(*size)--;
+	}
 }

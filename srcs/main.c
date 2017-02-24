@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 21:39:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/24 15:56:06 by moska            ###   ########.fr       */
+/*   Updated: 2017/02/24 16:45:40 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,21 @@ void	sig_callback(int s_num)
 {
 	if (s_num == SIGINT || s_num == SIGQUIT)
 		exit(g_exit_code);
+}
+
+void	loop_commands(t_shell **shell)
+{
+	t_list *lst;
+
+	lst = (*shell)->commands;
+	while (lst)
+	{
+		(*shell)->cmd = ft_strsplit(lst->content, ' ');
+		(*shell)->cmd_len = ft_str2len((*shell)->cmd);
+		interpret_line(shell);
+		ft_str2del(&(*shell)->cmd);
+		lst = lst->next;
+	}
 }
 
 int		run_shell(t_shell **shell)
@@ -35,14 +50,8 @@ int		run_shell(t_shell **shell)
 			continue ;
 		}
 		construct_command(shell);
-		while ((*shell)->commands)
-		{
-			(*shell)->cmd = ft_strsplit((*shell)->commands->content, ' ');
-			(*shell)->cmd_len = ft_str2len((*shell)->cmd);
-			interpret_line(shell);
-			ft_str2del(&(*shell)->cmd);
-			(*shell)->commands = (*shell)->commands->next;
-		}
+		loop_commands(shell);
+		mid_clean_shell(shell);
 		ft_strdel(&((*shell)->buff));
 		if ((*shell)->exit == 1)
 			return ((*shell)->ret);

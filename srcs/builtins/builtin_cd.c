@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 22:01:59 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/23 22:24:52 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/24 17:17:15 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,17 @@
 void	fix_path_if_going_home(t_shell **shell)
 {
 	char	**cmd;
+	char	*tmp;
 
 	cmd = (*shell)->cmd;
 	while (*cmd)
 	{
 		if (*cmd[0] == '~')
+		{
+			tmp = *cmd;
 			*cmd = ft_strjoin(get_env_val(shell, "HOME"), (*cmd + 1));
+			ft_strdel(&tmp);
+		}
 		cmd++;
 	}
 }
@@ -41,7 +46,6 @@ void	builtin_cd(t_shell **shell)
 	if (!(get_env_val(shell, "PWD")))
 		set_env_var(shell);
 	fix_path_if_going_home(shell);
-	// Todo: check for legal inputs
 	prep_and_change(shell);
 	rebuild_str2env(shell);
 }
