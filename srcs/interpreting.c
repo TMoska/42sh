@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   interpreting.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/02/23 06:57:34 by moska            ###   ########.fr       */
+/*   Updated: 2017/02/24 12:41:16 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static void	execute(t_shell **shell, char *exec, char **ptr, char **env)
 		execve(exec, ptr, env);
 	else
 	{
+		signal(SIGINT, SIG_IGN);
 		waitpid(-1, &status, 0);
 		if (WIFEXITED(status))
 		{
