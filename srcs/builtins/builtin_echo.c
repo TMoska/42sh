@@ -3,96 +3,118 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 22:38:50 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/24 11:52:45 by moska            ###   ########.fr       */
+/*   Updated: 2017/02/24 15:12:06 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	rebuild_cmd(t_shell **shell, char *cmd)
+static int	echo_with_env(t_shell **shell, char *cmd)
 {
-	char	*new;
-	int		i;
-	int		size;
-	int		quote;
-	char	**commands;
-
-	new = NULL;
-	quote = (cmd[0] == '\"' ? 2 : 1);
-	i = 2;
-	size = (int)ft_str2len((*shell)->cmd);
-	commands = (*shell)->cmd;
-	new = ft_str3join(commands[1], " ", commands[2]);
-	while ((i + 1) < size)
-	{
-		new = ft_str3join(new, " ", commands[i + 1]);
-		i++;
-	}
-	ft_str2del(&(*shell)->cmd);
-	(*shell)->cmd = ft_str2new(2);
-	(*shell)->cmd[0] = ft_strdup("echo");
-	(*shell)->cmd[1] = new;
-}
-
-void	echo_simple(t_shell **shell, char *cmd, int q_count)
-{
-	char	**tab;
-	int		size;
-	int		i;
+	int		len;
+	int		len1;
 	char	*tmp;
+	char	*env;
 
-	tab = ft_strsplit(cmd, ' ');
-	size = (int)ft_str2len(tab);
+	len = 0;
+	len1 = 0;
+	while (cmd[len1] != '$')
+		len1++;
+	tmp = ft_strsub(cmd, 0, len1);
+	ft_putstr(tmp);
+	ft_strdel(&tmp);
+	len1++;
+	while (ft_isalnum(cmd[len1 + len]) || cmd[len1 + len] == '_')
+		len++;
+	tmp = ft_strsub(cmd, len1, len);
+	env = get_env_val(shell, tmp);
+	ft_strdel(&tmp);
+	if (env)
+		ft_putstr(env);
+	return (len1 + len + 1);
+}
+
+static void	echo_simple(t_shell **shell, char *cmd)
+{
+	char	**tmp;
+	int		i;
+
 	i = 0;
-	while (i < size)
+	if ((tmp = ft_strsplit(cmd, ' ')))
 	{
-		if ((q_count == 2 || q_count == 0) && tab[i][0] == '$')
+		while (tmp[i])
 		{
-			tmp = get_env_val(shell, (tab[i] + 1));
-			if (tmp)
-				ft_putstr(tmp);
+			if (tmp[i][0] == '$')
+				echo_with_env(shell, tmp[i]);
+			else
+				ft_putstr(tmp[i]);
+			i++;
+			if (tmp[i])
+				ft_putchar(' ');
 		}
-		else
-			ft_putstr(tab[i]);
-		i++;
-		if (tab[i])
-			ft_putstr(" ");
+		ft_str2del(&tmp);
 	}
 }
 
-void	builtin_echo(t_shell **shell)
+static void	echo_words_within(t_shell **shell, char *tmp, int quote)
 {
-	char	*cmd;
 	int		i;
-	int		q_count;
+	char	**tmp_dep;
 
-	i = 1;
-	q_count = 0;
-	while ((*shell)->cmd[i])
+	tmp_dep = ft_strsplit(tmp, ' ');
+	i = 0;
+	while (tmp_dep[i])
 	{
-		cmd = (*shell)->cmd[i];
-		if ((*shell)->cmd_len == 1)
-			ft_putendl("");
-		else
-		{
-			if (cmd[0] == '\"' || cmd[0] == '\'')
-			{
-				q_count = (cmd[0] == '\"' ? 2 : 1);
-				rebuild_cmd(shell, cmd);
-				if (q_count == 2)
-					(*shell)->cmd[i] = ft_strtrim_char((*shell)->cmd[i], '\"');
-				else if (q_count == 1)
-					(*shell)->cmd[i] = ft_strtrim_char((*shell)->cmd[i], '\'');
-				cmd = (*shell)->cmd[i];
-			}
-			echo_simple(shell, cmd, q_count);
-		}
+		((ft_strchr(tmp_dep[i], '$') && quote == '\"') ?
+			echo_with_env(shell, tmp_dep[i]) : ft_putstr(tmp_dep[i]));
 		i++;
-		if ((*shell)->cmd[i])
-			ft_putstr(" ");
+		if (tmp_dep[i])
+			ft_putchar(' ');
 	}
-	ft_putendl("");
+	ft_strdel(&tmp);
+	ft_str2del(&tmp_dep);
+}
+
+static void	echo_quote(t_shell **shell, char *cmd, char quote)
+{
+	char	*tmp;
+	int		offset;
+	int		len;
+
+	tmp = NULL;
+	offset = 1;
+	while (cmd[offset])
+	{
+		len = 0;
+		while (cmd[offset + len] && cmd[offset + len] != quote)
+			len++;
+		tmp = ft_strsub(cmd, offset, len);
+		((offset >= 2) && cmd[offset - 2] == ' ') ? ft_putchar(' ') : (0);
+		echo_words_within(shell, tmp, quote);
+		offset += len + 1;
+		if (cmd[offset] == ' ')
+		{
+			ft_putchar(' ');
+			len = 0;
+			continue;
+		}
+		while (cmd[offset] && cmd[offset] != quote)
+			offset++;
+		((cmd[offset] == quote) ? offset++ : (0));
+	}
+}
+
+void		builtin_echo(t_shell **shell)
+{
+	char *tmp;
+
+	tmp = ((*shell)->buff + 5);
+	if (tmp[0] == '\"' || tmp[0] == '\'')
+		echo_quote(shell, tmp, tmp[0]);
+	else
+		echo_simple(shell, tmp);
+	ft_putchar('\n');
 }
