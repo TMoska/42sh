@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:29:07 by moska             #+#    #+#             */
-/*   Updated: 2017/02/24 17:20:14 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/25 20:21:20 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,25 @@ t_envl		*built_env_list(char **env)
 	return (new);
 }
 
+static void	increment_shlvl(t_shell **shell)
+{
+	char *shlvl;
+
+	shlvl = get_env_val(shell, "SHLVL");
+	printf("SHELL1: %s\n", shlvl);
+	if (!shlvl)
+		shlvl = "1";
+	else
+		shlvl = ft_itoa(ft_atoi(shlvl) + 1);
+	printf("SHELL2: %s\n", shlvl);
+	do_setenv(shell, "SHLVL", shlvl);
+}
+
 static void	set_env(t_shell **shell, char **env)
 {
 	(*shell)->env = ft_str2dup(env);
 	(*shell)->env_list = built_env_list((*shell)->env);
+	increment_shlvl(shell);
 }
 
 void		create_shell(t_shell **shell, char **env)

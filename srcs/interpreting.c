@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   interpreting.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/02/24 17:58:12 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/25 20:34:36 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void		interpret_line(t_shell **shell)
 
 	exec = NULL;
 	ptr = (*shell)->cmd;
+	rebuild_str2env(shell);
 	env = (*shell)->env;
 	if (try_a_builtin(shell))
 		return ;
