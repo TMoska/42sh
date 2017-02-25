@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:29:07 by moska             #+#    #+#             */
-/*   Updated: 2017/02/25 20:21:20 by moska            ###   ########.fr       */
+/*   Updated: 2017/02/25 21:34:35 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,10 @@ static void	increment_shlvl(t_shell **shell)
 	char *shlvl;
 
 	shlvl = get_env_val(shell, "SHLVL");
-	printf("SHELL1: %s\n", shlvl);
 	if (!shlvl)
 		shlvl = "1";
 	else
 		shlvl = ft_itoa(ft_atoi(shlvl) + 1);
-	printf("SHELL2: %s\n", shlvl);
 	do_setenv(shell, "SHLVL", shlvl);
 }
 
