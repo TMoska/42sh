@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 21:39:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/24 16:45:40 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/25 20:14:33 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int g_exit_code;
 
-void	sig_callback(int s_num)
+void  sig_callback(int s_num)
 {
-	if (s_num == SIGINT || s_num == SIGQUIT)
-		exit(g_exit_code);
+  if (s_num == SIGINT || s_num == SIGQUIT)
+    exit(g_exit_code);
 }
 
 void	loop_commands(t_shell **shell)
@@ -42,8 +42,7 @@ int		run_shell(t_shell **shell)
 		print_prompt(shell);
 		signal(SIGINT, sig_callback);
 		signal(SIGQUIT, sig_callback);
-		if (get_next_line(0, &((*shell)->buff)) == 0)
-			exit(g_exit_code);
+		read_input(shell);
 		if (!validate_and_prep_cmd(shell))
 		{
 			ft_strdel(&((*shell)->buff));

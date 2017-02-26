@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+         #
+#    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/02/24 17:53:12 by tmoska           ###   ########.fr        #
+#    Updated: 2017/02/25 20:13:45 by moska            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ builtins/builtin_setenv.c builtins/builtin_unsetenv.c \
 builtins/builtin_env_utilities.c builtins/builtin_env_utilities2.c \
 builtins/builtin_env_prints.c builtins/builtin_cd.c builtins/builtin_echo.c \
 builtins/builtin_cd_utilities.c builtins/builtin_cd_utilities2.c \
-builtins/builtin_cd_utilities3.c interpreting_utilities.c
+builtins/builtin_cd_utilities3.c interpreting_utilities.c \
+reading/reader.c
 
 SOURCES		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
