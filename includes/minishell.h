@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/25 20:12:33 by moska            ###   ########.fr       */
+/*   Updated: 2017/02/26 18:55:47 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,36 @@
 # include <signal.h>
 # include <unistd.h>
 # include <sys/stat.h>
+# include <term.h>
+# include <curses.h>
+# include <termios.h>
+# include <termcap.h>
 
 # define BUFF_SIZE 1024
+
+/*
+**	Button Key codes
+*/
+
+# define BTN_DEL	2117294875
+# define BTN_BACK	127
+
+# define BTN_HOME	4741915
+# define BTN_END	4610843
+
+# define BTN_LEFT	4479771
+# define BTN_RIGHT	4414235
+# define BTN_UP		4283163
+# define BTN_DOWN	4348699
+
+# define BTN_ESC	27
+# define BTN_ENTER	10
+# define BTN_TAB	9
+# define BTN_CTRL_D	4
+
+/*
+**	Types and Structs
+*/
 
 extern int g_exit_code;
 
@@ -40,6 +68,7 @@ typedef struct		s_shell
 	int				exit;
 	char			**env;
 	t_envl			*env_list;
+	struct termios	term;
 }					t_shell;
 
 typedef struct		s_env_s
@@ -50,6 +79,10 @@ typedef struct		s_env_s
 	int				cmd;
 	int				null;
 }					t_env_s;
+
+/*
+**	Core function prototypes
+*/
 
 void				print_prompt(t_shell **shell);
 void				create_shell(t_shell **shell, char **env);
@@ -115,5 +148,11 @@ void				join_back(char ***split_tab, char **new, int *size, int *i);
 */
 
 void				read_input(t_shell **shell);
+
+/*
+**	Terminall
+*/
+
+int					term_init(t_shell **shell);
 
 #endif

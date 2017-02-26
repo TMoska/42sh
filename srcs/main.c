@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 21:39:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/25 20:14:33 by moska            ###   ########.fr       */
+/*   Updated: 2017/02/26 17:36:39 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ int		main(int ac, char **av, char **env)
 	(void)av;
 	g_exit_code = 0;
 	create_shell(&shell, env);
+	if (term_init(&shell))
+	{
+		ft_putendl_fd("Error: Term info missing", 2);
+		exit(1);
+	}
 	run_shell(&shell);
 	clean_shell(&shell);
 	return (shell->ret);

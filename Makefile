@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
+#    By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/02/25 20:13:45 by moska            ###   ########.fr        #
+#    Updated: 2017/02/26 17:46:40 by tmoska           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ builtins/builtin_env_utilities.c builtins/builtin_env_utilities2.c \
 builtins/builtin_env_prints.c builtins/builtin_cd.c builtins/builtin_echo.c \
 builtins/builtin_cd_utilities.c builtins/builtin_cd_utilities2.c \
 builtins/builtin_cd_utilities3.c interpreting_utilities.c \
-reading/reader.c
+reading/reader.c terminal/term_init.c
 
 SOURCES		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
@@ -40,7 +40,7 @@ OBJECTS		= $(SOURCES:.c=.o)
 all: $(NAME)
 
 $(NAME): $(LIB) $(OBJECTS)
-	@$(CC) $(FLAGS) -o $@ $^ $(LIB_LINK)
+	@$(GCC) $(FLAGS) -o $@ $^ $(LIB_LINK)
 	@echo "\033[0;32mSuccess: \033[0mminishell compiled"
 	@echo "\033[0;32mDone"
 
@@ -48,7 +48,7 @@ $(LIB):
 	@make -C $(LIB_PATH)
 
 %.o: %.c $(INC_DIR)/*.h
-	@$(CC) $(FLAGS) $(INC_FLAGS) -c -o $@ $<
+	@$(GCC) $(FLAGS) $(INC_FLAGS) -c -o $@ $<
 
 clean:
 	@rm -f $(OBJECTS)
