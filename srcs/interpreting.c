@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   interpreting.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/02/25 20:34:36 by moska            ###   ########.fr       */
+/*   Updated: 2017/02/27 19:21:38 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	execute(t_shell **shell, char *exec, char **ptr, char **env)
 	int		status;
 
 	pid = fork();
+	term_trigger(shell, 1);
 	if (pid == 0)
 		execve(exec, ptr, env);
 	else
@@ -61,6 +62,7 @@ static void	fork_and_execute(t_shell **shell, char *exec,\
 			permission_denied(shell, NULL);
 		else if (S_ISREG(st.st_mode) && st.st_mode)
 			execute(shell, exec, ptr, env);
+		term_trigger(shell, 0);
 	}
 }
 
