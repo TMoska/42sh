@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/27 19:24:36 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/27 19:33:13 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@
 
 # define BTN_HOME	4741915
 # define BTN_END	4610843
+
+# define BTN_ALEFT	1146821403
+# define BTN_ARIGHT	1130044187
 
 # define BTN_LEFT	4479771
 # define BTN_RIGHT	4414235
@@ -161,6 +164,7 @@ void				join_back(char ***split_tab, char **new, int *size, int *i);
 */
 
 void				read_input(t_shell **shell);
+void				work_buffer(t_shell **shell, char *buffer);
 
 /*
 **	Terminall
