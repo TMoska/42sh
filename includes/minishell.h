@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/27 19:33:13 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/27 20:42:07 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,7 @@ void				work_buffer(t_shell **shell, char *buffer);
 int					term_init(t_shell **shell);
 int					term_trigger(t_shell **shell, int off);
 void				move_cursor_sides(t_shell **shell, unsigned int key);
+void				move_cursor_alt(t_shell **shell, unsigned int key);
 void				modify_buffer(t_shell **shell, unsigned int key);
 void				clean_buffer(t_shell **shell);
 #endif
