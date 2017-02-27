@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:32:46 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/27 19:33:56 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/27 23:30:26 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,25 @@
 
 static void	write_buffer(t_shell **shell, char *buffer)
 {
-	char	*tmp;
+	char	*ret;
+	char	*ret1;
+	int		in;
+	int		len;
+	char	*b;
 
-	(*shell)->tc_index += 1;
 	(*shell)->tc_len += 1;
-	if (!(*shell)->buff && ((*shell)->buff = ft_strdup(buffer)))
+	(*shell)->tc_index += 1;
+	in = (*shell)->tc_index;
+	len = (*shell)->tc_len;
+	b = (*shell)->buff;
+	if (!b && ((*shell)->buff = ft_strdup(buffer)))
 		return ;
-	tmp = (*shell)->buff;
-	(*shell)->buff = ft_strjoin((*shell)->buff, buffer);
-	ft_strdel(&tmp);
+	ret = ((in > 1) ? ft_strndup(b, in - 1) : NULL);
+	ret1 = (((len - in) > 0) ? ft_strdup(&b[in - 1]) : NULL);
+	(*shell)->buff = ft_str3join(ret, buffer, ret1);
+	ft_strdel(&ret);
+	ft_strdel(&ret1);
+	ft_strdel(&b);
 }
 
 void		work_buffer(t_shell **shell, char *buffer)
