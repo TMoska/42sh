@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/27 16:55:35 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/27 18:01:25 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@
 # define BTN_TAB	9
 # define BTN_CTRL_D	4
 
-
 /*
 **	Termcaps commands
 */
@@ -79,6 +78,7 @@ typedef struct		s_shell
 	char			**env;
 	t_envl			*env_list;
 	struct termios	term;
+	int				tc_ok;
 	int				tc_index;
 	int				tc_len;
 }					t_shell;

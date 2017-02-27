@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:29:07 by moska             #+#    #+#             */
-/*   Updated: 2017/02/27 16:43:55 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/27 18:14:27 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,15 @@ t_shell		*get_shell(char **env)
 {
 	static	t_shell *shell;
 
-	if (!shell && env && (shell = ft_memalloc(sizeof(t_shell))))
+	if (!shell && (shell = ft_memalloc(sizeof(t_shell))))
 	{
 		shell->exit = 0;
 		shell->ret = 0;
 		g_exit_code = 0;
 		shell->cmd_len = 0;
 		ft_bzero(&shell->commands, sizeof(t_list*));
-		set_env(&shell, env);
 	}
+	if (env)
+		set_env(&shell, env);
 	return (shell);
 }

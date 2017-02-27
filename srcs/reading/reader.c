@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/25 19:37:58 by moska             #+#    #+#             */
-/*   Updated: 2017/02/27 16:56:30 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/27 17:50:59 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		write_buffer(t_shell **shell, char *buffer)
 	ft_strdel(&tmp);
 }
 
-void	work_buffer(t_shell **shell, char *buffer)
+void		work_buffer(t_shell **shell, char *buffer)
 {
 	write_buffer(shell, buffer);
 	ft_putstr(tgetstr("im", NULL));

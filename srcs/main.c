@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 21:39:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/27 16:55:41 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/27 18:29:24 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int g_exit_code;
 
-void  sig_callback(int s_num)
+void	sig_callback(int s_num)
 {
 	t_shell *shell;
 
 	shell = get_shell(NULL);
- 	if (s_num == SIGQUIT)
+	if (s_num == SIGQUIT)
 		exit(g_exit_code);
 	else if (s_num == SIGINT)
 		clean_buffer(&shell);
@@ -31,7 +31,7 @@ void	catch_signals(void)
 
 	i = 32;
 	while (i)
-		signal (i--, sig_callback);
+		signal(i--, sig_callback);
 }
 
 void	loop_commands(t_shell **shell)
@@ -55,7 +55,10 @@ int		run_shell(t_shell **shell)
 	{
 		print_prompt(shell);
 		catch_signals();
-		read_input(shell);
+		if ((*shell)->tc_ok)
+			read_input(shell);
+		else
+			get_next_line(0, &(*shell)->buff);
 		if (!validate_and_prep_cmd(shell))
 		{
 			ft_strdel(&((*shell)->buff));
@@ -78,11 +81,7 @@ int		main(int ac, char **av, char **env)
 	(void)av;
 	g_exit_code = 0;
 	shell = get_shell(env);
-	if (term_init(&shell))
-	{
-		ft_putendl_fd("Error: Term info missing", 2);
-		exit(1);
-	}
+	term_init(&shell);
 	run_shell(&shell);
 	clean_shell(&shell);
 	return (shell->ret);
