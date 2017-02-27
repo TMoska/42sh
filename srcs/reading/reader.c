@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/25 19:37:58 by moska             #+#    #+#             */
-/*   Updated: 2017/02/27 19:32:16 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/27 20:24:02 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static int	identify_key(t_shell **shell, char *buffer, unsigned int key)
 		move_cursor_sides(shell, key);
 	else if (key == BTN_BACK || key == BTN_DEL)
 		modify_buffer(shell, key);
+	else if (key == BTN_ALEFT || key == BTN_ARIGHT)
+		move_cursor_alt(shell, key);
 	else if (key == BTN_CTRL_D)
 		sig_callback(SIGQUIT);
 	if (key == BTN_ENTER)

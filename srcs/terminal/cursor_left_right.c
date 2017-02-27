@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cursor_left_right.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:25:57 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/27 17:51:54 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/27 20:26:21 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,9 @@ void		move_cursor_sides(t_shell **shell, unsigned int key)
 	else if ((key == BTN_RIGHT || key == BTN_END) &&
 		(*shell)->tc_index < (*shell)->tc_len)
 		move_right(shell, key);
+}
+
+void		move_cursor_alt(t_shell **shell, unsigned int key)
+{
+	
 }
