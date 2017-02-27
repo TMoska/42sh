@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/25 19:37:58 by moska             #+#    #+#             */
-/*   Updated: 2017/02/26 18:59:46 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/26 20:26:11 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void		write_to_buffer(t_shell **shell, char *buffer)
 void	work_on_buffer(t_shell **shell, char *buffer)
 {
 	write_to_buffer(shell, buffer);
-	// ft_putstr(tgetstr("im", NULL));
+	ft_putstr(tgetstr("im", NULL));
 	ft_putstr(buffer);
-	// ft_putstr(tgetstr("ei", NULL));
+	ft_putstr(tgetstr("ei", NULL));
 }
 
 static int	identify_key(t_shell **shell, char *buffer, unsigned int key)

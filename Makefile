@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+         #
+#    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/02/26 17:46:40 by tmoska           ###   ########.fr        #
+#    Updated: 2017/02/26 20:31:06 by moska            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ FLAGS 		= -Wall -Werror -Wextra -g
 LIB_PATH	= libft
 LIB			= $(LIB_PATH)/libft.a
 LIB_LINK	= -L $(LIB_PATH) -lft
+EXTRA_LIB = -ltermcap
 
 INC_DIR 	= includes
 INC_FLAGS 	= -I./includes -I $(LIB_PATH)/includes
@@ -40,7 +41,7 @@ OBJECTS		= $(SOURCES:.c=.o)
 all: $(NAME)
 
 $(NAME): $(LIB) $(OBJECTS)
-	@$(GCC) $(FLAGS) -o $@ $^ $(LIB_LINK)
+	@$(GCC) $(FLAGS) -o $@ $^ $(LIB_LINK) $(EXTRA_LIB)
 	@echo "\033[0;32mSuccess: \033[0mminishell compiled"
 	@echo "\033[0;32mDone"
 
