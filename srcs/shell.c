@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:29:07 by moska             #+#    #+#             */
-/*   Updated: 2017/02/25 21:34:35 by moska            ###   ########.fr       */
+/*   Updated: 2017/02/27 16:43:55 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,18 @@ static void	set_env(t_shell **shell, char **env)
 	increment_shlvl(shell);
 }
 
-void		create_shell(t_shell **shell, char **env)
+t_shell		*get_shell(char **env)
 {
-	if ((*shell = ft_memalloc(sizeof(t_shell))))
+	static	t_shell *shell;
+
+	if (!shell && env && (shell = ft_memalloc(sizeof(t_shell))))
 	{
-		(*shell)->exit = 0;
-		(*shell)->ret = 0;
+		shell->exit = 0;
+		shell->ret = 0;
 		g_exit_code = 0;
-		(*shell)->cmd_len = 0;
-		ft_bzero(&(*shell)->commands, sizeof(t_list*));
+		shell->cmd_len = 0;
+		ft_bzero(&shell->commands, sizeof(t_list*));
+		set_env(&shell, env);
 	}
-	set_env(shell, env);
+	return (shell);
 }

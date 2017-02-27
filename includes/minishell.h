@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/26 18:55:47 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/27 16:55:35 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,16 @@
 # define BTN_TAB	9
 # define BTN_CTRL_D	4
 
+
+/*
+**	Termcaps commands
+*/
+
+# define MOVE_LEFT	ft_putstr(tgetstr("le", NULL));
+# define MOVE_RIGHT	ft_putstr(tgetstr("nd", NULL));
+
+# define DEL		ft_putstr(tgetstr("dc", NULL));
+
 /*
 **	Types and Structs
 */
@@ -69,6 +79,8 @@ typedef struct		s_shell
 	char			**env;
 	t_envl			*env_list;
 	struct termios	term;
+	int				tc_index;
+	int				tc_len;
 }					t_shell;
 
 typedef struct		s_env_s
@@ -85,7 +97,7 @@ typedef struct		s_env_s
 */
 
 void				print_prompt(t_shell **shell);
-void				create_shell(t_shell **shell, char **env);
+t_shell				*get_shell(char **env);
 int					validate_and_prep_cmd(t_shell **shell);
 void				interpret_line(t_shell **shell);
 char				*loop_through_paths(char ***paths, int *i, char *cmd);
@@ -100,6 +112,7 @@ void				print_env(t_envl *env_list);
 t_envl				*built_env_list(char **env);
 void				no_file_or_dir(t_shell **shell);
 void				not_a_dir(t_shell **shell);
+void				sig_callback(int s_num);
 
 /*
 **	Environment list custom struct & functions
@@ -154,5 +167,7 @@ void				read_input(t_shell **shell);
 */
 
 int					term_init(t_shell **shell);
-
+void				move_cursor_sides(t_shell **shell, unsigned int key);
+void				modify_buffer(t_shell **shell, unsigned int key);
+void				clean_buffer(t_shell **shell);
 #endif

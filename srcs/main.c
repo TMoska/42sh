@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 21:39:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/26 17:36:39 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/27 16:55:41 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,22 @@ int g_exit_code;
 
 void  sig_callback(int s_num)
 {
-  if (s_num == SIGINT || s_num == SIGQUIT)
-    exit(g_exit_code);
+	t_shell *shell;
+
+	shell = get_shell(NULL);
+ 	if (s_num == SIGQUIT)
+		exit(g_exit_code);
+	else if (s_num == SIGINT)
+		clean_buffer(&shell);
+}
+
+void	catch_signals(void)
+{
+	int i;
+
+	i = 32;
+	while (i)
+		signal (i--, sig_callback);
 }
 
 void	loop_commands(t_shell **shell)
@@ -40,8 +54,7 @@ int		run_shell(t_shell **shell)
 	while (1)
 	{
 		print_prompt(shell);
-		signal(SIGINT, sig_callback);
-		signal(SIGQUIT, sig_callback);
+		catch_signals();
 		read_input(shell);
 		if (!validate_and_prep_cmd(shell))
 		{
@@ -64,7 +77,7 @@ int		main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	g_exit_code = 0;
-	create_shell(&shell, env);
+	shell = get_shell(env);
 	if (term_init(&shell))
 	{
 		ft_putendl_fd("Error: Term info missing", 2);
