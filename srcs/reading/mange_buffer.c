@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mange_buffer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:32:46 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/27 23:30:26 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/28 01:15:08 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void	write_buffer(t_shell **shell, char *buffer)
 	char	*b;
 
 	(*shell)->tc_len += 1;
-	(*shell)->tc_index += 1;
-	in = (*shell)->tc_index;
+	(*shell)->tc_in += 1;
+	in = (*shell)->tc_in;
 	len = (*shell)->tc_len;
 	b = (*shell)->buff;
 	if (!b && ((*shell)->buff = ft_strdup(buffer)))

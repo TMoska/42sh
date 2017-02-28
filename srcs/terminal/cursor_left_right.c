@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cursor_left_right.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:25:57 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/27 23:29:20 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/28 01:19:21 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static void	move_left(t_shell **shell)
 {
 	MOVE_LEFT;
-	((*shell)->tc_index -= 1);
+	((*shell)->tc_in -= 1);
 }
 
 static void	move_right(t_shell **shell)
 {
 	MOVE_RIGHT;
-	((*shell)->tc_index += 1);
+	((*shell)->tc_in += 1);
 }
 
 void		move_cursor_sides(t_shell **shell, unsigned int key)
@@ -30,57 +30,44 @@ void		move_cursor_sides(t_shell **shell, unsigned int key)
 
 	if (!(*shell)->buff)
 		return ;
-	if ((key == BTN_LEFT || key == BTN_HOME) && (*shell)->tc_index > 0)
+	if ((key == BTN_LEFT || key == BTN_HOME) && (*shell)->tc_in > 0)
 	{
-		i = (key == BTN_LEFT ? 1 : ((*shell)->tc_index));
+		i = (key == BTN_LEFT ? 1 : ((*shell)->tc_in));
 		while ((i-- != 0))
 			move_left(shell);
 
 	}
 	else if ((key == BTN_RIGHT || key == BTN_END) &&
-		(*shell)->tc_index < (*shell)->tc_len)
+		(*shell)->tc_in < (*shell)->tc_len)
 	{
-		i = (key == BTN_RIGHT ? 1 : (*shell)->tc_len - (*shell)->tc_index);
+		i = (key == BTN_RIGHT ? 1 : (*shell)->tc_len - (*shell)->tc_in);
 		while ((i-- > 0))
 			move_right(shell);
 	}
 }
 
-void		move_cursor_alt(t_shell **shell, unsigned int key)
+void		move_cursor_alt(t_shell **s, unsigned int key)
 {
-	char	*b;
-	int 	in;
-	int		l;
-
-	in = (*shell)->tc_index;
-	b = (*shell)->buff;
-	l = (*shell)->tc_len;
+	if (((*s)->tc_in == 0 && key == BTN_ALEFT) ||
+		((*s)->tc_in == 1 && key == BTN_ARIGHT))
+		return ;
 	if (key == BTN_ALEFT)
 	{
-		if (in == 0)
-			return ;
-		if ((*shell)->buff[in - 1] == ' ' && (in -= 1))
-			move_left(shell);
-		if (((*shell)->buff[in] == ' ') && (in -= 1))
-			move_left(shell);
-		while (!((*shell)->buff[in] == ' ' || in == 0) && (in -= 1))
-			move_left(shell);
-		if ((*shell)->buff[in] == ' ' && (in += 1))
-			move_right(shell);
+		if ((*s)->buff[(*s)->tc_in - 1] == ' ')
+			move_left(s);
+		if ((*s)->buff[(*s)->tc_in] == ' ')
+			move_left(s);
+		while (!((*s)->buff[(*s)->tc_in] == ' ' || (*s)->tc_in == 0))
+			move_left(s);
+		if ((*s)->buff[(*s)->tc_in] == ' ' && (*s)->tc_in != 0)
+			move_right(s);
 	}
 	else
 	{
-		if (in == l)
-			return ;
-		if (b[in] == ' ')
-		{
-			move_right(shell);
-			in += 1;
-		}
-		while (!(b[in] == ' ' || in == l))
-		{
-			move_right(shell);
-			in += 1;
-		}
+		if ((*s)->buff[(*s)->tc_in] == ' ')
+			move_right(s);
+		while ((!((*s)->buff[(*s)->tc_in] == ' ' ||
+			(*s)->tc_in == (*s)->tc_len)))
+			move_right(s);
 	}
 }

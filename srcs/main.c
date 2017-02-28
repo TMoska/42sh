@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 21:39:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/27 19:35:43 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/28 01:49:05 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int		main(int ac, char **av, char **env)
 	g_exit_code = 0;
 	shell = get_shell(env);
 	term_init(&shell);
+	ft_putstr(tgetstr("cl", NULL));
 	run_shell(&shell);
 	clean_shell(&shell);
 	return (shell->ret);
