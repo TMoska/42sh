@@ -1,4 +1,4 @@
-minishell - TMoska 
+minishell - TMoska [![Buld Status](https://travis-ci.org/TMoska/minishell.svg)](https://travis-ci.org/TMoska/minishell.svg)
 ===
 
 Recreation of `/bin/bash` with executable interpretation and some of the builtins.
