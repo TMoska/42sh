@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:29:07 by moska             #+#    #+#             */
-/*   Updated: 2017/02/27 18:14:27 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/28 11:20:25 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,11 @@ static void	increment_shlvl(t_shell **shell)
 
 	shlvl = get_env_val(shell, "SHLVL");
 	if (!shlvl)
-		shlvl = "1";
+		shlvl = ft_strdup("1");
 	else
 		shlvl = ft_itoa(ft_atoi(shlvl) + 1);
 	do_setenv(shell, "SHLVL", shlvl);
+	ft_strdel(&shlvl);
 }
 
 static void	set_env(t_shell **shell, char **env)

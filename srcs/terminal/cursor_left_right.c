@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:25:57 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/28 01:19:21 by moska            ###   ########.fr       */
+/*   Updated: 2017/02/28 11:25:10 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void		move_cursor_sides(t_shell **shell, unsigned int key)
 		i = (key == BTN_LEFT ? 1 : ((*shell)->tc_in));
 		while ((i-- != 0))
 			move_left(shell);
-
 	}
 	else if ((key == BTN_RIGHT || key == BTN_END) &&
 		(*shell)->tc_in < (*shell)->tc_len)

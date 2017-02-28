@@ -6,13 +6,13 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/25 19:37:58 by moska             #+#    #+#             */
-/*   Updated: 2017/02/28 01:51:01 by moska            ###   ########.fr       */
+/*   Updated: 2017/02/28 11:24:53 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int 	reset_line(t_shell **shell)
+static int	reset_line(t_shell **shell)
 {
 	(*shell)->tc_in = 0;
 	(*shell)->tc_len = 0;
