@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 18:33:26 by moska             #+#    #+#             */
-/*   Updated: 2017/02/28 02:20:19 by moska            ###   ########.fr       */
+/*   Updated: 2017/02/28 17:34:55 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 void	print_prompt(t_shell **shell)
 {
+	char *val;
+
+	val = ft_strjoin(get_env_val(shell, "PWD"), " $> ");
+	(*shell)->prompt_len = ft_strlen(val);
 	ft_putstr("\x1b[35m");
-	ft_putstr(get_env_val(shell, "PWD"));
-	ft_putstr(" $> ");
+	ft_putstr(val);
 	ft_putstr("\033[0m");
 }
 

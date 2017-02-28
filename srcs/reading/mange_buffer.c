@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mange_buffer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:32:46 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/28 11:24:26 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/28 17:16:27 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@ static void	write_buffer(t_shell **shell, char *buffer)
 	ft_strdel(&ret);
 	ft_strdel(&ret1);
 	ft_strdel(&b);
+}
+
+int	reset_line(t_shell **shell)
+{
+	(*shell)->tc_in = 0;
+	(*shell)->tc_len = 0;
+	return (0);
 }
 
 void		work_buffer(t_shell **shell, char *buffer)

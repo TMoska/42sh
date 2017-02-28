@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 22:56:19 by moska             #+#    #+#             */
-/*   Updated: 2017/02/23 22:38:39 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/28 16:33:21 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	try_a_builtin(t_shell **shell)
 		builtin_cd(shell);
 	else if (ft_strcmp(cmd, "echo") == 0)
 		builtin_echo(shell);
+	else if (ft_strcmp(cmd, "hist") == 0)
+		print_history(shell);
 	else
 		ret = 0;
 	return (ret);

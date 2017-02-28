@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   reader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/25 19:37:58 by moska             #+#    #+#             */
-/*   Updated: 2017/02/28 11:24:53 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/28 17:29:08 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	reset_line(t_shell **shell)
-{
-	(*shell)->tc_in = 0;
-	(*shell)->tc_len = 0;
-	return (0);
-}
 
 static int	identify_key(t_shell **shell, char *buffer, unsigned int key)
 {
@@ -32,6 +25,8 @@ static int	identify_key(t_shell **shell, char *buffer, unsigned int key)
 		move_cursor_alt(shell, key);
 	else if (key == BTN_CTRL_D)
 		sig_callback(SIGQUIT);
+	else if (key == BTN_UP || key == BTN_DOWN)
+		history(shell, key);
 	else if (key == BTN_ENTER)
 		return (reset_line(shell));
 	return (1);

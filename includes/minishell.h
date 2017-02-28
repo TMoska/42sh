@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/28 15:27:02 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/28 18:25:46 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@
 # define MOVE_RIGHT	ft_putstr(tgetstr("nd", NULL));
 
 # define DEL		ft_putstr(tgetstr("dc", NULL));
+# define CURS_LEFT	ft_putstr(tgetstr("cr", NULL));
+# define DEL_LINE	ft_putstr(tgetstr("ce", NULL));
 
 /*
 **	Types and Structs
@@ -71,9 +73,17 @@ typedef struct		s_envl
 	char			*value;
 }					t_envl;
 
+typedef struct		s_hist
+{
+	char			*cmd;
+	struct s_hist	*next;
+	struct s_hist	*prev;
+}					t_hist;
+
 typedef struct		s_shell
 {
 	char			*buff;
+	char			*hist_buff_tmp;
 	t_list			*commands;
 	char			**cmd;
 	int				cmd_len;
@@ -85,6 +95,8 @@ typedef struct		s_shell
 	int				tc_ok;
 	int				tc_in;
 	int				tc_len;
+	int				prompt_len;
+	t_hist			*history;
 }					t_shell;
 
 typedef struct		s_env_s
@@ -166,6 +178,7 @@ void				join_back(char ***split_tab, char **new, int *size, int *i);
 
 void				read_input(t_shell **shell);
 void				work_buffer(t_shell **shell, char *buffer);
+int					reset_line(t_shell **shell);
 
 /*
 **	Terminall
@@ -177,4 +190,13 @@ void				move_cursor_sides(t_shell **shell, unsigned int key);
 void				move_cursor_alt(t_shell **shell, unsigned int key);
 void				modify_buffer(t_shell **shell, unsigned int key);
 void				clean_buffer(t_shell **shell);
+
+/*
+**	History
+*/
+
+void				hist_add(t_hist **begin_list, char *cmd);
+void				print_history(t_shell **shell);
+void				history(t_shell **shell, unsigned int key);
+
 #endif
