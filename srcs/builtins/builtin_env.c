@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 18:27:17 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/23 22:30:41 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/02/28 15:34:13 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,8 @@ int				has_errors(t_shell **shell, t_env_s *env_s, char **cmd)
 
 void			builtin_env(t_shell **shell)
 {
-	char	**env;
 	t_env_s	*env_s;
 
-	env = (*shell)->env;
 	if ((*shell)->cmd_len == 1)
 		print_env((*shell)->env_list);
 	else if ((env_s = create_env_struct((*shell)->cmd)))
