@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 21:39:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/28 16:08:53 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/01 13:24:25 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int		run_shell(t_shell **shell)
 	{
 		print_prompt(shell);
 		catch_signals();
+		rewind_history(&(*shell)->history);
 		if ((*shell)->tc_ok)
 			read_input(shell);
 		else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/02/28 18:25:46 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/01 13:24:14 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,5 +198,6 @@ void				clean_buffer(t_shell **shell);
 void				hist_add(t_hist **begin_list, char *cmd);
 void				print_history(t_shell **shell);
 void				history(t_shell **shell, unsigned int key);
+void				rewind_history(t_hist **hist);
 
 #endif

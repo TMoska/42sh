@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:09:26 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/28 16:56:02 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/01 23:00:50 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void		hist_add(t_hist **begin_list, char *cmd)
 	if (*begin_list)
 		(*begin_list)->prev = new;
 	*begin_list = new;
+	rewind_history(begin_list);
 }
 
 void		print_history(t_shell **shell)
@@ -58,7 +59,7 @@ void		print_history(t_shell **shell)
 	hist = (*shell)->history;
 	while (hist)
 	{
-		printf("%s\n", hist->cmd);
+		// printf("%s\n", hist->cmd);
 		hist = hist->next;
 	}
 }
