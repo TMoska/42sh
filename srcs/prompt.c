@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 18:33:26 by moska             #+#    #+#             */
-/*   Updated: 2017/03/01 23:20:24 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/02 20:21:02 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	print_prompt(t_shell **shell)
 	ft_putstr("\x1b[35m");
 	ft_putstr(val);
 	ft_putstr("\033[0m");
+	ft_strdel(&val);
 }
 
 void	command_not_found(t_shell **shell)

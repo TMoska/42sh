@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/01 13:24:14 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/02 20:54:16 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@
 # define BTN_ENTER	10
 # define BTN_TAB	9
 # define BTN_CTRL_D	4
+
+# define BTN_CTRL_P 16
+# define BTN_CTRL_I 9
+# define BTN_CTRL_K 11
+# define BTN_CTRL_L	12
+
 
 /*
 **	Termcaps commands
@@ -97,6 +103,7 @@ typedef struct		s_shell
 	int				tc_len;
 	int				prompt_len;
 	t_hist			*history;
+	char			*clipboard;
 }					t_shell;
 
 typedef struct		s_env_s
@@ -190,6 +197,10 @@ void				move_cursor_sides(t_shell **shell, unsigned int key);
 void				move_cursor_alt(t_shell **shell, unsigned int key);
 void				modify_buffer(t_shell **shell, unsigned int key);
 void				clean_buffer(t_shell **shell);
+void				cut_line(t_shell **shell, unsigned int key);
+void				clean_input(t_shell **shell);
+void				paste(t_shell **shell);
+void				copy(t_shell **shell);
 
 /*
 **	History

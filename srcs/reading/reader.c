@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/25 19:37:58 by moska             #+#    #+#             */
-/*   Updated: 2017/02/28 17:29:08 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/02 20:54:23 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ static int	identify_key(t_shell **shell, char *buffer, unsigned int key)
 		sig_callback(SIGQUIT);
 	else if (key == BTN_UP || key == BTN_DOWN)
 		history(shell, key);
+	else if (key == BTN_CTRL_K || key == BTN_CTRL_L)
+		cut_line(shell, key);
+	else if (key == BTN_CTRL_P)
+		work_buffer(shell, (*shell)->clipboard);
+	else if (key == BTN_CTRL_I)
+		copy(shell);
 	else if (key == BTN_ENTER)
 		return (reset_line(shell));
 	return (1);

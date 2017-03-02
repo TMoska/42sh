@@ -6,7 +6,7 @@
 #    By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/02/28 16:46:15 by tmoska           ###   ########.fr        #
+#    Updated: 2017/03/02 20:33:15 by tmoska           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRC_DIR 	= srcs
 SRC_FILES = main.c prompt.c shell.c interpreting.c validating.c \
 command.c cleaning.c builtins.c builtins/builtin_exit.c builtins/builtin_env.c \
 builtins/builtin_getenv.c env_list/utils.c env_list/utils2.c \
-builtins/builtin_setenv.c builtins/builtin_unsetenv.c \
+builtins/builtin_setenv.c builtins/builtin_unsetenv.c terminal/cut_copy_line.c \
 builtins/builtin_env_utilities.c builtins/builtin_env_utilities2.c \
 builtins/builtin_env_prints.c builtins/builtin_cd.c builtins/builtin_echo.c \
 builtins/builtin_cd_utilities.c builtins/builtin_cd_utilities2.c \
