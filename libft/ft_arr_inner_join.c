@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:39:07 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/04 17:01:20 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/04 18:13:24 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	**ft_arr_inner_join(char **arr, char **arr1)
 		tmp++;
 	}
 	res = ft_str2new(size);
-	while (i < size)
+	while (a < size)
 	{
 		if (ft_arr_includes(arr1, arr[i]))
 		{

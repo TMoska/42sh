@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/02 20:54:16 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/05 00:22:35 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,15 @@ typedef struct		s_envl
 	char			*value;
 }					t_envl;
 
+typedef struct		s_quotes
+{
+	t_bool			dquote;
+	t_bool			squote;
+	t_bool			bquote;
+	t_bool			escape;
+	t_bool			oneline;
+}					t_quotes;
+
 typedef struct		s_hist
 {
 	char			*cmd;
@@ -104,6 +113,8 @@ typedef struct		s_shell
 	int				prompt_len;
 	t_hist			*history;
 	char			*clipboard;
+	char			*prev_line_buff;
+	t_quotes		*q;
 }					t_shell;
 
 typedef struct		s_env_s
@@ -119,7 +130,7 @@ typedef struct		s_env_s
 **	Core function prototypes
 */
 
-void				print_prompt(t_shell **shell);
+void				print_prompt(t_shell **shell, char *prompt);
 t_shell				*get_shell(char **env);
 int					validate_and_prep_cmd(t_shell **shell);
 void				interpret_line(t_shell **shell);
@@ -211,4 +222,9 @@ void				print_history(t_shell **shell);
 void				history(t_shell **shell, unsigned int key);
 void				rewind_history(t_hist **hist);
 
+/*
+**	Quotes
+*/
+
+int					do_quotes(t_shell **shell);
 #endif

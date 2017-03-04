@@ -6,16 +6,16 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/25 19:37:58 by moska             #+#    #+#             */
-/*   Updated: 2017/03/02 20:54:23 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/05 00:23:12 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	identify_key(t_shell **shell, char *buffer, unsigned int key)
+static int	identify_key(t_shell **shell, char *buff, unsigned int key)
 {
 	if (key != BTN_ENTER && ft_isprint(key))
-		work_buffer(shell, buffer);
+		work_buffer(shell, buff);
 	else if (key == BTN_LEFT || key == BTN_RIGHT ||
 		key == BTN_END || key == BTN_HOME)
 		move_cursor_sides(shell, key);
@@ -40,11 +40,11 @@ static int	identify_key(t_shell **shell, char *buffer, unsigned int key)
 
 void		read_input(t_shell **shell)
 {
-	char	*buffer[5];
+	char	*buff[5];
 
-	ft_memset(buffer, 0, 5);
-	while ((read(0, buffer, 5)) > 0 &&
-		identify_key(shell, (char *)buffer, (unsigned int)*buffer))
-		ft_memset(buffer, 0, 5);
+	ft_memset(buff, 0, 5);
+	while ((read(0, buff, 5)) > 0 &&
+		identify_key(shell, (char *)buff, (unsigned int)*buff))
+		ft_memset(buff, 0, 5);
 	ft_putchar('\n');
 }

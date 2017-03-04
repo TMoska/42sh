@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   modify_buffer.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:29:48 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/28 01:15:05 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/04 22:38:49 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	clean_buffer(t_shell **shell)
 {
 	ft_strdel(&(*shell)->buff);
 	ft_putchar('\n');
-	print_prompt(shell);
+	print_prompt(shell, NULL);
 }
 
 void	modify_buffer(t_shell **shell, unsigned int key)
