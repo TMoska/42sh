@@ -1,0 +1,15 @@
+.
+..
+.git
+.gitignore
+Makefile
+README.md
+author
+cat
+fifi
+includes
+l
+libft
+minishell
+srcs
+test

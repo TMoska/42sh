@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:33:19 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/27 22:39:58 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/04 17:00:23 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,4 +137,8 @@ char				**ft_str2join(char **s1, char **s2);
 char				*ft_strtrim_char(char const *s, char c);
 char				*ft_strndelat(char *str, int index, size_t size);
 char				*ft_strndup(char *src, size_t size);
+char				**ft_arr_push(char **arr, char *str);
+char				**ft_arr_del_at(char **arr, int index);
+int					ft_arr_includes(char **arr, char *str);
+char				**ft_arr_inner_join(char **arr, char **arr1);
 #endif
