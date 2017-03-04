@@ -6,13 +6,13 @@
 #    By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/03/04 15:15:04 by tmoska           ###   ########.fr        #
+#    Updated: 2017/03/05 00:26:53 by tmoska           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 GCC 		= gcc
 # GCC 		= clang -fsanitize=memory
-NAME 		= minishell
+NAME 		= 21sh
 FLAGS 		= -Wall -Werror -Wextra -g
 
 LIB_PATH	= libft
