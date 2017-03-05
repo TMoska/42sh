@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unsetenv.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 20:27:38 by moska             #+#    #+#             */
-/*   Updated: 2017/02/22 20:59:38 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/05 22:09:20 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	hanlde_cmd(t_shell **shell, char **cmd)
 			(*shell)->env_list = tmp->next;
 		free(tmp->name);
 		free(tmp->value);
+		free(tmp);
 	}
 }
 
