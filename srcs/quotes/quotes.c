@@ -6,16 +6,33 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 15:14:49 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/05 14:55:19 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/05 18:43:13 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		quote_incomplete(t_quotes **q, char *buff)
+t_quotes	**init_quotes(t_quotes **q)
 {
+	t_bool tmp;
+
+	tmp = FALSE;
+	if (*q)
+		tmp = (*q)->was_quoted;
 	ft_memdel((void**)q);
 	*q = (t_quotes*)ft_memalloc(sizeof(t_quotes*) + 1);
+	(*q)->was_quoted = ((!!tmp) ? tmp : FALSE);
+	(*q)->dquote = FALSE;
+	(*q)->squote = FALSE;
+	(*q)->bquote = FALSE;
+	(*q)->escape = FALSE;
+	(*q)->oneline = FALSE;
+	return (q);
+}
+
+int			quote_incomplete(t_quotes **q, char *buff)
+{
+	q = init_quotes(q);
 	while (buff && *buff)
 	{
 		if (*buff == '\\' && !*(buff + 1))
@@ -35,7 +52,7 @@ int		quote_incomplete(t_quotes **q, char *buff)
 	return ((*q)->oneline || (*q)->bquote || (*q)->squote || (*q)->dquote);
 }
 
-int		ask_for_more_input(t_shell **shell, t_quotes **q)
+int			ask_for_more_input(t_shell **shell, t_quotes **q)
 {
 	char	*str;
 
@@ -52,7 +69,7 @@ int		ask_for_more_input(t_shell **shell, t_quotes **q)
 	return (0);
 }
 
-int		do_quotes(t_shell **shell)
+int			do_quotes(t_shell **shell)
 {
 	char		*tmp;
 
@@ -73,8 +90,12 @@ int		do_quotes(t_shell **shell)
 			(*shell)->buff = ft_strjoin((*shell)->tmp_buff, (*shell)->buff);
 		}
 		else
+		{
+			(*shell)->q->was_quoted = 1;
+			hist_add(&(*shell)->history, (*shell)->buff);
 			(*shell)->buff = ft_str3join((*shell)->tmp_buff,\
 					"\n", (*shell)->buff);
+		}
 		ft_strdel(&tmp);
 		ft_strdel(&(*shell)->tmp_buff);
 	}

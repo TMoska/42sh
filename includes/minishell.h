@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/05 15:34:38 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/05 18:27:01 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct		s_envl
 
 typedef struct		s_quotes
 {
+	t_bool			was_quoted;
 	t_bool			dquote;
 	t_bool			squote;
 	t_bool			bquote;
