@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:09:26 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/02 17:26:48 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/05 14:56:20 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ static t_hist	*hist_new(char *cmd)
 	return (lst);
 }
 
-void		rewind_history(t_hist **hist)
+void			rewind_history(t_hist **hist)
 {
 	while ((*hist) && (*hist)->prev)
 		*hist = (*hist)->prev;
 }
 
-void		hist_add(t_hist **begin_list, char *cmd)
+void			hist_add(t_hist **begin_list, char *cmd)
 {
 	t_hist *new;
 
@@ -52,7 +52,7 @@ void		hist_add(t_hist **begin_list, char *cmd)
 	rewind_history(begin_list);
 }
 
-void		print_history(t_shell **shell)
+void			print_history(t_shell **shell)
 {
 	t_hist *hist;
 

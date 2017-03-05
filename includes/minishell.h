@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/05 00:22:35 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/05 14:59:03 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@
 # define BTN_CTRL_I 9
 # define BTN_CTRL_K 11
 # define BTN_CTRL_L	12
-
 
 /*
 **	Termcaps commands
@@ -113,7 +112,7 @@ typedef struct		s_shell
 	int				prompt_len;
 	t_hist			*history;
 	char			*clipboard;
-	char			*prev_line_buff;
+	char			*tmp_buff;
 	t_quotes		*q;
 }					t_shell;
 

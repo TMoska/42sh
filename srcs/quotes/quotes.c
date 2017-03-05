@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 15:14:49 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/05 00:24:46 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/05 14:55:19 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int		quote_incomplete(t_quotes **q, char *buff)
 {
+	ft_memdel((void**)q);
 	*q = (t_quotes*)ft_memalloc(sizeof(t_quotes*) + 1);
 	while (buff && *buff)
 	{
@@ -59,23 +60,23 @@ int		do_quotes(t_shell **shell)
 		return (0);
 	while (quote_incomplete(&(*shell)->q, (*shell)->buff))
 	{
-		(*shell)->prev_line_buff = ft_strdup((*shell)->buff);
+		(*shell)->tmp_buff = ft_strdup((*shell)->buff);
 		ft_strdel(&(*shell)->buff);
 		ask_for_more_input(shell, &(*shell)->q);
 		tmp = (*shell)->buff;
 		if ((*shell)->q->oneline)
 		{
-			tmp = (*shell)->prev_line_buff;
-			(*shell)->prev_line_buff = ft_strndelat(tmp, ft_strlen(tmp) - 1, 1);
-			(*shell)->buff = ft_strjoin((*shell)->prev_line_buff, (*shell)->buff);
+			tmp = (*shell)->tmp_buff;
+			(*shell)->tmp_buff = ft_strndelat(tmp, ft_strlen(tmp) - 1, 1);
 			ft_strdel(&tmp);
+			tmp = (*shell)->buff;
+			(*shell)->buff = ft_strjoin((*shell)->tmp_buff, (*shell)->buff);
 		}
 		else
-			(*shell)->buff = ft_str3join((*shell)->prev_line_buff, "\n", (*shell)->buff);
+			(*shell)->buff = ft_str3join((*shell)->tmp_buff,\
+					"\n", (*shell)->buff);
 		ft_strdel(&tmp);
-		ft_strdel(&(*shell)->prev_line_buff);
+		ft_strdel(&(*shell)->tmp_buff);
 	}
-	ft_strndelat((*shell)->buff, 0, 1);
-	ft_strndelat((*shell)->buff, ft_strlen(((*shell)->buff)) - 1, 1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 22:11:46 by moska             #+#    #+#             */
-/*   Updated: 2017/02/24 17:38:59 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/05 14:44:58 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ void	clean_shell(t_shell **shell)
 {
 	ft_str2del(&(*shell)->env);
 	clean_env_list(&(*shell)->env_list);
+	free((*shell)->q);
 }

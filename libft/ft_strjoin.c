@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 07:34:04 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/05 14:23:15 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/05 15:01:41 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	else if (s1 && !s2)
 		return (ft_strdup((char*)s1));
-	else
+	else if (!s1 && s2)
 		return (ft_strdup((char*)s2));
+	return (NULL);
 }

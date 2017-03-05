@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 21:39:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/04 22:49:54 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/05 14:58:55 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ int		run_shell(t_shell **shell)
 		if ((*shell)->tc_ok)
 			read_input(shell);
 		else
+		{
 			if (get_next_line(0, &(*shell)->buff) == 0)
 				return (0);
+		}
 		do_quotes(shell);
 		if (!validate_and_prep_cmd(shell))
 		{
