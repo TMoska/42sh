@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 18:33:26 by moska             #+#    #+#             */
-/*   Updated: 2017/03/04 22:41:07 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/05 15:31:33 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_prompt(t_shell **shell, char *prompt)
 	if (!prompt)
 		prompt = ft_strjoin(get_env_val(shell, "PWD"), " $> ");
 	(*shell)->prompt_len = ft_strlen(prompt);
-	ft_putstr("\x1b[35m");
+	ft_putstr("\033[0;32m");
 	ft_putstr(prompt);
 	ft_putstr("\033[0m");
 	ft_strdel(&prompt);
