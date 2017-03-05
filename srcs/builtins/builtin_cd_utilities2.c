@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 22:10:26 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/24 17:04:32 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/05 22:03:32 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,26 @@ static void	start_moving(t_shell **shell, char *path, struct stat *stats,\
 static char	*fix_path_special_cases(t_shell **shell, char *path)
 {
 	char		*oldpwd;
+	char		*home;
 
 	oldpwd = NULL;
+	home = get_env_val(shell, "HOME");	
 	if (!path)
-		return (get_env_val(shell, "HOME"));
+	{
+		if (!home)
+			ft_putendl_fd("cd: no HOME env variable set", 2);
+		return (home);
+	}
 	else if (ft_strcmp(path, "-") == 0)
 	{
-		oldpwd = get_env_val(shell, "OLDPWD");
-		return (oldpwd ? oldpwd : get_env_val(shell, "HOME"));
+		if ((oldpwd = get_env_val(shell, "OLDPWD")))
+			return (oldpwd);
+		else
+		{
+			if (!home)
+				ft_putendl_fd("cd: no HOME env variable set", 2);
+			return (home);
+		}
 	}
 	else
 		return (path);
@@ -86,7 +98,8 @@ void		prep_and_change(t_shell **shell)
 
 	path = (*shell)->cmd[1];
 	p_option = 0;
-	path = fix_path_special_cases(shell, path);
+	if (!(path = fix_path_special_cases(shell, path)))
+		return ;
 	if ((stats = (struct stat *)malloc(sizeof(struct stat))))
 	{
 		if ((*shell)->cmd[1])

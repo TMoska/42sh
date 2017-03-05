@@ -6,16 +6,17 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 22:01:59 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/24 17:17:15 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/05 22:13:01 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	fix_path_if_going_home(t_shell **shell)
+int		fix_path_if_going_home(t_shell **shell)
 {
 	char	**cmd;
 	char	*tmp;
+	char	*home;
 
 	cmd = (*shell)->cmd;
 	while (*cmd)
@@ -23,11 +24,18 @@ void	fix_path_if_going_home(t_shell **shell)
 		if (*cmd[0] == '~')
 		{
 			tmp = *cmd;
-			*cmd = ft_strjoin(get_env_val(shell, "HOME"), (*cmd + 1));
+			home = get_env_val(shell, "HOME");
+			*cmd = ft_strjoin(home, (*cmd + 1));
 			ft_strdel(&tmp);
+			if (!home)
+			{
+				ft_putendl_fd("cd: no HOME env variable set", 2);
+				return (1);
+			}
 		}
 		cmd++;
 	}
+	return (0);
 }
 
 void	set_env_var(t_shell **shell)
@@ -45,7 +53,8 @@ void	builtin_cd(t_shell **shell)
 {
 	if (!(get_env_val(shell, "PWD")))
 		set_env_var(shell);
-	fix_path_if_going_home(shell);
+	if (fix_path_if_going_home(shell))
+		return ;
 	prep_and_change(shell);
 	rebuild_str2env(shell);
 }
