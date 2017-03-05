@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   term_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/26 12:03:00 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/27 20:11:49 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/05 15:34:39 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	clean_terminal(void)
+{
+	ft_putstr(tgetstr("cl", NULL));
+}
 
 int		term_init(t_shell **shell)
 {

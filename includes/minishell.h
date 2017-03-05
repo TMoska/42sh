@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/05 14:59:03 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/05 15:34:38 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,7 @@ void				cut_line(t_shell **shell, unsigned int key);
 void				clean_input(t_shell **shell);
 void				paste(t_shell **shell);
 void				copy(t_shell **shell);
+void				clean_terminal(void);
 
 /*
 **	History

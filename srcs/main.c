@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 21:39:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/05 14:58:55 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/05 15:34:47 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int		main(int ac, char **av, char **env)
 	g_exit_code = 0;
 	shell = get_shell(env);
 	term_init(&shell);
-	ft_putstr(tgetstr("cl", NULL));
+	clean_terminal();
 	run_shell(&shell);
 	clean_shell(&shell);
 	return (shell->ret);
