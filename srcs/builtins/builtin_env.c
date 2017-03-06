@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 18:27:17 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/28 15:34:13 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/06 16:35:34 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ void			print_env(t_envl *env_list)
 {
 	while (env_list)
 	{
-		ft_putstr("\033[1;34m");
-		ft_putstr(env_list->name);
-		ft_putstr("\033[0m");
-		ft_putstr("=");
-		ft_putendl(env_list->value);
+		if (env_list->value)
+		{
+			ft_putstr("\033[1;34m");
+			ft_putstr(env_list->name);
+			ft_putstr("\033[0m");
+			ft_putstr("=");
+			ft_putendl(env_list->value);
+		}
 		env_list = env_list->next;
 	}
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+         #
+#    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/03/05 00:26:53 by tmoska           ###   ########.fr        #
+#    Updated: 2017/03/06 16:14:38 by tmoska           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ builtins/builtin_env_prints.c builtins/builtin_cd.c builtins/builtin_echo.c \
 builtins/builtin_cd_utilities.c builtins/builtin_cd_utilities2.c \
 builtins/builtin_cd_utilities3.c interpreting_utilities.c history/history.c \
 reading/reader.c terminal/term_init.c terminal/cursor_left_right.c \
-terminal/modify_buffer.c reading/mange_buffer.c history/utils.c quotes/quotes.c \
+terminal/modify_buffer.c reading/mange_buffer.c history/utils.c quotes/quotes.c\
+builtins/builtin_export.c
 
 SOURCES		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
@@ -60,5 +61,5 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@make fclean -C $(LIB_PATH)
-	
+
 re: fclean all

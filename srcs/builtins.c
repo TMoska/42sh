@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 22:56:19 by moska             #+#    #+#             */
-/*   Updated: 2017/03/05 15:37:00 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/06 16:15:04 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	try_a_builtin(t_shell **shell)
 		print_history(shell);
 	else if (ft_strcmp(cmd, "clean") == 0)
 		clean_terminal();
+	else if (ft_strcmp(cmd, "export") == 0)
+		builtin_export(shell);
 	else
 		ret = 0;
 	return (ret);

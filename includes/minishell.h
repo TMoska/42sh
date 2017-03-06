@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/05 18:27:01 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/06 16:14:23 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,7 @@ void				change_symlink_directory(t_shell **shell, char *path);
 void				prep_and_change(t_shell **shell);
 void				builtin_echo(t_shell **shell);
 void				join_back(char ***split_tab, char **new, int *size, int *i);
+void				builtin_export(t_shell **shell);
 
 /*
 **	Reading
