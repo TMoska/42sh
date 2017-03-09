@@ -6,13 +6,13 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 05:55:01 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/09 10:34:48 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/09 21:12:07 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	add_command(char ***cmds, char *cmd, int *offset, int *len)
+static void		add_command(char ***cmds, char *cmd, int *offset, int *len)
 {
 	char	*tmp;
 	char	*tmp1;
@@ -26,10 +26,11 @@ void	add_command(char ***cmds, char *cmd, int *offset, int *len)
 	ft_strdel(&tmp1);
 }
 
-int		is_op(char *c)
+static int		is_op(char *c)
 {
-	if (ft_strlen(c) >= 2 && (ft_strncmp(c, "||", 2) == 0 || ft_strncmp(c, "&&", 2) == 0 ||
-	ft_strncmp(c, "<<", 2) == 0 || ft_strncmp(c, ">>", 2) == 0))
+	if (ft_strlen(c) >= 2 && (ft_strncmp(c, "||", 2) == 0 ||
+			ft_strncmp(c, "&&", 2) == 0 || ft_strncmp(c, "<<", 2) == 0 ||
+			ft_strncmp(c, ">>", 2) == 0))
 		return(2);
 	else if (*c == ';' || *c == '|' || *c == '<' || *c == '>')
 		return(1);
@@ -37,7 +38,7 @@ int		is_op(char *c)
 		return (0);
 }
 
-void	add_operator(char ***cmds, char *cmd, int *offset, int *len)
+static void		add_operator(char ***cmds, char *cmd, int *offset, int *len)
 {
 	int		len_op;
 	char	*tmp;
@@ -53,7 +54,7 @@ void	add_operator(char ***cmds, char *cmd, int *offset, int *len)
 	(*offset) += len_op;
 }
 
-char	**split_command(char *cmd)
+char			**split_command(char *cmd)
 {
 	char	**cmds;
 	char	*c;

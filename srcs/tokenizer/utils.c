@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 03:34:21 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/09 12:13:33 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/09 23:13:17 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,17 @@ int		tkn_new_to_back(t_tkn **lst, char *data, int type)
 void	tkn_merge_nodes(t_tkn **dst, t_tkn **src)
 {
 		char	*tmp;
-		t_tkn	*tmp_token;
+		t_tkn	*pre_src;
+		t_tkn	*tmp_src;
 
 		tmp = (*dst)->data;
+		pre_src = *dst;
+		tmp_src = *src;
 		(*dst)->data = ft_str3join(tmp, " ", (*src)->data);
-		tmp_token = (*src)->left;
-		if ((*src)->left)
-			(*src)->left->right = (*src)->right;
-		if (tmp_token && (*src)->right)
-			((*src)->right)->left = tmp_token;
+		while (pre_src->right != *src)
+			pre_src = pre_src->right;
+		pre_src->right = (*src)->right;
 		ft_strdel(&tmp);
-		ft_strdel(&(*src)->data);
-		// free(src);
+		ft_strdel(&tmp_src->data);
+		free(tmp_src);
 }
