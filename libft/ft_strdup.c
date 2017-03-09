@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 17:00:08 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/05 15:01:08 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/09 03:38:19 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,8 @@ char	*ft_strdup(char *src)
 {
 	char	*str;
 
-	if (!src)
+	if (!src || !(str = ft_strnew(ft_strlen(src))))
 		return (NULL);
-	if ((str = ft_strnew(ft_strlen(src))))
-		ft_strcpy(str, src);
-	else
-		return (NULL);
+	ft_strcpy(str, src);
 	return (str);
 }

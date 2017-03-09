@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/16 21:42:06 by moska             #+#    #+#             */
-/*   Updated: 2017/03/09 03:41:57 by tmoska           ###   ########.fr       */
+/*   Created: 2017/03/09 03:34:21 by tmoska            #+#    #+#             */
+/*   Updated: 2017/03/09 03:41:53 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	construct_command(t_shell **shell)
+t_tkn	*tkn_new(char *data, int type)
 {
-	char	**tmp;
-	int		i;
+	t_tkn	*node;
 
-	i = 0;
-	tmp = ft_strsplit((*shell)->buff, ';');
-	while (tmp[i])
-	{
-		ft_lstadd_back(&(*shell)->commands, ft_lstnew(tmp[i],\
-			ft_strlen(tmp[i]) + 1));
-		i++;
-	}
-	ft_str2del(&tmp);
+	if (!(node = (t_tkn*)ft_memalloc(sizeof(t_tkn))))
+		return (NULL);
+	if (!data || !(node->data = ft_strdup(data)))
+		return (NULL);
+	node->type = type;
+	node->left = NULL;
+	node->right = NULL;
+	return (node);
 }

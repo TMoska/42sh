@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 21:39:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/05 15:34:47 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/09 03:28:22 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	loop_commands(t_shell **shell)
 
 int		run_shell(t_shell **shell)
 {
-	while (1)
+	while ((*shell)->exit != 1)
 	{
 		print_prompt(shell, NULL);
 		catch_signals();
@@ -62,10 +62,8 @@ int		run_shell(t_shell **shell)
 		if ((*shell)->tc_ok)
 			read_input(shell);
 		else
-		{
 			if (get_next_line(0, &(*shell)->buff) == 0)
 				return (0);
-		}
 		do_quotes(shell);
 		if (!validate_and_prep_cmd(shell))
 		{
@@ -73,12 +71,10 @@ int		run_shell(t_shell **shell)
 			continue ;
 		}
 		construct_command(shell);
-		loop_commands(shell);
+		// loop_commands(shell);
 		mid_clean_shell(shell);
-		ft_strdel(&((*shell)->buff));
-		if ((*shell)->exit == 1)
-			return ((*shell)->ret);
 	}
+	return ((*shell)->ret);
 }
 
 int		main(int ac, char **av, char **env)

@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/06 16:14:23 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/09 03:33:20 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,14 @@ typedef struct		s_shell
 	char			*tmp_buff;
 	t_quotes		*q;
 }					t_shell;
+
+typedef				s_tkn
+{
+	char			*data;
+	int				type;
+	struct s_tkn	*left;
+	struct s_tkn	*right;
+}					t_tkn;
 
 typedef struct		s_env_s
 {
