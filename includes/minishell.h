@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/09 03:53:22 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/09 08:57:38 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ typedef struct		s_shell
 	t_quotes		*q;
 }					t_shell;
 
-typedef				s_tkn
+typedef struct		s_tkn
 {
 	char			*data;
 	int				type;
@@ -243,6 +243,7 @@ int					do_quotes(t_shell **shell);
 */
 
 t_tkn				*tkn_new(char *data, int type);
-int					*tkn_new_to_back(t_tkn *lst, char *data, int type);
+int					tkn_new_to_back(t_tkn **lst, char *data, int type);
+char				**split_command(char *cmd);
 
 #endif

@@ -6,11 +6,29 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 21:42:06 by moska             #+#    #+#             */
-/*   Updated: 2017/03/09 04:58:57 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/09 08:53:06 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void		assign_a_priority_type(char *s, int *type)
+{
+	if ((ft_strcmp(s, ";") == 0))
+		(*type) = 6;
+	else if (ft_strcmp(s, "||") == 0 || ft_strcmp(s, "&&") == 0)
+		(*type) = 5;
+	else if (ft_strcmp(s, "|") == 0)
+		(*type) = 4;
+	else if (ft_strstr(s, "&>"))
+		(*type) = 3;
+	else if (ft_strcmp(s, "<") == 0 || ft_strcmp(s, "<<") == 0)
+		(*type) = 2;
+	else if (ft_strcmp(s, ">") == 0 || ft_strcmp(s, ">>") == 0)
+		(*type) = 1;
+	else
+		(*type) = 0;
+}
 
 void		construct_command(t_shell **shell)
 {
@@ -21,17 +39,13 @@ void		construct_command(t_shell **shell)
 
 	tkns = NULL;
 	i = 0;
-	cmds = ft_strsplit((*shell)->buff, ' ');
+	cmds = split_command((*shell)->buff);
 	while (cmds[i])
 	{
-		// Todo: Double-check with mfa (2&>1) matching
-		type  = (ft_strcmp(cmds[i], ";") == 0 || ft_strcmp(cmds[i], "||") == 0 \
-			|| ft_strcmp(cmds[i], "&&") == 0 || ft_strcmp(cmds[i], "|") == 0 \
-			|| ft_strcmp(cmds[i], "<") == 0 || ft_strcmp(cmds[i], "<<") == 0 \
-			|| ft_strcmp(cmds[i], ">") == 0 || ft_strcmp(cmds[i], ">>") == 0 \
-			|| ft_strstr(cmds[i], "&>"));
+		// // Todo: Double-check with mfa (2&>1) matching
+		assign_a_priority_type(cmds[i], &type);
 		tkn_new_to_back(&tkns, cmds[i], type);
-		printf("! %s %i\n", cmds[i], type);
+		printf("! |%s| %i\n", cmds[i], type);
 		i++;
 	}
 }

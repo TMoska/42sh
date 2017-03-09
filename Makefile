@@ -6,7 +6,7 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/03/06 16:14:38 by tmoska           ###   ########.fr        #
+#    Updated: 2017/03/09 06:13:59 by tmoska           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ INC_FLAGS 	= -I./includes -I $(LIB_PATH)/includes
 
 SRC_DIR 	= srcs
 SRC_FILES = main.c prompt.c shell.c interpreting.c validating.c \
-command.c cleaning.c builtins.c builtins/builtin_exit.c builtins/builtin_env.c \
+tokenizer/command.c cleaning.c builtins.c builtins/builtin_exit.c builtins/builtin_env.c \
 builtins/builtin_getenv.c env_list/utils.c env_list/utils2.c \
 builtins/builtin_setenv.c builtins/builtin_unsetenv.c terminal/cut_copy_line.c \
 builtins/builtin_env_utilities.c builtins/builtin_env_utilities2.c \
@@ -34,7 +34,7 @@ builtins/builtin_cd_utilities.c builtins/builtin_cd_utilities2.c \
 builtins/builtin_cd_utilities3.c interpreting_utilities.c history/history.c \
 reading/reader.c terminal/term_init.c terminal/cursor_left_right.c \
 terminal/modify_buffer.c reading/mange_buffer.c history/utils.c quotes/quotes.c\
-builtins/builtin_export.c
+builtins/builtin_export.c tokenizer/utils.c tokenizer/split_command.c
 
 SOURCES		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 

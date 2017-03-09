@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:33:19 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/04 17:00:23 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/09 08:54:45 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,8 @@ void				ft_put_justified_str(char *str, size_t tot_size,\
 void				ft_put_justified_nbr(int nb, size_t tot_size,\
 		char fill, t_bool right);
 void				ft_putchar_if(int condition, char pos, char neg);
-int					ft_lst_in_list(t_list *begin_list, void *data,\
-		int (*cmp)());
+int					ft_lst_in_list(t_list *begin_list, void *data, \
+	int (*cmp)());
 int					ft_lstadd_back(t_list **alst, t_list *new);
 void				ft_lst_clear(void **list_content, size_t *content_size);
 int					ft_char_arr_len(char **arr);
@@ -137,7 +137,7 @@ char				**ft_str2join(char **s1, char **s2);
 char				*ft_strtrim_char(char const *s, char c);
 char				*ft_strndelat(char *str, int index, size_t size);
 char				*ft_strndup(char *src, size_t size);
-char				**ft_arr_push(char **arr, char *str);
+void				ft_arr_push(char ***arr, char *str);
 char				**ft_arr_del_at(char **arr, int index);
 int					ft_arr_includes(char **arr, char *str);
 char				**ft_arr_inner_join(char **arr, char **arr1);

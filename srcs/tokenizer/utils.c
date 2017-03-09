@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 03:34:21 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/09 04:09:57 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/09 05:01:54 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,15 @@ t_tkn	*tkn_new(char *data, int type)
 	return (node);
 }
 
-int		*tkn_new_to_back(t_tkn *lst, char *data, int type)
-{x`
+int		tkn_new_to_back(t_tkn **lst, char *data, int type)
+{
 	t_tkn *new;
 	t_tkn *tmp;
 
+	tmp = *lst;
 	if (!(new = tkn_new(data, type)))
-		return (NULL);
-	if (*lst)
+		return (0);
+	if (tmp)
 	{
 		while (tmp->right)
 			tmp = tmp->right;

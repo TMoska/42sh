@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str2del.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 22:13:47 by moska             #+#    #+#             */
-/*   Updated: 2017/02/19 23:24:44 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/09 07:09:56 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_str2del(char ***tab)
 	int i;
 
 	i = 0;
-	if (!(*tab))
+	if (!tab || !(*tab))
 		return ;
 	while ((*tab)[i])
 	{
