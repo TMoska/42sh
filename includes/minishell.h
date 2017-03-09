@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/09 10:47:00 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/09 12:03:52 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,10 +242,12 @@ int					do_quotes(t_shell **shell);
 **	Tokenizing
 */
 
-void				construct_command(t_shell **shell);
 t_tkn				*tkn_new(char *data, int type);
 int					tkn_new_to_back(t_tkn **lst, char *data, int type);
 char				**split_command(char *cmd);
 int					if_op_find_priority(char *s);
+void				tokenize(t_shell **shell);
+void				get_tokens(t_shell **shell);
+void				tkn_merge_nodes(t_tkn **dst, t_tkn **src);
 
 #endif
