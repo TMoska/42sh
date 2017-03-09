@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/09 08:57:38 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/09 10:47:00 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ typedef struct		s_shell
 	char			*clipboard;
 	char			*tmp_buff;
 	t_quotes		*q;
+	struct s_tkn	*tkns;
 }					t_shell;
 
 typedef struct		s_tkn
@@ -145,7 +146,6 @@ void				interpret_line(t_shell **shell);
 char				*loop_through_paths(char ***paths, int *i, char *cmd);
 void				clean_shell(t_shell **shell);
 void				command_not_found(t_shell **shell);
-void				construct_command(t_shell **shell);
 void				mid_clean_shell(t_shell **shell);
 void				permission_denied(t_shell **shell, char *path);
 void				must_exec(t_shell **shell, char *exec, \
@@ -242,8 +242,10 @@ int					do_quotes(t_shell **shell);
 **	Tokenizing
 */
 
+void				construct_command(t_shell **shell);
 t_tkn				*tkn_new(char *data, int type);
 int					tkn_new_to_back(t_tkn **lst, char *data, int type);
 char				**split_command(char *cmd);
+int					if_op_find_priority(char *s);
 
 #endif

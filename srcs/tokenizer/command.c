@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 21:42:06 by moska             #+#    #+#             */
-/*   Updated: 2017/03/09 08:53:06 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/09 10:46:19 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ void		construct_command(t_shell **shell)
 	cmds = split_command((*shell)->buff);
 	while (cmds[i])
 	{
-		// // Todo: Double-check with mfa (2&>1) matching
 		assign_a_priority_type(cmds[i], &type);
 		tkn_new_to_back(&tkns, cmds[i], type);
 		printf("! |%s| %i\n", cmds[i], type);
 		i++;
 	}
+	ft_str2del(&cmds);
+	(*shell)->tkns = tkns;
 }

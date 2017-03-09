@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 12:14:20 by moska             #+#    #+#             */
-/*   Updated: 2017/02/17 15:59:03 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/09 10:31:40 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_str2len(char **tab)
 	size_t i;
 
 	i = 0;
-	if (!tab)
+	if (!tab || !*tab)
 		return (0);
 	while (tab[i])
 		i++;
