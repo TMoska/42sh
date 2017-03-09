@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/09 03:33:20 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/09 03:53:22 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,4 +237,12 @@ void				rewind_history(t_hist **hist);
 */
 
 int					do_quotes(t_shell **shell);
+
+/*
+**	Tokenizing
+*/
+
+t_tkn				*tkn_new(char *data, int type);
+int					*tkn_new_to_back(t_tkn *lst, char *data, int type);
+
 #endif
