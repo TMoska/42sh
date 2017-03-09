@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 03:34:21 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/09 03:51:54 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/09 04:09:57 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_tkn	*tkn_new(char *data, int type)
 }
 
 int		*tkn_new_to_back(t_tkn *lst, char *data, int type)
-{
+{x`
 	t_tkn *new;
 	t_tkn *tmp;
 
