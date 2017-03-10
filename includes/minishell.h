@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/10 04:08:37 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/10 05:29:42 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ typedef struct		s_shell
 	char			*tmp_buff;
 	t_quotes		*q;
 	struct s_tkn	*tkns;
+	struct s_tkn	*tree;
 	int				token_count;
 }					t_shell;
 
@@ -252,5 +253,6 @@ void				get_tokens(t_shell **shell);
 void				tkn_move_args_to_start(t_tkn **dst, t_tkn **src);
 void				reorganize_tokens(t_shell **shell);
 void				syn_error(t_shell **shell);
+t_tkn				*build_tree(t_tkn *tree);
 
 #endif
