@@ -6,36 +6,12 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 09:18:00 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/19 23:05:02 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/10 00:29:37 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
-
-static int	word_count(char const *s, char c)
-{
-	int	i;
-	int	wc;
-	int	found;
-
-	i = 0;
-	wc = 0;
-	found = 0;
-	while (s[i])
-	{
-		if (s[i] == c)
-			found = 0;
-		else
-		{
-			if (found == 0)
-				wc++;
-			found = 1;
-		}
-		i++;
-	}
-	return (wc);
-}
 
 char		**ft_strsplit(char const *s, char c)
 {
@@ -46,7 +22,7 @@ char		**ft_strsplit(char const *s, char c)
 
 	if (!s)
 		return (0);
-	size = word_count(s, c);
+	size = ft_word_count(s, c);
 	substr_len = 0;
 	i = 0;
 	if (!(table = (char **)malloc((sizeof(char *) * size + 1))))

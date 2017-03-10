@@ -6,7 +6,7 @@
 #    By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/22 15:11:22 by tmoska            #+#    #+#              #
-#    Updated: 2017/03/04 16:55:31 by tmoska           ###   ########.fr        #
+#    Updated: 2017/03/10 00:29:52 by moska            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SOURCES =	ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 					ft_str2new.c ft_str2dup.c get_next_line.c ft_str3join.c \
 					ft_strlen_until.c ft_str2join.c ft_strtrim_char.c ft_strndup.c \
 					ft_arr_push.c ft_arr_del_at.c ft_arr_includes.c ft_arr_inner_join.c \
+					ft_word_count.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
