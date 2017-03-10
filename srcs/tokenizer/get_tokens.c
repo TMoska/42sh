@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 11:27:17 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/09 23:13:47 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/09 23:38:25 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void		get_tokens(t_shell **shell)
 		tkn_new_to_back(&tkns, cmds[i], type);
 		i++;
 	}
+	(*shell)->token_count = i;
 	ft_str2del(&cmds);
 	(*shell)->tkns = tkns;
 }

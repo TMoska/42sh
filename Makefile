@@ -6,7 +6,7 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/03/09 11:28:52 by tmoska           ###   ########.fr        #
+#    Updated: 2017/03/10 00:03:13 by moska            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ builtins/builtin_cd_utilities3.c interpreting_utilities.c history/history.c \
 reading/reader.c terminal/term_init.c terminal/cursor_left_right.c \
 terminal/modify_buffer.c reading/mange_buffer.c history/utils.c quotes/quotes.c\
 builtins/builtin_export.c tokenizer/utils.c tokenizer/split_command.c \
-tokenizer/get_tokens.c tokenizer/tokenizer.c
+tokenizer/get_tokens.c tokenizer/tokenizer.c tokenizer/reorganizer.c \
+tokenizer/errors.c
 
 SOURCES		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 

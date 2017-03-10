@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 03:34:21 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/09 23:13:17 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/10 04:08:40 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,40 @@ int		tkn_new_to_back(t_tkn **lst, char *data, int type)
 	return (1);
 }
 
-void	tkn_merge_nodes(t_tkn **dst, t_tkn **src)
+char	*ft_join_arr_to_str(char **arr)
+{
+	char	*tmp;
+	char	**tmp_arr;
+	char	*res;
+
+	tmp_arr = arr;
+	res = ft_strdup(*tmp_arr);
+	tmp_arr++;
+	while (*tmp_arr)
+	{
+		tmp = res;
+		res = ft_str3join(res, " ", *tmp_arr);
+		tmp_arr++;
+		ft_strdel(&tmp);
+	}
+	return (res);
+}
+
+void	tkn_move_args_to_start(t_tkn **dst, t_tkn **src)
 {
 		char	*tmp;
-		t_tkn	*pre_src;
-		t_tkn	*tmp_src;
+		char	*tmp_dst;
+		char	*tmp_src;
+		char	**src_data_tab;
 
-		tmp = (*dst)->data;
-		pre_src = *dst;
-		tmp_src = *src;
-		(*dst)->data = ft_str3join(tmp, " ", (*src)->data);
-		while (pre_src->right != *src)
-			pre_src = pre_src->right;
-		pre_src->right = (*src)->right;
+		tmp_dst = (*dst)->data;
+		tmp_src = (*src)->data;
+		src_data_tab = ft_strsplit((*src)->data, ' ');
+		tmp = ft_join_arr_to_str(&(src_data_tab[1]));
+		(*dst)->data = ft_str3join(tmp_dst, " ", tmp);
+		(*src)->data = ft_strdup(src_data_tab[0]);
+		ft_strdel(&tmp_dst);
+		ft_strdel(&tmp_src);
 		ft_strdel(&tmp);
-		ft_strdel(&tmp_src->data);
-		free(tmp_src);
+		ft_str2del(&src_data_tab);
 }
