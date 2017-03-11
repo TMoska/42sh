@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/11 23:51:24 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/12 00:04:51 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,7 +261,6 @@ int					in_range(int i, int start, int end);
 **	Execution
 */
 
-void				execute_tree(t_shell **shell);
 int					execute_node(t_tkn *node);
 int					execute_right_redirection(t_tkn *node);
 int					execute_logic_operators(t_tkn *node);

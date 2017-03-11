@@ -6,11 +6,21 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 15:40:38 by moska             #+#    #+#             */
-/*   Updated: 2017/03/11 23:24:03 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/12 00:04:56 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+**	0	-	binary
+**	1	-	>, >>
+**	2	-	<, <<
+**	3	-	&>
+**	4	-	|
+**	5	-	&&, ||
+**	6	-	;
+*/
 
 int		execute_node(t_tkn *node)
 {
@@ -19,30 +29,25 @@ int		execute_node(t_tkn *node)
 	ret = 0;
 	if (!node)
 		ret = 0;
-	else if (node->type == 0) // binary
+	else if (node->type == 0)
 		ret = interpret_line(node->data);
-	else if (node->type == 1) // >, >>
+	else if (node->type == 1)
 		ret = execute_right_redirection(node);
-	else if (node->type == 2) // <, <<
+	else if (node->type == 2)
 	{
 
 	}
-	else if (node->type == 3) // &>
+	else if (node->type == 3)
 	{
 
 	}
-	else if (node->type == 4) // |
+	else if (node->type == 4)
 	{
 
 	}
-	else if (node->type == 5) // && or ||
+	else if (node->type == 5)
 		ret = execute_logic_operators(node);
-	else if (node->type == 6) // semicolon (;)
+	else if (node->type == 6)
 		ret = execute_semicolon(node);
 	return (ret);
-}
-
-void	execute_tree(t_shell **shell)
-{
-	execute_node((*shell)->tree);
 }
