@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 18:33:26 by moska             #+#    #+#             */
-/*   Updated: 2017/03/10 23:20:11 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/11 21:54:55 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	no_file_or_dir(t_shell **shell)
 {
 	ft_putstr_fd((*shell)->cmd[0], 2);
 	ft_putendl_fd(": no such file or directory", 2);
-	printf("OK\n");
 	(*shell)->ret = -1;
 	g_exit_code = -1;
 }

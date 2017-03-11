@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 15:40:38 by moska             #+#    #+#             */
-/*   Updated: 2017/03/11 17:54:32 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/11 23:24:03 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ int		execute_node(t_tkn *node)
 	else if (node->type == 0) // binary
 		ret = interpret_line(node->data);
 	else if (node->type == 1) // >, >>
-	{
-
-	}
+		ret = execute_right_redirection(node);
 	else if (node->type == 2) // <, <<
 	{
 
@@ -38,17 +36,9 @@ int		execute_node(t_tkn *node)
 
 	}
 	else if (node->type == 5) // && or ||
-	{
-		ret  = execute_node(node->left);
-		if ((ft_strcmp(node->data, "||") == 0 && ret != 0)
-			|| (ft_strcmp(node->data, "&&") == 0 && ret == 0))
-			ret = execute_node(node->right);
-	}
+		ret = execute_logic_operators(node);
 	else if (node->type == 6) // semicolon (;)
-	{
-		execute_node(node->left);
-		execute_node(node->right);
-	}
+		ret = execute_semicolon(node);
 	return (ret);
 }
 

@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 04:11:29 by moska             #+#    #+#             */
-/*   Updated: 2017/03/10 05:34:17 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/11 21:54:30 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ t_tkn	*build_tree(t_tkn *tree)
 	left = get_left_branch(tree, head);
 	head->left = build_tree(left);
 	head->right = build_tree(right);
-	print_node(head);
+	// print_node(head);
 	return (head);
 }

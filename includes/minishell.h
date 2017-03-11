@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/11 17:50:01 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/11 23:51:24 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <termios.h>
 # include <termcap.h>
 # include <sys/wait.h>
+# include <fcntl.h>
 
 # define BUFF_SIZE 1024
 
@@ -174,7 +175,7 @@ void				rebuild_str2env(t_shell **shell);
 **	Builtins
 */
 
-int					try_a_builtin(t_shell **shell, char *cmd);
+int					try_a_builtin(t_shell **shell, char *base_cmd, char *full_cmd);
 int					builtin_exit(t_shell **shell);
 int					builtin_env(t_shell **shell);
 int					builtin_getenv (t_shell **shell);
@@ -197,7 +198,7 @@ void				work_environ_and_display(char **cmd, t_shell **shell);
 void				do_setenv(t_shell **shell, char *name, char *value);
 void				change_symlink_directory(t_shell **shell, char *path);
 int					prep_and_change(t_shell **shell);
-int					builtin_echo(t_shell **shell);
+int					builtin_echo(t_shell **shell, char *cmd);
 void				join_back(char ***split_tab, char **new, int *size, int *i);
 void				builtin_export(t_shell **shell);
 
@@ -254,7 +255,16 @@ void				tkn_move_args_to_start(t_tkn **dst, t_tkn **src);
 void				reorganize_tokens(t_shell **shell);
 void				syn_error(t_shell **shell);
 t_tkn				*build_tree(t_tkn *tree);
-void				execute_tree(t_shell **shell);
 int					in_range(int i, int start, int end);
+
+/*
+**	Execution
+*/
+
+void				execute_tree(t_shell **shell);
+int					execute_node(t_tkn *node);
+int					execute_right_redirection(t_tkn *node);
+int					execute_logic_operators(t_tkn *node);
+int					execute_semicolon(t_tkn *node);
 
 #endif

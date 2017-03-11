@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/03/11 17:44:46 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/11 23:57:33 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ int			must_exec(t_shell **shell, char *exec, char **ptr, char **env)
 	i = 0;
 	ret = 0;
 	path = get_env_val(shell, "PATH");
-	if (!path)
-		path = "/usr/bin:/bin:/usr/sbin:/sbin";
 	if ((exec = get_full_executable(shell, exec, path)))
 	{
 		ret = fork_and_execute(shell, exec, ptr, env);
@@ -113,7 +111,7 @@ int			interpret_line(char *cmd)
 	ptr = shell->cmd;
 	rebuild_str2env(&shell);
 	env = shell->env;
-	ret = try_a_builtin(&shell, ptr[0]);
+	ret = try_a_builtin(&shell, ptr[0], cmd);
 	if (ret < 1)
 		return (ret);
 	return (must_exec(&shell, exec, ptr, env));

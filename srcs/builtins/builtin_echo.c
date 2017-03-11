@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 22:38:50 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/11 00:59:39 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/11 23:51:08 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,11 @@ static void	echo_quote(t_shell **shell, char *cmd, char quote)
 	}
 }
 
-int		builtin_echo(t_shell **shell)
+int		builtin_echo(t_shell **shell, char *cmd)
 {
 	char *tmp;
 
-	tmp = ((*shell)->buff + 5);
+	tmp = (cmd + 5);
 	if (tmp[0] == '\"' || tmp[0] == '\'')
 		echo_quote(shell, tmp, tmp[0]);
 	else
