@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 21:39:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/09 12:01:17 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/10 21:48:21 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	loop_commands(t_shell **shell)
 	{
 		(*shell)->cmd = ft_strsplit(lst->content, ' ');
 		(*shell)->cmd_len = ft_str2len((*shell)->cmd);
-		interpret_line(shell);
+		// interpret_line(shell);
 		ft_str2del(&(*shell)->cmd);
 		lst = lst->next;
 	}

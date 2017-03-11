@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unsetenv.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 20:27:38 by moska             #+#    #+#             */
-/*   Updated: 2017/03/05 22:09:20 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/11 17:36:05 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,16 @@ void	hanlde_cmd(t_shell **shell, char **cmd)
 	}
 }
 
-void	builtin_unsetenv(t_shell **shell)
+int		builtin_unsetenv(t_shell **shell)
 {
 	char	**cmd;
 
 	cmd = (*shell)->cmd;
-	if (ft_str2len(cmd) == 1)
-		return ;
+	if ((*shell)->cmd_len == 1)
+		return (-1);
 	cmd++;
 	while (*cmd)
 		hanlde_cmd(shell, cmd++);
 	rebuild_str2env(shell);
+	return (0);
 }

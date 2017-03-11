@@ -6,15 +6,16 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/26 12:03:00 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/05 15:34:39 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/11 17:49:32 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	clean_terminal(void)
+int		clean_terminal(void)
 {
 	ft_putstr(tgetstr("cl", NULL));
+	return (0);
 }
 
 int		term_init(t_shell **shell)

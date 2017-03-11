@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/10 05:29:42 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/11 17:50:01 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,14 +144,14 @@ typedef struct		s_env_s
 void				print_prompt(t_shell **shell, char *prompt);
 t_shell				*get_shell(char **env);
 int					validate_and_prep_cmd(t_shell **shell);
-void				interpret_line(t_shell **shell);
+int					interpret_line(char *cmd);
 char				*loop_through_paths(char ***paths, int *i, char *cmd);
 void				clean_shell(t_shell **shell);
-void				command_not_found(t_shell **shell);
+int					command_not_found(t_shell **shell);
 void				mid_clean_shell(t_shell **shell);
-void				permission_denied(t_shell **shell, char *path);
-void				must_exec(t_shell **shell, char *exec, \
-					char **ptr, char **env);
+int					permission_denied(t_shell **shell, char *path);
+int					must_exec(t_shell **shell, char *exec, char **ptr,\
+					char **env);
 void				print_env(t_envl *env_list);
 t_envl				*built_env_list(char **env);
 void				no_file_or_dir(t_shell **shell);
@@ -174,13 +174,13 @@ void				rebuild_str2env(t_shell **shell);
 **	Builtins
 */
 
-int					try_a_builtin(t_shell **shell);
-void				builtin_exit(t_shell **shell);
-void				builtin_env(t_shell **shell);
-void				builtin_getenv (t_shell **shell);
-void				builtin_setenv(t_shell **shell);
-void				builtin_unsetenv(t_shell **shell);
-void				builtin_cd(t_shell **shell);
+int					try_a_builtin(t_shell **shell, char *cmd);
+int					builtin_exit(t_shell **shell);
+int					builtin_env(t_shell **shell);
+int					builtin_getenv (t_shell **shell);
+int					builtin_setenv(t_shell **shell);
+int					builtin_unsetenv(t_shell **shell);
+int					builtin_cd(t_shell **shell);
 int					op_null(char **cmd);
 int					op_unset(char **cmd);
 int					op_setenv(char **cmd);
@@ -196,8 +196,8 @@ void				work_with_alterenv(char **cmd, t_shell **shell);
 void				work_environ_and_display(char **cmd, t_shell **shell);
 void				do_setenv(t_shell **shell, char *name, char *value);
 void				change_symlink_directory(t_shell **shell, char *path);
-void				prep_and_change(t_shell **shell);
-void				builtin_echo(t_shell **shell);
+int					prep_and_change(t_shell **shell);
+int					builtin_echo(t_shell **shell);
 void				join_back(char ***split_tab, char **new, int *size, int *i);
 void				builtin_export(t_shell **shell);
 
@@ -223,7 +223,7 @@ void				cut_line(t_shell **shell, unsigned int key);
 void				clean_input(t_shell **shell);
 void				paste(t_shell **shell);
 void				copy(t_shell **shell);
-void				clean_terminal(void);
+int					clean_terminal(void);
 
 /*
 **	History
@@ -254,5 +254,7 @@ void				tkn_move_args_to_start(t_tkn **dst, t_tkn **src);
 void				reorganize_tokens(t_shell **shell);
 void				syn_error(t_shell **shell);
 t_tkn				*build_tree(t_tkn *tree);
+void				execute_tree(t_shell **shell);
+int					in_range(int i, int start, int end);
 
 #endif

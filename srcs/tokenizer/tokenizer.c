@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 21:42:06 by moska             #+#    #+#             */
-/*   Updated: 2017/03/10 05:32:21 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/10 15:40:08 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,5 @@ void		tokenize(t_shell **shell)
 	reorganize_tokens(shell);
 	(*shell)->tree = build_tree((*shell)->tkns);
 	(*shell)->tkns = NULL;
+	execute_tree(shell);
 }

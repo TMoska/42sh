@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 23:32:59 by moska             #+#    #+#             */
-/*   Updated: 2017/03/10 04:08:36 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/10 21:55:23 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		in_range(int i, int start, int end)
 	return ((i <= end && i >= start));
 }
 
-void move_pointers(t_tkn *init, t_tkn **start, t_tkn **ptr1, t_tkn **ptr2)
+static void move_pointers(t_tkn *init, t_tkn **start, t_tkn **ptr1, t_tkn **ptr2)
 {
 	*start = init;
 	*ptr1 = (*start)->right;

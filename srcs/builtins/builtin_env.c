@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 18:27:17 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/06 16:35:34 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/11 17:23:18 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int				has_errors(t_shell **shell, t_env_s *env_s, char **cmd)
 	return (ret);
 }
 
-void			builtin_env(t_shell **shell)
+int			builtin_env(t_shell **shell)
 {
 	t_env_s	*env_s;
 
@@ -78,7 +78,7 @@ void			builtin_env(t_shell **shell)
 	else if ((env_s = create_env_struct((*shell)->cmd)))
 	{
 		if (has_errors(shell, env_s, (*shell)->cmd))
-			return ;
+			return (-1);
 		else if (env_s->ignore == 1 && env_s->cmd == 0 && env_s->set == 1)
 			print_setenv((*shell)->cmd);
 		else if (env_s->ignore == 1 && env_s->cmd == 1)
@@ -89,4 +89,5 @@ void			builtin_env(t_shell **shell)
 			work_environ_and_display((*shell)->cmd, shell);
 		free(env_s);
 	}
+	return (0);
 }

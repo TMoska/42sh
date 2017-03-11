@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 23:32:19 by moska             #+#    #+#             */
-/*   Updated: 2017/02/22 20:57:40 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/11 16:59:48 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,17 @@ static void	manage_return_code(t_shell **shell)
 	}
 }
 
-void		builtin_exit(t_shell **shell)
+int			builtin_exit(t_shell **shell)
 {
 	if ((*shell)->cmd_len > 2)
 	{
 		ft_putstr_fd("exit: too many arguments\n", 2);
-		return ;
+		return (-1);
 	}
 	else if ((*shell)->cmd_len == 2)
 		manage_return_code(shell);
 	mid_clean_shell(shell);
 	clean_shell(shell);
 	exit((*shell)->ret);
+	return (0);
 }

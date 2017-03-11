@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 22:10:26 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/05 22:03:32 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/11 17:48:09 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	change_directory(t_shell **shell, char *path)
 	}
 }
 
-static void	handle_errors(t_shell **shell, char *path, struct stat *stats)
+static int	handle_errors(t_shell **shell, char *path, struct stat *stats)
 {
 	if (access(path, F_OK) != -1)
 	{
@@ -43,6 +43,7 @@ static void	handle_errors(t_shell **shell, char *path, struct stat *stats)
 	}
 	else
 		no_file_or_dir(shell);
+	return (-1);
 }
 
 static void	start_moving(t_shell **shell, char *path, struct stat *stats,\
@@ -67,7 +68,7 @@ static char	*fix_path_special_cases(t_shell **shell, char *path)
 	char		*home;
 
 	oldpwd = NULL;
-	home = get_env_val(shell, "HOME");	
+	home = get_env_val(shell, "HOME");
 	if (!path)
 	{
 		if (!home)
@@ -89,17 +90,19 @@ static char	*fix_path_special_cases(t_shell **shell, char *path)
 		return (path);
 }
 
-void		prep_and_change(t_shell **shell)
+int			prep_and_change(t_shell **shell)
 {
 	struct stat	*stats;
 	char		*path;
 	DIR			*opened;
 	int			p_option;
+	int			ret;
 
+	ret = -1;
 	path = (*shell)->cmd[1];
 	p_option = 0;
 	if (!(path = fix_path_special_cases(shell, path)))
-		return ;
+		return (ret);
 	if ((stats = (struct stat *)malloc(sizeof(struct stat))))
 	{
 		if ((*shell)->cmd[1])
@@ -107,11 +110,11 @@ void		prep_and_change(t_shell **shell)
 		if ((opened = opendir(path)) || p_option)
 		{
 			start_moving(shell, path, stats, p_option);
-			if (opened)
-				closedir(opened);
+			ret = (opened) ? closedir(opened) : (-1);
 		}
 		else
-			handle_errors(shell, path, stats);
-		free(stats);
+			ret = handle_errors(shell, path, stats);
 	}
+	free(stats);
+	return (ret);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_setenv.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 14:00:23 by moska             #+#    #+#             */
-/*   Updated: 2017/02/23 22:05:49 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/11 17:35:05 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	do_setenv(t_shell **shell, char *name, char *value)
 	rebuild_str2env(shell);
 }
 
-void	builtin_setenv(t_shell **shell)
+int		builtin_setenv(t_shell **shell)
 {
 	size_t	len;
 
@@ -43,6 +43,7 @@ void	builtin_setenv(t_shell **shell)
 		ft_putendl_fd("setenv: too many arguments", 2);
 		(*shell)->ret = 2;
 		g_exit_code = 2;
+		return (-1);
 	}
 	else
 	{
@@ -52,8 +53,10 @@ void	builtin_setenv(t_shell **shell)
 			ft_putendl_fd((*shell)->cmd[1], 2);
 			(*shell)->ret = -1;
 			g_exit_code = -1;
+			return (-1);
 		}
 		else
 			do_setenv(shell, (*shell)->cmd[1], (*shell)->cmd[2]);
 	}
+	return (0);
 }
