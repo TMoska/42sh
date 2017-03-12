@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/03/11 23:57:33 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/12 23:34:27 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	fork_and_execute(t_shell **shell, char *exec,\
 	if (stat(exec, &st) != -1)
 	{
 		if ((access(exec, X_OK) != 0))
-			ret = permission_denied(shell, NULL);
+			ret = permission_denied(shell, TRUE, NULL);
 		else if (S_ISREG(st.st_mode) && st.st_mode)
 			ret = execute(shell, exec, ptr, env);
 		term_trigger(shell, 0);

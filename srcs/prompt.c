@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 18:33:26 by moska             #+#    #+#             */
-/*   Updated: 2017/03/11 21:54:55 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/12 23:35:57 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,14 @@ int		command_not_found(t_shell **shell)
 	return (-1);
 }
 
-int		permission_denied(t_shell **shell, char *path)
+int		permission_denied(t_shell **shell, t_bool name, char *path)
 {
-	ft_putstr_fd((*shell)->cmd[0], 2);
+	if (name)
+		ft_putstr_fd((*shell)->cmd[0], 2);
 	if (path)
 	{
-		ft_putstr_fd(": ", 2);
+		if (name)
+			ft_putstr_fd(": ", 2);
 		ft_putstr_fd(path, 2);
 	}
 	ft_putendl_fd(": Permission denied", 2);
@@ -46,10 +48,14 @@ int		permission_denied(t_shell **shell, char *path)
 	return (-1);
 }
 
-void	no_file_or_dir(t_shell **shell)
+void	no_file_or_dir(t_shell **shell, t_bool name)
 {
-	ft_putstr_fd((*shell)->cmd[0], 2);
-	ft_putendl_fd(": no such file or directory", 2);
+	if (name)
+	{
+		ft_putstr_fd((*shell)->cmd[0], 2);
+		ft_putstr_fd(": ", 2);
+	}
+	ft_putendl_fd("no such file or directory", 2);
 	(*shell)->ret = -1;
 	g_exit_code = -1;
 }

@@ -6,13 +6,13 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 23:14:32 by moska             #+#    #+#             */
-/*   Updated: 2017/03/12 18:01:26 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/12 22:30:56 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	execute(t_tkn *node, int fd, int stdout)
+void	execute_right(t_tkn *node, int fd, int stdout)
 {
 	close(1);
 	dup(fd);
@@ -40,6 +40,6 @@ int		execute_right_redirection(t_tkn *node)
 		(right_most->left && right_most->right) ? close(fd) : (0);
 		right_most = right_most->right;
 	}
-	execute(node, fd, stdout);
+	execute_right(node, fd, stdout);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 22:10:26 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/11 17:48:09 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/12 23:36:19 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ static int	handle_errors(t_shell **shell, char *path, struct stat *stats)
 	if (access(path, F_OK) != -1)
 	{
 		if (access(path, R_OK) == -1)
-			permission_denied(shell, path);
+			permission_denied(shell, TRUE, path);
 		else if (!S_ISDIR(stats->st_mode))
 			not_a_dir(shell);
 	}
 	else
-		no_file_or_dir(shell);
+		no_file_or_dir(shell, TRUE);
 	return (-1);
 }
 

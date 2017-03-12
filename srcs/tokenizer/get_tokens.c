@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 11:27:17 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/09 23:38:25 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/12 20:01:03 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	assign_a_priority_type(char *s, int *type)
 		(*type) = 5;
 	else if (ft_strcmp(s, "|") == 0)
 		(*type) = 4;
-	else if (ft_strstr(s, "&>"))
+	else if (ft_strstr(s, ">&"))
 		(*type) = 3;
 	else if (ft_strcmp(s, "<") == 0 || ft_strcmp(s, "<<") == 0)
 		(*type) = 2;

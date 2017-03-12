@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/12 00:04:51 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/12 23:36:10 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,12 +150,12 @@ char				*loop_through_paths(char ***paths, int *i, char *cmd);
 void				clean_shell(t_shell **shell);
 int					command_not_found(t_shell **shell);
 void				mid_clean_shell(t_shell **shell);
-int					permission_denied(t_shell **shell, char *path);
+int					permission_denied(t_shell **shell, t_bool name, char *path);
 int					must_exec(t_shell **shell, char *exec, char **ptr,\
 					char **env);
 void				print_env(t_envl *env_list);
 t_envl				*built_env_list(char **env);
-void				no_file_or_dir(t_shell **shell);
+void				no_file_or_dir(t_shell **shell, t_bool name);
 void				not_a_dir(t_shell **shell);
 void				sig_callback(int s_num);
 
@@ -265,5 +265,6 @@ int					execute_node(t_tkn *node);
 int					execute_right_redirection(t_tkn *node);
 int					execute_logic_operators(t_tkn *node);
 int					execute_semicolon(t_tkn *node);
+int					execute_left_redirection(t_tkn *node);
 
 #endif
