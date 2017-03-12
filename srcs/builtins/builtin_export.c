@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 15:34:33 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/06 16:34:17 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/12 18:03:34 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	builtin_export(t_shell **shell)
 	var = NULL;
 	cmd = NULL;
 	p_option = 0;
- 	i = 1;
+	i = 1;
 	if ((*shell)->cmd_len == 1)
 		builtin_env(shell);
 	else

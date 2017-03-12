@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 18:27:17 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/11 17:23:18 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/12 18:02:47 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int				has_errors(t_shell **shell, t_env_s *env_s, char **cmd)
 	return (ret);
 }
 
-int			builtin_env(t_shell **shell)
+int				builtin_env(t_shell **shell)
 {
 	t_env_s	*env_s;
 

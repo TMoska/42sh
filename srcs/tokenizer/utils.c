@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 03:34:21 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/10 04:08:40 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/12 18:02:34 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,19 @@ char	*ft_join_arr_to_str(char **arr)
 
 void	tkn_move_args_to_start(t_tkn **dst, t_tkn **src)
 {
-		char	*tmp;
-		char	*tmp_dst;
-		char	*tmp_src;
-		char	**src_data_tab;
+	char	*tmp;
+	char	*tmp_dst;
+	char	*tmp_src;
+	char	**src_data_tab;
 
-		tmp_dst = (*dst)->data;
-		tmp_src = (*src)->data;
-		src_data_tab = ft_strsplit((*src)->data, ' ');
-		tmp = ft_join_arr_to_str(&(src_data_tab[1]));
-		(*dst)->data = ft_str3join(tmp_dst, " ", tmp);
-		(*src)->data = ft_strdup(src_data_tab[0]);
-		ft_strdel(&tmp_dst);
-		ft_strdel(&tmp_src);
-		ft_strdel(&tmp);
-		ft_str2del(&src_data_tab);
+	tmp_dst = (*dst)->data;
+	tmp_src = (*src)->data;
+	src_data_tab = ft_strsplit((*src)->data, ' ');
+	tmp = ft_join_arr_to_str(&(src_data_tab[1]));
+	(*dst)->data = ft_str3join(tmp_dst, " ", tmp);
+	(*src)->data = ft_strdup(src_data_tab[0]);
+	ft_strdel(&tmp_dst);
+	ft_strdel(&tmp_src);
+	ft_strdel(&tmp);
+	ft_str2del(&src_data_tab);
 }

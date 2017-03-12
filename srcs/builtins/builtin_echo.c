@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 22:38:50 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/11 23:51:08 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/12 18:02:55 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ static void	echo_quote(t_shell **shell, char *cmd, char quote)
 	}
 }
 
-int		builtin_echo(t_shell **shell, char *cmd)
+int			builtin_echo(t_shell **shell, char *cmd)
 {
 	char *tmp;
 

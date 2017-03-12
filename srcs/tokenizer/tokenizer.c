@@ -6,17 +6,18 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 21:42:06 by moska             #+#    #+#             */
-/*   Updated: 2017/03/12 00:04:32 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/12 18:16:05 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void print_tokens(t_shell **shell)
+void		print_tokens(t_shell **shell)
 {
 	t_tkn	*tkns;
-	int 	i = 0;
+	int		i;
 
+	i = 0;
 	tkns = (*shell)->tkns;
 	printf("Token count: %-5i\n\n", (*shell)->token_count);
 	while (tkns)

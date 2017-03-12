@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 14:00:23 by moska             #+#    #+#             */
-/*   Updated: 2017/03/11 17:35:05 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/12 18:04:13 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ int		builtin_setenv(t_shell **shell)
 			g_exit_code = -1;
 			return (-1);
 		}
-		else
-			do_setenv(shell, (*shell)->cmd[1], (*shell)->cmd[2]);
+		do_setenv(shell, (*shell)->cmd[1], (*shell)->cmd[2]);
 	}
 	return (0);
 }

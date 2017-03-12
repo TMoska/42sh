@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 04:11:29 by moska             #+#    #+#             */
-/*   Updated: 2017/03/11 21:54:30 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/12 18:17:36 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	print_node(t_tkn *head)
 {
 	printf("%*s\n", (int)(6 + (ft_strlen(head->data) / 2)), head->data);
 	printf("%5s %s\n", "/", "\\");
-	printf("%5s %-5s\n\n", (head->left) ? head->left->data : "null", (head->right) ? head->right->data : "null");
+	printf("%5s %-5s\n\n", (head->left) ? head->left->data : \
+	"null", (head->right) ? head->right->data : "null");
 }
 
 t_tkn	*highest_priority_node(t_tkn *tree)

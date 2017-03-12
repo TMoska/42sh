@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 05:55:01 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/09 21:12:07 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/12 18:17:20 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ static int		is_op(char *c)
 	if (ft_strlen(c) >= 2 && (ft_strncmp(c, "||", 2) == 0 ||
 			ft_strncmp(c, "&&", 2) == 0 || ft_strncmp(c, "<<", 2) == 0 ||
 			ft_strncmp(c, ">>", 2) == 0))
-		return(2);
+		return (2);
 	else if (*c == ';' || *c == '|' || *c == '<' || *c == '>')
-		return(1);
+		return (1);
 	else
 		return (0);
 }

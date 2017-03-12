@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 15:14:49 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/05 18:43:13 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/12 18:09:29 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,11 @@ int			quote_incomplete(t_quotes **q, char *buff)
 	return ((*q)->oneline || (*q)->bquote || (*q)->squote || (*q)->dquote);
 }
 
-int			ask_for_more_input(t_shell **shell, t_quotes **q)
+char		*ask_for_more_input(t_shell **shell, t_quotes **q)
 {
 	char	*str;
 
+	ft_strdel(&(*shell)->buff);
 	if ((*q)->oneline)
 		str = ft_strdup("> ");
 	else if ((*q)->bquote)
@@ -66,21 +67,17 @@ int			ask_for_more_input(t_shell **shell, t_quotes **q)
 		str = ft_strdup("squote> ");
 	print_prompt(shell, str);
 	read_input(shell);
-	return (0);
+	return ((*shell)->buff);
 }
 
 int			do_quotes(t_shell **shell)
 {
 	char		*tmp;
 
-	if (!(*shell)->buff)
-		return (0);
-	while (quote_incomplete(&(*shell)->q, (*shell)->buff))
+	while ((*shell)->buff && quote_incomplete(&(*shell)->q, (*shell)->buff))
 	{
 		(*shell)->tmp_buff = ft_strdup((*shell)->buff);
-		ft_strdel(&(*shell)->buff);
-		ask_for_more_input(shell, &(*shell)->q);
-		tmp = (*shell)->buff;
+		tmp = ask_for_more_input(shell, &(*shell)->q);
 		if ((*shell)->q->oneline)
 		{
 			tmp = (*shell)->tmp_buff;
