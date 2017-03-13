@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 15:40:38 by moska             #+#    #+#             */
-/*   Updated: 2017/03/12 23:20:08 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/13 20:58:38 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ int		execute_node(t_tkn *node)
 	{
 	}
 	else if (node->type == 4)
-	{
-	}
+		ret = execute_pipe(node);
 	else if (node->type == 5)
 		ret = execute_logic_operators(node);
 	else if (node->type == 6)

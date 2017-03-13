@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/03/12 23:34:27 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/13 21:14:08 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,11 @@ static char	*get_full_executable(t_shell **shell, char *exec, char *path)
 static int	execute(t_shell **shell, char *exec, char **ptr, char **env)
 {
 	int		ret;
-	pid_t	pid;
 	int		status;
 
 	ret = 0;
-	pid = fork();
 	term_trigger(shell, 1);
-	if (pid == 0)
+	if (fork() == 0)
 	{
 		execve(exec, ptr, env);
 		ret = -1;

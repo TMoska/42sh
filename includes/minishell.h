@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/12 23:36:10 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/13 21:00:00 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,5 +266,6 @@ int					execute_right_redirection(t_tkn *node);
 int					execute_logic_operators(t_tkn *node);
 int					execute_semicolon(t_tkn *node);
 int					execute_left_redirection(t_tkn *node);
+int					execute_pipe(t_tkn *node);
 
 #endif
