@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 20:58:35 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/12 23:36:25 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/16 17:51:08 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int		check_errors(char *f_name)
 	}
 	else
 		no_file_or_dir(&shell, FALSE);
+	shell->cmd = ft_strsplit("", ' ');
 	return (-1);
 }
 

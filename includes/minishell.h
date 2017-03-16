@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/13 21:00:00 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/16 23:45:03 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,6 +253,9 @@ void				tokenize(t_shell **shell);
 void				get_tokens(t_shell **shell);
 void				tkn_move_args_to_start(t_tkn **dst, t_tkn **src);
 void				reorganize_tokens(t_shell **shell);
+void				move_pointers(t_tkn *init, t_tkn **start, t_tkn **ptr1, \
+					t_tkn **ptr2);
+void				arrange_nodes_in_priority(t_shell **shell);
 void				syn_error(t_shell **shell);
 t_tkn				*build_tree(t_tkn *tree);
 int					in_range(int i, int start, int end);

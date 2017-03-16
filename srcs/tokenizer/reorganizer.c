@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 23:32:59 by moska             #+#    #+#             */
-/*   Updated: 2017/03/12 18:15:11 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/16 23:45:19 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,16 @@ int			in_range(int i, int start, int end)
 	return ((i <= end && i >= start));
 }
 
-static void	move_pointers(t_tkn *init, t_tkn **start, \
+void	move_pointers(t_tkn *init, t_tkn **start, \
 	t_tkn **ptr1, t_tkn **ptr2)
 {
 	*start = init;
 	*ptr1 = (*start)->right;
-	*ptr2 = (*ptr1) ? (*ptr1)->right : NULL;
+	if (ptr2)
+		*ptr2 = (*ptr1) ? (*ptr1)->right : NULL;
 }
 
-void		reorganize_tokens(t_shell **shell)
+static void	move_args_around(t_shell **shell)
 {
 	t_tkn	*start;
 	t_tkn	*ptr1;
@@ -45,4 +46,10 @@ void		reorganize_tokens(t_shell **shell)
 		if (in_range(ptr1->type, 4, 6))
 			move_pointers(ptr1->right, &start, &ptr1, &ptr2);
 	}
+}
+
+void		reorganize_tokens(t_shell **shell)
+{
+	move_args_around(shell);
+	arrange_nodes_in_priority(shell);
 }
