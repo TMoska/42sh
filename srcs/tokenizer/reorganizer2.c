@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 23:43:13 by moska             #+#    #+#             */
-/*   Updated: 2017/03/16 23:44:28 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/17 19:07:39 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,17 @@ static void 	search_for_new_separator(t_tkn **start, t_tkn **ptr1)
 }
 
 static void 	search_for_next_ptr_position(t_tkn *start, t_tkn **ptr1, \
-	int max_type)
+	int *max_type)
 {
 	if (*ptr1 && (*ptr1)->right && (*ptr1)->right->right)
 		*ptr1 = (*ptr1)->right->right;
 	else
 	{
 		*ptr1 = NULL;
-		while (!(*ptr1) && max_type < 3)
+		while (!(*ptr1) && *max_type < 3)
 		{
-			max_type++;
-			search_for_first_higher_type_node(start, ptr1, max_type);
+			(*max_type)++;
+			search_for_first_higher_type_node(start, ptr1, *max_type);
 		}
 	}
 }
@@ -85,7 +85,7 @@ void		arrange_nodes_in_priority(t_shell **shell)
 				move_node_back(&start, ptr1);
 				search_for_first_higher_type_node(start, &ptr1, max_type);
 			}
-			search_for_next_ptr_position(start, &ptr1, max_type);
+			search_for_next_ptr_position(start, &ptr1, &max_type);
 		}
 		search_for_new_separator(&start, &ptr1);
 	}

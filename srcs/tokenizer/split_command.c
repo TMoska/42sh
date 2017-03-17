@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 05:55:01 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/17 17:28:34 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/17 20:46:32 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ static int		is_fd_aggregator(char ***cmds, char *cmd, int *offset, int *len)
 	}
 	add_command(cmds, cmd, offset, len);
 	ft_arr_push(cmds, tmp_str);
-	(*offset) += (size + 1);
+	(*offset) += (2 + size);
+	(*offset) += *len;
+	ft_strdel(&tmp_str);
 	return (0);
 }
 
