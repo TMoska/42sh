@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/03/13 21:14:08 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/16 17:46:42 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static int	execute(t_shell **shell, char *exec, char **ptr, char **env)
 	int		status;
 
 	ret = 0;
-	term_trigger(shell, 1);
 	if (fork() == 0)
 	{
 		execve(exec, ptr, env);
@@ -57,8 +56,7 @@ static int	execute(t_shell **shell, char *exec, char **ptr, char **env)
 	return (ret);
 }
 
-static int	fork_and_execute(t_shell **shell, char *exec,\
-		char **ptr, char **env)
+static int	fork_and_execute(t_shell **shell, char *exec)
 {
 	struct stat	st;
 	int			ret;
@@ -69,29 +67,39 @@ static int	fork_and_execute(t_shell **shell, char *exec,\
 		if ((access(exec, X_OK) != 0))
 			ret = permission_denied(shell, TRUE, NULL);
 		else if (S_ISREG(st.st_mode) && st.st_mode)
-			ret = execute(shell, exec, ptr, env);
-		term_trigger(shell, 0);
+			ret = 0;
 	}
 	return (ret);
 }
 
-int			must_exec(t_shell **shell, char *exec, char **ptr, char **env)
+int			get_and_test_executable(t_shell **shell, char **exec)
 {
 	char	*path;
 	int		i;
-	int		ret;
 
 	i = 0;
-	ret = 0;
 	path = get_env_val(shell, "PATH");
-	if ((exec = get_full_executable(shell, exec, path)))
-	{
-		ret = fork_and_execute(shell, exec, ptr, env);
-		ft_strdel(&exec);
-		return (ret);
-	}
+	if ((*exec = get_full_executable(shell, *exec, path)))
+		return (fork_and_execute(shell, *exec));
 	else
 		return (command_not_found(shell));
+}
+
+int			test_n_execute(t_shell **shell, char *exec, char **ptr, char **env)
+{
+	int		ret;
+
+	ret = 0;
+	if (get_and_test_executable(shell, &exec) == 0)
+	{
+		term_trigger(shell, 1);
+		ret = execute(shell, exec, ptr, env);
+		// ret = (*shell)->pipe ? exec_pipe(&shell, exec, ptr, env) : execute(&shell, exec, ptr, env);
+		ft_strdel(&exec);
+		term_trigger(shell, 0);
+		return (ret);
+	}
+	return (-1);
 }
 
 int			interpret_line(char *cmd)
@@ -112,5 +120,5 @@ int			interpret_line(char *cmd)
 	ret = try_a_builtin(&shell, ptr[0], cmd);
 	if (ret < 1)
 		return (ret);
-	return (must_exec(&shell, exec, ptr, env));
+	return (test_n_execute(&shell, exec, ptr, env));
 }

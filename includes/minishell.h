@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/16 23:45:03 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/17 00:27:51 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ typedef struct		s_shell
 	struct s_tkn	*tkns;
 	struct s_tkn	*tree;
 	int				token_count;
+	t_bool			pipe;
 }					t_shell;
 
 typedef struct		s_tkn
@@ -264,6 +265,8 @@ int					in_range(int i, int start, int end);
 **	Execution
 */
 
+int					test_n_execute(t_shell **shell, char *exec, char **ptr, \
+					char **env);
 int					execute_node(t_tkn *node);
 int					execute_right_redirection(t_tkn *node);
 int					execute_logic_operators(t_tkn *node);

@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 18:16:30 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/22 20:52:40 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/16 16:20:00 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void		work_as_newenv(char **cmd, t_shell **shell)
 
 	tmp = build_tmp_environment(cmd);
 	ptr = get_command(cmd);
-	must_exec(shell, ptr[0], ptr, tmp);
+	test_n_execute(shell, ptr[0], ptr, tmp);
+	(void)shell;
 	ft_str2del(&tmp);
 }
 
@@ -67,7 +68,7 @@ void		work_with_alterenv(char **cmd, t_shell **shell)
 	joint = ft_str2join((*shell)->env, tmp);
 	ft_str2del(&tmp);
 	ptr = get_command(cmd);
-	must_exec(shell, ptr[0], ptr, joint);
+	test_n_execute(shell, ptr[0], ptr, joint);
 	ft_str2del(&joint);
 }
 
