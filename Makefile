@@ -6,7 +6,7 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/03/17 15:30:00 by moska            ###   ########.fr        #
+#    Updated: 2017/03/17 20:50:16 by tmoska           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ tokenizer/get_tokens.c tokenizer/tokenizer.c tokenizer/reorganizer.c \
 tokenizer/errors.c tokenizer/tree_builder.c execution/executer.c \
 execution/right_redirections.c execution/logic_operators.c execution/pipe.c \
 execution/semicolon.c execution/left_redirections.c tokenizer/reorganizer2.c \
+execution/fd_aggregation.c
 
 SOURCES		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 

@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 15:40:38 by moska             #+#    #+#             */
-/*   Updated: 2017/03/13 20:58:38 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/17 20:50:04 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ int		execute_node(t_tkn *node)
 	else if (node->type == 2)
 		ret = execute_left_redirection(node);
 	else if (node->type == 3)
-	{
-	}
+		ret = execute_fd_aggregation(node);
 	else if (node->type == 4)
 		ret = execute_pipe(node);
 	else if (node->type == 5)
