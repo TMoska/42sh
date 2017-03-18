@@ -6,14 +6,17 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 23:14:32 by moska             #+#    #+#             */
-/*   Updated: 2017/03/12 22:30:56 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/18 19:05:09 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	execute_right(t_tkn *node, int fd, int stdout)
+void	execute_right(t_tkn *node, int fd)
 {
+	int		stdout;
+
+	stdout = dup(1);
 	close(1);
 	dup(fd);
 	execute_node(node->left);
@@ -25,11 +28,9 @@ int		execute_right_redirection(t_tkn *node)
 {
 	t_tkn	*right_most;
 	char	*f;
-	int		stdout;
 	int		fd;
 	int		ops;
 
-	stdout = dup(1);
 	right_most = node->right;
 	while (right_most)
 	{
@@ -40,6 +41,6 @@ int		execute_right_redirection(t_tkn *node)
 		(right_most->left && right_most->right) ? close(fd) : (0);
 		right_most = right_most->right;
 	}
-	execute_right(node, fd, stdout);
+	execute_right(node, fd);
 	return (0);
 }

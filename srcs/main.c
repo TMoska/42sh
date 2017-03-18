@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 21:39:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/17 17:15:06 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/18 15:45:30 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int		run_shell(t_shell **shell)
 		}
 		hist_add(&(*shell)->history, (*shell)->buff);
 		tokenize(shell);
-		// execute_node((*shell)->tree);
+		execute_node((*shell)->tree);
 		mid_clean_shell(shell);
 	}
 	return ((*shell)->ret);

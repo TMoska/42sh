@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 20:58:35 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/16 17:51:08 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/18 16:51:24 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ int		redirection_type(t_tkn *node)
 	return (ft_strcmp(node->data, "<<") == 0 ? 2 : 1);
 }
 
-void	execute_left(t_tkn *node, int fd, int stdin)
+void	execute_left(t_tkn *node, int fd)
 {
+	int		stdin;
+
+	stdin = dup(0);
 	close(0);
 	dup(fd);
 	execute_node(node->left);
@@ -70,10 +73,8 @@ int		execute_left_redirection(t_tkn *node)
 	t_tkn	*right_most;
 	char	*f;
 	int		fd;
-	int		stdin;
 	int		type;
 
-	stdin = dup(0);
 	type = redirection_type(node);
 	right_most = node->right;
 	while (right_most)
@@ -87,6 +88,6 @@ int		execute_left_redirection(t_tkn *node)
 		type = redirection_type(node);
 		right_most = right_most->right;
 	}
-	execute_left(node, fd, stdin);
+	execute_left(node, fd);
 	return (0);
 }
