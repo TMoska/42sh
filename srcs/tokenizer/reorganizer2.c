@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 23:43:13 by moska             #+#    #+#             */
-/*   Updated: 2017/03/20 03:41:32 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/20 21:25:26 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void		move_node_back(t_tkn **start, t_tkn *ptr1)
 	tmp2->right->right->right = tmp3;
 }
 
-static void 	search_for_first_higher_type_node(t_tkn *start , t_tkn **ptr1, \
+static void		higher_type_node(t_tkn *start, t_tkn **ptr1,\
 	int lower_than, int *post_pipe)
 {
 	*ptr1 = start->right;
@@ -40,7 +40,7 @@ static void 	search_for_first_higher_type_node(t_tkn *start , t_tkn **ptr1, \
 	*post_pipe = (*ptr1 && (*ptr1)->type == 4);
 }
 
-static void 	search_for_new_separator(t_tkn **start, t_tkn **ptr1)
+static void		search_for_new_separator(t_tkn **start, t_tkn **ptr1)
 {
 	while (*start && !in_range((*start)->type, 5, 6))
 		*start = (*start)->right;
@@ -50,46 +50,46 @@ static void 	search_for_new_separator(t_tkn **start, t_tkn **ptr1)
 		*start = NULL;
 }
 
-static void 	search_for_next_ptr_position(t_tkn *start, t_tkn **ptr1, \
-	int *max_type, int *post_pipe)
+static void		search_for_next_ptr_position(t_tkn *start, t_tkn **ptr1, \
+	int *m_type, int *post_pipe)
 {
 	if (*ptr1 && (*ptr1)->right && (*ptr1)->right->right)
 		*ptr1 = (*ptr1)->right->right;
 	else
 	{
 		*ptr1 = NULL;
-		while (!(*ptr1) && *max_type < 3)
+		while (!(*ptr1) && *m_type < 3)
 		{
-			(*max_type)++;
-			search_for_first_higher_type_node(start, ptr1, *max_type, post_pipe);
+			(*m_type)++;
+			higher_type_node(start, ptr1, *m_type, post_pipe);
 		}
 	}
 	*post_pipe = (*ptr1 && (*ptr1)->type == 4);
 }
 
-void		arrange_nodes_in_priority(t_shell **shell)
+void			arrange_nodes_in_priority(t_shell **shell)
 {
 	t_tkn	*start;
 	t_tkn	*ptr1;
 	t_tkn	*tmp;
-	int		max_type;
-	int	post_pipe;
+	int		m_type;
+	int		post_pipe;
 
 	start = (*shell)->tkns;
 	tmp = start;
 	post_pipe = 0;
-	search_for_first_higher_type_node(start, &ptr1, 2, &post_pipe);
+	higher_type_node(start, &ptr1, 2, &post_pipe);
 	while (start)
 	{
-		max_type = 2;
-		while (max_type <= 3 && ptr1 && in_range(ptr1->type, 1, 3) && !post_pipe)
+		m_type = 2;
+		while (m_type <= 3 && ptr1 && in_range(ptr1->type, 1, 3) && !post_pipe)
 		{
-			if (ptr1->type < max_type && ptr1->type > 0)
+			if (ptr1->type < m_type && ptr1->type > 0)
 			{
 				move_node_back(&start, ptr1);
-				search_for_first_higher_type_node(start, &ptr1, max_type, &post_pipe);
+				higher_type_node(start, &ptr1, m_type, &post_pipe);
 			}
-			search_for_next_ptr_position(start, &ptr1, &max_type, &post_pipe);
+			search_for_next_ptr_position(start, &ptr1, &m_type, &post_pipe);
 		}
 		search_for_new_separator(&start, &ptr1);
 	}

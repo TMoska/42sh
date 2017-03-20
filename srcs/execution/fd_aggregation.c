@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 20:49:15 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/19 21:33:53 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/20 21:20:46 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	perform_redirections(t_tkn *node, char *p1, char *p2)
 		if (!(i2 = ft_atoi(p2)))
 			return ;
 		tmp_i1 = dup(i1);
-		close (i1);
+		close(i1);
 		dup(i2);
 		execute_node(node->left);
 		dup2(tmp_i1, i1);

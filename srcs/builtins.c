@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 22:56:19 by moska             #+#    #+#             */
-/*   Updated: 2017/03/11 23:50:48 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/20 21:15:03 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int	try_a_builtin(t_shell **shell, char *base_cmd, char *full_cmd)
 		return (builtin_cd(shell));
 	else if (ft_strcmp(base_cmd, "echo") == 0)
 		return (builtin_echo(shell, full_cmd));
-	// else if (ft_strcmp(base_cmd, "hist") == 0)
-	// 	return (print_history(shell));
 	else if (ft_strcmp(base_cmd, "clean") == 0)
 		return (clean_terminal());
 	else

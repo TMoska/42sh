@@ -6,29 +6,11 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/03/20 21:12:26 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/20 21:18:41 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static char	*get_full_executable(t_shell **shell, char *exec, char *path)
-{
-	char	*tmp;
-	char	**paths;
-	int		i;
-	char	*cmd;
-
-	cmd = ((exec) ? exec : (*shell)->cmd[0]);
-	i = 0;
-	if (access(cmd, F_OK) == 0)
-		return (ft_strdup(cmd));
-	paths = ft_strsplit(path, ':');
-	if ((tmp = loop_through_paths(&paths, &i, cmd)))
-		return (tmp);
-	ft_str2del(&paths);
-	return (NULL);
-}
 
 static int	execute(t_shell **shell, char *exec, char **ptr, char **env)
 {
@@ -38,11 +20,8 @@ static int	execute(t_shell **shell, char *exec, char **ptr, char **env)
 
 	ret = 0;
 	if ((pid = fork()) == -1)
-	{
-		ft_putendl_fd("fork error", 2);
 		return (-1);
-	}
-	if (pid == 0)
+	else if (pid == 0)
 	{
 		execve(exec, ptr, env);
 		ret = -1;
@@ -60,35 +39,6 @@ static int	execute(t_shell **shell, char *exec, char **ptr, char **env)
 		}
 	}
 	return (ret);
-}
-
-static int	fork_and_execute(t_shell **shell, char *exec)
-{
-	struct stat	st;
-	int			ret;
-
-	ret = -1;
-	if (stat(exec, &st) != -1)
-	{
-		if ((access(exec, X_OK) != 0))
-			ret = permission_denied(shell, TRUE, NULL);
-		else if (S_ISREG(st.st_mode) && st.st_mode)
-			ret = 0;
-	}
-	return (ret);
-}
-
-int			get_and_test_executable(t_shell **shell, char **exec)
-{
-	char	*path;
-	int		i;
-
-	i = 0;
-	path = get_env_val(shell, "PATH");
-	if ((*exec = get_full_executable(shell, *exec, path)))
-		return (fork_and_execute(shell, *exec));
-	else
-		return (command_not_found(shell));
 }
 
 int			test_n_execute(t_shell **shell, char *exec, char **ptr, char **env)

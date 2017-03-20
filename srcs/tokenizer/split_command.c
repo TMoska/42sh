@@ -6,25 +6,11 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 05:55:01 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/19 21:47:32 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/20 21:31:37 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void		add_command(char ***cmds, char *cmd, int *offset, int *len)
-{
-	char	*tmp;
-	char	*tmp1;
-
-	if (*len == 0)
-		return ;
-	tmp = ft_strndup(&cmd[*offset], *len);
-	tmp1 = ft_strtrim(tmp);
-	ft_arr_push(cmds, tmp1);
-	ft_strdel(&tmp);
-	ft_strdel(&tmp1);
-}
 
 static int		is_fd_aggregator(char ***cmds, char *cmd, int *offset, int *len)
 {
@@ -35,7 +21,8 @@ static int		is_fd_aggregator(char ***cmds, char *cmd, int *offset, int *len)
 	(void)cmds;
 	size = 0;
 	c = cmd[*offset + *len + 1];
-	while (!(cmd[*offset + *len + 1 + size] == ' ' || cmd[*offset + *len + 1 + size] == '\0'))
+	while (!(cmd[*offset + *len + 1 + size] == ' ' ||\
+		cmd[*offset + *len + 1 + size] == '\0'))
 		size++;
 	if (!(tmp_str = ft_strndup(&cmd[*offset + *len + 1], size)))
 		return (-1);
@@ -52,7 +39,7 @@ static int		is_fd_aggregator(char ***cmds, char *cmd, int *offset, int *len)
 	return (0);
 }
 
-static int		is_op(char *c)
+int				is_op(char *c)
 {
 	if (ft_strlen(c) >= 2 && (ft_strncmp(c, "||", 2) == 0 ||
 			ft_strncmp(c, "&&", 2) == 0 || ft_strncmp(c, "<<", 2) == 0 ||
@@ -62,22 +49,6 @@ static int		is_op(char *c)
 		return (1);
 	else
 		return (0);
-}
-
-static void		add_operator(char ***cmds, char *cmd, int *offset, int *len)
-{
-	int		len_op;
-	char	*tmp;
-	char	*tmp1;
-
-	len_op = is_op(&cmd[*offset + *len]);
-	if (!len_op || !(tmp = ft_strndup(&cmd[*offset + *len], len_op)))
-		return ;
-	ft_arr_push(cmds, tmp);
-	tmp1 = ft_strtrim(tmp);
-	ft_strdel(&tmp);
-	ft_strdel(&tmp1);
-	(*offset) += len_op;
 }
 
 char			**split_command(char *cmd)
@@ -94,7 +65,6 @@ char			**split_command(char *cmd)
 	while (*c)
 	{
 		c = &cmd[offset + len];
-		// Todo: 2>&1
 		if (*c == ' ' && is_fd_aggregator(&cmds, cmd, &offset, &len) == 0)
 		{
 			c = &cmd[offset + len];
@@ -102,12 +72,7 @@ char			**split_command(char *cmd)
 			continue ;
 		}
 		if (is_op(c) || *c == '\0')
-		{
-			add_command(&cmds, cmd, &offset, &len);
-			add_operator(&cmds, cmd, &offset, &len);
-			offset += len;
-			len = 0;
-		}
+			add_cmds(&cmds, cmd, &offset, &len);
 		else
 			len++;
 	}

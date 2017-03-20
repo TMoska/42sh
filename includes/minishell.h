@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/17 20:49:49 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/20 21:34:23 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,8 @@ void				rebuild_str2env(t_shell **shell);
 **	Builtins
 */
 
-int					try_a_builtin(t_shell **shell, char *base_cmd, char *full_cmd);
+int					try_a_builtin(t_shell **shell, char *base_cmd,\
+					char *full_cmd);
 int					builtin_exit(t_shell **shell);
 int					builtin_env(t_shell **shell);
 int					builtin_getenv (t_shell **shell);
@@ -260,6 +261,9 @@ void				arrange_nodes_in_priority(t_shell **shell);
 void				syn_error(t_shell **shell);
 t_tkn				*build_tree(t_tkn *tree);
 int					in_range(int i, int start, int end);
+void				add_cmds(char ***cmds, char *cmd, int *offset, int *len);
+int					is_op(char *c);
+void				add_command(char ***cmds, char *cmd, int *offset, int *len);
 
 /*
 **	Execution
@@ -274,5 +278,6 @@ int					execute_semicolon(t_tkn *node);
 int					execute_left_redirection(t_tkn *node);
 int					execute_pipe(t_tkn *node);
 int					execute_fd_aggregation(t_tkn *node);
+int					get_and_test_executable(t_shell **shell, char **exec);
 
 #endif

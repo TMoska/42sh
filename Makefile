@@ -6,7 +6,7 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/03/17 20:50:16 by tmoska           ###   ########.fr        #
+#    Updated: 2017/03/20 21:30:16 by tmoska           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ INC_DIR 	= includes
 INC_FLAGS 	= -I./includes -I $(LIB_PATH)/includes
 
 SRC_DIR 	= srcs
-SRC_FILES = main.c prompt.c shell.c interpreting.c validating.c \
+SRC_FILES = main.c prompt.c shell.c validating.c execution/interpreting.c \
 cleaning.c builtins.c builtins/builtin_exit.c builtins/builtin_env.c \
 builtins/builtin_getenv.c env_list/utils.c env_list/utils2.c \
 builtins/builtin_setenv.c builtins/builtin_unsetenv.c terminal/cut_copy_line.c \
@@ -39,7 +39,8 @@ tokenizer/get_tokens.c tokenizer/tokenizer.c tokenizer/reorganizer.c \
 tokenizer/errors.c tokenizer/tree_builder.c execution/executer.c \
 execution/right_redirections.c execution/logic_operators.c execution/pipe.c \
 execution/semicolon.c execution/left_redirections.c tokenizer/reorganizer2.c \
-execution/fd_aggregation.c
+execution/fd_aggregation.c execution/interpreting2.c \
+tokenizer/split_command_utils.c
 
 SOURCES		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
