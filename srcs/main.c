@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 21:39:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/18 15:45:30 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/20 04:25:01 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,6 @@ void	catch_signals(void)
 	{
 		signal(i, sig_callback);
 		i--;
-	}
-}
-
-void	loop_commands(t_shell **shell)
-{
-	t_list *lst;
-
-	lst = (*shell)->commands;
-	while (lst)
-	{
-		(*shell)->cmd = ft_strsplit(lst->content, ' ');
-		(*shell)->cmd_len = ft_str2len((*shell)->cmd);
-		// interpret_line(shell);
-		ft_str2del(&(*shell)->cmd);
-		lst = lst->next;
 	}
 }
 
