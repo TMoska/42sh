@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 20:58:50 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/20 04:24:20 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/20 19:59:46 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ void	perform_pipe(t_tkn *node, int fds[2], int stdin, int stdout)
 		close(stdout);
 		exit(0);
 	} else {		// Parent
-		waitpid(-1, &status, 0);
-		if (WIFEXITED(status))
-			g_exit_code = WIFEXITED(status);
 		close(0);       /* close normal stdin */
 		dup(fds[0]);   /* make stdin same as fds[0] */
 		close(fds[1]); /* we don't need this */
@@ -40,6 +37,9 @@ void	perform_pipe(t_tkn *node, int fds[2], int stdin, int stdout)
 			execute_node(node->right);
 		else
 			interpret_line(node->right->data);
+		wait(&status);
+		if (WIFEXITED(status))
+			g_exit_code = WIFEXITED(status);
 		dup2(stdin, 0);
 		close(stdin);
 	}
