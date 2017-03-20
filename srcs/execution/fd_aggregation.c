@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 20:49:15 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/18 19:59:45 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/19 21:33:53 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,7 @@ int		execute_fd_aggregation(t_tkn *node)
 		size++;
 	p2 = ft_strndup(op, size);
 	perform_redirections(node, p1, p2);
+	ft_strdel(&p1);
+	ft_strdel(&p2);
 	return (0);
 }
