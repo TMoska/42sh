@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 20:58:50 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/18 20:58:27 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/20 04:24:20 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	perform_pipe(t_tkn *node, int fds[2], int stdin, int stdout)
 			execute_node(node->right);
 			interpret_line(node->right->left->data);
 		}
+		else if (node->right->type == 1 || node->right->type == 2)
+			execute_node(node->right);
 		else
 			interpret_line(node->right->data);
 		dup2(stdin, 0);
