@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 05:55:01 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/17 20:46:32 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/19 21:47:32 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static int		is_fd_aggregator(char ***cmds, char *cmd, int *offset, int *len)
 	c = cmd[*offset + *len + 1];
 	while (!(cmd[*offset + *len + 1 + size] == ' ' || cmd[*offset + *len + 1 + size] == '\0'))
 		size++;
-	tmp_str = ft_strndup(&cmd[*offset + *len + 1], size);
+	if (!(tmp_str = ft_strndup(&cmd[*offset + *len + 1], size)))
+		return (-1);
 	if (!ft_strstr(tmp_str, ">&"))
 	{
 		ft_strdel(&tmp_str);
