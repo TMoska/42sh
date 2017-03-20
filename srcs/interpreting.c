@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/03/20 04:17:49 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/20 21:12:26 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,15 @@ static int	execute(t_shell **shell, char *exec, char **ptr, char **env)
 {
 	int		ret;
 	int		status;
+	pid_t	pid;
 
 	ret = 0;
-	if (fork() == 0)
+	if ((pid = fork()) == -1)
+	{
+		ft_putendl_fd("fork error", 2);
+		return (-1);
+	}
+	if (pid == 0)
 	{
 		execve(exec, ptr, env);
 		ret = -1;
