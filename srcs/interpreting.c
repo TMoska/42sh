@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/03/16 17:46:42 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/20 04:17:49 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ int			test_n_execute(t_shell **shell, char *exec, char **ptr, char **env)
 	{
 		term_trigger(shell, 1);
 		ret = execute(shell, exec, ptr, env);
-		// ret = (*shell)->pipe ? exec_pipe(&shell, exec, ptr, env) : execute(&shell, exec, ptr, env);
 		ft_strdel(&exec);
 		term_trigger(shell, 0);
 		return (ret);
@@ -120,5 +119,7 @@ int			interpret_line(char *cmd)
 	ret = try_a_builtin(&shell, ptr[0], cmd);
 	if (ret < 1)
 		return (ret);
-	return (test_n_execute(&shell, exec, ptr, env));
+	ret = test_n_execute(&shell, exec, ptr, env);
+	ft_str2del(&(shell->cmd));
+	return (ret);
 }

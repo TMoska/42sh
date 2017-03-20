@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 22:11:46 by moska             #+#    #+#             */
-/*   Updated: 2017/03/11 17:43:44 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/20 04:18:23 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,8 @@ void	clean_list(void **a, size_t *b)
 
 void	mid_clean_shell(t_shell **shell)
 {
-	(void)shell;
 	ft_lstdel(&(*shell)->commands, clean_list);
 	ft_strdel(&((*shell)->buff));
-	ft_str2del(&((*shell)->cmd));
 	clean_btree((*shell)->tree);
 }
 
