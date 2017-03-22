@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 11:27:17 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/22 18:39:25 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/22 21:58:25 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int			error_check(t_tkn *tkns)
 
 	i = 0;
 	nd = tkns;
-	// nd = tkn_pre_last(tkns);
 	while (nd)
 	{
 		if (i == 0 && nd->type != 0)

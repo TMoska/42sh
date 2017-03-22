@@ -6,11 +6,18 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/25 19:37:58 by moska             #+#    #+#             */
-/*   Updated: 2017/03/22 19:30:21 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/22 21:57:54 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	cancel_heredoc(t_shell **shell, char *heredoc)
+{
+	ft_strdel(&(*shell)->buff);
+	(*shell)->buff = ft_strdup(heredoc);
+	return (reset_line(shell));
+}
 
 static int	identify_key(t_shell **shell, char *buff, unsigned int key,\
 			char *heredoc)
@@ -25,11 +32,7 @@ static int	identify_key(t_shell **shell, char *buff, unsigned int key,\
 	else if (key == BTN_ALEFT || key == BTN_ARIGHT)
 		move_cursor_alt(shell, key);
 	else if (key == BTN_CTRL_D && heredoc)
-	{
-		ft_strdel(&(*shell)->buff);
-		(*shell)->buff = ft_strdup(heredoc);
-		return (reset_line(shell));
-	}
+		return (cancel_heredoc(shell, heredoc));
 	else if (key == BTN_CTRL_D && ft_strlen((*shell)->buff) == 0)
 		sig_callback(SIGQUIT);
 	else if (key == BTN_UP || key == BTN_DOWN)

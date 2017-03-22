@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/22 19:24:56 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/22 21:58:47 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,6 @@ t_envl				*built_env_list(char **env);
 void				no_file_or_dir(t_shell **shell, t_bool name);
 void				not_a_dir(t_shell **shell);
 void				sig_callback(int s_num);
-
 
 /*
 **	Cleaning
