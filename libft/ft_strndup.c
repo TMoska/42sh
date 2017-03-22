@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 22:39:08 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/17 21:54:20 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/22 00:23:17 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strndup(char *src, size_t size)
 {
 	char	*str;
 
-	if (size == 0)
+	if (!src || size == 0)
 		return (0);
 	if ((str = ft_strnew(size)))
 		ft_strncpy(str, src, size);
