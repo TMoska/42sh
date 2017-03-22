@@ -6,14 +6,13 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 00:01:41 by moska             #+#    #+#             */
-/*   Updated: 2017/03/12 18:04:42 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/22 15:30:11 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	syn_error(t_shell **shell)
+void	syn_error(void)
 {
-	(void)shell;
 	ft_putendl_fd("Parsing error.", 2);
 }

@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 20:58:35 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/20 04:21:33 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/22 19:25:18 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	read_heredoc(int fd, char **f)
 	while (1)
 	{
 		print_prompt(&shell, ft_strdup(">"));
-		read_input(&shell);
+		read_input(&shell, *f);
 		if (ft_strcmp(shell->buff, *f) == 0)
 			break ;
 		write(fd, shell->buff, ft_strlen(shell->buff));

@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 21:39:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/20 04:25:01 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/22 19:25:23 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,12 @@ int		run_shell(t_shell **shell)
 {
 	while ((*shell)->exit != 1)
 	{
+		ft_bzero(&(*shell)->tree, sizeof(t_tkn*));
 		print_prompt(shell, NULL);
 		catch_signals();
 		rewind_history(&(*shell)->history);
 		if ((*shell)->tc_ok)
-			read_input(shell);
+			read_input(shell, NULL);
 		else
 		{
 			if (get_next_line(0, &(*shell)->buff) == 0)
@@ -58,8 +59,10 @@ int		run_shell(t_shell **shell)
 			continue ;
 		}
 		hist_add(&(*shell)->history, (*shell)->buff);
-		tokenize(shell);
-		execute_node((*shell)->tree);
+		if (tokenize(shell) == 1)
+			syn_error();
+		else
+			execute_node((*shell)->tree);
 		mid_clean_shell(shell);
 	}
 	return ((*shell)->ret);

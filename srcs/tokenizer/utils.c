@@ -6,11 +6,21 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 03:34:21 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/12 18:02:34 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/22 15:50:56 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_tkn	*tkn_pre_last(t_tkn *lst)
+{
+	t_tkn	*node;
+
+	node = lst;
+	while (node->right)
+		node = node->right;
+	return (node);
+}
 
 t_tkn	*tkn_new(char *data, int type)
 {

@@ -6,13 +6,14 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/25 19:37:58 by moska             #+#    #+#             */
-/*   Updated: 2017/03/17 00:27:24 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/22 19:30:21 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	identify_key(t_shell **shell, char *buff, unsigned int key)
+static int	identify_key(t_shell **shell, char *buff, unsigned int key,\
+			char *heredoc)
 {
 	if (key != BTN_ENTER && ft_isprint(key))
 		work_buffer(shell, buff);
@@ -23,6 +24,12 @@ static int	identify_key(t_shell **shell, char *buff, unsigned int key)
 		modify_buffer(shell, key);
 	else if (key == BTN_ALEFT || key == BTN_ARIGHT)
 		move_cursor_alt(shell, key);
+	else if (key == BTN_CTRL_D && heredoc)
+	{
+		ft_strdel(&(*shell)->buff);
+		(*shell)->buff = ft_strdup(heredoc);
+		return (reset_line(shell));
+	}
 	else if (key == BTN_CTRL_D && ft_strlen((*shell)->buff) == 0)
 		sig_callback(SIGQUIT);
 	else if (key == BTN_UP || key == BTN_DOWN)
@@ -38,13 +45,13 @@ static int	identify_key(t_shell **shell, char *buff, unsigned int key)
 	return (1);
 }
 
-void		read_input(t_shell **shell)
+void		read_input(t_shell **shell, char *heredoc)
 {
 	char	*buff[5];
 
 	ft_memset(buff, 0, 5);
 	while ((read(0, buff, 5)) > 0 &&
-		identify_key(shell, (char *)buff, (unsigned int)*buff))
+		identify_key(shell, (char *)buff, (unsigned int)*buff, heredoc))
 		ft_memset(buff, 0, 5);
 	ft_putchar('\n');
 }

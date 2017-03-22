@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 15:14:49 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/12 18:09:29 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/22 19:25:27 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char		*ask_for_more_input(t_shell **shell, t_quotes **q)
 	if ((*q)->squote)
 		str = ft_strdup("squote> ");
 	print_prompt(shell, str);
-	read_input(shell);
+	read_input(shell, NULL);
 	return ((*shell)->buff);
 }
 
