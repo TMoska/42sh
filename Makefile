@@ -6,7 +6,7 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/03/23 23:48:16 by tmoska           ###   ########.fr        #
+#    Updated: 2017/03/23 23:57:18 by tmoska           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,12 +57,11 @@ $(NAME): $(LIB) $(OBJECTS)
 $(LIB):
 	@make -C $(LIB_PATH)
 
-%.o: %.c $(INC_DIR)/*.h
+%.o: %.c $(INC_DIR)/minishell.h
 	@$(GCC) $(FLAGS) $(INC_FLAGS) -c -o $@ $<
 
 clean:
 	@rm -f $(OBJECTS)
-	@find . \( -name "*~" -o -name "*.swp" -o -name ".DS_Store" \) -delete
 	@make clean -C $(LIB_PATH)
 
 fclean: clean
