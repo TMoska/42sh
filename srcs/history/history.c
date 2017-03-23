@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:45:24 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/05 14:56:35 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/23 23:54:05 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void			clean_input(t_shell **shell)
 	CURS_LEFT;
 	while (i < (*shell)->prompt_len)
 	{
-		MOVE_RIGHT
+		MOVE_RIGHT;
 		i++;
 	}
 	DEL_LINE;
@@ -57,13 +57,10 @@ static void		find_prev_hist(t_shell **shell)
 
 void			history(t_shell **shell, unsigned int key)
 {
-	if (!(*shell)->history
-		|| (key == BTN_UP && (!(*shell)->history->next && (*shell)->hist_buff_tmp))
-		|| (key == BTN_DOWN && !((*shell)->history || (*shell)->history->prev)))
+	if (!(*shell)->history ||
+	(key == BTN_UP && (!(*shell)->history->next && (*shell)->hist_buff_tmp)) ||
+	(key == BTN_DOWN && !((*shell)->history || (*shell)->history->prev)))
 		return ;
 	clean_input(shell);
-	if (key == BTN_UP)
-		find_next_hist(shell);
-	else
-		find_prev_hist(shell);
+	(key == BTN_UP) ? find_next_hist(shell) : find_prev_hist(shell);
 }
