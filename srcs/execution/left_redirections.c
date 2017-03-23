@@ -6,18 +6,13 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 20:58:35 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/22 19:25:18 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/23 23:34:21 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		redirection_type(t_tkn *node)
-{
-	return (ft_strcmp(node->data, "<<") == 0 ? 2 : 1);
-}
-
-void	execute_left(t_tkn *node, int fd)
+static void	execute_left(t_tkn *node, int fd)
 {
 	int		stdin;
 
@@ -29,64 +24,62 @@ void	execute_left(t_tkn *node, int fd)
 	close(stdin);
 }
 
-void	read_heredoc(int fd, char **f)
+static void	read_heredoc(int fd, char **f, t_shell **shell)
 {
-	t_shell *shell;
 	char	*buff_tmp;
 
 	fd = open(".21sh_heredoc_tmp", O_RDWR | O_CREAT | O_TRUNC, 0644);
-	shell = get_shell(NULL);
-	buff_tmp = ft_strdup(shell->buff);
+	buff_tmp = ft_strdup((*shell)->buff);
 	while (1)
 	{
-		print_prompt(&shell, ft_strdup(">"));
-		read_input(&shell, *f);
-		if (ft_strcmp(shell->buff, *f) == 0)
+		print_prompt(shell, ft_strdup(">"));
+		read_input(shell, *f);
+		if (ft_strcmp((*shell)->buff, *f) == 0)
 			break ;
-		write(fd, shell->buff, ft_strlen(shell->buff));
+		write(fd, (*shell)->buff, ft_strlen((*shell)->buff));
 		write(fd, "\n", 1);
 	}
 	close(fd);
 	*f = ".21sh_heredoc_tmp";
-	ft_strdel(&shell->buff);
-	shell->buff = buff_tmp;
+	ft_strdel(&(*shell)->buff);
+	(*shell)->buff = buff_tmp;
 }
 
-int		check_errors(char *f_name)
+static int	check_errors(char *f_name, t_shell **shell)
 {
-	t_shell *shell;
-
-	shell = get_shell(NULL);
 	if (access(f_name, F_OK) != -1)
 	{
 		if (access(f_name, R_OK) == -1)
-			permission_denied(&shell, FALSE, f_name);
+			permission_denied(shell, FALSE, f_name);
 	}
 	else
-		no_file_or_dir(&shell, FALSE);
+		no_file_or_dir(shell, FALSE);
 	return (-1);
 }
 
-int		execute_left_redirection(t_tkn *node)
+int			execute_left_redirection(t_tkn *node, int pre_condition)
 {
 	t_tkn	*right_most;
 	char	*f;
 	int		fd;
 	int		type;
+	t_shell	*shell;
 
+	shell = get_shell(NULL);
 	type = redirection_type(node);
 	right_most = node->right;
 	while (right_most)
 	{
+		if (!pre_condition && shell->pipe_and_redir && !open_tmp_heredoc(&fd))
+			break ;
 		f = (right_most->left) ? right_most->left->data : right_most->data;
-		if (type == 2)
-			read_heredoc(fd, &f);
+		(type == 2) ? read_heredoc(fd, &f, &shell) : (0);
 		if ((fd = open(f, O_RDONLY)) == -1)
-			return (check_errors(f));
+			return (check_errors(f, &shell));
 		(right_most->left && right_most->right) ? close(fd) : (0);
 		type = redirection_type(node);
 		right_most = right_most->right;
 	}
-	execute_left(node, fd);
+	(!pre_condition) ? execute_left(node, fd) : (0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 20:58:50 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/20 21:12:52 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/23 21:11:01 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 void	exec_child(t_tkn *node, int fds[2], int stdout)
 {
+	t_tkn	*heredoc_node;
+
+	if ((heredoc_node = tkn_search_node(node->left, "<<")))
+		execute_left_redirection(heredoc_node, 1);
 	close(1);
 	dup(fds[1]);
 	close(fds[0]);

@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/22 21:58:47 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/23 23:33:24 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ typedef struct		s_shell
 	struct s_tkn	*tkns;
 	struct s_tkn	*tree;
 	int				token_count;
-	t_bool			pipe;
+	int				pipe_and_redir;
 }					t_shell;
 
 typedef struct		s_tkn
@@ -271,6 +271,7 @@ void				add_cmds(char ***cmds, char *cmd, int *offset, int *len);
 int					is_op(char *c);
 void				add_command(char ***cmds, char *cmd, int *offset, int *len);
 t_tkn				*tkn_pre_last(t_tkn *lst);
+t_tkn				*tkn_search_node(t_tkn *node, char *data);
 
 /*
 **	Execution
@@ -282,9 +283,11 @@ int					execute_node(t_tkn *node);
 int					execute_right_redirection(t_tkn *node);
 int					execute_logic_operators(t_tkn *node);
 int					execute_semicolon(t_tkn *node);
-int					execute_left_redirection(t_tkn *node);
+int					execute_left_redirection(t_tkn *node, int pre_condition);
 int					execute_pipe(t_tkn *node);
 int					execute_fd_aggregation(t_tkn *node);
 int					get_and_test_executable(t_shell **shell, char **exec);
+int					open_tmp_heredoc(int *fd);
+int					redirection_type(t_tkn *node);
 
 #endif
