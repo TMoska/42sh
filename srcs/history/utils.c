@@ -6,11 +6,28 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:09:26 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/25 22:01:59 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/25 23:46:48 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int				print_history(t_shell **shell)
+{
+	t_h_lst	*lst;
+
+	lst = (*shell)->history->list;
+	while (lst->next)
+		lst = lst->next;
+	while (lst)
+	{
+		ft_putnbr(lst->index + 1);
+		ft_putstr("  ");
+		ft_putendl(lst->cmd);
+		lst = lst->prev;
+	}
+	return (0);
+}
 
 static t_h_lst	*hist_new_node(char *cmd)
 {

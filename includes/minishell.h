@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/25 21:49:06 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/25 23:44:40 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,13 @@ typedef struct		s_h_lst
 typedef struct		s_hist
 {
 	int				size;
+	int				at_index;
 	struct s_h_lst	*list;
 }					t_hist;
 
 typedef struct		s_shell
 {
 	char			*buff;
-	char			*hist_buff_tmp;
 	t_list			*commands;
 	char			**cmd;
 	int				cmd_len;
@@ -254,6 +254,7 @@ int					clean_terminal(void);
 
 void				hist_add(t_shell **shell);
 void				history(t_shell **shell, unsigned int key);
+int					print_history(t_shell **shell);
 
 /*
 **	Quotes
