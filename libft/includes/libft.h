@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:33:19 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/10 01:32:35 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/25 02:40:11 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,4 +142,7 @@ char				**ft_arr_del_at(char **arr, int index);
 int					ft_arr_includes(char **arr, char *str);
 char				**ft_arr_inner_join(char **arr, char **arr1);
 int					ft_word_count(char const *s, char c);
+int					ft_lst_new_add_back(t_list **alst, void const *content,\
+					size_t size);
+void				ft_print_list(t_list *lst);
 #endif

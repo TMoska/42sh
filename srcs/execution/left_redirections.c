@@ -6,13 +6,13 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 20:58:35 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/23 23:34:21 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/25 18:46:49 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	execute_left(t_tkn *node, int fd)
+static void	execute_single_left(t_tkn *node, int fd)
 {
 	int		stdin;
 
@@ -22,27 +22,6 @@ static void	execute_left(t_tkn *node, int fd)
 	execute_node(node->left);
 	dup2(stdin, 0);
 	close(stdin);
-}
-
-static void	read_heredoc(int fd, char **f, t_shell **shell)
-{
-	char	*buff_tmp;
-
-	fd = open(".21sh_heredoc_tmp", O_RDWR | O_CREAT | O_TRUNC, 0644);
-	buff_tmp = ft_strdup((*shell)->buff);
-	while (1)
-	{
-		print_prompt(shell, ft_strdup(">"));
-		read_input(shell, *f);
-		if (ft_strcmp((*shell)->buff, *f) == 0)
-			break ;
-		write(fd, (*shell)->buff, ft_strlen((*shell)->buff));
-		write(fd, "\n", 1);
-	}
-	close(fd);
-	*f = ".21sh_heredoc_tmp";
-	ft_strdel(&(*shell)->buff);
-	(*shell)->buff = buff_tmp;
 }
 
 static int	check_errors(char *f_name, t_shell **shell)
@@ -57,7 +36,7 @@ static int	check_errors(char *f_name, t_shell **shell)
 	return (-1);
 }
 
-int			execute_left_redirection(t_tkn *node, int pre_condition)
+int			execute_left_redirection(t_tkn *node)
 {
 	t_tkn	*right_most;
 	char	*f;
@@ -70,16 +49,16 @@ int			execute_left_redirection(t_tkn *node, int pre_condition)
 	right_most = node->right;
 	while (right_most)
 	{
-		if (!pre_condition && shell->pipe_and_redir && !open_tmp_heredoc(&fd))
-			break ;
 		f = (right_most->left) ? right_most->left->data : right_most->data;
-		(type == 2) ? read_heredoc(fd, &f, &shell) : (0);
-		if ((fd = open(f, O_RDONLY)) == -1)
+		if ((type == 1) && (fd = open(f, O_RDONLY)) == -1)
 			return (check_errors(f, &shell));
 		(right_most->left && right_most->right) ? close(fd) : (0);
 		type = redirection_type(node);
 		right_most = right_most->right;
 	}
-	(!pre_condition) ? execute_left(node, fd) : (0);
+	if (type == 1)
+		execute_single_left(node, fd);
+	else if (execute_two_left(node, f) == -1)
+		return (-1);
 	return (0);
 }

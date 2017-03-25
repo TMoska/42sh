@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 22:11:46 by moska             #+#    #+#             */
-/*   Updated: 2017/03/20 04:18:23 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/25 05:02:31 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,18 @@ void	clean_list(void **a, size_t *b)
 	ft_strdel((char**)a);
 }
 
+void	del_lst_str(void **content, size_t *content_size)
+{
+	(void)content_size;
+	ft_strdel((char**)content);
+}
+
 void	mid_clean_shell(t_shell **shell)
 {
 	ft_lstdel(&(*shell)->commands, clean_list);
 	ft_strdel(&((*shell)->buff));
 	clean_btree((*shell)->tree);
+	ft_lstdel(&(*shell)->heredoc, &del_lst_str);
 }
 
 void	clean_shell(t_shell **shell)

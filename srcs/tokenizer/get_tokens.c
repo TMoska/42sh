@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 11:27:17 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/23 23:43:04 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/25 03:23:36 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,46 +50,37 @@ int			error_check(t_tkn *tkns)
 	return (0);
 }
 
-void		build_token_list(char **cmds, int pipe_redir[2], int *type, \
-		t_tkn **tkns)
+void		build_token_list(t_shell **shell, char **cmds, int *type,\
+			t_tkn **tkns)
 {
 	int		i;
-	t_shell	*shell;
 
-	shell = get_shell(NULL);
 	i = 0;
 	while (cmds[i])
 	{
 		assign_a_priority_type(cmds[i], type);
-		if (*type == 4)
-			pipe_redir[0] = 1;
-		else if (ft_strcmp(cmds[i], "<<") == 0)
-			pipe_redir[1] = 1;
 		tkn_new_to_back(tkns, cmds[i], *type);
 		i++;
 	}
-	shell->tkns = *tkns;
-	shell->token_count = i;
-	shell->pipe_and_redir = (pipe_redir[0] && pipe_redir[1]);
+	(*shell)->tkns = *tkns;
+	(*shell)->token_count = i;
 }
 
 int			get_tokens(t_shell **shell)
 {
 	t_tkn	*tkns;
 	char	**cmds;
-	int		pipe_redir[2];
 	int		type;
 
 	tkns = NULL;
-	pipe_redir[0] = 0;
-	pipe_redir[1] = 0;
 	cmds = split_command((*shell)->buff);
-	build_token_list(cmds, pipe_redir, &type, &tkns);
+	build_token_list(shell, cmds, &type, &tkns);
 	ft_str2del(&cmds);
 	if (error_check(tkns) == 1)
 	{
 		(*shell)->tree = tkns;
 		return (1);
 	}
+	scan_heredocs(shell);
 	return (0);
 }
