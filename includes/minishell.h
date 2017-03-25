@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/25 05:03:13 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/25 18:22:49 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ void				sig_callback(int s_num);
 void				clean_shell(t_shell **shell);
 void				mid_clean_shell(t_shell **shell);
 void				clean_btree(t_tkn *tree);
+void				del_lst_str(void **content, size_t *content_size);
 
 /*
 **	Environment list custom struct & functions
@@ -295,5 +296,6 @@ int					execute_fd_aggregation(t_tkn *node);
 int					get_and_test_executable(t_shell **shell, char **exec);
 int					open_tmp_heredoc(int *fd);
 int					redirection_type(t_tkn *node);
+int					execute_two_left(t_tkn *node, char *out);
 
 #endif
