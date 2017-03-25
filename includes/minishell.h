@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/23 23:33:24 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/25 05:03:13 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ typedef struct		s_shell
 	struct s_tkn	*tkns;
 	struct s_tkn	*tree;
 	int				token_count;
-	int				pipe_and_redir;
+	t_list			*heredoc;
 }					t_shell;
 
 typedef struct		s_tkn
@@ -219,6 +219,12 @@ void				work_buffer(t_shell **shell, char *buffer);
 int					reset_line(t_shell **shell);
 
 /*
+**	Heredoc
+*/
+
+void				scan_heredocs(t_shell **shell);
+
+/*
 **	Terminall
 */
 
@@ -283,7 +289,7 @@ int					execute_node(t_tkn *node);
 int					execute_right_redirection(t_tkn *node);
 int					execute_logic_operators(t_tkn *node);
 int					execute_semicolon(t_tkn *node);
-int					execute_left_redirection(t_tkn *node, int pre_condition);
+int					execute_left_redirection(t_tkn *node);
 int					execute_pipe(t_tkn *node);
 int					execute_fd_aggregation(t_tkn *node);
 int					get_and_test_executable(t_shell **shell, char **exec);

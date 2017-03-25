@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_lst_new_add_back.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/22 12:35:39 by moska             #+#    #+#             */
-/*   Updated: 2017/03/25 02:58:06 by tmoska           ###   ########.fr       */
+/*   Created: 2017/03/25 02:28:35 by tmoska            #+#    #+#             */
+/*   Updated: 2017/03/25 02:58:48 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_lstadd_back(t_list **alst, t_list *new)
+int		ft_lst_new_add_back(t_list **alst, void const *content,\
+	 	size_t size)
 {
-	t_list	*tmp;
+	t_list	*new;
 
-	tmp = *alst;
-	if (!new)
+	if (!(new = ft_lstnew(content, size + 1)) || ft_lstadd_back(alst, new))
 		return (1);
-	if (*alst)
-	{
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
-	}
-	else
-		ft_lstadd(alst, new);
 	return (0);
 }

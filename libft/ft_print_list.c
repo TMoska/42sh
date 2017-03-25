@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_print_list.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/22 12:35:39 by moska             #+#    #+#             */
-/*   Updated: 2017/03/25 02:58:06 by tmoska           ###   ########.fr       */
+/*   Created: 2017/03/25 02:38:46 by tmoska            #+#    #+#             */
+/*   Updated: 2017/03/25 03:02:01 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_lstadd_back(t_list **alst, t_list *new)
+void	ft_print_list(t_list *lst)
 {
-	t_list	*tmp;
+	t_list *l;
 
-	tmp = *alst;
-	if (!new)
-		return (1);
-	if (*alst)
+	l = lst;
+	ft_putendl("=========================");
+	ft_putendl("START ft_print_list START");
+	while (l)
 	{
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
+		ft_putendl(l->content);
+		l = l->next;
 	}
-	else
-		ft_lstadd(alst, new);
-	return (0);
+	ft_putendl("  END ft_print_list END  ");
+	ft_putendl("=========================");
 }
