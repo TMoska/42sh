@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 15:14:49 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/25 21:42:54 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/26 00:08:27 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ int			do_quotes(t_shell **shell)
 		else
 		{
 			(*shell)->q->was_quoted = 1;
-			// hist_add(&(*shell)->history, (*shell)->buff);
 			(*shell)->buff = ft_str3join((*shell)->tmp_buff,\
 					"\n", (*shell)->buff);
 		}
