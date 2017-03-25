@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:45:24 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/23 23:54:05 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/25 21:51:18 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,41 +26,43 @@ void			clean_input(t_shell **shell)
 	DEL_LINE;
 	reset_line(shell);
 }
-
-static void		find_next_hist(t_shell **shell)
-{
-	if (!(*shell)->hist_buff_tmp && (*shell)->buff)
-		(*shell)->hist_buff_tmp = ft_strdup((*shell)->buff);
-	else if ((*shell)->hist_buff_tmp)
-		(*shell)->history = (*shell)->history->next;
-	ft_strdel(&(*shell)->buff);
-	work_buffer(shell, (*shell)->history->cmd);
-}
-
-static void		find_prev_hist(t_shell **shell)
-{
-	char	*ret;
-
-	ft_strdel(&(*shell)->buff);
-	if (!(*shell)->history->prev)
-	{
-		ret = (*shell)->hist_buff_tmp;
-		ft_strdel(&(*shell)->hist_buff_tmp);
-	}
-	else
-	{
-		(*shell)->history = (*shell)->history->prev;
-		ret = (*shell)->history->cmd;
-	}
-	work_buffer(shell, ret);
-}
-
+//
+// static void		find_next_hist(t_shell **shell)
+// {
+// 	if (!(*shell)->hist_buff_tmp && (*shell)->buff)
+// 		(*shell)->hist_buff_tmp = ft_strdup((*shell)->buff);
+// 	else if ((*shell)->hist_buff_tmp)
+// 		(*shell)->history = (*shell)->history->next;
+// 	ft_strdel(&(*shell)->buff);
+// 	work_buffer(shell, (*shell)->history->cmd);
+// }
+//
+// static void		find_prev_hist(t_shell **shell)
+// {
+// 	char	*ret;
+//
+// 	ft_strdel(&(*shell)->buff);
+// 	if (!(*shell)->history->prev)
+// 	{
+// 		ret = (*shell)->hist_buff_tmp;
+// 		ft_strdel(&(*shell)->hist_buff_tmp);
+// 	}
+// 	else
+// 	{
+// 		(*shell)->history = (*shell)->history->prev;
+// 		ret = (*shell)->history->cmd;
+// 	}
+// 	work_buffer(shell, ret);
+// }
+//
 void			history(t_shell **shell, unsigned int key)
 {
-	if (!(*shell)->history ||
-	(key == BTN_UP && (!(*shell)->history->next && (*shell)->hist_buff_tmp)) ||
-	(key == BTN_DOWN && !((*shell)->history || (*shell)->history->prev)))
-		return ;
-	clean_input(shell);
-	(key == BTN_UP) ? find_next_hist(shell) : find_prev_hist(shell);
+	(void)shell;
+	(void)key;
+	// if (!(*shell)->history ||
+	// (key == BTN_UP && (!(*shell)->history->next && (*shell)->hist_buff_tmp)) ||
+	// (key == BTN_DOWN && !((*shell)->history || (*shell)->history->prev)))
+	// 	return ;
+	// clean_input(shell);
+	// (key == BTN_UP) ? find_next_hist(shell) : find_prev_hist(shell);
 }
