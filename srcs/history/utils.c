@@ -6,60 +6,49 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:09:26 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/05 14:56:20 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/25 23:46:48 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_hist	*hist_new(char *cmd)
+int				print_history(t_shell **shell)
 {
-	t_hist *lst;
-	size_t size;
+	t_h_lst	*lst;
 
-	lst = (t_hist *)ft_memalloc(sizeof(*lst));
-	if (!lst)
-		return (NULL);
-	if (cmd)
+	lst = (*shell)->history->list;
+	while (lst->next)
+		lst = lst->next;
+	while (lst)
 	{
-		size = ft_strlen(cmd);
-		if ((lst->cmd = ft_strnew(size + 1)))
-			ft_strcpy(lst->cmd, cmd);
-		else
-			return (NULL);
+		ft_putnbr(lst->index + 1);
+		ft_putstr("  ");
+		ft_putendl(lst->cmd);
+		lst = lst->prev;
 	}
+	return (0);
+}
+
+static t_h_lst	*hist_new_node(char *cmd)
+{
+	t_h_lst	*lst;
+
+	if (!(lst = (t_h_lst *)ft_memalloc(sizeof(*lst))) || !cmd)
+		return (NULL);
+	lst->cmd = ft_strdup(cmd);
 	lst->next = NULL;
 	return (lst);
 }
 
-void			rewind_history(t_hist **hist)
+void			hist_add(t_shell **shell)
 {
-	while ((*hist) && (*hist)->prev)
-		*hist = (*hist)->prev;
-}
+	t_h_lst	*new;
 
-void			hist_add(t_hist **begin_list, char *cmd)
-{
-	t_hist *new;
-
-	if (!(new = hist_new(cmd)))
-		return ;
-	rewind_history(begin_list);
-	new->next = *begin_list;
-	if (*begin_list)
-		(*begin_list)->prev = new;
-	*begin_list = new;
-	rewind_history(begin_list);
-}
-
-void			print_history(t_shell **shell)
-{
-	t_hist *hist;
-
-	hist = (*shell)->history;
-	while (hist)
-	{
-		printf("%s\n", hist->cmd);
-		hist = hist->next;
-	}
+	new = hist_new_node((*shell)->buff);
+	new->next = (*shell)->history->list;
+	if ((*shell)->history->list)
+		(*shell)->history->list->prev = new;
+	(*shell)->history->list = new;
+	new->index = (*shell)->history->size;
+	(*shell)->history->size++;
 }

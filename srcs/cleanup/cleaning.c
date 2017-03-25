@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 22:11:46 by moska             #+#    #+#             */
-/*   Updated: 2017/03/25 05:02:31 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/26 00:05:10 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,6 @@ void	clean_btree(t_tkn *tree)
 	free(tree);
 }
 
-void	clean_list(void **a, size_t *b)
-{
-	(void)b;
-	ft_strdel((char**)a);
-}
-
 void	del_lst_str(void **content, size_t *content_size)
 {
 	(void)content_size;
@@ -38,15 +32,29 @@ void	del_lst_str(void **content, size_t *content_size)
 
 void	mid_clean_shell(t_shell **shell)
 {
-	ft_lstdel(&(*shell)->commands, clean_list);
+	ft_lstdel(&(*shell)->commands, del_lst_str);
 	ft_strdel(&((*shell)->buff));
 	clean_btree((*shell)->tree);
-	ft_lstdel(&(*shell)->heredoc, &del_lst_str);
+	ft_lstdel(&(*shell)->heredoc, del_lst_str);
+}
+
+void	clean_history(t_h_lst *lst)
+{
+	t_h_lst	*tmp;
+
+	while (lst)
+	{
+		tmp = lst;
+		lst = lst->next;
+		ft_strdel(&tmp->cmd);
+	}
 }
 
 void	clean_shell(t_shell **shell)
 {
 	ft_str2del(&(*shell)->env);
 	clean_env_list(&(*shell)->env_list);
+	clean_history((*shell)->history->list);
+	ft_memdel((void **)(&(*shell)->history));
 	free((*shell)->q);
 }

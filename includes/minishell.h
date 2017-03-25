@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/25 18:22:49 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/25 23:44:40 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,24 @@ typedef struct		s_quotes
 	t_bool			oneline;
 }					t_quotes;
 
-typedef struct		s_hist
+typedef struct		s_h_lst
 {
 	char			*cmd;
-	struct s_hist	*next;
-	struct s_hist	*prev;
+	int				index;
+	struct s_h_lst	*next;
+	struct s_h_lst	*prev;
+}					t_h_lst;
+
+typedef struct		s_hist
+{
+	int				size;
+	int				at_index;
+	struct s_h_lst	*list;
 }					t_hist;
 
 typedef struct		s_shell
 {
 	char			*buff;
-	char			*hist_buff_tmp;
 	t_list			*commands;
 	char			**cmd;
 	int				cmd_len;
@@ -245,10 +252,9 @@ int					clean_terminal(void);
 **	History
 */
 
-void				hist_add(t_hist **begin_list, char *cmd);
-void				print_history(t_shell **shell);
+void				hist_add(t_shell **shell);
 void				history(t_shell **shell, unsigned int key);
-void				rewind_history(t_hist **hist);
+int					print_history(t_shell **shell);
 
 /*
 **	Quotes
