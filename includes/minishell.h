@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/26 01:21:26 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/26 09:55:45 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,6 +257,12 @@ int					clean_terminal(void);
 void				hist_add(t_shell **shell);
 void				history(t_shell **shell, unsigned int key);
 int					print_history(t_shell **shell);
+char				*history_search_first_match(t_shell **shell, char *s);
+int					replace_double_exclamation(t_shell **shell, char *tmp);
+int					replace_single_exclamation(char **cmd);
+void				replace_ation(t_shell **shell, char *cmd);
+void				set_hist_of_index(t_shell **shell, int index);
+t_h_lst				*hist_at_index(t_shell **shell, int index);
 
 /*
 **	Quotes

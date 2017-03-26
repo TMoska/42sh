@@ -6,22 +6,20 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:45:24 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/25 23:50:54 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/26 07:02:15 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void			set_hist_of_index(t_shell **shell, int index, int e_m)
+void			set_hist_of_index(t_shell **shell, int index)
 {
 	t_h_lst	*lst;
 
 	ft_strdel(&(*shell)->buff);
-	if (index == -1 && e_m == 0)
+	if (index == -1)
 		return ;
-	lst = (*shell)->history->list;
-	while (lst->index != index)
-		lst = lst->next;
+	lst = hist_at_index(shell, index);
 	work_buffer(shell, lst->cmd);
 }
 
@@ -67,5 +65,5 @@ void			history(t_shell **shell, unsigned int key)
 		return ;
 	clean_input(shell);
 	(key == BTN_UP) ? find_next_hist(shell) : find_prev_hist(shell);
-	set_hist_of_index(shell, (*shell)->history->at_index, 0);
+	set_hist_of_index(shell, (*shell)->history->at_index);
 }
