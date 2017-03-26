@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 06:51:00 by moska             #+#    #+#             */
-/*   Updated: 2017/03/26 09:55:05 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/26 10:00:16 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,6 @@ char			*excl_nb(t_shell **shell, int nb)
 	return (lst->cmd);
 }
 
-int			repl_error(char *arg)
-{
-	ft_putstr_fd("No such history index: ", 2);
-	ft_putendl_fd(arg, 2);
-	return (0);
-}
-
 int 			start_replacing(char **cmd, int *till_end, int *type, int *i)
 {
 	char	*arg;
@@ -71,8 +64,12 @@ int 			start_replacing(char **cmd, int *till_end, int *type, int *i)
 	shell = get_shell(NULL);
 	arg = ft_strndup(*cmd + *i, *till_end);
 	repl = (*type) ? excl_nb(&shell, ft_atoi(arg)) : ("NO");
-	if (!repl && repl_error(arg) == 0)
+	if (!repl)
+	{
+		ft_putstr_fd("No such history index: ", 2);
+		ft_putendl_fd(arg, 2);
 		return (-1);
+	}
 	old = ft_strndup(*cmd + *i - 1, 1 + ft_strlen(arg));
 	ft_str_replace(cmd, old, repl);
 	ft_strdel(&arg);
