@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 06:51:00 by moska             #+#    #+#             */
-/*   Updated: 2017/03/26 10:00:16 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/26 10:44:43 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ int 			start_replacing(char **cmd, int *till_end, int *type, int *i)
 
 	shell = get_shell(NULL);
 	arg = ft_strndup(*cmd + *i, *till_end);
-	repl = (*type) ? excl_nb(&shell, ft_atoi(arg)) : ("NO");
+	if (*type)
+		repl = excl_nb(&shell, ft_atoi(arg));
+	else
+		repl = history_search_first_match(&shell, arg);
 	if (!repl)
 	{
 		ft_putstr_fd("No such history index: ", 2);
