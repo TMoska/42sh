@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 00:54:38 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/26 01:09:34 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/26 01:23:02 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,25 @@ char	*get_git_branch(void)
 	return (git);
 }
 
-char	*build_prompt(t_shell **shell)
+void	build_prompt(t_shell **shell)
 {
 	char	*git;
-	char	*prompt;
-	char	*tmp;
+	char	*logname;
+	char	*path;
 
 	git = get_git_branch();
-	tmp = ft_str3join("\033[0;35m", get_env_val(shell, "LOGNAME"),\
-			"\033[0;33m:\033[0;32m");
-	prompt = ft_strjoin(tmp, get_env_val(shell, "PWD"));
-	ft_strdel(&tmp);
+	logname = get_env_val(shell, "LOGNAME");
+	path = get_env_val(shell, "PWD");
+	ft_putstr("\033[0;35m");
+	ft_putstr(logname);
+	ft_putstr("\033[0;33m:\033[0;32m");
+	ft_putstr(path);
+	(*shell)->prompt_len = ft_strlen(logname) + ft_strlen(path) + 1;
 	if (git)
 	{
-		tmp = prompt;
-		prompt = ft_strjoin(prompt, "\033[0;33m:\033[0;32m");
-		ft_strdel(&tmp);
-		tmp = prompt;
-		prompt = ft_str3join(prompt, "\033[0;36m", git);
-		ft_strdel(&tmp);
+		ft_putstr("\033[0;33m:\033[0;36m");
+		ft_putstr(git);
 		ft_strdel(&git);
+		(*shell)->prompt_len += ft_strlen(git) + 1;
 	}
-	return (prompt);
 }

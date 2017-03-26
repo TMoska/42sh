@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/26 01:09:52 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/26 01:21:26 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ typedef struct		s_env_s
 
 void				print_prompt(t_shell **shell, char *prompt);
 char				*get_git_branch(void);
-char				*build_prompt(t_shell **shell);
+void				build_prompt(t_shell **shell);
 t_shell				*get_shell(char **env);
 int					validate_and_prep_cmd(t_shell **shell);
 int					interpret_line(char *cmd);
