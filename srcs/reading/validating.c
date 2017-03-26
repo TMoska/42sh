@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validating.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 22:32:02 by moska             #+#    #+#             */
-/*   Updated: 2017/02/22 21:06:39 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/26 09:53:59 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 static int	command_is_good(char *cmd)
 {
-	if (!cmd || ft_strisblank(cmd))
-		return (0);
-	return (1);
+	return (!(!cmd || ft_strisblank(cmd)));
 }
 
 int			validate_and_prep_cmd(t_shell **shell)
@@ -27,8 +25,17 @@ int			validate_and_prep_cmd(t_shell **shell)
 	{
 		tmp = (*shell)->buff;
 		(*shell)->buff = ft_strtrim((*shell)->buff);
-		free(tmp);
-		return (1);
+		if (ft_strstr((*shell)->buff, "!!") &&
+			replace_double_exclamation(shell, tmp))
+		{
+			ft_strdel(&tmp);
+			return (-1);
+		}
+		ft_strdel(&tmp);
+		if (ft_strchr((*shell)->buff, '!') &&
+		(replace_single_exclamation(&(*shell)->buff) == -1))
+			return (-1);
+		return (0);
 	}
-	return (0);
+	return (-1);
 }
