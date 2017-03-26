@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/03/20 21:18:41 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/26 03:51:03 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,11 @@ int			interpret_line(char *cmd)
 	ptr = shell->cmd;
 	rebuild_str2env(&shell);
 	env = shell->env;
-	ret = try_a_builtin(&shell, ptr[0], cmd);
-	if (ret < 1)
+	if ((ret = try_a_builtin(&shell, ptr[0], cmd)) < 1)
+	{
+		ft_str2del(&(shell->cmd));
 		return (ret);
+	}
 	ret = test_n_execute(&shell, exec, ptr, env);
 	ft_str2del(&(shell->cmd));
 	return (ret);

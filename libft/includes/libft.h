@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:33:19 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/25 02:40:11 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/26 05:15:32 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,4 +145,5 @@ int					ft_word_count(char const *s, char c);
 int					ft_lst_new_add_back(t_list **alst, void const *content,\
 					size_t size);
 void				ft_print_list(t_list *lst);
+void				ft_str_replace(char **str, char *old, char *new);
 #endif
