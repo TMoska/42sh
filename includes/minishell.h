@@ -61,10 +61,12 @@
 
 # define MOVE_LEFT	ft_putstr(tgetstr("le", NULL));
 # define MOVE_RIGHT	ft_putstr(tgetstr("nd", NULL));
+# define MOVE_DOWN  ft_putstr(tgetstr("do", NULL));
 
 # define DEL		ft_putstr(tgetstr("dc", NULL));
 # define CURS_LEFT	ft_putstr(tgetstr("cr", NULL));
 # define DEL_LINE	ft_putstr(tgetstr("ce", NULL));
+# define DEL_LINES ft_putstr(tgetstr("cd", NULL));
 
 /*
 **	Types and Structs
@@ -145,6 +147,17 @@ typedef struct		s_env_s
 	int				cmd;
 	int				null;
 }					t_env_s;
+
+struct        	s_tab
+{
+  char          *content;
+  size_t        cursor;
+  size_t        place;
+  size_t        col;
+  size_t        page;
+  struct s_tab  next;
+  struct s_tab  prev;
+}             	c_tab;
 
 /*
 **	Core function prototypes
