@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/26 11:06:33 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/26 12:14:15 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,6 +268,7 @@ void				move_right(t_shell **shell, char *buff, int offset);
 void				move_left(t_shell **shell);
 void				back_to_prompt(t_shell **shell, int keep);
 void				clear_cmdline(t_shell **shell);
+void				goto_endcmdline(t_shell **shell);
 
 /*
 **	History

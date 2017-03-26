@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 05:12:13 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/26 10:39:05 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/26 12:14:58 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,21 @@ void	clear_cmdline(t_shell **shell)
 
 	i = 0;
 	back_to_prompt(shell, 1);
+	(*shell)->term->tc_in = 0;
 	while (i < (*shell)->term->tc_len)
 	{
 		ft_putchar(' ');
 		++i;
+		(*shell)->term->tc_in += 1;
 	}
 	(*shell)->term->tc_len = 0;
 	back_to_prompt(shell, 0);
+}
+
+void	goto_endcmdline(t_shell **shell)
+{
+	while ((*shell)->term->tc_in != (*shell)->term->tc_len)
+		move_right(shell, NULL, 1);
 }
 
 void	back_to_prompt(t_shell **shell, int keep)
