@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:29:48 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/04 22:38:49 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/26 03:07:57 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	clean_buffer(t_shell **shell)
 {
 	ft_strdel(&(*shell)->buff);
 	ft_putchar('\n');
+	reset_line(shell);
 	print_prompt(shell, NULL);
 }
 
