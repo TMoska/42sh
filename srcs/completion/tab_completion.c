@@ -6,11 +6,11 @@
 /*   By: ede-sous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/03/25 23:53:59 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/26 12:48:42 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 static size_t  verify_btn(unsigned int key)
 {
