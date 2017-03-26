@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:45:24 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/25 23:50:54 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/26 10:36:57 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,14 @@ void			clean_input(t_shell **shell)
 
 	i = 0;
 	CURS_LEFT;
-	while (i < (*shell)->prompt_len)
+	while (i < (*shell)->term->prompt_len)
 	{
 		MOVE_RIGHT;
 		i++;
 	}
-	DEL_LINE;
-	reset_line(shell);
+	//DEL_LINE;
+	//reset_line(shell);
+	clear_cmdline(shell);
 }
 
 static void		find_next_hist(t_shell **shell)

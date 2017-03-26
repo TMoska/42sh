@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:29:07 by moska             #+#    #+#             */
-/*   Updated: 2017/03/25 21:55:52 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/26 03:52:38 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ t_shell		*get_shell(char **env)
 		shell->ret = 0;
 		g_exit_code = 0;
 		shell->cmd_len = 0;
+		shell->term = ft_memalloc(sizeof(t_term));
 		shell->history = ft_memalloc(sizeof(t_hist*));
 		shell->history->list = NULL;
 		ft_bzero(&shell->commands, sizeof(t_list*));

@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 21:39:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/25 23:55:34 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/26 05:01:56 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		run_shell(t_shell **shell)
 		(*shell)->history->at_index = -1;
 		print_prompt(shell, NULL);
 		catch_signals();
-		if ((*shell)->tc_ok)
+		if ((*shell)->term->tc_ok)
 			read_input(shell, NULL);
 		else
 		{
