@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 00:54:38 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/26 01:36:57 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/26 01:54:22 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*get_git_branch(void)
 {
 	int		fd;
 	char	*git;
-	char	**tmp2;
+	char	*tmp;
 	int		i;
 
 	i = 0;
@@ -24,12 +24,9 @@ char	*get_git_branch(void)
 	if ((fd = open(".git/HEAD", O_RDONLY)) != -1)
 	{
 		get_next_line(fd, &git);
-		tmp2 = ft_strsplit(git, '/');
-		ft_strdel(&git);
-		while (tmp2[i])
-			i++;
-		git = ft_strdup(tmp2[i - 1]);
-		ft_str2del(&tmp2);
+		tmp = git;
+		git = ft_strdup(git + 16);
+		ft_strdel(&tmp);
 	}
 	return (git);
 }
