@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 06:51:00 by moska             #+#    #+#             */
-/*   Updated: 2017/03/26 10:44:43 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/26 11:23:31 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 /*
 **	Returns a type of a single exclamation mark token
-**
 **	numbers = 1
 **	string = 0;
-**
 */
 
 static int		single_excl_type(char *str)
@@ -54,7 +52,7 @@ char			*excl_nb(t_shell **shell, int nb)
 	return (lst->cmd);
 }
 
-int 			start_replacing(char **cmd, int *till_end, int *type, int *i)
+int				start_replacing(char **cmd, int *till_end, int *type, int *i)
 {
 	char	*arg;
 	char	*repl;
