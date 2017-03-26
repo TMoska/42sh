@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 06:51:00 by moska             #+#    #+#             */
-/*   Updated: 2017/03/26 11:23:31 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/26 14:51:49 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,28 @@
 
 /*
 **	Returns a type of a single exclamation mark token
-**	numbers = 1
+**	# = 2;
+**	numbers = 1;
 **	string = 0;
 */
 
 static int		single_excl_type(char *str)
 {
-	return (ft_isdigit(*str) || (*str == '-' && ft_isdigit(*(str + 1))));
+	if (*str == '#')
+		return (2);
+	else if (ft_isdigit(*str) || (*str == '-' && ft_isdigit(*(str + 1))))
+		return (1);
+	else if (ft_isalpha(*(str + 1)))
+		return (0);
+	else
+		return (-1);
 }
 
 static void		single_excl_find_end(char *str, int type, int *till_end)
 {
-	if (type)
+	if (type == 2)
+		(*till_end) = 1;
+	else if (type == 1)
 	{
 		while (ft_isdigit(*(str + *till_end)) || (*till_end == 0 &&
 			*(str + *till_end) == '-' && ft_isdigit(*(str + *till_end + 1))))
@@ -61,18 +71,17 @@ int				start_replacing(char **cmd, int *till_end, int *type, int *i)
 
 	shell = get_shell(NULL);
 	arg = ft_strndup(*cmd + *i, *till_end);
-	if (*type)
+	repl = NULL;
+	if (*type == 2)
+		repl = ft_strndup(*cmd, *i - 1);
+	else if (*type == 1)
 		repl = excl_nb(&shell, ft_atoi(arg));
-	else
+	else if (*type == 0)
 		repl = history_search_first_match(&shell, arg);
-	if (!repl)
-	{
-		ft_putstr_fd("No such history index: ", 2);
-		ft_putendl_fd(arg, 2);
+	if (!repl && no_history_err(arg))
 		return (-1);
-	}
 	old = ft_strndup(*cmd + *i - 1, 1 + ft_strlen(arg));
-	ft_str_replace(cmd, old, repl);
+	ft_str_replace(cmd, old, repl, 1);
 	ft_strdel(&arg);
 	ft_strdel(&old);
 	*i += ft_strlen(repl);
@@ -86,9 +95,9 @@ int				replace_single_exclamation(char **cmd)
 	int		type;
 
 	i = 0;
-	till_end = 0;
 	while (*((*cmd) + i))
 	{
+		till_end = 0;
 		while (*((*cmd) + i) && *((*cmd) + i) != '!')
 			i++;
 		if (!(*((*cmd) + i)))
@@ -102,7 +111,6 @@ int				replace_single_exclamation(char **cmd)
 			return (0);
 		if (start_replacing(cmd, &till_end, &type, &i) == -1)
 			return (-1);
-		till_end = 0;
 	}
 	return (0);
 }

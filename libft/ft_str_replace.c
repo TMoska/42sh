@@ -6,13 +6,13 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 05:06:21 by moska             #+#    #+#             */
-/*   Updated: 2017/03/26 05:35:08 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/26 14:45:25 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_str_replace(char **str, char *old, char *new)
+void	ft_str_replace(char **str, char *old, char *new, int only_one)
 {
 	int		i;
 	int		old_len;
@@ -34,7 +34,10 @@ void	ft_str_replace(char **str, char *old, char *new)
 			ft_strdel(&tmp);
 			str_len = ft_strlen(*str);
 			i += ft_strlen(new);
-			continue ;
+			if (only_one)
+				break ;
+			else
+				continue ;
 		}
 		i++;
 	}

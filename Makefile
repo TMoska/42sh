@@ -6,7 +6,7 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/03/26 10:44:26 by moska            ###   ########.fr        #
+#    Updated: 2017/03/26 13:44:51 by moska            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ execution/fd_aggregation.c execution/interpreting2.c tokenizer/utils2.c \
 tokenizer/split_command_utils.c execution/left_redirection_utils.c \
 execution/interpreting_utilities.c reading/validating.c heredoc/heredoc.c \
 execution/left_redirections2.c reading/prompt_utils.c history/history_search.c \
-history/exclamation.c \
+history/exclamation.c history/single_exclamation_utils.c \
 
 SOURCES		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
