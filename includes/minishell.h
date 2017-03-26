@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/26 01:09:52 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/26 12:03:03 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,16 +148,16 @@ typedef struct		s_env_s
 	int				null;
 }					t_env_s;
 
-struct        	s_tab
+typedef struct		s_tab
 {
-  char          *content;
-  size_t        cursor;
-  size_t        place;
-  size_t        col;
-  size_t        page;
-  struct s_tab  next;
-  struct s_tab  prev;
-}             	c_tab;
+  char				*content;
+  size_t			cursor;
+  size_t			place;
+  size_t			col;
+  size_t			page;
+  struct s_tab		next;
+  struct s_tab		prev;
+}					c_tab;
 
 /*
 **	Core function prototypes
