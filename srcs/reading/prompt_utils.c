@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 00:54:38 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/26 01:23:02 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/26 01:36:57 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	build_prompt(t_shell **shell)
 	{
 		ft_putstr("\033[0;33m:\033[0;36m");
 		ft_putstr(git);
-		ft_strdel(&git);
 		(*shell)->prompt_len += ft_strlen(git) + 1;
+		ft_strdel(&git);
 	}
 }
