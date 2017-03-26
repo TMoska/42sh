@@ -6,11 +6,7 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2017/03/26 09:11:10 by adeletan         ###   ########.fr        #
-=======
-#    Updated: 2017/03/26 10:44:26 by moska            ###   ########.fr        #
->>>>>>> 02a75669829b701dc1caf0f5919b47c8e906f17a
+#    Updated: 2017/03/26 11:08:19 by adeletan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,13 +42,9 @@ execution/semicolon.c execution/left_redirections.c tokenizer/reorganizer2.c \
 execution/fd_aggregation.c execution/interpreting2.c tokenizer/utils2.c \
 tokenizer/split_command_utils.c execution/left_redirection_utils.c \
 execution/interpreting_utilities.c reading/validating.c heredoc/heredoc.c \
-<<<<<<< HEAD
 execution/left_redirections2.c reading/prompt_utils.c terminal/edition_utils.c \
-terminal/edition.c terminal/edition_cursor_right.c
-=======
-execution/left_redirections2.c reading/prompt_utils.c history/history_search.c \
-history/exclamation.c \
->>>>>>> 02a75669829b701dc1caf0f5919b47c8e906f17a
+history/history_search.c history/exclamation.c terminal/edition.c \
+terminal/edition_cursor_right.c
 
 SOURCES		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
