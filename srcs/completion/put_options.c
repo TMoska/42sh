@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   c_utils.c                                          :+:      :+:    :+:   */
+/*   put_options.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ede-sous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,43 +12,19 @@
 
 #include "../../includes/minishell.h"
 
-static c_tab  *cmd_option_2(c_tab *tmp, char *cmd)
+int         put_options(c_tab *list)
 {
-  if (tmp->prev)
-    tmp->cursor = 0;
-  else
-    tmp->cursor = 1;
-  tmp->place = 0;
-  tmp->col = 0;
-  tmp->page = 0;
-  tmp->content = ft_strdup(cmd);
-  tmp->contentsize = ft_strlen(cmd);
-  return (tmp);
-}
+    size_t  c_page;
 
-void        cmd_option(char *cmd, c_tab **list)
-{
-  c_tab     *tmp;
-  c_tab     *prev;
-
-  if (!(*list))
-  {
-    if (!(tmp = (c_tab*)malloc(sizeof(c_tab))
-      return ;
-    (*list) = tmp;
-    tmp->prev = NULL;
-  }
-  else
-  {
-    tmp = (*list);
-    while (tmp->next)
-      tmp = tmp->next;
-    prev = tmp;
-    tmp = tmp->next;
-    if (!(tmp = (c_tab*)malloc(sizeof(c_tab))
-      return ;
-    tmp->prev = prev;
-  }
-  tmp = cmd_options_2(tmp, cmd);
-  tmp->next = NULL;
+    if (!(list = define_padding(list)))
+        return (0);
+    while (list && list->cursor != 1)
+      list = list->next;
+    if (!list)
+      return (0);
+    c_page = tmp->page;
+    while (tmp->prev && tmp->page == c_page)
+      tmp = tmp->prev;
+    (tmp->prev ? tmp = tmp->next : tmp);
+    MOVE_DOWN;
 }

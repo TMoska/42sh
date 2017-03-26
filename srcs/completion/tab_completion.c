@@ -48,7 +48,8 @@ void    tab_completion(t_shell **shell, c_tab *list, size_t val)
   }
   else if (!(list = search_on_dir(".", shell, NULL)))
     return ;
-  ft_putlist(list);
+  if (ft_putlist(list) == 0)
+      return ;
   read_input(&*shell, NULL);
   if ((*shell)->buff && (val = verify_btn((unsigned int)(*shell)->buff)) != 9)
       tab_completion(shell, list, val);
