@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 09:02:29 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/26 09:59:26 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/26 12:40:28 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	move_left(t_shell **shell)
 {
-	if (((*shell)->term->tc_in + (*shell)->term->prompt_len) % ft_linesize() == 0)
+	if (((*shell)->term->tc_in + (*shell)->term->prompt_len) %
+		ft_linesize() == 0)
 	{
 		ft_putstr(tgetstr("up", NULL));
 		ft_putstr(tgoto(tgetstr("ch", NULL), 0, ft_linesize() - 1));

@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/03/26 12:16:04 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/26 12:31:13 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static int	execute(t_shell **shell, char *exec, char **ptr, char **env)
 		return (-1);
 	else if (pid == 0)
 	{
-		goto_endcmdline(shell);
 		execve(exec, ptr, env);
 		ret = -1;
 	}

@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/25 19:37:58 by moska             #+#    #+#             */
-/*   Updated: 2017/03/26 12:14:31 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/26 12:37:35 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ static int	identify_key(t_shell **shell, char *buff, unsigned int key,\
 	else if (key == BTN_CTRL_I)
 		copy(shell);
 	else if (key == BTN_ENTER)
+	{
+		goto_endcmdline(shell);
 		return (reset_line(shell));
+	}
 	return (1);
 }
 
