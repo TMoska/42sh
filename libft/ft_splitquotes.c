@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:52:28 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/27 23:08:46 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/28 01:05:11 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,19 @@
 static char			*ft_strncpyquo(char *dst, const char *src, size_t len)
 {
 	size_t	i;
+	char	d;
 	char	*tmp;
 
 	i = 0;
 	tmp = (char *)dst;
+	d = *src;
 	while (i++ < len && *src)
 	{
-		if (*src == '\\' && (*(src + 1) == '"' || *(src + 1) == '`'
-			|| *(src + 1) == 39))
+		if (*(src + 1) == d && *src == '\\' && (*(src + 1) == '"'
+			|| *(src + 1) == '`' || *(src + 1) == 39))
 			++src;
-		if ((*src == '"' || *src == '`' || *src == 39) && *(src - 1) != '\\')
+		if ((*src == '"' || *src == '`' || *src == 39) && *(src - 1) != '\\' &&
+			*src == d)
 			++src;
 		else
 		{
@@ -35,10 +38,7 @@ static char			*ft_strncpyquo(char *dst, const char *src, size_t len)
 		}
 	}
 	while (i++ < len)
-	{
-		*dst = '\0';
-		dst++;
-	}
+		*(dst++) = '\0';
 	return (tmp);
 }
 

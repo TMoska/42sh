@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 15:14:49 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/27 23:33:53 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/28 00:15:56 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int			do_quotes(t_shell **shell)
 		if ((*shell)->q->oneline)
 		{
 			tmp = (*shell)->tmp_buff;
-			//(*shell)->tmp_buff = ft_strndelat(tmp, ft_strlen(tmp) - 1, 1);
+			(*shell)->tmp_buff = ft_strndelat(tmp, ft_strlen(tmp) - 1, 1);
 			ft_strdel(&tmp);
 			tmp = (*shell)->buff;
 			(*shell)->buff = ft_strjoin((*shell)->tmp_buff, (*shell)->buff);
