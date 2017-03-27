@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/26 13:57:57 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/27 14:27:48 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,6 +264,8 @@ void				replace_ation(t_shell **shell, char *cmd);
 void				set_hist_of_index(t_shell **shell, int index);
 t_h_lst				*hist_at_index(t_shell **shell, int index);
 int					no_history_err(char *arg);
+char				*history_search_first_arg_match(t_shell **shell, char *s);
+int					single_excl_type(char *str);
 
 /*
 **	Quotes

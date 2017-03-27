@@ -6,34 +6,21 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 06:51:00 by moska             #+#    #+#             */
-/*   Updated: 2017/03/26 14:51:49 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/27 14:27:25 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-**	Returns a type of a single exclamation mark token
-**	# = 2;
-**	numbers = 1;
-**	string = 0;
-*/
-
-static int		single_excl_type(char *str)
+static void	single_excl_find_end(char *str, int type, int *till_end)
 {
-	if (*str == '#')
-		return (2);
-	else if (ft_isdigit(*str) || (*str == '-' && ft_isdigit(*(str + 1))))
-		return (1);
-	else if (ft_isalpha(*(str + 1)))
-		return (0);
-	else
-		return (-1);
-}
-
-static void		single_excl_find_end(char *str, int type, int *till_end)
-{
-	if (type == 2)
+	if (type == 3)
+	{
+		(*till_end)++;
+		while (!(*(str + *till_end) == '\0' || *(str + *till_end) == '?'))
+			(*till_end)++;
+	}
+	else if (type == 2)
 		(*till_end) = 1;
 	else if (type == 1)
 	{
@@ -48,7 +35,7 @@ static void		single_excl_find_end(char *str, int type, int *till_end)
 	}
 }
 
-char			*excl_nb(t_shell **shell, int nb)
+char		*excl_nb(t_shell **shell, int nb)
 {
 	t_h_lst	*lst;
 	int		index;
@@ -62,7 +49,27 @@ char			*excl_nb(t_shell **shell, int nb)
 	return (lst->cmd);
 }
 
-int				start_replacing(char **cmd, int *till_end, int *type, int *i)
+char		*get_repl_value(char **cmd, char **arg, int type, int i)
+{
+	t_shell	*shell;
+
+	shell = get_shell(NULL);
+	if (type == 3)
+	{
+		ft_str_replace(arg, "?", "", 0);
+		return (history_search_first_arg_match(&shell, *arg));
+	}
+	if (type == 2)
+		return (ft_strndup(*cmd, i - 1));
+	else if (type == 1)
+		return (excl_nb(&shell, ft_atoi(*arg)));
+	else if (type == 0)
+		return (history_search_first_match(&shell, *arg));
+	else
+		return (NULL);
+}
+
+int			start_replacing(char **cmd, int *till_end, int *type, int *i)
 {
 	char	*arg;
 	char	*repl;
@@ -72,23 +79,21 @@ int				start_replacing(char **cmd, int *till_end, int *type, int *i)
 	shell = get_shell(NULL);
 	arg = ft_strndup(*cmd + *i, *till_end);
 	repl = NULL;
-	if (*type == 2)
-		repl = ft_strndup(*cmd, *i - 1);
-	else if (*type == 1)
-		repl = excl_nb(&shell, ft_atoi(arg));
-	else if (*type == 0)
-		repl = history_search_first_match(&shell, arg);
-	if (!repl && no_history_err(arg))
+	if (!(repl = get_repl_value(cmd, &arg, *type, *i)) && no_history_err(arg))
 		return (-1);
-	old = ft_strndup(*cmd + *i - 1, 1 + ft_strlen(arg));
+	if (*type == 3)
+		old = ft_strndup(*cmd + *i - 1, 3 + ft_strlen(arg));
+	else
+		old = ft_strndup(*cmd + *i - 1, 1 + ft_strlen(arg));
 	ft_str_replace(cmd, old, repl, 1);
 	ft_strdel(&arg);
 	ft_strdel(&old);
+	(*type == 2) ? ft_strdel(&repl) : (0);
 	*i += ft_strlen(repl);
 	return (0);
 }
 
-int				replace_single_exclamation(char **cmd)
+int			replace_single_exclamation(char **cmd)
 {
 	int		i;
 	int		till_end;
