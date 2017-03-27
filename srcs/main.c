@@ -31,10 +31,7 @@ void	catch_signals(void)
 
 	i = 32;
 	while (i > 0)
-	{
-		signal(i, sig_callback);
-		i--;
-	}
+		signal(i--, sig_callback);
 }
 
 int		run_shell(t_shell **shell)

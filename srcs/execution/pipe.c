@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 20:58:50 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/25 06:23:23 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/27 20:11:26 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,40 +25,39 @@ void	exec_child(t_tkn *node, int fds[2], int stdout)
 
 void	exec_parent(t_tkn *node, int fds[2], int stdin)
 {
-	int		status;
-
 	close(0);
 	dup(fds[0]);
 	close(fds[1]);
-	if (*(node->right->data) == '|')
-	{
-		execute_node(node->right);
-		interpret_line(node->right->left->data);
-	}
-	else if (node->right->type == 1 || node->right->type == 2)
-		execute_node(node->right);
-	else
-		interpret_line(node->right->data);
-	wait(&status);
-	if (WIFEXITED(status))
-		g_exit_code = WIFEXITED(status);
+	execute_node(node->right);
 	dup2(stdin, 0);
 	close(stdin);
+	exit(0);
+}
+
+int		fork_error(void)
+{
+	ft_putendl_fd("fork error", 2);
+	return (1);
 }
 
 void	perform_pipe(t_tkn *node, int fds[2], int stdin, int stdout)
 {
-	pid_t	pid;
+	pid_t	pid_child_left;
+	pid_t	pid_child_right;
+	int		status;
 
-	if ((pid = fork()) == -1)
-	{
-		ft_putendl_fd("fork error", 2);
+	if ((pid_child_right = fork()) == -1 && fork_error())
 		return ;
-	}
-	if (pid == 0)
-		exec_child(node, fds, stdout);
-	else
+	else if (!pid_child_right)
 		exec_parent(node, fds, stdin);
+	if ((pid_child_left = fork()) == -1 && fork_error())
+		return ;
+	else if (!pid_child_left)
+		exec_child(node, fds, stdout);
+	close(fds[0]);
+	close(fds[1]);
+	waitpid(-1, &status, 0);
+	waitpid(-1, &status, 0);
 }
 
 int		execute_pipe(t_tkn *node)
