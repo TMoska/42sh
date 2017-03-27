@@ -6,7 +6,7 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/03/26 00:54:49 by tmoska           ###   ########.fr        #
+#    Updated: 2017/03/26 13:44:51 by moska            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ INC_FLAGS 	= -I./includes -I $(LIB_PATH)/includes
 SRC_DIR 	= srcs
 SRC_FILES = main.c execution/interpreting.c terminal/shell.c cleanup/cleaning.c\
 builtins/builtins.c builtins/builtin_exit.c builtins/builtin_env.c \
-builtins/builtin_getenv.c env_list/utils.c env_list/utils2.c \
+builtins/builtin_getenv.c env_list/utils.c env_list/utils2.c tokenizer/errors.c\
 builtins/builtin_setenv.c builtins/builtin_unsetenv.c terminal/cut_copy_line.c \
 builtins/builtin_env_utilities.c builtins/builtin_env_utilities2.c \
 builtins/builtin_env_prints.c builtins/builtin_cd.c builtins/builtin_echo.c \
@@ -36,13 +36,14 @@ reading/reader.c terminal/term_init.c terminal/cursor_left_right.c \
 terminal/modify_buffer.c reading/mange_buffer.c history/utils.c quotes/quotes.c\
 builtins/builtin_export.c tokenizer/utils.c tokenizer/split_command.c \
 tokenizer/get_tokens.c tokenizer/tokenizer.c tokenizer/reorganizer.c \
-tokenizer/errors.c tokenizer/tree_builder.c execution/executer.c \
+tokenizer/tree_builder.c execution/executer.c history/single_exclamation.c \
 execution/right_redirections.c execution/logic_operators.c execution/pipe.c \
 execution/semicolon.c execution/left_redirections.c tokenizer/reorganizer2.c \
 execution/fd_aggregation.c execution/interpreting2.c tokenizer/utils2.c \
 tokenizer/split_command_utils.c execution/left_redirection_utils.c \
 execution/interpreting_utilities.c reading/validating.c heredoc/heredoc.c \
-execution/left_redirections2.c reading/prompt_utils.c
+execution/left_redirections2.c reading/prompt_utils.c history/history_search.c \
+history/exclamation.c history/single_exclamation_utils.c \
 
 SOURCES		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 

@@ -48,7 +48,7 @@ void    tab_completion(t_shell **shell, c_tab *list, size_t val)
   }
   else if (!(list = search_on_dir(".", shell, NULL)))
     return ;
-  if (ft_putlist(list) == 0)
+  if (put_options(list, &*shell) == 0)
       return ;
   read_input(&*shell, NULL);
   if ((*shell)->buff && (val = verify_btn((unsigned int)(*shell)->buff)) != 9)
@@ -56,4 +56,5 @@ void    tab_completion(t_shell **shell, c_tab *list, size_t val)
   // Erase list, i don't know how to do it :x -> have to put it on 25lines
   MOVE_DOWN;
   DEL_LINES;
+  MOVE_UP;
 }

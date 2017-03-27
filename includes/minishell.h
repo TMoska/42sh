@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/26 12:04:20 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/27 18:24:50 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,13 @@
 **	Termcaps commands
 */
 
+# define MOVE_UP		ft_putstr(tgetstr("up", NULL));
 # define MOVE_LEFT	ft_putstr(tgetstr("le", NULL));
 # define MOVE_RIGHT	ft_putstr(tgetstr("nd", NULL));
 # define MOVE_DOWN  ft_putstr(tgetstr("do", NULL));
+
+# define SAVE_LINE ft_putstr(tgetstr("sc", NULL));
+# define LOAD_LINE ft_putstr(tgetstr("rc", NULL));
 
 # define DEL		ft_putstr(tgetstr("dc", NULL));
 # define CURS_LEFT	ft_putstr(tgetstr("cr", NULL));
@@ -159,13 +163,22 @@ typedef struct		s_tab
   struct s_tab		*prev;
 }					c_tab;
 
+struct					p_put
+{
+	int					c_line;
+	size_t				c_col;
+	size_t				len;
+	size_t				m_len;
+	int					max_len;
+}								;
+
 /*
 **	Core function prototypes
 */
 
 void				print_prompt(t_shell **shell, char *prompt);
 char				*get_git_branch(void);
-char				*build_prompt(t_shell **shell);
+void				build_prompt(t_shell **shell);
 t_shell				*get_shell(char **env);
 int					validate_and_prep_cmd(t_shell **shell);
 int					interpret_line(char *cmd);
@@ -270,6 +283,15 @@ int					clean_terminal(void);
 void				hist_add(t_shell **shell);
 void				history(t_shell **shell, unsigned int key);
 int					print_history(t_shell **shell);
+char				*history_search_first_match(t_shell **shell, char *s);
+int					replace_double_exclamation(t_shell **shell, char *tmp);
+int					replace_single_exclamation(char **cmd);
+void				replace_ation(t_shell **shell, char *cmd);
+void				set_hist_of_index(t_shell **shell, int index);
+t_h_lst				*hist_at_index(t_shell **shell, int index);
+int					no_history_err(char *arg);
+char				*history_search_first_arg_match(t_shell **shell, char *s);
+int					single_excl_type(char *str);
 
 /*
 **	Quotes

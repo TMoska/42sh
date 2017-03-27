@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 00:54:38 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/26 01:09:34 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/26 14:46:00 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*get_git_branch(void)
 {
 	int		fd;
 	char	*git;
-	char	**tmp2;
+	char	*tmp;
 	int		i;
 
 	i = 0;
@@ -24,36 +24,35 @@ char	*get_git_branch(void)
 	if ((fd = open(".git/HEAD", O_RDONLY)) != -1)
 	{
 		get_next_line(fd, &git);
-		tmp2 = ft_strsplit(git, '/');
-		ft_strdel(&git);
-		while (tmp2[i])
-			i++;
-		git = ft_strdup(tmp2[i - 1]);
-		ft_str2del(&tmp2);
+		tmp = git;
+		git = ft_strdup(git + 16);
+		ft_strdel(&tmp);
 	}
 	return (git);
 }
 
-char	*build_prompt(t_shell **shell)
+void	build_prompt(t_shell **shell)
 {
 	char	*git;
-	char	*prompt;
-	char	*tmp;
+	char	*logname;
+	char	*path;
 
 	git = get_git_branch();
-	tmp = ft_str3join("\033[0;35m", get_env_val(shell, "LOGNAME"),\
-			"\033[0;33m:\033[0;32m");
-	prompt = ft_strjoin(tmp, get_env_val(shell, "PWD"));
-	ft_strdel(&tmp);
+	logname = get_env_val(shell, "LOGNAME");
+	path = ft_strdup(get_env_val(shell, "PWD"));
+	if (ft_strcmp(get_env_val(shell, "HOME"), path) != 0)
+		ft_str_replace(&path, get_env_val(shell, "HOME"), "~", 0);
+	ft_putstr("\033[0;35m");
+	ft_putstr(logname);
+	ft_putstr("\033[0;33m:\033[0;32m");
+	ft_putstr(path);
+	(*shell)->prompt_len = ft_strlen(logname) + ft_strlen(path) + 1;
 	if (git)
 	{
-		tmp = prompt;
-		prompt = ft_strjoin(prompt, "\033[0;33m:\033[0;32m");
-		ft_strdel(&tmp);
-		tmp = prompt;
-		prompt = ft_str3join(prompt, "\033[0;36m", git);
-		ft_strdel(&tmp);
+		ft_putstr("\033[0;33m:\033[0;36m");
+		ft_putstr(git);
+		(*shell)->prompt_len += ft_strlen(git) + 1;
 		ft_strdel(&git);
 	}
-	return (prompt);
+	ft_strdel(&path);
 }
