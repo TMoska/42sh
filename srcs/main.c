@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 21:39:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/26 09:44:23 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/27 20:09:56 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ void	catch_signals(void)
 
 	i = 32;
 	while (i > 0)
-	{
-		signal(i, sig_callback);
-		i--;
-	}
+		signal(i--, sig_callback);
 }
 
 int		run_shell(t_shell **shell)

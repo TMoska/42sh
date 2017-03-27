@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/27 14:27:48 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/27 20:06:32 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -314,5 +314,6 @@ int					get_and_test_executable(t_shell **shell, char **exec);
 int					open_tmp_heredoc(int *fd);
 int					redirection_type(t_tkn *node);
 int					execute_two_left(t_tkn *node, char *out);
+int					fork_error(void);
 
 #endif
