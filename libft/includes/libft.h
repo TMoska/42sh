@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:33:19 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/26 05:15:32 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/27 20:35:46 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *str);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
+int					ft_isspace(int c);
 int					ft_isalnum(int c);
 int					ft_isascii(int c);
 int					ft_isprint(int c);
@@ -145,5 +146,7 @@ int					ft_word_count(char const *s, char c);
 int					ft_lst_new_add_back(t_list **alst, void const *content,\
 					size_t size);
 void				ft_print_list(t_list *lst);
-void				ft_str_replace(char **str, char *old, char *new);
+void				ft_str_replace(char **str, char *old, char *new,\
+					int only_one);
+char				**ft_splitquotes(char const *s, char c);
 #endif

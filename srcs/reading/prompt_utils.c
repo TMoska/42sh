@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 00:54:38 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/26 11:04:24 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/27 19:46:13 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	build_prompt(t_shell **shell)
 	logname = get_env_val(shell, "LOGNAME");
 	path = ft_strdup(get_env_val(shell, "PWD"));
 	if (ft_strcmp(get_env_val(shell, "HOME"), path) != 0)
-		ft_str_replace(&path, get_env_val(shell, "HOME"), "~");
+		ft_str_replace(&path, get_env_val(shell, "HOME"), "~", 0);
 	ft_putstr("\033[0;35m");
 	ft_putstr(logname);
 	ft_putstr("\033[0;33m:\033[0;32m");

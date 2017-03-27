@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 05:12:13 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/26 12:40:51 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/26 12:50:19 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	clear_cmdline(t_shell **shell)
 
 void	goto_endcmdline(t_shell **shell)
 {
-	while ((*shell)->term->tc_in != (*shell)->term->tc_len)
+	while ((*shell)->term->tc_in < (*shell)->term->tc_len)
 		move_right(shell, NULL, 1);
 }
 

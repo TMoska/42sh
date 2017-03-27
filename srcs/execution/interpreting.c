@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/03/26 12:31:13 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/27 23:14:33 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int			interpret_line(char *cmd)
 	int		ret;
 
 	shell = get_shell(NULL);
-	shell->cmd = ft_strsplit(cmd, ' ');
+	shell->cmd = ft_splitquotes(cmd, ' ');
 	shell->cmd_len = ft_str2len(shell->cmd);
 	exec = NULL;
 	ptr = shell->cmd;
