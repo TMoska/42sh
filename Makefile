@@ -42,8 +42,9 @@ execution/semicolon.c execution/left_redirections.c tokenizer/reorganizer2.c \
 execution/fd_aggregation.c execution/interpreting2.c tokenizer/utils2.c \
 tokenizer/split_command_utils.c execution/left_redirection_utils.c \
 execution/interpreting_utilities.c reading/validating.c heredoc/heredoc.c \
-execution/left_redirections2.c reading/prompt_utils.c history/history_search.c \
-history/exclamation.c history/single_exclamation_utils.c \
+execution/left_redirections2.c reading/prompt_utils.c terminal/edition_utils.c \
+history/history_search.c history/exclamation.c terminal/edition.c \
+terminal/edition_cursor_right.c
 
 SOURCES		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 

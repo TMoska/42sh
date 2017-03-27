@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 size_t      binary_directories(t_shell *shell)
 {
@@ -24,9 +24,7 @@ size_t      binary_directories(t_shell *shell)
   (shell->tc_in != 0 ? shell->tc_in++ : 0);
   if (!(split = ft_strsplit(&(shell->buff + shell->tc_in), ' ')))
     return (0);
-  if (split[1] != NULL && split[2] == NULL)
-    return (1);
-  return (0);
+  return (split[1] != NULL && split[2] == NULL);
 }
 
 char      *search_cmd(t_shell *shell)

@@ -10,7 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
+
+static c_tab  *move_select(c_tab *list, size_t val)
+{
+  c_tab       *tmp;
+
+  tmp = list;
+  while (tmp->next && tmp->cursor != 1)
+    tmp = tmp->next;
+  if (val == )
+
+}
 
 static size_t  verify_btn(unsigned int key)
 {
@@ -35,16 +46,14 @@ void    tab_completion(t_shell **shell, c_tab *list, size_t val)
 
   i = 0;
   if (val != 0 && list)
-    list = move_select(list, &*shell, val);
-  else if (binary_directories(*shell))
+    list = move_select(list, val);
+  else if (binary_directories(*shell) && (path = get_env_val(shell, "PATH")))
   {
-    path = get_env_val(shell, "PATH");
     if (!path || !(paths = ft_strsplit(path, ':')))
       return ;
     while (paths[i])
-      list = search_on_dir(path[i++], shell, list);
-    if (!list)
-      return ;
+      if (!(list = search_on_dir(path[i++], shell, list)))
+        return ;
   }
   else if (!(list = search_on_dir(".", shell, NULL)))
     return ;

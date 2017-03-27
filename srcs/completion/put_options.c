@@ -18,8 +18,8 @@ static void    option_prompt(c_tab *list, t_shell **shell)
     list->next;
   ft_strdel(&((*shell)->buff));
   (*shell)->buff = ft_strdup(list->content);
-
-  work_buffer(&*shell, NULL);
+  clear_cmdline(shell);
+  work_buffer(shell, NULL);
 }
 
 static void			put_2_page(c_tab *list)

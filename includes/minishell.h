@@ -24,6 +24,7 @@
 # include <termcap.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+# include <sys/ioctl.h>
 
 # define BUFF_SIZE 1024
 
@@ -110,6 +111,17 @@ typedef struct		s_hist
 	struct s_h_lst	*list;
 }					t_hist;
 
+typedef struct		s_term
+{
+	struct termios	term;
+	int				tc_ok;
+	int				tc_in;
+	int				tc_len;
+	int				prompt_len;
+	int				prompt_line;
+	int				winsize_x;
+}					t_term;
+
 typedef struct		s_shell
 {
 	char			*buff;
@@ -120,11 +132,7 @@ typedef struct		s_shell
 	int				exit;
 	char			**env;
 	t_envl			*env_list;
-	struct termios	term;
-	int				tc_ok;
-	int				tc_in;
-	int				tc_len;
-	int				prompt_len;
+	t_term			*term;
 	t_hist			*history;
 	char			*clipboard;
 	char			*tmp_buff;
@@ -275,6 +283,18 @@ void				clean_input(t_shell **shell);
 void				paste(t_shell **shell);
 void				copy(t_shell **shell);
 int					clean_terminal(void);
+
+/*
+**	Edition
+*/
+
+void				ft_printbuffer(t_shell **shell);
+int					ft_linesize(void);
+void				move_right(t_shell **shell, char *buff, int offset);
+void				move_left(t_shell **shell);
+void				back_to_prompt(t_shell **shell, int keep);
+void				clear_cmdline(t_shell **shell);
+void				goto_endcmdline(t_shell **shell);
 
 /*
 **	History

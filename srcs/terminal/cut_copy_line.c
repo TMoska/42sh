@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 18:00:21 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/05 14:57:57 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/26 03:39:13 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,16 @@ void		cut_line(t_shell **shell, unsigned int key)
 	tmp1 = (*shell)->clipboard;
 	if (key == BTN_CTRL_K)
 	{
-		tmp = ft_strndelat((*shell)->buff, 0, (*shell)->tc_in);
-		(*shell)->clipboard = ft_strndup((*shell)->buff, (*shell)->tc_in);
+		tmp = ft_strndelat((*shell)->buff, 0, (*shell)->term->tc_in);
+		(*shell)->clipboard = ft_strndup((*shell)->buff,
+				(*shell)->term->tc_in);
 	}
 	else
 	{
-		tmp = ft_strndelat((*shell)->buff, (*shell)->tc_in,\
-			(*shell)->tc_len - (*shell)->tc_in);
-		(*shell)->clipboard = ft_strndup(&(*shell)->buff[(*shell)->tc_in],\
-			(*shell)->tc_len - (*shell)->tc_in);
+		tmp = ft_strndelat((*shell)->buff, (*shell)->term->tc_in,\
+			(*shell)->term->tc_len - (*shell)->term->tc_in);
+		(*shell)->clipboard = ft_strndup(&(*shell)->buff[(*shell)->term->
+			tc_in], (*shell)->term->tc_len - (*shell)->term->tc_in);
 	}
 	clean_input(shell);
 	ft_strdel(&(*shell)->buff);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/07 21:39:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/26 09:44:23 by moska            ###   ########.fr       */
+/*   Created: 2017/03/26 11:05:54 by adeletan          #+#    #+#             */
+/*   Updated: 2017/03/26 11:06:03 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		run_shell(t_shell **shell)
 		(*shell)->history->at_index = -1;
 		print_prompt(shell, NULL);
 		catch_signals();
-		if ((*shell)->tc_ok)
+		if ((*shell)->term->tc_ok)
 			read_input(shell, NULL);
 		else
 		{
