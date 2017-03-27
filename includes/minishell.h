@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/27 20:37:56 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/27 20:39:49 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,18 @@
 **	Termcaps commands
 */
 
-# define MOVE_UP		ft_putstr(tgetstr("up", NULL));
+# define MOVE_UP	ft_putstr(tgetstr("up", NULL));
 # define MOVE_LEFT	ft_putstr(tgetstr("le", NULL));
 # define MOVE_RIGHT	ft_putstr(tgetstr("nd", NULL));
 # define MOVE_DOWN  ft_putstr(tgetstr("do", NULL));
 
-# define SAVE_LINE ft_putstr(tgetstr("sc", NULL));
-# define LOAD_LINE ft_putstr(tgetstr("rc", NULL));
+# define SAVE_LINE	ft_putstr(tgetstr("sc", NULL));
+# define LOAD_LINE	ft_putstr(tgetstr("rc", NULL));
 
 # define DEL		ft_putstr(tgetstr("dc", NULL));
 # define CURS_LEFT	ft_putstr(tgetstr("cr", NULL));
 # define DEL_LINE	ft_putstr(tgetstr("ce", NULL));
-# define DEL_LINES ft_putstr(tgetstr("cd", NULL));
+# define DEL_LINES	ft_putstr(tgetstr("cd", NULL));
 
 /*
 **	Types and Structs
