@@ -6,12 +6,11 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/03/27 19:45:26 by adeletan         ###   ########.fr        #
+#    Updated: 2017/03/27 23:42:16 by adeletan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 GCC 		= gcc
-# GCC 		= clang -fsanitize=memory
 NAME 		= 21sh
 FLAGS 		= -Wall -Werror -Wextra -g
 
