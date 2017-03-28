@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 20:58:35 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/25 18:46:49 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/28 19:27:23 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int			execute_left_redirection(t_tkn *node)
 		if ((type == 1) && (fd = open(f, O_RDONLY)) == -1)
 			return (check_errors(f, &shell));
 		(right_most->left && right_most->right) ? close(fd) : (0);
-		type = redirection_type(node);
+		if (right_most->right)
+			type = redirection_type(right_most);
 		right_most = right_most->right;
 	}
 	if (type == 1)
