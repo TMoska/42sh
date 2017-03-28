@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 15:14:49 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/28 01:08:43 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/28 22:52:51 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int			quote_incomplete(t_quotes **q, char *buff)
 			(*q)->oneline ^= 1;
 		else if (*buff == '\\')
 			(*q)->escape ^= 1;
-		else if (*buff == '"' && *(buff - 1) != '\\' && !(*q)->squote && !(*q)->bquote)
+		else if (*buff == '"' && *(buff - 1)
+			!= '\\' && !(*q)->squote && !(*q)->bquote)
 			(*q)->dquote ^= !(*q)->escape;
 		else if (*buff == '\'' && !(*q)->dquote && !(*q)->bquote)
 			(*q)->squote ^= !(*q)->escape;

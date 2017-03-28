@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 11:06:18 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/28 19:21:18 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/28 22:51:03 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,6 @@ void			clean_input(t_shell **shell)
 	int i;
 
 	i = 0;
-	/*CURS_LEFT;
-	while (i < (*shell)->term->prompt_len)
-	{
-		MOVE_RIGHT;
-		i++;
-	}*/
-	//DEL_LINE;
-	//reset_line(shell);
 	(void)shell;
 }
 

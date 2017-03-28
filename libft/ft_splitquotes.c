@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:52:28 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/28 04:13:12 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/28 22:50:41 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char			*ft_strncpyquo(char *dst, const char *src, size_t len)
 	return (tmp);
 }
 
-int				ft_endquo(const char *str, int i)
+int					ft_endquo(const char *str, int i)
 {
 	int		quotes_count;
 	char	c;

@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:33:19 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/28 04:13:37 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/28 22:06:40 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int					ft_isascii(int c);
 int					ft_isprint(int c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
+void				ft_put2str(char const *str, char const *str2);
 int					ft_strcmp(const char *s1, const char *s2);
 char				*ft_strstr(const char *big, const char *little);
 char				*ft_strnstr(const char *big,

@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_new_add_back.c                              :+:      :+:    :+:   */
+/*   ft_put2str.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/25 02:28:35 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/28 22:45:25 by adeletan         ###   ########.fr       */
+/*   Created: 2017/03/28 22:01:13 by adeletan          #+#    #+#             */
+/*   Updated: 2017/03/28 22:02:06 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_lst_new_add_back(t_list **alst, void const *content,\
-		size_t size)
+void	ft_put2str(char const *str, char const *str2)
 {
-	t_list	*new;
-
-	if (!(new = ft_lstnew(content, size + 1)) || ft_lstadd_back(alst, new))
-		return (1);
-	return (0);
+	ft_putstr(str);
+	ft_putstr(str2);
 }
