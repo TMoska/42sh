@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 22:38:50 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/28 22:51:37 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/28 23:15:06 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ int		*ft_setquotes(int *array, const char *s, char c)
 
 void	ft_echo(t_shell **shell, char *str, int flag)
 {
-	int i;
-	int i2;
+	int		i;
+	int		i2;
+	char	*tmp;
 
 	i = 0;
 	while (str[i])
@@ -57,14 +58,12 @@ void	ft_echo(t_shell **shell, char *str, int flag)
 				while (str[i] && (!ft_isspace(str[i]) &&
 					!ft_isquotes(str[i + 1])))
 					++i;
-				ft_putstr(get_env_val(shell, ft_strsub(str, i2 + 1, i - 1)));
+				tmp = ft_strsub(str, i2 + 1, i - 1);
+				ft_putstr(get_env_val(shell, tmp));
+				ft_strdel(&tmp);
 			}
 		}
-		if (str[i])
-		{
-			ft_putchar(str[i]);
-			++i;
-		}
+		(str[i]) ? ft_putchar(str[i++]) : (0);
 	}
 }
 
@@ -88,5 +87,7 @@ int		builtin_echo(t_shell **shell, char *cmd)
 	}
 	if (ft_strcmp(array[1], "-n") != 0)
 		ft_putchar('\n');
+	ft_str2del(&array);
+	free(iarray);
 	return (0);
 }
