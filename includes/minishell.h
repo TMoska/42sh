@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/28 01:56:06 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/28 23:03:05 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,17 @@ struct					p_put
 	size_t				len;
 	size_t				m_len;
 	int					max_len;
+}								;
+
+struct					d_pad
+{
+	size_t				line_s;
+	size_t				col_s;
+	size_t				page_s;
+	size_t				len_x;
+	size_t				len_y;
+	size_t				max_x;
+	size_t				max_y;
 }								;
 
 /*
@@ -373,5 +384,6 @@ char				*search_cmd(t_shell *shell);
 c_tab				*search_on_dir(char *path, t_shell *shell, c_tab *list);
 c_tab				*cmd_option(char *cmd, c_tab *list);
 c_tab           	*define_pading(c_tab *list, t_shell *shell);
+int					put_options(c_tab *list, t_shell **shell);
 
 #endif
