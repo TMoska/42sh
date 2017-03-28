@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 09:02:29 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/28 18:32:46 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/28 19:37:32 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	move_left(t_shell **shell)
 			ft_putstr(tgoto(tgetstr("ch", NULL), 0, ft_strlen(ft_getpart(shell)) - 1));
 		return ;
 	}
-	if (((*shell)->term->tc_in + (*shell)->term->prompt_len) %
+	if ((ft_currentline(shell) + (*shell)->term->prompt_len) %
 		ft_linesize() == 0)
 	{
 		ft_putstr(tgetstr("up", NULL));
@@ -50,14 +50,14 @@ void	move_right(t_shell **shell, char *buff, int offset)
 		ft_putstr(tgetstr("im", NULL));
 		ft_putstr(buff);
 		ft_putstr(tgetstr("ei", NULL));
-	if (((*shell)->term->tc_in + (*shell)->term->prompt_len) % ft_linesize() == 0)
+	if ((ft_currentline(shell) + (*shell)->term->prompt_len) % ft_linesize() == 0)
 	{
 		ft_putstr(tgetstr("do", NULL));
 		ft_putstr(tgoto(tgetstr("ch", NULL), 0, 0));
 	}
 		return ;
 	}
-	if (((*shell)->term->tc_in + (*shell)->term->prompt_len + 1) % ft_linesize() == 0)
+	if ((ft_currentline(shell) + (*shell)->term->prompt_len + 1) % ft_linesize() == 0)
 	{
 		ft_putstr(tgetstr("do", NULL));
 		ft_putstr(tgoto(tgetstr("ch", NULL), 0, 0));
