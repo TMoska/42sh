@@ -6,7 +6,7 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/03/27 20:45:12 by ede-sous         ###   ########.fr        #
+#    Updated: 2017/03/28 01:57:07 by ede-sous         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,9 @@ tokenizer/split_command_utils.c execution/left_redirection_utils.c \
 execution/interpreting_utilities.c reading/validating.c heredoc/heredoc.c \
 execution/left_redirections2.c reading/prompt_utils.c terminal/edition_utils.c \
 history/history_search.c history/exclamation.c terminal/edition.c \
-terminal/edition_cursor_right.c
+terminal/edition_cursor_right.c history/single_exclamation_utils.c \
+completion/c_utils.c completion/c_utils2.c completion/put_options.c \
+completion/tab_completion.c completion/define_pading.c
 
 SOURCES		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 

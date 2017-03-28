@@ -6,16 +6,16 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/03/27 20:37:34 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/28 01:49:32 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 static void    option_prompt(c_tab *list, t_shell **shell)
 {
   while (list && list->cursor != 1)
-    list->next;
+    list = list->next;
   ft_strdel(&((*shell)->buff));
   (*shell)->buff = ft_strdup(list->content);
   clear_cmdline(shell);
@@ -25,7 +25,7 @@ static void    option_prompt(c_tab *list, t_shell **shell)
 static void			put_2_page(c_tab *list)
 {
 	if (list->cursor == 0)
-		ft_putstr(list->content, 0);
+		ft_putstr(list->content);
   else
   {
     ft_putstr("\033[7;92m");
@@ -43,18 +43,17 @@ static void put_page(c_tab *list, size_t c_page)
   while (list && list->page == c_page)
   {
     SAVE_LINE;
-    MOVE_DOWN;
     p.c_line = 1;
 		p.m_len = 0;
 		while (list && list->col == p.c_col)
 		{
-			DOWN;
-      ft_putstr(tgoto(tgetstr("ch", NULL), 0, p.max_line));
+            ft_putstr(tgoto(tgetstr("ch", NULL), 0, p.max_len));
 			p.c_line++;
 			p.len = ft_strlen(list->content);
 			(p.len > p.m_len ? p.m_len = p.len : p.m_len);
 			put_2_page(list);
 			list = list->next;
+            MOVE_DOWN;
 		}
     LOAD_LINE;
 		p.max_len += p.m_len + 3;
@@ -69,16 +68,15 @@ int         put_options(c_tab *list, t_shell **shell)
     MOVE_DOWN;
     DEL_LINES;
     MOVE_UP;
-    if (!(list = define_padding(list)))
-        return (0);
     while (list && list->cursor != 1)
       list = list->next;
     if (!list)
       return (0);
-    c_page = tmp->page;
-    while (tmp->prev && tmp->page == c_page)
-      tmp = tmp->prev;
-    (tmp->prev ? tmp = tmp->next : tmp);
+    c_page = list->page;
+    while (list->prev && list->page == c_page)
+      list = list->prev;
+    (list->prev ? list = list->next : list);
     put_page(list, c_page);
     option_prompt(list, &*shell);
+    return (1);
 }

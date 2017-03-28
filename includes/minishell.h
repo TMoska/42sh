@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/27 20:37:56 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/28 01:56:06 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@
 # define SAVE_LINE ft_putstr(tgetstr("sc", NULL));
 # define LOAD_LINE ft_putstr(tgetstr("rc", NULL));
 
+# define CLEAR		ft_putstr(tgetstr("cl", NULL));
 # define DEL		ft_putstr(tgetstr("dc", NULL));
 # define CURS_LEFT	ft_putstr(tgetstr("cr", NULL));
 # define DEL_LINE	ft_putstr(tgetstr("ce", NULL));
@@ -361,5 +362,16 @@ int					open_tmp_heredoc(int *fd);
 int					redirection_type(t_tkn *node);
 int					execute_two_left(t_tkn *node, char *out);
 int					fork_error(void);
+
+/*
+**	Completion
+*/
+
+void				tab_completion(t_shell **shell, c_tab *list, size_t val);
+size_t				binary_directories(t_shell *shell);
+char				*search_cmd(t_shell *shell);
+c_tab				*search_on_dir(char *path, t_shell *shell, c_tab *list);
+c_tab				*cmd_option(char *cmd, c_tab *list);
+c_tab           	*define_pading(c_tab *list, t_shell *shell);
 
 #endif

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   c_utils.c                                          :+:      :+:    :+:   */
+/*   c_utils2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ede-sous <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/03/26 12:48:24 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/28 01:43:16 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 static c_tab  *cmd_option_2(c_tab *tmp, char *cmd)
 {
@@ -22,33 +22,34 @@ static c_tab  *cmd_option_2(c_tab *tmp, char *cmd)
   tmp->col = 0;
   tmp->page = 0;
   tmp->content = ft_strdup(cmd);
-  tmp->contentsize = ft_strlen(cmd);
   return (tmp);
 }
 
-void        cmd_option(char *cmd, c_tab **list)
+c_tab        *cmd_option(char *cmd, c_tab *list)
 {
   c_tab     *tmp;
   c_tab     *prev;
 
-  if (!(*list))
+  if (!list)
   {
-    if (!(tmp = (c_tab*)malloc(sizeof(c_tab))
-      return ;
-    (*list) = tmp;
+    if (!(tmp = (c_tab*)malloc(sizeof(c_tab))))
+      return (NULL);
+    list = tmp;
     tmp->prev = NULL;
   }
   else
   {
-    tmp = (*list);
+    tmp = list;
     while (tmp->next)
       tmp = tmp->next;
     prev = tmp;
     tmp = tmp->next;
-    if (!(tmp = (c_tab*)malloc(sizeof(c_tab))
-      return ;
+    if (!(tmp = (c_tab*)malloc(sizeof(c_tab))))
+      return (NULL);
+    prev->next = tmp;
     tmp->prev = prev;
   }
-  tmp = cmd_options_2(tmp, cmd);
+  tmp = cmd_option_2(tmp, cmd);
   tmp->next = NULL;
+  return (list);
 }

@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/25 19:37:58 by moska             #+#    #+#             */
-/*   Updated: 2017/03/26 12:37:35 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/28 00:10:52 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@ static int	cancel_heredoc(t_shell **shell, char *heredoc)
 static int	identify_key(t_shell **shell, char *buff, unsigned int key,\
 			char *heredoc)
 {
-	if (key != BTN_ENTER && ft_isprint(key))
+	if (key == BTN_TAB)
+	{
+			tab_completion(shell, NULL, 0);
+			return (reset_line(shell));
+	}
+	else if (key != BTN_ENTER && ft_isprint(key))
 		work_buffer(shell, buff);
 	else if (key == BTN_LEFT || key == BTN_RIGHT ||
 		key == BTN_END || key == BTN_HOME)
