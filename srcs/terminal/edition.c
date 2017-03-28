@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 05:12:13 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/26 12:50:19 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/28 18:31:33 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,11 @@ void	clear_cmdline(t_shell **shell)
 	int i;
 
 	i = 0;
+	ft_putstr(tgetstr("sc", NULL));
 	back_to_prompt(shell, 1);
-	(*shell)->term->tc_in = 0;
-	while (i < (*shell)->term->tc_len)
-	{
-		ft_putchar(' ');
-		++i;
-		(*shell)->term->tc_in += 1;
-	}
-	(*shell)->term->tc_len = 0;
+	ft_putstr(tgoto(tgetstr("ch", NULL), 0, (*shell)->term->prompt_len));
+	ft_putstr(tgetstr("cd", NULL));
+	ft_putstr(tgetstr("rc", NULL));
 	back_to_prompt(shell, 0);
 }
 
@@ -39,24 +35,24 @@ void	back_to_prompt(t_shell **shell, int keep)
 {
 	int line;
 
-	line = ((*shell)->term->tc_in + (*shell)->term->prompt_len) /
-		ft_linesize();
-	while (line > 0)
-	{
-		ft_putstr(tgetstr("up", NULL));
-		--line;
-	}
-	if (keep == 0)
-		(*shell)->term->tc_in = 0;
-	ft_putstr(tgoto(tgetstr("ch", NULL), 0, (*shell)->term->prompt_len));
+	line = (*shell)->term->tc_in;
+
+	while ((*shell)->term->tc_in)
+		move_left(shell);
+	if (keep == 1)
+		(*shell)->term->tc_in = line;
 }
 
 void	ft_printbuffer(t_shell **shell)
 {
+	int i;
 
+
+	i = (*shell)->term->tc_in;
 	ft_putstr(tgetstr("sc", NULL));
-	back_to_prompt(shell, 1);
+	clear_cmdline(shell);
 	ft_putstr((*shell)->buff);
 	ft_putchar(' ');
 	ft_putstr(tgetstr("rc", NULL));
+	(*shell)->term->tc_in = i;
 }

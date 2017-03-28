@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 11:06:18 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/26 13:05:01 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/28 19:21:18 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void			set_hist_of_index(t_shell **shell, int index)
 	if (index == -1)
 		return ;
 	lst = hist_at_index(shell, index);
-	clear_cmdline(shell);
 	work_buffer(shell, lst->cmd);
 }
 
@@ -37,7 +36,7 @@ void			clean_input(t_shell **shell)
 	}*/
 	//DEL_LINE;
 	//reset_line(shell);
-	clear_cmdline(shell);
+	(void)shell;
 }
 
 static void		find_next_hist(t_shell **shell)
@@ -66,6 +65,7 @@ void			history(t_shell **shell, unsigned int key)
 	(key == BTN_DOWN && (h->at_index == -1)))
 		return ;
 	clear_cmdline(shell);
+	(*shell)->term->tc_len = 0;
 	(key == BTN_UP) ? find_next_hist(shell) : find_prev_hist(shell);
 	set_hist_of_index(shell, (*shell)->history->at_index);
 }

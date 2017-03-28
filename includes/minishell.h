@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/27 23:42:48 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/28 12:02:54 by adeletan         ###   ########.fr       */
 /*   Updated: 2017/03/27 20:06:32 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -236,6 +236,7 @@ void				builtin_export(t_shell **shell);
 void				read_input(t_shell **shell, char *heredoc);
 void				work_buffer(t_shell **shell, char *buffer);
 int					reset_line(t_shell **shell);
+char				*ft_getpart(t_shell **shell);
 
 /*
 **	Heredoc
@@ -270,6 +271,8 @@ void				move_left(t_shell **shell);
 void				back_to_prompt(t_shell **shell, int keep);
 void				clear_cmdline(t_shell **shell);
 void				goto_endcmdline(t_shell **shell);
+int					ft_isfirstline(t_shell **shell);
+int					ft_currentline(t_shell **shell);
 
 /*
 **	History

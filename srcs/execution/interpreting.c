@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/03/27 23:45:49 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/28 04:58:08 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static int	execute(t_shell **shell, char *exec, char **ptr, char **env)
 	{
 		signal(SIGINT, SIG_IGN);
 		waitpid(pid, &status, 0);
+		(*shell)->ret = WEXITSTATUS(status);
 		if (WIFEXITED(status))
 		{
-			(*shell)->ret = WIFEXITED(status);
 			g_exit_code = WIFEXITED(status);
 			if (WEXITSTATUS(status))
 				ret = -1;

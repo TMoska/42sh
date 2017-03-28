@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:52:28 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/28 01:05:11 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/28 04:13:12 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ static char			*ft_strncpyquo(char *dst, const char *src, size_t len)
 	d = *src;
 	while (i++ < len && *src)
 	{
-		if (*(src + 1) == d && *src == '\\' && (*(src + 1) == '"'
-			|| *(src + 1) == '`' || *(src + 1) == 39))
+		if ((*(src + 1) == d || !ft_isquotes(d)) && *src == '\\' && (*(src + 1)
+		== '"' || *(src + 1) == '`' || *(src + 1) == 39) && (d = *(src + 1)))
 			++src;
 		if ((*src == '"' || *src == '`' || *src == 39) && *(src - 1) != '\\' &&
-			*src == d)
+			(*src == d || !ft_isquotes(d)) && (d = *src))
 			++src;
 		else
 		{
@@ -42,7 +42,7 @@ static char			*ft_strncpyquo(char *dst, const char *src, size_t len)
 	return (tmp);
 }
 
-static int			ft_endquo(const char *str, int i)
+int				ft_endquo(const char *str, int i)
 {
 	int		quotes_count;
 	char	c;
@@ -103,9 +103,7 @@ static int			ft_count_quo(char const *s, char c)
 		else
 		{
 			if ((s[i] == '`' || s[i] == '"' || s[i] == 39) && s[i - 1] != '\\')
-			{
 				i = ft_endquo(s, i);
-			}
 			if (found == 0)
 				wc++;
 			found = 1;
@@ -127,7 +125,7 @@ char				**ft_splitquotes(char const *s, char c)
 	size = ft_count_quo(s, c);
 	substr_len = 0;
 	i = 0;
-	if (!(table = (char **)malloc((sizeof(char *) * (size + 1)))))
+	if (!(table = ft_str2new(size)))
 		return (NULL);
 	while (size--)
 	{
