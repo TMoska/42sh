@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 21:27:55 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/20 21:33:42 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/28 22:28:17 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void			add_command(char ***cmds, char *cmd, int *offset, int *len)
 		return ;
 	tmp = ft_strndup(&cmd[*offset], *len);
 	tmp1 = ft_strtrim(tmp);
+	printf("add_command: %s\n", tmp1);
 	ft_arr_push(cmds, tmp1);
 	ft_strdel(&tmp);
 	ft_strdel(&tmp1);
@@ -35,6 +36,7 @@ static void		add_operator(char ***cmds, char *cmd, int *offset, int *len)
 	len_op = is_op(&cmd[*offset + *len]);
 	if (!len_op || !(tmp = ft_strndup(&cmd[*offset + *len], len_op)))
 		return ;
+	printf("add_operator: %s\n", tmp);
 	ft_arr_push(cmds, tmp);
 	tmp1 = ft_strtrim(tmp);
 	ft_strdel(&tmp);

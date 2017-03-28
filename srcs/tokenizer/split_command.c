@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 05:55:01 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/20 21:31:37 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/29 03:34:17 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ static int		is_fd_aggregator(char ***cmds, char *cmd, int *offset, int *len)
 		return (-1);
 	}
 	add_command(cmds, cmd, offset, len);
+	printf("is_fd_aggregator: %s\n", tmp_str);
 	ft_arr_push(cmds, tmp_str);
-	(*offset) += (2 + size);
+	(*offset) += (1 + size);
 	(*offset) += *len;
 	ft_strdel(&tmp_str);
 	return (0);
@@ -67,11 +68,12 @@ char			**split_command(char *cmd)
 		c = &cmd[offset + len];
 		if (*c == ' ' && is_fd_aggregator(&cmds, cmd, &offset, &len) == 0)
 		{
-			c = &cmd[offset + len];
+			if ((*(c = &cmd[offset + len]) == ' ') && (offset++))
+				c = &cmd[offset + len];
 			len = 0;
 			continue ;
 		}
-		if (is_op(c) || *c == '\0')
+		else if (is_op(c) || *c == '\0')
 			add_cmds(&cmds, cmd, &offset, &len);
 		else
 			len++;
