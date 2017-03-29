@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 09:18:00 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/29 00:42:58 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/29 04:25:45 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char		**ft_strsplit(char const *s, char c)
 	size = ft_word_count(s, c);
 	substr_len = 0;
 	i = 0;
-	if (!(table = (char **)malloc((sizeof(char *) * (size + 2)))))
+	if (!(table = (char **)malloc((sizeof(char *) * (size + 1)))))
 		return (NULL);
 	while (size--)
 	{

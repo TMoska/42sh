@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/03/28 04:58:08 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/29 05:13:15 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int			test_n_execute(t_shell **shell, char *exec, char **ptr, char **env)
 		term_trigger(shell, 0);
 		return (ret);
 	}
+	ft_strdel(&exec);
 	return (-1);
 }
 
