@@ -6,79 +6,70 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/03/28 22:55:35 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/29 09:54:51 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static c_tab  *move_select(c_tab *list, size_t val)
+struct s_pad		start_pad(struct winsize w, size_t nb_files)
 {
-  c_tab       *tmp;
+	struct s_pad	pad;
 
-  tmp = list;
-  while (tmp->next && tmp->cursor != 1)
-    tmp = tmp->next;
-    (void)val;
-  return (list);
+	pad.line_s = 1;
+	pad.col_s = 1;
+	pad.page_s = 1;
+	pad.pages = 1;
+	pad.cols = 1;
+	pad.max_x = w.ws_col - 2;
+	pad.max_y = 10;
+	while (nb_files > pad.cols * pad.pages)
+		(pad.cols < 5 ? pad.cols++ : pad.pages++);
+	pad.len_x = 0;
+	return (pad);
 }
 
-static size_t  verify_btn(unsigned int key)
+static size_t		verify_btn(unsigned int key)
 {
-  if (key == BTN_UP)
-    return (8);
-  else if (key == BTN_RIGHT || key == BTN_TAB)
-    return (6);
-  else if (key == BTN_LEFT)
-    return (4);
-  else if (key == BTN_DOWN)
-    return (2);
-  else
-    return (9);
-  return (0);
+	if (key == BTN_UP)
+		return (8);
+	else if (key == BTN_RIGHT || key == BTN_TAB)
+		return (6);
+	else if (key == BTN_LEFT)
+		return (4);
+	else if (key == BTN_DOWN)
+		return (2);
+	else if (key == BTN_BACK)
+		return (9);
+	else if (key == BTN_ENTER)
+		return (1);
+	return (0);
 }
 
-void    tab_completion(t_shell **shell, c_tab *list, size_t val)
+void				tab_completion(t_shell **shell, t_c_tab *list, size_t val)
 {
-  char    *path;
-  char    **paths;
-  char    buff[1];
-  size_t  i;
+	char			*buff[5];
 
-  i = -1;
-  if (val != 0 && list)
-    list = move_select(list, val);
-  else if (binary_directories(*shell))
-  {
-    if (!(path = get_env_val(shell, "PATH")))
-        return ;
-    if (!path || !(paths = ft_strsplit(path, ':')))
-      return ;
-    while (paths[++i])
-      list = search_on_dir(paths[i], *shell, list);
-      if (!list)
-      return ;
-  }
-  else if (!(list = search_on_dir(".", *shell, NULL)))
-    return ;
- if (val == 0)
-        if (!(list = define_pading(list, *shell)))
-            return ;
-    while (list)
-    {
-        ft_putendl(list->content);
-        if (!list->next)
-            break ;
-        list = list->next;
-    }
-  if (put_options(list, &*shell) == 0)
-      return ;
-  read(0, buff, 1);
-  if (((val = verify_btn((unsigned int)buff)) != 9))
-      tab_completion(shell, list, val);
-  work_buffer(shell, buff);
-  // Erase list, i don't know how to do it :x -> have to put it on 25lines
-  MOVE_DOWN;
-  DEL_LINES;
-  MOVE_UP;
+	ft_memset(buff, 0, 5);
+	while (val == 0 || (read(0, buff, 5)
+				&& (val = verify_btn((unsigned int)*buff)) != 0
+				&& val != 1 && val != 9))
+	{
+		tab_term(1);
+		(list ? list = move_select(list, val) : NULL);
+		if (val == 0 && binary_directories(*shell))
+		{
+			if (!(list = tab_binary(list, *shell)))
+				return ;
+		}
+		else if (val == 0 && !(list = search_on_dir(".", *shell, NULL)))
+			return ;
+		if (val == 0 && !(list = define_pading(list, shell)))
+			break ;
+		if ((val = 1) && put_options(list, shell) == 0)
+			break ;
+		ft_memset(buff, 0, 5);
+	}
+	tab_term(2);
+	(list ? clean_c_list(&list) : NULL);
 }

@@ -6,7 +6,7 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/03/28 23:04:39 by ede-sous         ###   ########.fr        #
+#    Updated: 2017/03/29 08:54:23 by ede-sous         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,8 @@ execution/left_redirections2.c reading/prompt_utils.c terminal/edition_utils.c \
 history/history_search.c history/exclamation.c terminal/edition.c \
 terminal/edition_cursor_right.c history/single_exclamation_utils.c \
 completion/c_utils.c completion/c_utils2.c completion/put_options.c \
-completion/tab_completion.c completion/define_pading.c
+completion/tab_completion.c completion/define_pading.c completion/tab_arrows.c \
+completion/utils3.c
 
 SOURCES		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 

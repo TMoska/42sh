@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/28 23:03:05 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/29 09:55:20 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,34 +163,36 @@ typedef struct		s_env_s
 
 typedef struct		s_tab
 {
-  char				*content;
-  size_t			cursor;
-  size_t			place;
-  size_t			col;
-  size_t			page;
-  struct s_tab		*next;
-  struct s_tab		*prev;
-}					c_tab;
+	char			*content;
+	size_t			cursor;
+	size_t			place;
+	size_t			col;
+	size_t			page;
+	struct s_tab	*next;
+	struct s_tab	*prev;
+}					t_c_tab;
 
-struct					p_put
+struct				s_put
 {
-	int					c_line;
-	size_t				c_col;
-	size_t				len;
-	size_t				m_len;
-	int					max_len;
-}								;
+	int				c_line;
+	size_t			c_col;
+	size_t			len;
+	size_t			m_len;
+	int				max_len;
+}					;
 
-struct					d_pad
+struct				s_pad
 {
-	size_t				line_s;
-	size_t				col_s;
-	size_t				page_s;
-	size_t				len_x;
-	size_t				len_y;
-	size_t				max_x;
-	size_t				max_y;
-}								;
+	size_t			line_s;
+	size_t			col_s;
+	size_t			page_s;
+	size_t			cols;
+	size_t			pages;
+	size_t			len_x;
+	size_t			len_y;
+	size_t			max_x;
+	size_t			max_y;
+}					;
 
 /*
 **	Core function prototypes
@@ -206,7 +208,7 @@ char				*loop_through_paths(char ***paths, int *i, char *cmd);
 int					command_not_found(t_shell **shell);
 int					permission_denied(t_shell **shell, t_bool name, char *path);
 int					must_exec(t_shell **shell, char *exec, char **ptr,\
-					char **env);
+		char **env);
 void				print_env(t_envl *env_list);
 t_envl				*built_env_list(char **env);
 void				no_file_or_dir(t_shell **shell, t_bool name);
@@ -221,6 +223,7 @@ void				clean_shell(t_shell **shell);
 void				mid_clean_shell(t_shell **shell);
 void				clean_btree(t_tkn *tree);
 void				del_lst_str(void **content, size_t *content_size);
+void				clean_c_list(t_c_tab **lst);
 
 /*
 **	Environment list custom struct & functions
@@ -239,7 +242,7 @@ void				rebuild_str2env(t_shell **shell);
 */
 
 int					try_a_builtin(t_shell **shell, char *base_cmd,\
-					char *full_cmd);
+		char *full_cmd);
 int					builtin_exit(t_shell **shell);
 int					builtin_env(t_shell **shell);
 int					builtin_getenv (t_shell **shell);
@@ -340,11 +343,11 @@ int					tkn_new_to_back(t_tkn **lst, char *data, int type);
 char				**split_command(char *cmd);
 int					if_op_find_priority(char *s);
 int					tokenize(t_shell **shell);
-int					get_tokens(t_shell **shell);
+int					get_tokens(t_shell **shell, int first);
 void				tkn_move_args_to_start(t_tkn **dst, t_tkn **src);
 void				reorganize_tokens(t_shell **shell);
 void				move_pointers(t_tkn *init, t_tkn **start, t_tkn **ptr1, \
-					t_tkn **ptr2);
+		t_tkn **ptr2);
 void				arrange_nodes_in_priority(t_shell **shell);
 void				syn_error(void);
 t_tkn				*build_tree(t_tkn *tree);
@@ -354,13 +357,14 @@ int					is_op(char *c);
 void				add_command(char ***cmds, char *cmd, int *offset, int *len);
 t_tkn				*tkn_pre_last(t_tkn *lst);
 t_tkn				*tkn_search_node(t_tkn *node, char *data);
+t_tkn				*tkn_last(t_tkn *node);
 
 /*
 **	Execution
 */
 
 int					test_n_execute(t_shell **shell, char *exec, char **ptr, \
-					char **env);
+		char **env);
 int					execute_node(t_tkn *node);
 int					execute_right_redirection(t_tkn *node);
 int					execute_logic_operators(t_tkn *node);
@@ -378,12 +382,22 @@ int					fork_error(void);
 **	Completion
 */
 
-void				tab_completion(t_shell **shell, c_tab *list, size_t val);
+void				tab_completion(t_shell **shell, t_c_tab *list, size_t val);
 size_t				binary_directories(t_shell *shell);
 char				*search_cmd(t_shell *shell);
-c_tab				*search_on_dir(char *path, t_shell *shell, c_tab *list);
-c_tab				*cmd_option(char *cmd, c_tab *list);
-c_tab           	*define_pading(c_tab *list, t_shell *shell);
-int					put_options(c_tab *list, t_shell **shell);
+t_c_tab				*search_on_dir(char *path, t_shell *shell, t_c_tab *list);
+t_c_tab				*cmd_option(char *cmd, t_c_tab *list);
+t_c_tab				*define_pading(t_c_tab *list, t_shell **shell);
+int					put_options(t_c_tab *list, t_shell **shell);
+void				put_question(size_t i);
+struct d_pad		start_pad(struct winsize w, size_t nb_files);
+t_c_tab				*move_select(t_c_tab *list, size_t val);
+t_c_tab				*tab_binary(t_c_tab *list, t_shell *shell);
+t_c_tab				**init_left(t_c_tab **tmp, size_t *c, size_t *l,
+								size_t *page);
+t_c_tab				**init_right(t_c_tab **tmp, size_t *c, size_t *l,
+								size_t *page);
+void				tab_term(int v);
+void				print_tokens(t_tkn *tokens);
 
 #endif
