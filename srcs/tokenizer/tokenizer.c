@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 21:42:06 by moska             #+#    #+#             */
-/*   Updated: 2017/03/28 20:36:46 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/29 03:35:28 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ int			tokenize(t_shell **shell)
 {
 	if (get_tokens(shell, 1) == 1)
 		return (1);
-	print_tokens((*shell)->tkns);
 	reorganize_tokens(shell);
-	print_tokens((*shell)->tkns);
 	(*shell)->tree = build_tree((*shell)->tkns);
 	(*shell)->tkns = NULL;
 	return (0);
