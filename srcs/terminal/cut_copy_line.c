@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 18:00:21 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/26 03:39:13 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/29 03:22:17 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ void		cut_line(t_shell **shell, unsigned int key)
 		(*shell)->clipboard = ft_strndup(&(*shell)->buff[(*shell)->term->
 			tc_in], (*shell)->term->tc_len - (*shell)->term->tc_in);
 	}
-	clean_input(shell);
+	while ((*shell)->term->tc_in)
+		move_left(shell);
 	ft_strdel(&(*shell)->buff);
+	reset_line(shell);
 	work_buffer(shell, tmp);
 	move_cursor_sides(shell, (key == BTN_CTRL_K) ? BTN_HOME : BTN_END);
 	ft_strdel(&tmp);

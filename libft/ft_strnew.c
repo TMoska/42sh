@@ -6,7 +6,7 @@
 /*   By: tmoska <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 22:32:36 by tmoska            #+#    #+#             */
-/*   Updated: 2016/11/17 22:32:37 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/29 02:08:39 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strnew(size_t size)
 {
 	char *str;
 
-	if ((str = (char *)malloc(size + 1)))
+	if ((str = (char *)malloc(sizeof(char) * (size + 1))))
 	{
 		ft_bzero(str, size + 1);
 		return (str);

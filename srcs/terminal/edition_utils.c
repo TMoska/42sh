@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 05:07:59 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/28 22:36:09 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/29 02:52:27 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int			ft_isfirstline(t_shell **shell)
 	i = (*shell)->term->tc_in;
 	if (i < 0)
 		i = 0;
-	while (i > 0)
+	while (i > 0 && (*shell)->buff[i])
 	{
 		if ((*shell)->buff[i] == '\n' && i != (*shell)->term->tc_in)
 			i2++;

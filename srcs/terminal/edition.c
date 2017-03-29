@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 05:12:13 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/28 22:37:52 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/29 03:20:29 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	back_to_prompt(t_shell **shell, int keep)
 	int line;
 
 	line = (*shell)->term->tc_in;
-	while ((*shell)->term->tc_in)
+	while ((*shell)->term->tc_in > 0)
 		move_left(shell);
 	if (keep == 1)
 		(*shell)->term->tc_in = line;
@@ -48,10 +48,12 @@ void	ft_printbuffer(t_shell **shell)
 	int i;
 
 	i = (*shell)->term->tc_in;
+	ft_putstr(tgetstr("vi", NULL));
 	ft_putstr(tgetstr("sc", NULL));
 	clear_cmdline(shell);
 	ft_putstr((*shell)->buff);
 	ft_putchar(' ');
 	ft_putstr(tgetstr("rc", NULL));
+	ft_putstr(tgetstr("ve", NULL));
 	(*shell)->term->tc_in = i;
 }
