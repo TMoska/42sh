@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 23:43:13 by moska             #+#    #+#             */
-/*   Updated: 2017/03/28 15:34:48 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/29 03:34:41 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ int			add_op(t_tkn **lst, t_tkn **tkns)
 		tkn_new_to_back(lst, tmp, (*tkns)->type);
 		ft_strdel(&tmp);
 	}
-	*tkns = (*tkns)->right;
+	if ((*tkns)->type != 3)
+		*tkns = (*tkns)->right;
 	return (1);
 }
 
@@ -109,6 +110,8 @@ void		arrange_nodes_in_priority(t_shell **shell)
 				break ;
 		}
 		add_op(&sorted, &tkns);
+		if (!tkns)
+			break ;
 		tkns = tkns->right;
 		(!tkns || in_range(tkns->type, 4, 6)) ? tkns_sort(&lst_sep) : (0);
 		(tkns && in_range(tkns->type, 4, 6)) ? add_op(&sorted, &tkns) : (0);
