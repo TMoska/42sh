@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_splitquotes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:52:28 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/29 03:40:01 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/30 04:23:46 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
-#include <stdlib.h>
+#include "libft.h"
 
 static char			*ft_strncpyquo(char *dst, const char *src, size_t len)
 {

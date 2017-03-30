@@ -6,11 +6,17 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 18:00:21 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/29 03:22:17 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/30 04:46:19 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void		cut_to_buff(t_shell **shell, int from, int size, char **tmp)
+{
+	*tmp = ft_strndelat((*shell)->buff, from, size);
+	(*shell)->clipboard = ft_strndup(&(*shell)->buff[from], size);
+}
 
 void		cut_line(t_shell **shell, unsigned int key)
 {
@@ -20,18 +26,10 @@ void		cut_line(t_shell **shell, unsigned int key)
 	tmp = (*shell)->buff;
 	tmp1 = (*shell)->clipboard;
 	if (key == BTN_CTRL_K)
-	{
-		tmp = ft_strndelat((*shell)->buff, 0, (*shell)->term->tc_in);
-		(*shell)->clipboard = ft_strndup((*shell)->buff,
-				(*shell)->term->tc_in);
-	}
+		cut_to_buff(shell, 0, (*shell)->term->tc_in, &tmp);
 	else
-	{
-		tmp = ft_strndelat((*shell)->buff, (*shell)->term->tc_in,\
-			(*shell)->term->tc_len - (*shell)->term->tc_in);
-		(*shell)->clipboard = ft_strndup(&(*shell)->buff[(*shell)->term->
-			tc_in], (*shell)->term->tc_len - (*shell)->term->tc_in);
-	}
+		cut_to_buff(shell, (*shell)->term->tc_in,\
+					(*shell)->term->tc_len - (*shell)->term->tc_in, &tmp);
 	while ((*shell)->term->tc_in)
 		move_left(shell);
 	ft_strdel(&(*shell)->buff);

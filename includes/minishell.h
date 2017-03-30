@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/28 23:05:06 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/30 04:46:50 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,7 +253,6 @@ void				move_cursor_alt(t_shell **shell, unsigned int key);
 void				modify_buffer(t_shell **shell, unsigned int key);
 void				clean_buffer(t_shell **shell);
 void				cut_line(t_shell **shell, unsigned int key);
-void				clean_input(t_shell **shell);
 void				paste(t_shell **shell);
 void				copy(t_shell **shell);
 int					clean_terminal(void);
@@ -339,8 +338,6 @@ int					open_tmp_heredoc(int *fd);
 int					redirection_type(t_tkn *node);
 int					execute_two_left(t_tkn *node, char *out);
 int					fork_error(void);
-
-
 void				print_tokens(t_tkn *tokens);
 
 #endif

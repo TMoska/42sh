@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 11:06:18 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/29 03:13:24 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/30 04:29:47 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,6 @@ void			set_hist_of_index(t_shell **shell, int index)
 		return ;
 	lst = hist_at_index(shell, index);
 	work_buffer(shell, lst->cmd);
-}
-
-void			clean_input(t_shell **shell)
-{
-	int i;
-
-	i = 0;
-	(void)shell;
 }
 
 static void		find_next_hist(t_shell **shell)

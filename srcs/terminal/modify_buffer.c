@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:29:48 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/29 03:20:06 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/30 04:34:09 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ void		clean_buffer(t_shell **shell)
 	print_prompt(shell, NULL);
 }
 
-static int	buffer_bol(t_shell **shell, unsigned int key)
+static int	buffer_bol(t_shell **shell)
 {
-	(void)key;
 	MOVE_LEFT;
 	((*shell)->term->tc_in -= 1);
 	return (1);
@@ -36,7 +35,7 @@ void		modify_buffer(t_shell **shell, unsigned int key)
 		(key == BTN_BACK && (*shell)->term->tc_in == 0))
 		return ;
 	if (key == BTN_BACK)
-		buffer_bol(shell, key);
+		buffer_bol(shell);
 	(*shell)->term->tc_len -= 1;
 	tmp = (*shell)->buff;
 	if ((*shell)->buff[(*shell)->term->tc_in] == '\n')

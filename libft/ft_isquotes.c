@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isquotes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 03:43:56 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/28 03:44:35 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/30 04:24:10 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,5 @@
 int		ft_isquotes(int c)
 {
 	c = (unsigned char)c;
-	if (c == '\'' || c == '`' || c == '\"')
-		return (1);
-	return (0);
+	return (c == '\'' || c == '`' || c == '\"');
 }
