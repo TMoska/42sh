@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 20:19:58 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/28 13:09:27 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/30 04:15:34 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,10 @@ t_tkn	*tkn_last(t_tkn *node)
 	while (node->right)
 		node = node->right;
 	return (node);
+}
+
+void	skip_and_sort(t_tkn **tkns, t_tkn **lst_sep)
+{
+	*tkns = (*tkns)->right;
+	(!(*tkns) || in_range((*tkns)->type, 4, 6)) ? tkns_sort(lst_sep) : (0);
 }

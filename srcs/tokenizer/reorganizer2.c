@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 23:43:13 by moska             #+#    #+#             */
-/*   Updated: 2017/03/29 03:34:41 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/30 04:15:27 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,7 @@ void		arrange_nodes_in_priority(t_shell **shell)
 		{
 			tkn_new_to_back(&sorted, tkns->data, tkns->type);
 			lst_sep = tkn_last(sorted);
-			tkns = tkns->right;
-			(!tkns || in_range(tkns->type, 4, 6)) ? tkns_sort(&lst_sep) : (0);
+			skip_and_sort(&tkns, &lst_sep);
 			if (tkns && in_range(tkns->type, 4, 6) && add_op(&sorted, &tkns))
 				continue ;
 			if (!tkns)
@@ -112,8 +111,7 @@ void		arrange_nodes_in_priority(t_shell **shell)
 		add_op(&sorted, &tkns);
 		if (!tkns)
 			break ;
-		tkns = tkns->right;
-		(!tkns || in_range(tkns->type, 4, 6)) ? tkns_sort(&lst_sep) : (0);
+		skip_and_sort(&tkns, &lst_sep);
 		(tkns && in_range(tkns->type, 4, 6)) ? add_op(&sorted, &tkns) : (0);
 	}
 	re_assign_to_tkns(shell, sorted);
