@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 00:54:38 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/30 17:40:05 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/30 20:14:43 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,10 @@ void	build_prompt(t_shell **shell)
 	ft_putstr(logname);
 	ft_putstr("\033[0;33m:\033[0;32m");
 	ft_putstr(path);
-	(*shell)->term->prompt_len = ft_strlen(logname) + ft_strlen(path) + 1;
 	if (git)
 	{
 		ft_putstr("\033[0;33m:\033[0;36m");
 		ft_putstr(git);
-		(*shell)->term->prompt_len += ft_strlen(git) + 1;
 		ft_strdel(&git);
 	}
 	ft_strdel(&path);

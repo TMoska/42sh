@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/03/30 17:26:50 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/30 20:12:16 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void			tab_term(int v)
     else if (v == 3)
     {
         ft_putstr(tgetstr("ve", NULL));
-        DEL_LINES
-        MOVE_UP
+        //DEL_LINES
+    //    MOVE_UP
     }
 }
 

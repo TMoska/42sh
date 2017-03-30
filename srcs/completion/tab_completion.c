@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/03/30 18:38:53 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/30 20:13:22 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,12 @@ static size_t		verify_btn(unsigned int key)
 void				tab_completion(t_shell **shell, t_c_tab *list, size_t val)
 {
 	char			*buff[5];
+    char            *tmp;
+    size_t             i;
+    size_t          bin_dir;
 
+    bin_dir = 0;
+    i = 0;
 	ft_memset(buff, 0, 5);
 	while (val == 0 || (read(0, buff, 5)
 				&& (val = verify_btn((unsigned int)*buff)) != 0
@@ -57,7 +62,7 @@ void				tab_completion(t_shell **shell, t_c_tab *list, size_t val)
 	{
 		tab_term(1);
 		(list ? list = move_select(list, val) : NULL);
-		if (val == 0 && binary_directories(*shell))
+		if (val == 0 && (bin_dir = binary_directories(*shell)))
 		{
 			if (!(list = tab_binary(list, *shell)))
 				return ;
@@ -74,14 +79,20 @@ void				tab_completion(t_shell **shell, t_c_tab *list, size_t val)
     {
         while (list && list->cursor != 1)
             list = list->next;
+        i = ft_strlen((*shell)->buff);
+        if (bin_dir == 0)
+            while ((*shell)->buff[i] != ' ' && i > 0)
+                i--;
+        tmp = ft_strsub((*shell)->buff, 0, i + 1);
         ft_strdel(&(*shell)->buff);
-        work_buffer(shell, list->content);
+        (*shell)->buff = ft_strjoin(tmp, list->content);
+        ft_strdel(&tmp);
+        clear_cmdline(shell);
+        print_prompt(shell, NULL);
+        work_buffer(shell, NULL);
         tab_term(3);
     }
     else
 	   tab_term(2);
 	(list ? clean_c_list(&list) : NULL);
-    clear_cmdline(shell);
-    print_prompt(shell, NULL);
-    read_input(shell, NULL);
 }
