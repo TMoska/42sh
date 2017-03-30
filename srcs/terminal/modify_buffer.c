@@ -6,13 +6,13 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:29:48 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/26 11:03:58 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/30 04:34:09 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	clean_buffer(t_shell **shell)
+void		clean_buffer(t_shell **shell)
 {
 	ft_strdel(&(*shell)->buff);
 	ft_putchar('\n');
@@ -20,7 +20,14 @@ void	clean_buffer(t_shell **shell)
 	print_prompt(shell, NULL);
 }
 
-void	modify_buffer(t_shell **shell, unsigned int key)
+static int	buffer_bol(t_shell **shell)
+{
+	MOVE_LEFT;
+	((*shell)->term->tc_in -= 1);
+	return (1);
+}
+
+void		modify_buffer(t_shell **shell, unsigned int key)
 {
 	char	*tmp;
 
@@ -28,12 +35,19 @@ void	modify_buffer(t_shell **shell, unsigned int key)
 		(key == BTN_BACK && (*shell)->term->tc_in == 0))
 		return ;
 	if (key == BTN_BACK)
-	{
-		MOVE_LEFT;
-		((*shell)->term->tc_in -= 1);
-	}
+		buffer_bol(shell);
 	(*shell)->term->tc_len -= 1;
 	tmp = (*shell)->buff;
+	if ((*shell)->buff[(*shell)->term->tc_in] == '\n')
+	{
+		if (ft_isfirstline(shell))
+			ft_putstr(tgoto(tgetstr("ch", NULL), 0,
+			ft_getpart(shell, NULL) + (*shell)->term->prompt_len - 1));
+		else
+			ft_putstr(tgoto(tgetstr("ch", NULL), 0,
+			ft_getpart(shell, NULL) - 1));
+		ft_putstr(tgetstr("up", NULL));
+	}
 	(*shell)->buff = ft_strndelat((*shell)->buff,\
 			(*shell)->term->tc_in, (size_t)1);
 	ft_printbuffer(shell);

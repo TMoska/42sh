@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 15:14:49 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/26 00:08:27 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/30 05:54:17 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,16 @@ int			quote_incomplete(t_quotes **q, char *buff)
 	{
 		if (*buff == '\\' && !*(buff + 1))
 			(*q)->oneline ^= 1;
-		else if (*buff == '\\')
+		else if (*buff == '\\' && *(buff - 1) != '\\')
 			(*q)->escape ^= 1;
-		else if (*buff == '"' && !(*q)->squote && !(*q)->bquote)
+		else if (*buff == '"' && *(buff - 1) != '\\'
+				&& !(*q)->squote && !(*q)->bquote)
 			(*q)->dquote ^= !(*q)->escape;
-		else if (*buff == '\'' && !(*q)->dquote && !(*q)->bquote)
+		else if (*buff == '\'' && *(buff - 1) != '\\'
+				&& !(*q)->dquote && !(*q)->bquote)
 			(*q)->squote ^= !(*q)->escape;
-		else if (*buff == '`' && !(*q)->squote)
+		else if (*buff == '`' && *(buff - 1) != '\\'
+				&& !(*q)->squote)
 			(*q)->bquote ^= !(*q)->escape;
 		else
 			(*q)->escape = 0;
@@ -52,10 +55,24 @@ int			quote_incomplete(t_quotes **q, char *buff)
 	return ((*q)->oneline || (*q)->bquote || (*q)->squote || (*q)->dquote);
 }
 
+void		custom_signal(int s_num)
+{
+	(void)s_num;
+}
+
 char		*ask_for_more_input(t_shell **shell, t_quotes **q)
 {
 	char	*str;
+	char	*quote;
 
+	if ((*q)->oneline)
+		quote = "";
+	else if ((*q)->bquote)
+		quote = "`";
+	else if ((*q)->dquote)
+		quote = "\"";
+	if ((*q)->squote)
+		quote = "\'";
 	ft_strdel(&(*shell)->buff);
 	if ((*q)->oneline)
 		str = ft_strdup("> ");
@@ -66,7 +83,8 @@ char		*ask_for_more_input(t_shell **shell, t_quotes **q)
 	if ((*q)->squote)
 		str = ft_strdup("squote> ");
 	print_prompt(shell, str);
-	read_input(shell, NULL);
+	signal(SIGINT, custom_signal);
+	read_input(shell, quote);
 	return ((*shell)->buff);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:33:19 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/26 14:45:44 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/28 22:06:40 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,14 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *str);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
+int					ft_isspace(int c);
+int					ft_isquotes(int c);
 int					ft_isalnum(int c);
 int					ft_isascii(int c);
 int					ft_isprint(int c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
+void				ft_put2str(char const *str, char const *str2);
 int					ft_strcmp(const char *s1, const char *s2);
 char				*ft_strstr(const char *big, const char *little);
 char				*ft_strnstr(const char *big,
@@ -60,6 +63,7 @@ char				*ft_strcat(char *s1, const char *s2);
 char				*ft_strncat(char *s1, const char *s2, size_t n);
 size_t				ft_strlcat(char *dst, const char *src,
 					size_t size);
+int					ft_endquo(const char *str, int i);
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
@@ -147,4 +151,5 @@ int					ft_lst_new_add_back(t_list **alst, void const *content,\
 void				ft_print_list(t_list *lst);
 void				ft_str_replace(char **str, char *old, char *new,\
 					int only_one);
+char				**ft_splitquotes(char const *s, char c);
 #endif

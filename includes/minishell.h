@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/30 17:03:06 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/30 17:43:14 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,7 +294,6 @@ void				move_cursor_alt(t_shell **shell, unsigned int key);
 void				modify_buffer(t_shell **shell, unsigned int key);
 void				clean_buffer(t_shell **shell);
 void				cut_line(t_shell **shell, unsigned int key);
-void				clean_input(t_shell **shell);
 void				paste(t_shell **shell);
 void				copy(t_shell **shell);
 int					clean_terminal(void);
@@ -310,6 +309,9 @@ void				move_left(t_shell **shell);
 void				back_to_prompt(t_shell **shell, int keep);
 void				clear_cmdline(t_shell **shell);
 void				goto_endcmdline(t_shell **shell);
+int					ft_isfirstline(t_shell **shell);
+int					ft_currentline(t_shell **shell);
+int					ft_getpart(t_shell **shell, char **str);
 
 /*
 **	History
@@ -358,6 +360,8 @@ void				add_command(char ***cmds, char *cmd, int *offset, int *len);
 t_tkn				*tkn_pre_last(t_tkn *lst);
 t_tkn				*tkn_search_node(t_tkn *node, char *data);
 t_tkn				*tkn_last(t_tkn *node);
+void				skip_and_sort(t_tkn **tkns, t_tkn **lst_sep);
+void				tkns_sort(t_tkn **begin_list);
 
 /*
 **	Execution
@@ -377,6 +381,7 @@ int					open_tmp_heredoc(int *fd);
 int					redirection_type(t_tkn *node);
 int					execute_two_left(t_tkn *node, char *out);
 int					fork_error(void);
+void				print_tokens(t_tkn *tokens);
 
 /*
 **	Completion
@@ -398,6 +403,5 @@ t_c_tab				**init_left(t_c_tab **tmp, size_t *c, size_t *l,
 t_c_tab				**init_right(t_c_tab **tmp, size_t *c, size_t *l,
 								size_t *page);
 void				tab_term(int v);
-void				print_tokens(t_tkn *tokens);
 
 #endif

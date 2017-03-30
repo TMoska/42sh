@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 20:49:15 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/29 03:29:29 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/30 17:42:12 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,20 @@ void	perform_redirections(t_tkn *node, char *p1, char *p2)
 	int	i2;
 	int	tmp_i1;
 
-	if (!(i1 = ft_atoi(p1)) || !p2 || (*p2 != '-' && !(i2 = ft_atoi(p2))))
+	i1 = ft_atoi(p1);
+	i2 = ft_atoi(p2);
+	if (!i1 || !p2 || (*p2 != '-' && !i2))
 	{
 		syn_error();
 		return ;
 	}
 	tmp_i1 = dup(i1);
 	close(i1);
-	if (*p2 == '-')
-	{
-		(node->right) ? execute_node(node->right) : (0);
-		execute_node(node->left);
-		dup2(tmp_i1, i1);
-	}
-	else
-	{
-		dup(i2);
-		(node->right) ? execute_node(node->right) : (0);
-		execute_node(node->left);
-		dup2(tmp_i1, i1);
-		close(tmp_i1);
-	}
+	(*p2 != '-') ? dup(i2) : (0);
+	(node->right) ? execute_node(node->right) : (0);
+	execute_node(node->left);
+	dup2(tmp_i1, i1);
+	(*p2 != '-') ? close(tmp_i1) : (0);
 }
 
 int		execute_fd_aggregation(t_tkn *node)

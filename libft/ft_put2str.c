@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_put2str.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/17 21:19:27 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/29 04:19:11 by tmoska           ###   ########.fr       */
+/*   Created: 2017/03/28 22:01:13 by adeletan          #+#    #+#             */
+/*   Updated: 2017/03/28 22:02:06 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+void	ft_put2str(char const *str, char const *str2)
 {
-	char	*a;
-	size_t	i;
-
-	i = 0;
-	a = b;
-	while (i++ < len)
-		*(a++) = (unsigned char)c;
-	return (b);
+	ft_putstr(str);
+	ft_putstr(str2);
 }

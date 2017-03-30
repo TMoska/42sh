@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 11:05:54 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/26 11:06:03 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/30 17:40:35 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int		run_shell(t_shell **shell)
 			ft_strdel(&((*shell)->buff));
 			continue ;
 		}
-		hist_add(shell);
 		do_quotes(shell);
+		hist_add(shell);
 		(tokenize(shell) == 1) ? syn_error() : execute_node((*shell)->tree);
 		mid_clean_shell(shell);
 	}

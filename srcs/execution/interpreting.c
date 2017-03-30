@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/03/26 12:31:13 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/30 17:40:58 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static int	execute(t_shell **shell, char *exec, char **ptr, char **env)
 	{
 		signal(SIGINT, SIG_IGN);
 		waitpid(pid, &status, 0);
+		(*shell)->ret = WEXITSTATUS(status);
 		if (WIFEXITED(status))
 		{
-			(*shell)->ret = WIFEXITED(status);
 			g_exit_code = WIFEXITED(status);
 			if (WEXITSTATUS(status))
 				ret = -1;
@@ -54,6 +54,7 @@ int			test_n_execute(t_shell **shell, char *exec, char **ptr, char **env)
 		term_trigger(shell, 0);
 		return (ret);
 	}
+	ft_strdel(&exec);
 	return (-1);
 }
 
@@ -66,7 +67,7 @@ int			interpret_line(char *cmd)
 	int		ret;
 
 	shell = get_shell(NULL);
-	shell->cmd = ft_strsplit(cmd, ' ');
+	shell->cmd = ft_splitquotes(cmd, ' ');
 	shell->cmd_len = ft_str2len(shell->cmd);
 	exec = NULL;
 	ptr = shell->cmd;

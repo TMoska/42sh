@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:32:46 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/26 12:28:28 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/29 03:01:57 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,4 @@ void		work_buffer(t_shell **shell, char *buffer)
 	write_buffer(shell, buffer);
 	move_right(shell, buffer, 0);
 	ft_printbuffer(shell);
-//	ft_putstr(tgetstr("nd", NULL));
-//	ft_putstr(tgetstr("im", NULL));
-//	ft_putstr(buffer);
-//	ft_putstr(tgetstr("ei", NULL));
 }

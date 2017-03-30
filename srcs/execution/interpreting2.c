@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 21:17:52 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/20 21:19:05 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/29 05:11:51 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ static char	*get_full_executable(t_shell **shell, char *exec, char *path)
 		return (ft_strdup(cmd));
 	paths = ft_strsplit(path, ':');
 	if ((tmp = loop_through_paths(&paths, &i, cmd)))
+	{
+		ft_str2del(&paths);
 		return (tmp);
+	}
 	ft_str2del(&paths);
 	return (NULL);
 }

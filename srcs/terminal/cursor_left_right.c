@@ -6,25 +6,12 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:25:57 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/26 12:41:23 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/28 23:52:29 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
-static void	move_left(t_shell **shell)
-{
-	MOVE_LEFT;
-	((*shell)->term->tc_in -= 1);
-}
-*/
-/*
-static void	move_right(t_shell **shell)
-{
-	MOVE_RIGHT;
-	((*shell)->term->tc_in += 1);
-}
-*/
+
 void		move_cursor_sides(t_shell **shell, unsigned int key)
 {
 	int		i;
