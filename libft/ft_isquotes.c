@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   ft_isquotes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/17 22:32:36 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/30 05:17:09 by tmoska           ###   ########.fr       */
+/*   Created: 2017/03/28 03:43:56 by adeletan          #+#    #+#             */
+/*   Updated: 2017/03/30 04:24:10 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strnew(size_t size)
+int		ft_isquotes(int c)
 {
-	char *str;
-
-	if ((str = ft_memalloc(sizeof(char) * (size + 1))))
-		return (str);
-	return (NULL);
+	c = (unsigned char)c;
+	return (c == '\'' || c == '`' || c == '\"');
 }

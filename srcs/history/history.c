@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/28 16:45:24 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/26 07:02:15 by moska            ###   ########.fr       */
+/*   Created: 2017/03/26 11:06:18 by adeletan          #+#    #+#             */
+/*   Updated: 2017/03/30 04:29:47 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,6 @@ void			set_hist_of_index(t_shell **shell, int index)
 		return ;
 	lst = hist_at_index(shell, index);
 	work_buffer(shell, lst->cmd);
-}
-
-void			clean_input(t_shell **shell)
-{
-	int i;
-
-	i = 0;
-	CURS_LEFT;
-	while (i < (*shell)->prompt_len)
-	{
-		MOVE_RIGHT;
-		i++;
-	}
-	DEL_LINE;
-	reset_line(shell);
 }
 
 static void		find_next_hist(t_shell **shell)
@@ -63,7 +48,8 @@ void			history(t_shell **shell, unsigned int key)
 	(key == BTN_UP && h->at_index == 0) ||
 	(key == BTN_DOWN && (h->at_index == -1)))
 		return ;
-	clean_input(shell);
+	clear_cmdline(shell);
+	(*shell)->term->tc_len = 0;
 	(key == BTN_UP) ? find_next_hist(shell) : find_prev_hist(shell);
 	set_hist_of_index(shell, (*shell)->history->at_index);
 }

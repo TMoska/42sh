@@ -6,7 +6,7 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/03/27 20:45:12 by ede-sous         ###   ########.fr        #
+#    Updated: 2017/03/28 23:05:15 by tmoska           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,9 @@ execution/semicolon.c execution/left_redirections.c tokenizer/reorganizer2.c \
 execution/fd_aggregation.c execution/interpreting2.c tokenizer/utils2.c \
 tokenizer/split_command_utils.c execution/left_redirection_utils.c \
 execution/interpreting_utilities.c reading/validating.c heredoc/heredoc.c \
+execution/left_redirections2.c reading/prompt_utils.c terminal/edition_utils.c \
+history/history_search.c history/exclamation.c terminal/edition.c \
+terminal/edition_cursor_right.c \
 execution/left_redirections2.c reading/prompt_utils.c history/history_search.c \
 history/exclamation.c history/single_exclamation_utils.c \
 

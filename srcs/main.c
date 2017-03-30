@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/07 21:39:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/27 20:09:56 by tmoska           ###   ########.fr       */
+/*   Created: 2017/03/26 11:05:54 by adeletan          #+#    #+#             */
+/*   Updated: 2017/03/29 03:40:28 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		run_shell(t_shell **shell)
 		(*shell)->history->at_index = -1;
 		print_prompt(shell, NULL);
 		catch_signals();
-		if ((*shell)->tc_ok)
+		if ((*shell)->term->tc_ok)
 			read_input(shell, NULL);
 		else
 		{
@@ -53,8 +53,8 @@ int		run_shell(t_shell **shell)
 			ft_strdel(&((*shell)->buff));
 			continue ;
 		}
-		hist_add(shell);
 		do_quotes(shell);
+		hist_add(shell);
 		(tokenize(shell) == 1) ? syn_error() : execute_node((*shell)->tree);
 		mid_clean_shell(shell);
 	}

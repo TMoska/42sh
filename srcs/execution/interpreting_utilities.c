@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 17:52:25 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/11 21:54:44 by moska            ###   ########.fr       */
+/*   Updated: 2017/03/29 05:06:58 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ char	*loop_through_paths(char ***paths, int *i, char *cmd)
 	{
 		tmp = ft_str3join((*paths)[*i], "/", cmd);
 		if (access(tmp, F_OK) == 0)
-		{
-			ft_str2del(paths);
 			return (tmp);
-		}
 		ft_strdel(&tmp);
 		(*i)++;
 	}

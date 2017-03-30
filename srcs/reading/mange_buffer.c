@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:32:46 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/05 14:57:30 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/29 03:01:57 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ static void	write_buffer(t_shell **shell, char *buffer)
 	char	*b;
 
 	len = ft_strlen(buffer);
-	(*shell)->tc_len += len;
-	(*shell)->tc_in += len;
-	in = (*shell)->tc_in;
-	len = (*shell)->tc_len;
+	(*shell)->term->tc_len += len;
+	(*shell)->term->tc_in += len;
+	in = (*shell)->term->tc_in;
+	len = (*shell)->term->tc_len;
 	b = (*shell)->buff;
 	if (!b && ((*shell)->buff = ft_strdup(buffer)))
 		return ;
@@ -38,15 +38,14 @@ static void	write_buffer(t_shell **shell, char *buffer)
 
 int			reset_line(t_shell **shell)
 {
-	(*shell)->tc_in = 0;
-	(*shell)->tc_len = 0;
+	(*shell)->term->tc_in = 0;
+	(*shell)->term->tc_len = 0;
 	return (0);
 }
 
 void		work_buffer(t_shell **shell, char *buffer)
 {
 	write_buffer(shell, buffer);
-	ft_putstr(tgetstr("im", NULL));
-	ft_putstr(buffer);
-	ft_putstr(tgetstr("ei", NULL));
+	move_right(shell, buffer, 0);
+	ft_printbuffer(shell);
 }

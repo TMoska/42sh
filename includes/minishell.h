@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/30 04:16:02 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/30 05:17:22 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <termcap.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+# include <sys/ioctl.h>
 
 # define BUFF_SIZE 1024
 
@@ -104,6 +105,17 @@ typedef struct		s_hist
 	struct s_h_lst	*list;
 }					t_hist;
 
+typedef struct		s_term
+{
+	struct termios	term;
+	int				tc_ok;
+	int				tc_in;
+	int				tc_len;
+	int				prompt_len;
+	int				prompt_line;
+	int				winsize_x;
+}					t_term;
+
 typedef struct		s_shell
 {
 	char			*buff;
@@ -114,11 +126,7 @@ typedef struct		s_shell
 	int				exit;
 	char			**env;
 	t_envl			*env_list;
-	struct termios	term;
-	int				tc_ok;
-	int				tc_in;
-	int				tc_len;
-	int				prompt_len;
+	t_term			*term;
 	t_hist			*history;
 	char			*clipboard;
 	char			*tmp_buff;
@@ -245,10 +253,24 @@ void				move_cursor_alt(t_shell **shell, unsigned int key);
 void				modify_buffer(t_shell **shell, unsigned int key);
 void				clean_buffer(t_shell **shell);
 void				cut_line(t_shell **shell, unsigned int key);
-void				clean_input(t_shell **shell);
 void				paste(t_shell **shell);
 void				copy(t_shell **shell);
 int					clean_terminal(void);
+
+/*
+**	Edition
+*/
+
+void				ft_printbuffer(t_shell **shell);
+int					ft_linesize(void);
+void				move_right(t_shell **shell, char *buff, int offset);
+void				move_left(t_shell **shell);
+void				back_to_prompt(t_shell **shell, int keep);
+void				clear_cmdline(t_shell **shell);
+void				goto_endcmdline(t_shell **shell);
+int					ft_isfirstline(t_shell **shell);
+int					ft_currentline(t_shell **shell);
+int					ft_getpart(t_shell **shell, char **str);
 
 /*
 **	History
@@ -318,8 +340,6 @@ int					open_tmp_heredoc(int *fd);
 int					redirection_type(t_tkn *node);
 int					execute_two_left(t_tkn *node, char *out);
 int					fork_error(void);
-
-
 void				print_tokens(t_tkn *tokens);
 
 #endif
