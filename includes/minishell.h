@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/30 05:17:22 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/30 21:13:40 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -340,6 +340,5 @@ int					open_tmp_heredoc(int *fd);
 int					redirection_type(t_tkn *node);
 int					execute_two_left(t_tkn *node, char *out);
 int					fork_error(void);
-void				print_tokens(t_tkn *tokens);
 
 #endif

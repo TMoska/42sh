@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 22:38:50 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/28 23:15:06 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/30 20:16:22 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int		builtin_echo(t_shell **shell, char *cmd)
 	{
 		ft_echo(shell, array[i], iarray[i - 1]);
 		++i;
-		ft_putchar(' ');
+		(array[i]) ? ft_putchar(' ') : (0);
 	}
 	if (ft_strcmp(array[1], "-n") != 0)
 		ft_putchar('\n');
