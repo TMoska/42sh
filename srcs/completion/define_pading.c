@@ -6,11 +6,11 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/03/29 09:54:04 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/30 17:02:44 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 static t_c_tab		*tpad(t_c_tab *tmp, struct s_pad *pad)
 {
@@ -86,7 +86,7 @@ static size_t			too_much_file(t_c_tab *list)
 	char				buff[1];
 
 	i = 1;
-    ft_putstr(tgetstr("vi", NULL));
+	ft_putstr(tgetstr("vi", NULL));
 	while (list && list->next)
 	{
 		list = list->next;
@@ -97,8 +97,8 @@ static size_t			too_much_file(t_c_tab *list)
 		put_question(i);
 		while (buff[0] != 'y' && buff[0] != 'n')
 			read(0, buff, 1);
-        MOVE_UP;
-        DEL_LINES
+		MOVE_UP;
+		DEL_LINES
 		if (buff[0] == 'y')
 			return (i);
 		else if (buff[0] == 'n')
@@ -115,10 +115,10 @@ t_c_tab				*define_pading(t_c_tab *list, t_shell **shell)
 
 	nb_files = 0;
 	if (!list || ((nb_files = too_much_file(list)) == 0))
-    {
-        ft_strdel(&(*shell)->buff);
-        return (NULL);
-    }
+	{
+		ft_strdel(&(*shell)->buff);
+		return (NULL);
+	}
 	ioctl(0, TIOCGWINSZ, &w);
 	pad = init_pading(nb_files, w, list);
 	list = treat_pading(list, pad);

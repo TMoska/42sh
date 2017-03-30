@@ -6,11 +6,11 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/03/29 09:28:39 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/30 16:59:23 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 size_t				binary_directories(t_shell *shell)
 {

@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/03/29 09:54:35 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/30 17:10:24 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int						put_options(t_c_tab *tmp, t_shell **shell)
 	t_c_tab				*list;
 
 	list = tmp;
+	MOVE_DOWN;
 	while (list && list->cursor != 1)
 		list = list->next;
 	if (!list)
@@ -80,5 +81,6 @@ int						put_options(t_c_tab *tmp, t_shell **shell)
 	(list->prev ? list = list->next : list);
 	put_page(list, c_page);
 	option_prompt(list, &*shell);
+	MOVE_UP;
 	return (1);
 }

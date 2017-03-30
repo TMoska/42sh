@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/03/29 09:54:51 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/30 17:23:09 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,15 @@ void				tab_completion(t_shell **shell, t_c_tab *list, size_t val)
 			break ;
 		ft_memset(buff, 0, 5);
 	}
-	tab_term(2);
+    if (val == 1)
+    {
+        while (list && list->cursor != 1)
+            list = list->next;
+        work_buffer(shell, list->content);
+        tab_term(3);
+    }
+    else
+	   tab_term(2);
 	(list ? clean_c_list(&list) : NULL);
+    read_input(shell, NULL);
 }

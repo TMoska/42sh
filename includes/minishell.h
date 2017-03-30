@@ -6,14 +6,14 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/29 09:55:20 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/30 17:03:06 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libft.h"
+# include "../libft/includes/libft.h"
 # include <stdio.h>
 # include <signal.h>
 # include <unistd.h>
@@ -390,7 +390,7 @@ t_c_tab				*cmd_option(char *cmd, t_c_tab *list);
 t_c_tab				*define_pading(t_c_tab *list, t_shell **shell);
 int					put_options(t_c_tab *list, t_shell **shell);
 void				put_question(size_t i);
-struct d_pad		start_pad(struct winsize w, size_t nb_files);
+struct s_pad		start_pad(struct winsize w, size_t nb_files);
 t_c_tab				*move_select(t_c_tab *list, size_t val);
 t_c_tab				*tab_binary(t_c_tab *list, t_shell *shell);
 t_c_tab				**init_left(t_c_tab **tmp, size_t *c, size_t *l,
