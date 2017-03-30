@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 21:42:06 by moska             #+#    #+#             */
-/*   Updated: 2017/03/28 23:04:44 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/30 05:16:56 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ void		print_tokens(t_tkn *tokens)
 
 	i = 0;
 	tkns = tokens;
+	printf("===== START print_tokens START =====\n");
 	while (tkns)
 	{
 		printf("%i: %-10s type: %i\n", i + 1, tkns->data, tkns->type);
 		tkns = tkns->right;
 		i++;
 	}
+	printf("=====   END print_tokens END   =====\n");
 }
 
 int			tokenize(t_shell **shell)
