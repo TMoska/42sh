@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/03/30 16:59:23 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/30 18:38:21 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ size_t				binary_directories(t_shell *shell)
 	(in != 0 ? in++ : 0);
 	if (!(split = ft_strsplit((shell->buff + in), ' ')))
 		return (1);
-	ft_putendl(split[0]);
 	val = 0;
 	if (split[0] == NULL || (split[0] != NULL &&
 				(split[1] == NULL || split[1][0] == '\0') &&

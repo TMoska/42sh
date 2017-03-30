@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/03/30 17:02:44 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/30 18:36:40 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ static size_t			too_much_file(t_c_tab *list)
 	return (i);
 }
 
-t_c_tab				*define_pading(t_c_tab *list, t_shell **shell)
+t_c_tab				*define_pading(t_c_tab *list)
 {
 	size_t			nb_files;
 	struct s_pad	pad;
@@ -115,10 +115,7 @@ t_c_tab				*define_pading(t_c_tab *list, t_shell **shell)
 
 	nb_files = 0;
 	if (!list || ((nb_files = too_much_file(list)) == 0))
-	{
-		ft_strdel(&(*shell)->buff);
 		return (NULL);
-	}
 	ioctl(0, TIOCGWINSZ, &w);
 	pad = init_pading(nb_files, w, list);
 	list = treat_pading(list, pad);
