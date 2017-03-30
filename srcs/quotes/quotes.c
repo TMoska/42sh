@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 15:14:49 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/30 04:36:13 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/30 05:54:17 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,24 @@ int			quote_incomplete(t_quotes **q, char *buff)
 	return ((*q)->oneline || (*q)->bquote || (*q)->squote || (*q)->dquote);
 }
 
+void		custom_signal(int s_num)
+{
+	(void)s_num;
+}
+
 char		*ask_for_more_input(t_shell **shell, t_quotes **q)
 {
 	char	*str;
+	char	*quote;
 
+	if ((*q)->oneline)
+		quote = "";
+	else if ((*q)->bquote)
+		quote = "`";
+	else if ((*q)->dquote)
+		quote = "\"";
+	if ((*q)->squote)
+		quote = "\'";
 	ft_strdel(&(*shell)->buff);
 	if ((*q)->oneline)
 		str = ft_strdup("> ");
@@ -69,7 +83,8 @@ char		*ask_for_more_input(t_shell **shell, t_quotes **q)
 	if ((*q)->squote)
 		str = ft_strdup("squote> ");
 	print_prompt(shell, str);
-	read_input(shell, NULL);
+	signal(SIGINT, custom_signal);
+	read_input(shell, quote);
 	return ((*shell)->buff);
 }
 
