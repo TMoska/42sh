@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:32:46 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/31 03:55:13 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/31 07:23:55 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static void	write_buffer(t_shell **shell, char *buffer)
 	b = (*shell)->buff;
 	if (!b && ((*shell)->buff = ft_strdup(buffer)))
 		return ;
-	ret = ((in > 1) ? ft_strndup(b, in - 1) : NULL);
-	ret1 = (((len - in) > 0) ? ft_strdup(&b[in - 1]) : NULL);
+	ret = ((in > 1) ? ft_strndup(b, in - ft_strlen(buffer)) : NULL);
+	ret1 = (((len - in) > 0) ? ft_strdup(&b[in - ft_strlen(buffer)]) : NULL);
 	(*shell)->buff = ft_str3join(ret, buffer, ret1);
 	ft_strdel(&ret);
 	ft_strdel(&ret1);
@@ -45,7 +45,17 @@ int			reset_line(t_shell **shell)
 
 void		work_buffer(t_shell **shell, char *buffer)
 {
+	int i;
+
+	if (!buffer)
+		return ;
+	i = ft_strlen(buffer);
 	write_buffer(shell, buffer);
-	move_right(shell, buffer, 0);
+	(*shell)->term->tc_in -= i;
+	while (i)
+	{
+		move_right(shell, NULL, 1);
+		i--;
+	}
 	ft_printbuffer(shell);
 }
