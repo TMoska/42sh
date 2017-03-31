@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/26 12:03:00 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/31 01:41:33 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/31 03:43:05 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,12 @@ int		term_init(t_shell **shell)
 	char	*term_name;
 	char	*term_env;
 
-	term_name = ttyname(0);
+	if (!(term_name = ttyname(0)))
+		return (1);
 	(!(get_env_val(shell, "PWD"))) ? set_pwd_env_var(shell) : (0);
 	do_setenv(shell, "SHELL", get_env_val(shell, "PWD"));
 	if (!(term_env = get_env_val(shell, "TERM")))
 		do_setenv(shell, "TERM", "xterm-256color");
-	if (term_name == NULL)
-		return (1);
 	if (tcgetattr(STDIN_FILENO, &(*shell)->term->term) == -1 ||
 		tgetent(NULL, term_env) < 1)
 		return (1);

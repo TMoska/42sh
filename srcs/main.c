@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 11:05:54 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/29 03:40:28 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/31 03:44:05 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ int		main(int ac, char **av, char **env)
 	(void)av;
 	g_exit_code = 0;
 	shell = get_shell(env);
-	term_init(&shell);
+	if (term_init(&shell))
+		return (1);
 	clean_terminal();
 	run_shell(&shell);
 	clean_shell(&shell);
