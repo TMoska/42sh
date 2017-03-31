@@ -54,11 +54,7 @@ static void	start_moving(t_shell **shell, char *path, struct stat *stats,\
 		if (S_ISLNK(stats->st_mode) && p_option == 0)
 			change_symlink_directory(shell, path);
 		else
-		{
-			if (p_option)
-				path = (*shell)->cmd[2];
 			change_directory(shell, path);
-		}
 	}
 }
 
@@ -99,14 +95,12 @@ int			prep_and_change(t_shell **shell)
 	int			ret;
 
 	ret = -1;
-	path = (*shell)->cmd[1];
 	p_option = 0;
+	parse_cd_options(shell, &p_option, &path);
 	if (!(path = fix_path_special_cases(shell, path)))
 		return (ret);
 	if ((stats = (struct stat *)malloc(sizeof(struct stat))))
 	{
-		if ((*shell)->cmd[1])
-			p_option = (ft_strcmp((*shell)->cmd[1], "-P") == 0);
 		if ((opened = opendir(path)) || p_option)
 		{
 			start_moving(shell, path, stats, p_option);
