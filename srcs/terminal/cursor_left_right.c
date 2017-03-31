@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:25:57 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/28 23:52:29 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/31 03:56:47 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,17 @@ void		move_cursor_alt(t_shell **s, unsigned int key)
 		return ;
 	if (key == BTN_ALEFT)
 	{
-		if ((*s)->buff[(*s)->term->tc_in - 1] == ' ')
+		if ((*s)->buff[(*s)->term->tc_in - 1] == ' ' && (*s)->term->tc_in != 0)
 			move_left(s);
-		if ((*s)->buff[(*s)->term->tc_in] == ' ')
+		while ((*s)->buff[(*s)->term->tc_in] == ' ' && (*s)->term->tc_in != 0)
 			move_left(s);
-		while (!((*s)->buff[(*s)->term->tc_in] == ' ' ||
+		while (!((*s)->buff[(*s)->term->tc_in - 1] == ' ' ||
 			(*s)->term->tc_in == 0))
 			move_left(s);
-		if ((*s)->buff[(*s)->term->tc_in] == ' ' && (*s)->term->tc_in != 0)
-			move_right(s, NULL, 1);
 	}
 	else
 	{
-		if ((*s)->buff[(*s)->term->tc_in] == ' ')
+		while ((*s)->buff[(*s)->term->tc_in] == ' ')
 			move_right(s, NULL, 1);
 		while ((!((*s)->buff[(*s)->term->tc_in] == ' ' ||
 			(*s)->term->tc_in == (*s)->term->tc_len)))

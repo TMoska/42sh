@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 05:07:59 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/29 02:52:27 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/31 04:09:10 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,7 @@ int			ft_currentline(t_shell **shell)
 	char	*tmp;
 
 	i = -1;
-	argv = ft_strsplit((*shell)->buff, '\n');
-	while (argv[++i])
-	{
-		tmp = argv[i];
-		argv[i] = ft_strjoin(argv[i], "\n");
-		free(tmp);
-	}
+	argv = ft_strsplitin((*shell)->buff, '\n');
 	len = (*shell)->term->tc_in;
 	i = -1;
 	ft_getpart(shell, &tmp);
@@ -69,22 +63,6 @@ int			ft_isfirstline(t_shell **shell)
 	return (1);
 }
 
-static char	**ft_appendreturn(char **str)
-{
-	int		i;
-	char	*tmp;
-
-	i = 0;
-	while (str[i])
-	{
-		tmp = str[i];
-		str[i] = ft_strjoin(str[i], "\n");
-		free(tmp);
-		++i;
-	}
-	return (str);
-}
-
 int			ft_getpart(t_shell **shell, char **str)
 {
 	int		i;
@@ -95,8 +73,7 @@ int			ft_getpart(t_shell **shell, char **str)
 	i = -1;
 	i2 = -1;
 	i3 = -1;
-	array = ft_strsplit((*shell)->buff, '\n');
-	array = ft_appendreturn(array);
+	array = ft_strsplitin((*shell)->buff, '\n');
 	i2 = 0;
 	while (++i < (*shell)->term->tc_in)
 		if (!array || !array[i2])
