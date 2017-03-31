@@ -79,7 +79,10 @@ int				builtin_env(t_shell **shell)
 	else if ((env_s = create_env_struct((*shell)->cmd)))
 	{
 		if (has_errors(shell, env_s, (*shell)->cmd))
+		{
+			free(env_s);
 			return (-1);
+		}
 		else if (env_s->ignore == 1 && env_s->cmd == 0 && env_s->set == 1)
 			print_setenv((*shell)->cmd);
 		else if (env_s->ignore == 1 && env_s->cmd == 1)
