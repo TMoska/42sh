@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 18:25:35 by moska             #+#    #+#             */
-/*   Updated: 2017/01/19 01:08:55 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/31 02:42:54 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ char		*ft_itoa_ularge(unsigned long long number)
 	if (number == 0)
 		return (ft_strdup("0"));
 	length = ft_count_umax_digits(number);
-	new = malloc(sizeof(char*) * (length + 1));
+	if (!(new = malloc(sizeof(char*) * (length + 1))))
+		return (NULL);
 	do_chars(new, new + length - 1, number);
 	new[length] = '\0';
 	return (new);

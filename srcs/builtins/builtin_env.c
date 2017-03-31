@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 18:27:17 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/12 18:02:47 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/31 02:47:53 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static t_env_s	*create_env_struct(char **cmd)
 {
 	t_env_s *env_s;
 
+	env_s = NULL;
 	if ((env_s = (t_env_s *)malloc(sizeof(t_env_s))))
 	{
 		env_s->null = op_null(cmd);
