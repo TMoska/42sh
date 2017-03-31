@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 09:02:29 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/31 03:58:43 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/31 04:07:59 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,23 @@ static int		find_end(t_shell **shell, int i)
 {
 	if (i == 1)
 	{
-		if (ft_getpart(shell, NULL) + (*shell)->term->prompt_len
+		if (ft_checkcurrentline(shell) + (*shell)->term->prompt_len
 			< ft_linesize())
 			ft_putstr(tgoto(tgetstr("ch", NULL), 0,
-			ft_getpart(shell, NULL) + (*shell)->term->prompt_len - 1));
+			ft_checkcurrentline(shell) + (*shell)->term->prompt_len - 1));
 		else
 			ft_putstr(tgoto(tgetstr("ch", NULL), 0,
-			(ft_getpart(shell, NULL) + (*shell)->term->prompt_len)
+			(ft_checkcurrentline(shell) + (*shell)->term->prompt_len)
 			% ft_linesize() - 1));
 	}
 	else
 	{
-		if (ft_getpart(shell, NULL) < ft_linesize())
+		if (ft_checkcurrentline(shell) < ft_linesize())
 			ft_putstr(tgoto(tgetstr("ch", NULL), 0,
-			ft_getpart(shell, NULL) - 1));
+			ft_checkcurrentline(shell) - 1));
 		else
 			ft_putstr(tgoto(tgetstr("ch", NULL), 0,
-			ft_getpart(shell, NULL) % ft_linesize() - 1));
+			ft_checkcurrentline(shell) % ft_linesize() - 1));
 	}
 	return (0);
 }
