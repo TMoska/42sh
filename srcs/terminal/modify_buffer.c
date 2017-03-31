@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:29:48 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/31 02:22:49 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/31 05:07:57 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ static int	buffer_bol(t_shell **shell)
 	return (1);
 }
 
+static void	delete_secondline(t_shell **shell)
+{
+	(*shell)->term->tc_in += 1;
+	ft_putstr(tgoto(tgetstr("ch", NULL), 0, ft_getpart(shell, NULL) - 1));
+	(*shell)->term->tc_in -= 1;
+}
+
 void		modify_buffer(t_shell **shell, unsigned int key)
 {
 	char	*tmp;
@@ -34,8 +41,7 @@ void		modify_buffer(t_shell **shell, unsigned int key)
 	if ((key == BTN_DEL && (*shell)->term->tc_in == (*shell)->term->tc_len) ||
 		(key == BTN_BACK && (*shell)->term->tc_in == 0))
 		return ;
-	if (key == BTN_BACK)
-		buffer_bol(shell);
+	key == BTN_BACK ? buffer_bol(shell) : 0;
 	(*shell)->term->tc_len -= 1;
 	tmp = (*shell)->buff;
 	if ((*shell)->buff[(*shell)->term->tc_in] == '\n')
@@ -44,12 +50,12 @@ void		modify_buffer(t_shell **shell, unsigned int key)
 			ft_putstr(tgoto(tgetstr("ch", NULL), 0,
 			ft_getpart(shell, NULL) + (*shell)->term->prompt_len - 1));
 		else
-			ft_putstr(tgoto(tgetstr("ch", NULL), 0,
-			ft_getpart(shell, NULL) - 1));
-		if (key == BTN_BACK)
-			ft_putstr(tgetstr("up", NULL));
+		{
+			delete_secondline(shell);
+		}
+		(key == BTN_BACK) ? ft_putstr(tgetstr("up", NULL)) : (void)0;
 	}
-	(*shell)->buff = ft_strndelat((*shell)->buff,\
+	(*shell)->buff = ft_strndelat((*shell)->buff,
 			(*shell)->term->tc_in, (size_t)1);
 	ft_printbuffer(shell);
 	ft_strdel(&tmp);
