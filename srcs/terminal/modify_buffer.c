@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:29:48 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/31 05:07:57 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/31 06:43:43 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ void		modify_buffer(t_shell **shell, unsigned int key)
 			ft_putstr(tgoto(tgetstr("ch", NULL), 0,
 			ft_getpart(shell, NULL) + (*shell)->term->prompt_len - 1));
 		else
-		{
 			delete_secondline(shell);
-		}
 		(key == BTN_BACK) ? ft_putstr(tgetstr("up", NULL)) : (void)0;
 	}
 	(*shell)->buff = ft_strndelat((*shell)->buff,

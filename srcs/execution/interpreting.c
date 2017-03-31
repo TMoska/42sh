@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/03/29 05:13:15 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/31 05:44:29 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	execute(t_shell **shell, char *exec, char **ptr, char **env)
 		(*shell)->ret = WEXITSTATUS(status);
 		if (WIFEXITED(status))
 		{
-			g_exit_code = WIFEXITED(status);
+			g_exit_code = WEXITSTATUS(status);
 			if (WEXITSTATUS(status))
 				ret = -1;
 		}

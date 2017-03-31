@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 22:58:02 by moska             #+#    #+#             */
-/*   Updated: 2017/02/17 15:58:36 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/31 05:22:41 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_strisblank(char *str)
 {
 	while (*str)
 	{
-		if (((int)(*str) == 9) || ((int)(*str) == 32))
+		if (((int)(*str) == 9) || ft_isspace(*str))
 			str++;
 		else
 			return (0);

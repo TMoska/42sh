@@ -6,12 +6,11 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 09:18:00 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/31 03:56:13 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/31 04:15:18 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 static size_t	ft_strlen_u(const char *str, char c)
 {

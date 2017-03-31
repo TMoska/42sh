@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 11:05:54 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/31 05:10:06 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/31 06:43:56 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ int		run_shell(t_shell **shell)
 			if (get_next_line(0, &(*shell)->buff) == 0)
 				return (0);
 		}
+		do_quotes(shell);
 		if (validate_and_prep_cmd(shell) == -1)
 		{
 			ft_strdel(&((*shell)->buff));
 			continue ;
 		}
-		do_quotes(shell);
 		hist_add(shell);
 		(tokenize(shell) == 1) ? syn_error() : execute_node((*shell)->tree);
 		mid_clean_shell(shell);
@@ -69,7 +69,8 @@ int		main(int ac, char **av, char **env)
 	(void)av;
 	g_exit_code = 0;
 	shell = get_shell(env);
-	term_init(&shell);
+	if (term_init(&shell))
+		return (1);
 	clean_terminal();
 	run_shell(&shell);
 	clean_shell(&shell);
