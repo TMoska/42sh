@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 22:38:50 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/30 20:16:22 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/31 02:49:30 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,35 +39,7 @@ int		*ft_setquotes(int *array, const char *s, char c)
 	return (array);
 }
 
-void	ft_echo(t_shell **shell, char *str, int flag)
-{
-	int		i;
-	int		i2;
-	char	*tmp;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '$' && !flag)
-		{
-			if ((ft_strncmp(&str[i], "$?", 2) == 0) && (i += 2))
-				ft_putnbr((*shell)->ret);
-			else
-			{
-				i2 = i;
-				while (str[i] && (!ft_isspace(str[i]) &&
-					!ft_isquotes(str[i + 1])))
-					++i;
-				tmp = ft_strsub(str, i2 + 1, i - 1);
-				ft_putstr(get_env_val(shell, tmp));
-				ft_strdel(&tmp);
-			}
-		}
-		(str[i]) ? ft_putchar(str[i++]) : (0);
-	}
-}
-
-int		builtin_echo(t_shell **shell, char *cmd)
+int		builtin_echo(char *cmd)
 {
 	int		i;
 	char	**array;
@@ -81,7 +53,7 @@ int		builtin_echo(t_shell **shell, char *cmd)
 		++i;
 	while (array[i])
 	{
-		ft_echo(shell, array[i], iarray[i - 1]);
+		ft_putstr(array[i]);
 		++i;
 		(array[i]) ? ft_putchar(' ') : (0);
 	}

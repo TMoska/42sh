@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/30 21:13:40 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/31 03:58:57 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,7 +224,7 @@ void				work_environ_and_display(char **cmd, t_shell **shell);
 void				do_setenv(t_shell **shell, char *name, char *value);
 void				change_symlink_directory(t_shell **shell, char *path);
 int					prep_and_change(t_shell **shell);
-int					builtin_echo(t_shell **shell, char *cmd);
+int					builtin_echo(char *cmd);
 void				join_back(char ***split_tab, char **new, int *size, int *i);
 void				builtin_export(t_shell **shell);
 
@@ -233,6 +233,7 @@ void				builtin_export(t_shell **shell);
 */
 
 void				read_input(t_shell **shell, char *heredoc);
+int					replace_env_vals(t_shell **shell);
 void				work_buffer(t_shell **shell, char *buffer);
 int					reset_line(t_shell **shell);
 
