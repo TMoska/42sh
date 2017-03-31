@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:33:19 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/28 22:06:40 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/03/31 03:59:12 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef	struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+char				**ft_strsplitin(char const *str, char c);
 size_t				ft_strlen(const char *str);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);

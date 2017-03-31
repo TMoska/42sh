@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:29:48 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/30 04:34:09 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/31 04:17:26 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void		modify_buffer(t_shell **shell, unsigned int key)
 		else
 			ft_putstr(tgoto(tgetstr("ch", NULL), 0,
 			ft_getpart(shell, NULL) - 1));
-		ft_putstr(tgetstr("up", NULL));
+		(key == BTN_BACK) ? ft_putstr(tgetstr("up", NULL)) : (0);
 	}
 	(*shell)->buff = ft_strndelat((*shell)->buff,\
 			(*shell)->term->tc_in, (size_t)1);
