@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 22:38:50 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/31 04:12:55 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/31 05:29:34 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,10 @@ int		*ft_setquotes(int *array, const char *s, char c)
 		{
 			if ((s[i] == '`' || s[i] == '"' || s[i] == 39) && s[i - 1] != '\\')
 			{
-				if (s[i] == '\'')
-					array[wc] = 1;
+				(s[i] == '\'') ? (array[wc] = 1) : (0);
 				i = ft_endquo(s, i);
 			}
-			if (found == 0)
-				wc++;
+			(found == 0) ? wc++ : (0);
 			found = 1;
 		}
 	return (array);
