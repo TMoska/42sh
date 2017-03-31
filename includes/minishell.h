@@ -223,6 +223,7 @@ void				work_with_alterenv(char **cmd, t_shell **shell);
 void				work_environ_and_display(char **cmd, t_shell **shell);
 void				do_setenv(t_shell **shell, char *name, char *value);
 void				change_symlink_directory(t_shell **shell, char *path);
+void				parse_cd_options(t_shell **shell, int *p_option, char **path);
 int					prep_and_change(t_shell **shell);
 int					builtin_echo(char *cmd);
 void				join_back(char ***split_tab, char **new, int *size, int *i);
