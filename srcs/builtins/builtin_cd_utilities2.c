@@ -96,7 +96,8 @@ int			prep_and_change(t_shell **shell)
 
 	ret = -1;
 	p_option = 0;
-	parse_cd_options(shell, &p_option, &path);
+	if (parse_cd_options(shell, &p_option, &path) == -1)
+		return (ret);
 	if (!(path = fix_path_special_cases(shell, path)))
 		return (ret);
 	if ((stats = (struct stat *)malloc(sizeof(struct stat))))
