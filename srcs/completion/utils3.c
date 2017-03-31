@@ -6,13 +6,13 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/03/30 20:12:16 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/31 04:42:35 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_c_tab				*tab_binary(t_c_tab *list, t_shell *shell)
+t_c_tab			*tab_binary(t_c_tab *list, t_shell *shell)
 {
 	size_t			i;
 	char			*path;
@@ -33,22 +33,25 @@ void			tab_term(int v)
 {
 	if (v == 1)
 	{
-		MOVE_DOWN
-		DEL_LINES
-		MOVE_UP
+		MOVE_DOWN;
+		DEL_LINES;
+		MOVE_UP;
 	}
 	else if (v == 2)
 	{
 		ft_putstr(tgetstr("ve", NULL));
-		MOVE_UP
-		DEL_LINES
+		DEL_LINES;
 	}
-    else if (v == 3)
-    {
-        ft_putstr(tgetstr("ve", NULL));
-        //DEL_LINES
-    //    MOVE_UP
-    }
+	else if (v == 3)
+	{
+		ft_putstr(tgetstr("ve", NULL));
+		DEL_LINES;
+	}
+	else if (v == 4)
+	{
+		ft_putstr(tgetstr("sc", NULL));
+		MOVE_DOWN;
+	}
 }
 
 t_c_tab			**init_left(t_c_tab **tmp, size_t *c, size_t *l, size_t *page)

@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/03/29 09:24:45 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/31 04:02:53 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void				clean_c_list(t_c_tab **lst)
 
 void				put_question(size_t i)
 {
-	DEL_LINES
-    ft_putstr("\033[1;91m Bro, there is a lot of possibilities O.O like ");
+	DEL_LINES;
+	ft_putstr("\033[1;91m Bro, there is a lot of possibilities O.O like ");
 	ft_putnbr(i);
 	ft_putstr(" possibilities O.O Are you sure about that? (y or n)\033[0m");
 }

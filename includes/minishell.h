@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/30 19:16:28 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/30 21:06:11 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 # define BTN_ENTER	10
 # define BTN_TAB	9
 # define BTN_CTRL_D	4
+# define BTN_S_TAB  5921563
 
 # define BTN_CTRL_P 16
 # define BTN_CTRL_I 9

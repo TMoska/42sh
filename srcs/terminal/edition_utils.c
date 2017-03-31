@@ -6,7 +6,7 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 05:07:59 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/30 17:33:33 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/31 02:18:32 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int			ft_linesize(void)
 	struct winsize w;
 
 	ioctl(0, TIOCGWINSZ, &w);
-	return ((w.ws_col == 0) ? (1) : w.ws_col);
+	return (50);
 }
 
 int			ft_currentline(t_shell **shell)

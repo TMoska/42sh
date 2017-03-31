@@ -6,15 +6,15 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/03/30 18:36:40 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/31 04:33:09 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static t_c_tab		*tpad(t_c_tab *tmp, struct s_pad *pad)
+static t_c_tab			*tpad(t_c_tab *tmp, struct s_pad *pad)
 {
-	size_t			len;
+	size_t				len;
 
 	len = ft_strlen(tmp->content);
 	(len > (*pad).len_x ? (*pad).len_x = len : (*pad).len_x);
@@ -24,10 +24,10 @@ static t_c_tab		*tpad(t_c_tab *tmp, struct s_pad *pad)
 	return (tmp);
 }
 
-static t_c_tab		*treat_pading(t_c_tab *list, struct s_pad pad)
+static t_c_tab			*treat_pading(t_c_tab *list, struct s_pad pad)
 {
-	t_c_tab			*tmp;
-	size_t			total_len;
+	t_c_tab				*tmp;
+	size_t				total_len;
 
 	tmp = list;
 	total_len = 0;
@@ -41,7 +41,7 @@ static t_c_tab		*treat_pading(t_c_tab *list, struct s_pad pad)
 			tmp = tmp->next;
 		}
 		total_len += pad.len_x + 3;
-		if (total_len >= pad.max_x - 4)
+		if (total_len >= pad.max_x - 20)
 		{
 			total_len = 0;
 			pad.col_s = 0;
@@ -98,7 +98,8 @@ static size_t			too_much_file(t_c_tab *list)
 		while (buff[0] != 'y' && buff[0] != 'n')
 			read(0, buff, 1);
 		MOVE_UP;
-		DEL_LINES
+		MOVE_UP;
+		DEL_LINES;
 		if (buff[0] == 'y')
 			return (i);
 		else if (buff[0] == 'n')
@@ -107,11 +108,11 @@ static size_t			too_much_file(t_c_tab *list)
 	return (i);
 }
 
-t_c_tab				*define_pading(t_c_tab *list)
+t_c_tab					*define_pading(t_c_tab *list)
 {
-	size_t			nb_files;
-	struct s_pad	pad;
-	struct winsize	w;
+	size_t				nb_files;
+	struct s_pad		pad;
+	struct winsize		w;
 
 	nb_files = 0;
 	if (!list || ((nb_files = too_much_file(list)) == 0))

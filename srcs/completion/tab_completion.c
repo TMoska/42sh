@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/03/30 20:13:22 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/03/31 04:40:39 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static size_t		verify_btn(unsigned int key)
 		return (8);
 	else if (key == BTN_RIGHT || key == BTN_TAB)
 		return (6);
-	else if (key == BTN_LEFT)
+	else if (key == BTN_LEFT || key == BTN_S_TAB)
 		return (4);
 	else if (key == BTN_DOWN)
 		return (2);
@@ -46,53 +46,59 @@ static size_t		verify_btn(unsigned int key)
 	return (0);
 }
 
+void				put_tab(t_c_tab *list, t_shell **shell, size_t val)
+{
+	char			*res;
+	char			*tmp;
+	size_t			i;
+
+	tmp = NULL;
+	if (val == 1)
+	{
+		while (list && list->cursor != 1)
+			list = list->next;
+		i = ft_strlen((*shell)->buff);
+		while (i > 0 && (*shell)->buff[i] != ' ')
+			i--;
+		if (i != 0)
+			tmp = ft_strsub((*shell)->buff, 0, i + 1);
+		clear_cmdline(shell);
+		ft_bzero((*shell)->buff, ft_strlen((*shell)->buff));
+		reset_line(shell);
+		res = ft_str3join(tmp, list->content, " ");
+		ft_strdel(&tmp);
+		work_buffer(shell, res);
+		ft_strdel(&res);
+	}
+	else
+		tab_term(2);
+}
+
 void				tab_completion(t_shell **shell, t_c_tab *list, size_t val)
 {
 	char			*buff[5];
-    char            *tmp;
-    size_t             i;
-    size_t          bin_dir;
 
-    bin_dir = 0;
-    i = 0;
 	ft_memset(buff, 0, 5);
+	tab_term(4);
 	while (val == 0 || (read(0, buff, 5)
-				&& (val = verify_btn((unsigned int)*buff)) != 0
-				&& val != 1 && val != 9))
+	&& (val = verify_btn((unsigned int)*buff)) != 0 && val != 1 && val != 9))
 	{
 		tab_term(1);
 		(list ? list = move_select(list, val) : NULL);
-		if (val == 0 && (bin_dir = binary_directories(*shell)))
+		if (val == 0 && (binary_directories(*shell)))
 		{
+			MOVE_DOWN;
 			if (!(list = tab_binary(list, *shell)))
 				return ;
 		}
 		else if (val == 0 && !(list = search_on_dir(".", *shell, NULL)))
 			return ;
-		if (val == 0 && !(list = define_pading(list)))
-			break ;
-		if ((val = 1) && put_options(list) == 0)
+		if (val == 0 && !(list = define_pading(list)) &&
+				(val = 1) && put_options(list) == 0)
 			break ;
 		ft_memset(buff, 0, 5);
 	}
-    if (val == 1)
-    {
-        while (list && list->cursor != 1)
-            list = list->next;
-        i = ft_strlen((*shell)->buff);
-        if (bin_dir == 0)
-            while ((*shell)->buff[i] != ' ' && i > 0)
-                i--;
-        tmp = ft_strsub((*shell)->buff, 0, i + 1);
-        ft_strdel(&(*shell)->buff);
-        (*shell)->buff = ft_strjoin(tmp, list->content);
-        ft_strdel(&tmp);
-        clear_cmdline(shell);
-        print_prompt(shell, NULL);
-        work_buffer(shell, NULL);
-        tab_term(3);
-    }
-    else
-	   tab_term(2);
+	ft_putstr(tgetstr("rc", NULL));
+	put_tab(list, shell, val);
 	(list ? clean_c_list(&list) : NULL);
 }
