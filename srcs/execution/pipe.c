@@ -6,13 +6,13 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 20:58:50 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/31 05:49:57 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/31 06:01:41 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec_child(t_tkn *node, int fds[2], int stdout)
+void		exec_child(t_tkn *node, int fds[2], int stdout)
 {
 	close(1);
 	dup(fds[1]);
@@ -23,7 +23,7 @@ void	exec_child(t_tkn *node, int fds[2], int stdout)
 	exit(g_exit_code);
 }
 
-void	exec_parent(t_tkn *node, int fds[2], int stdin)
+void		exec_parent(t_tkn *node, int fds[2], int stdin)
 {
 	close(0);
 	dup(fds[0]);
@@ -34,7 +34,7 @@ void	exec_parent(t_tkn *node, int fds[2], int stdin)
 	exit(g_exit_code);
 }
 
-int		fork_error(void)
+int			fork_error(void)
 {
 	ft_putendl_fd("fork error", 2);
 	return (1);
@@ -62,7 +62,7 @@ static int	perform_pipe(t_tkn *node, int fds[2], int stdin, int stdout)
 	return (!(WIFEXITED(status1) && WEXITSTATUS(status1) == 0));
 }
 
-int		execute_pipe(t_tkn *node)
+int			execute_pipe(t_tkn *node)
 {
 	int		fds[2];
 	int		stdin;

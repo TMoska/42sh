@@ -6,7 +6,7 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 11:05:54 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/31 05:25:27 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/03/31 06:01:54 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		run_shell(t_shell **shell)
 				return (0);
 		}
 		do_quotes(shell);
- 		if (validate_and_prep_cmd(shell) == -1)
+		if (validate_and_prep_cmd(shell) == -1)
 		{
 			ft_strdel(&((*shell)->buff));
 			continue ;
