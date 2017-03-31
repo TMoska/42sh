@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 20:49:15 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/31 05:58:16 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/01 00:29:03 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,10 @@ int		perform_redirections(t_tkn *node, char *p1, char *p2)
 		return (-1);
 	}
 	tmp_i1 = dup(i1);
-	close(i1);
-	(*p2 != '-') ? dup(i2) : (0);
-	(node->right) ? execute_node(node->right) : (0);
+	(*p2 != '-') ? dup2(i2, i1) : close(i1);
 	execute_node(node->left);
 	dup2(tmp_i1, i1);
-	(*p2 != '-') ? close(tmp_i1) : (0);
+	close(tmp_i1);
 	return (0);
 }
 
