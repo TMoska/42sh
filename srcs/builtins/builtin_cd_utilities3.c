@@ -34,18 +34,28 @@ void	join_back(char ***split_tab, char **new, int *size, int *i)
 void	parse_cd_options(t_shell **shell, int *p_option, char **path)
 {
 	int		i;
+	int		j;
 	int		capl;
 
 	i = 1;
 	capl = 0;
 	while ((*shell)->cmd[i] != 0)
 	{
-		if (ft_strncmp((*shell)->cmd[i], "-P", 2) == 0)
-			*p_option = 1;
-		else if (ft_strncmp((*shell)->cmd[i], "-L", 2) == 0
-				|| ft_strncmp((*shell)->cmd[i], "-LP", 3) == 0
-				|| ft_strncmp((*shell)->cmd[i], "-PL", 3) == 0)
-			capl = 1;
+		if ((*shell)->cmd[i][0] == '-' && ft_strlen((*shell)->cmd[i]) != 1)
+		{
+			j = 1;
+			while ((*shell)->cmd[i][j] != '\0' && 
+					((*shell)->cmd[i][j] == 'P' || (*shell)->cmd[i][j] == 'L'))
+			{
+				if ((*shell)->cmd[i][j] == 'P')
+					*p_option = 1;
+				else if ((*shell)->cmd[i][j] == 'L')
+					capl = 1;
+				j++;
+			}
+			if ((*shell)->cmd[i][j] != '\0')
+				break ;
+		}
 		else
 			break;
 		i++;
