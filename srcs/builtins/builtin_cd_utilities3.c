@@ -71,7 +71,8 @@ int			parse_cd_options(t_shell **shell, int *p_option, char **path)
 		ft_putstr_fd("cd: invalid option\nUsage: cd [-L|-P] [dir]\n", 2);
 		return (-1);
 	}
-	*p_option = (capl == 1) ? 0 : 1;
+	if (*p_option == 1)
+		*p_option = (capl == 1) ? 0 : 1;
 	if ((*shell)->cmd[i] == 0)
 		(*path) = get_env_val(shell, "HOME");
 	else
