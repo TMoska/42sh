@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 17:37:21 by tmoska            #+#    #+#             */
-/*   Updated: 2017/02/24 17:38:31 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/01 03:14:20 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ static int	sub_parser(t_shell **shell, int *p_option, int *capl, int *i)
 		if ((*shell)->cmd[*i][0] == '-' && ft_strlen((*shell)->cmd[*i]) != 1)
 		{
 			j = 1;
-			while ((*shell)->cmd[*i][j] != '\0' && 
-					((*shell)->cmd[*i][j] == 'P' || (*shell)->cmd[*i][j] == 'L'))
+			while ((*shell)->cmd[*i][j] != '\0' &&
+					((*shell)->cmd[*i][j] == 'P'
+					|| (*shell)->cmd[*i][j] == 'L'))
 			{
 				if ((*shell)->cmd[*i][j] == 'P')
 					*p_option = 1;
@@ -53,7 +54,7 @@ static int	sub_parser(t_shell **shell, int *p_option, int *capl, int *i)
 				return (-1);
 		}
 		else
-			break;
+			break ;
 		(*i)++;
 	}
 	return (0);
