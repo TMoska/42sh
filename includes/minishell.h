@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/01 18:08:39 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/01 18:59:08 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -307,7 +307,7 @@ int					tkn_new_to_back(t_tkn **lst, char *data, int type);
 char				**split_command(char *cmd);
 int					if_op_find_priority(char *s);
 int					tokenize(t_shell **shell);
-int					get_tokens(t_shell **shell, int first);
+int					get_tokens(t_shell **shell);
 void				tkn_move_args_to_start(t_tkn **dst, t_tkn **src);
 void				reorganize_tokens(t_shell **shell);
 void				move_pointers(t_tkn *init, t_tkn **start, t_tkn **ptr1, \
