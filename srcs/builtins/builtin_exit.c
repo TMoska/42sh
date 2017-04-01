@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 23:32:19 by moska             #+#    #+#             */
-/*   Updated: 2017/03/11 16:59:48 by moska            ###   ########.fr       */
+/*   Updated: 2017/04/02 00:54:08 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static void	manage_return_code(t_shell **shell)
 	if (!is_all_int((*shell)->cmd[1]))
 	{
 		ft_putstr_fd("exit: numeric argument required\n", 2);
-		(*shell)->ret = 2;
-		g_exit_code = 2;
+		(*shell)->ret = 1;
+		g_exit_code = 1;
 	}
 	else if ((arg = ft_atoi((*shell)->cmd[1])))
 	{
