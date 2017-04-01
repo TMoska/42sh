@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 14:00:23 by moska             #+#    #+#             */
-/*   Updated: 2017/03/12 18:04:13 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/02 01:21:27 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,35 @@ void	do_setenv(t_shell **shell, char *name, char *value)
 	rebuild_str2env(shell);
 }
 
+int		error_checking(t_shell **shell)
+{
+	int		i;
+	int		ret;
+
+	i = 0;
+	ret = 0;
+	if (!(ft_isalpha((*shell)->cmd[1][i]) || (*shell)->cmd[1][i] == '_'))
+	{
+		ft_putstr_fd("setenv: bad env var name: ", 2);
+		ft_putendl_fd((*shell)->cmd[1], 2);
+		ret = -1;
+	}
+	i++;
+	while ((*shell)->cmd[1][i])
+	{
+		if (!(ft_isalnum((*shell)->cmd[1][i]) || (*shell)->cmd[1][i] == '_'))
+		{
+			ft_putstr_fd("setenv: bad env var name: ", 2);
+			ft_putendl_fd((*shell)->cmd[1], 2);
+			ret = -1;
+		}
+		i++;
+	}
+	(*shell)->ret = ret;
+	g_exit_code = ret;
+	return (ret);
+}
+
 int		builtin_setenv(t_shell **shell)
 {
 	size_t	len;
@@ -47,14 +76,8 @@ int		builtin_setenv(t_shell **shell)
 	}
 	else
 	{
-		if (!(ft_isalpha((*shell)->cmd[1][0]) || (*shell)->cmd[1][0] == '_'))
-		{
-			ft_putstr_fd("setenv: not an identifier: ", 2);
-			ft_putendl_fd((*shell)->cmd[1], 2);
-			(*shell)->ret = -1;
-			g_exit_code = -1;
+		if (error_checking(shell) == -1)
 			return (-1);
-		}
 		do_setenv(shell, (*shell)->cmd[1], (*shell)->cmd[2]);
 	}
 	return (0);
