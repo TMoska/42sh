@@ -6,13 +6,13 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 17:37:21 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/01 03:14:20 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/04/01 16:52:48 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	join_back(char ***split_tab, char **new, int *size, int *i)
+void		join_back(char ***split_tab, char **new, int *size, int *i)
 {
 	char *tmp;
 

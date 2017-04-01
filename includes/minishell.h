@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/31 17:06:24 by moska            ###   ########.fr       */
+/*   Updated: 2017/04/01 16:53:12 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,7 +226,8 @@ void				change_symlink_directory(t_shell **shell, char *path);
 int					prep_and_change(t_shell **shell);
 int					builtin_echo(char *cmd);
 void				join_back(char ***split_tab, char **new, int *size, int *i);
-int					parse_cd_options(t_shell **shell, int *p_option, char **path);
+int					parse_cd_options(t_shell **shell, int *p_option,\
+					char **path);
 void				builtin_export(t_shell **shell);
 
 /*
