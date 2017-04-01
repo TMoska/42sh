@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 20:58:50 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/31 06:01:41 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/02 00:01:57 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void		exec_child(t_tkn *node, int fds[2], int stdout)
 {
-	close(1);
-	dup(fds[1]);
+	dup2(fds[1], 1);
 	close(fds[0]);
 	execute_node(node->left);
 	dup2(stdout, 1);
@@ -25,8 +24,7 @@ void		exec_child(t_tkn *node, int fds[2], int stdout)
 
 void		exec_parent(t_tkn *node, int fds[2], int stdin)
 {
-	close(0);
-	dup(fds[0]);
+	dup2(fds[0], 0);
 	close(fds[1]);
 	execute_node(node->right);
 	dup2(stdin, 0);
