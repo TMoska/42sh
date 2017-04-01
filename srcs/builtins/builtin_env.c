@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 18:27:17 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/31 02:47:53 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/04/01 02:51:31 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,40 @@ static t_env_s	*create_env_struct(char **cmd)
 	return (env_s);
 }
 
-int				has_errors(t_shell **shell, t_env_s *env_s, char **cmd)
+static void		set_error_flag(t_env_s *env_s, int *ret)
 {
-	int	ret;
-
-	ret = 0;
-	while (*cmd)
-	{
-		if (*cmd[0] == '-' && *(*cmd + 1) && \
-				!(*(*cmd + 1) == 'u' || *(*cmd + 1) == 'i'
-			|| *(*cmd + 1) == '0' || ft_strcmp(*cmd, "--null") == 0)
-			&& (ret = 1))
-			ft_putendl_fd("env: illegal argument", 2);
-		cmd++;
-	}
 	if (env_s->unset == -1 && (ret = 1))
 		ft_putendl_fd("env: option requires an argument -- 'u'", 2);
 	else if (env_s->null == 1 && env_s->cmd == 1 && (ret = 1))
 		ft_putendl_fd("env: cannot specify --null (-0) with command", 2);
-	if (ret)
+	if (*ret)
 	{
 		((*shell)->ret = -1);
 		g_exit_code = -1;
 	}
+}
+
+int				has_errors(t_shell **shell, t_env_s *env_s, char **cmd)
+{
+	int	ret;
+	int	bin;
+
+	bin = 0;
+	ret = 0;
+	while (*cmd)
+	{
+		if (*cmd[0] != '-')
+			bin++;	
+		if (bin == 2)
+			break ;
+		if (*cmd[0] == '-' && *(*cmd + 1) && \
+				!(*(*cmd + 1) == 'u' || *(*cmd + 1) == 'i'
+			|| *(*cmd + 1) == '0' || ft_strcmp(*cmd, "--null") == 0)
+			&& (ret = 1))
+			ft_putendl_fd("env: illegal argument", 2);	
+		cmd++;
+	}
+	set_error_flag(env_s, &ret);
 	return (ret);
 }
 
