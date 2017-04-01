@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 11:27:17 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/01 18:59:25 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/01 19:09:54 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ int			error_check(t_tkn *tkns)
 	{
 		if (i == 0 && nd->type != 0)
 			return (1);
-		else if ((in_range(nd->type, 1, 2) || in_range(nd->type, 4, 6))
+		else if ((in_range(nd->type, 1, 2) || in_range(nd->type, 4, 5))
 		&& (!nd->right || nd->right->type != 0))
+			return (1);
+		else if (nd->type == 6 && nd->right && nd->right->type != 0)
 			return (1);
 		i++;
 		nd = nd->right;
