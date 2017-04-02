@@ -6,7 +6,7 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/04/02 11:28:05 by tmoska           ###   ########.fr        #
+#    Updated: 2017/04/02 18:52:21 by ryaoi            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ all: $(NAME)
 
 $(NAME): $(LIB) $(OBJECTS)
 	@$(GCC) $(FLAGS) -o $@ $^ $(LIB_LINK) $(EXTRA_LIB)
-	@echo "\033[0;32mSuccess: \033[0mminishell compiled"
+	@echo "\033[0;32mSuccess: \033[0m21sh compiled"
 	@echo "\033[0;32mDone"
 
 $(LIB):
