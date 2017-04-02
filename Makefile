@@ -6,7 +6,7 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/04/02 06:59:45 by tmoska           ###   ########.fr        #
+#    Updated: 2017/04/02 11:28:05 by tmoska           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ tokenizer/split_command_utils.c execution/left_redirection_utils.c \
 execution/interpreting_utilities.c reading/validating.c heredoc/heredoc.c \
 execution/left_redirections2.c reading/prompt_utils.c terminal/edition_utils.c \
 history/history_search.c history/exclamation.c terminal/edition.c \
-terminal/edition_cursor_right.c reading/env_vals.c \
+terminal/edition_cursor_right.c reading/env_vals.c quotes/splitquote_str2.c \
 execution/left_redirections2.c reading/prompt_utils.c history/history_search.c \
 history/exclamation.c history/single_exclamation_utils.c \
 builtins/builtin_env_prints2.c \
