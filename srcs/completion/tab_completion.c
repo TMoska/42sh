@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/03/31 04:40:39 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/02 05:53:31 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ static size_t		verify_btn(unsigned int key)
 		return (2);
 	else if (key == BTN_BACK)
 		return (9);
-	else if (key == BTN_ENTER)
+	else if (key == BTN_ENTER || key == BTN_SPACE)
 		return (1);
+	else if (key == BTN_SLASH)
+		return (47);
 	return (0);
 }
 
@@ -53,7 +55,7 @@ void				put_tab(t_c_tab *list, t_shell **shell, size_t val)
 	size_t			i;
 
 	tmp = NULL;
-	if (val == 1)
+	if (val == 1 || val > 9)
 	{
 		while (list && list->cursor != 1)
 			list = list->next;
@@ -65,7 +67,8 @@ void				put_tab(t_c_tab *list, t_shell **shell, size_t val)
 		clear_cmdline(shell);
 		ft_bzero((*shell)->buff, ft_strlen((*shell)->buff));
 		reset_line(shell);
-		res = ft_str3join(tmp, list->content, " ");
+		res = (val == 47 ? ft_str3join(tmp, list->content, "/") :
+				ft_str3join(tmp, list->content, " "));
 		ft_strdel(&tmp);
 		work_buffer(shell, res);
 		ft_strdel(&res);
@@ -81,20 +84,20 @@ void				tab_completion(t_shell **shell, t_c_tab *list, size_t val)
 	ft_memset(buff, 0, 5);
 	tab_term(4);
 	while (val == 0 || (read(0, buff, 5)
-	&& (val = verify_btn((unsigned int)*buff)) != 0 && val != 1 && val != 9))
+				&& (val = verify_btn((unsigned int)*buff)) > 1 && val < 9))
 	{
 		tab_term(1);
 		(list ? list = move_select(list, val) : NULL);
 		if (val == 0 && (binary_directories(*shell)))
 		{
-			MOVE_DOWN;
 			if (!(list = tab_binary(list, *shell)))
-				return ;
+				return (ft_putstr(tgetstr("rc", NULL)));
 		}
-		else if (val == 0 && !(list = search_on_dir(".", *shell, NULL)))
-			return ;
-		if (val == 0 && !(list = define_pading(list)) &&
-				(val = 1) && put_options(list) == 0)
+		else if (val == 0 && !(list = search_on_dir(".", *shell, NULL, 1)))
+			return (ft_putstr(tgetstr("rc", NULL)));
+		if (val == 0 && !(list = define_pading(list)))
+			break ;
+		if ((val = 1) && put_options(list) == 0)
 			break ;
 		ft_memset(buff, 0, 5);
 	}

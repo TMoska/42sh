@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/03/30 21:06:11 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/02 07:07:18 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 
 # define BTN_ESC	27
 # define BTN_ENTER	10
+# define BTN_SPACE  32
 # define BTN_TAB	9
 # define BTN_CTRL_D	4
 # define BTN_S_TAB  5921563
@@ -57,6 +58,9 @@
 # define BTN_CTRL_K 11
 # define BTN_CTRL_L	12
 
+# define BTN_Y      121
+# define BTN_N      110
+# define BTN_SLASH  47
 /*
 **	Termcaps commands
 */
@@ -391,7 +395,8 @@ void				print_tokens(t_tkn *tokens);
 void				tab_completion(t_shell **shell, t_c_tab *list, size_t val);
 size_t				binary_directories(t_shell *shell);
 char				*search_cmd(t_shell *shell);
-t_c_tab				*search_on_dir(char *path, t_shell *shell, t_c_tab *list);
+t_c_tab				*search_on_dir(char *path, t_shell *shell, t_c_tab *list,
+                                        size_t bin);
 t_c_tab				*cmd_option(char *cmd, t_c_tab *list);
 t_c_tab				*define_pading(t_c_tab *list);
 int					put_options(t_c_tab *list);
@@ -404,5 +409,6 @@ t_c_tab				**init_left(t_c_tab **tmp, size_t *c, size_t *l,
 t_c_tab				**init_right(t_c_tab **tmp, size_t *c, size_t *l,
 								size_t *page);
 void				tab_term(int v);
+void			    tab_lst_sort(t_c_tab **begin_list);
 
 #endif

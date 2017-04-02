@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/03/31 04:00:15 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/02 07:07:37 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ size_t				binary_directories(t_shell *shell)
 	size_t			in;
 
 	in = shell->term->tc_in;
+	if (in != 0 && ((shell->buff[in] == '/' && shell->buff[in - 1] == '.') ||
+			(shell->buff[in - 1] == '/' && shell->buff[in - 2] == '.' &&
+			 (shell->buff[in] == ' ' || shell->buff[in] == '\0'))))
+		return (0);
 	while (in > 0 && shell->buff[in] != '|' && shell->buff[in] != '`' &&
 			shell->buff[in] != '&' && shell->buff[in] != ';')
 		in--;
@@ -36,32 +40,57 @@ size_t				binary_directories(t_shell *shell)
 
 char				*search_cmd(t_shell *shell)
 {
-	char			**split;
 	char			*tmp;
 	size_t			i;
 	size_t			in;
 
 	in = shell->term->tc_in;
+	if (in != 0 && (shell->buff[in] == '/' && shell->buff[in - 1] == '.' &&
+				(shell->buff[in + 1] == '\0' || shell->buff[in + 1] == ' ')))
+		return (ft_strsub(shell->buff, in - 1, in + 1));
 	while (in > 0 && shell->buff[in] != '|' && shell->buff[in] != '`' &&
 			shell->buff[in] != '&' && shell->buff[in] != ';')
 		in--;
 	(in != 0 ? in++ : 0);
-	if (!(split = ft_strsplit((shell->buff + in), ' ')))
-		return (NULL);
-	if (shell->buff[shell->term->tc_in - 1] == ' ')
-	{
-		ft_str2del(&split);
+	if (shell->term->tc_in == 0 || shell->buff[in] == ' ')
 		return (ft_strdup(""));
-	}
-	i = 0;
-	while (split[i + 1] != NULL)
-		i++;
-	tmp = ft_strdup(split[i]);
-	ft_str2del(&split);
+	i = shell->term->tc_in;
+	in = i;
+	while (i != 0 && (shell->buff)[i] != ' ')
+		i--;
+	(i != 0 ? i++ : 0);
+	while ((shell->buff)[in] != '\0' && (shell->buff)[in] != ' ')
+		in++;
+	tmp = ft_strsub(shell->buff, i, in);
 	return (tmp);
 }
 
-t_c_tab				*search_on_dir(char *path, t_shell *shell, t_c_tab *list)
+t_c_tab				*option_dir(DIR *dir, t_c_tab *list, char **cmd)
+{
+	struct dirent	*dp;
+	t_c_tab			*tmp;
+	char			*tmp2;
+
+	while ((dp = readdir(dir)) != NULL)
+		if (dp->d_name[0] != '.' || dp->d_name[1] == '.')
+			list = cmd_option(dp->d_name, list);
+	closedir(dir);
+	tmp = list;
+	while (tmp)
+	{
+		tmp2 = ft_strdup(tmp->content);
+		ft_strdel(&tmp->content);
+		tmp->content = ft_strjoin((*cmd), tmp2);
+		ft_strdel(&tmp2);
+		tmp = tmp->next;
+	}
+	ft_strdel(cmd);
+	return (list);
+}
+
+
+t_c_tab				*search_on_dir(char *path, t_shell *shell, t_c_tab *list,
+		size_t bin)
 {
 	DIR				*dir;
 	char			*cmd;
@@ -70,12 +99,17 @@ t_c_tab				*search_on_dir(char *path, t_shell *shell, t_c_tab *list)
 
 	cmd = search_cmd(shell);
 	len = ft_strlen(cmd);
-	if (!(dir = opendir(path)))
+	if (bin == 1 && cmd[len - 1] == '/' && (dir = opendir(cmd)))
+		return ((list = option_dir(dir, list, &cmd)));
+	else if (!(dir = opendir(path)))
 		return (NULL);
 	while ((dp = readdir(dir)) != NULL)
 		if ((dp->d_name[0] != '.' || (cmd && cmd[0] == '.')) &&
 				!ft_strncmp(cmd, dp->d_name, len))
 			list = cmd_option(dp->d_name, list);
+	closedir(dir);
 	ft_strdel(&cmd);
+    tab_lst_sort(&list);
+    ((list) ? (list->cursor = 1) : (0));
 	return (list);
 }

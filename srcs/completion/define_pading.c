@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/03/31 04:33:09 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/02 05:46:15 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static t_c_tab			*treat_pading(t_c_tab *list, struct s_pad pad)
 }
 
 static struct s_pad		init_pading(size_t nb_files, struct winsize w,
-									t_c_tab *tmp)
+		t_c_tab *tmp)
 {
 	struct s_pad		pad;
 	size_t				max_len;
@@ -83,7 +83,7 @@ static struct s_pad		init_pading(size_t nb_files, struct winsize w,
 static size_t			too_much_file(t_c_tab *list)
 {
 	size_t				i;
-	char				buff[1];
+	char				*buff[5];
 
 	i = 1;
 	ft_putstr(tgetstr("vi", NULL));
@@ -92,18 +92,18 @@ static size_t			too_much_file(t_c_tab *list)
 		list = list->next;
 		i++;
 	}
-	if (i > 25)
+	if (i > 99)
 	{
 		put_question(i);
-		while (buff[0] != 'y' && buff[0] != 'n')
-			read(0, buff, 1);
-		MOVE_UP;
+		ft_memset(buff, 0, 5);
+		while (read(0, buff, 5) && (unsigned int)*buff != BTN_Y &&
+				(unsigned int)*buff != BTN_N && (unsigned int)*buff != BTN_TAB)
+			ft_memset(buff, 0, 5);
 		MOVE_UP;
 		DEL_LINES;
-		if (buff[0] == 'y')
-			return (i);
-		else if (buff[0] == 'n')
-			return (0);
+		MOVE_DOWN;
+		return (((unsigned int)*buff == BTN_Y || (unsigned int)*buff == BTN_TAB)
+				? (i) : (0));
 	}
 	return (i);
 }

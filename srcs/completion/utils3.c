@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/03/31 04:42:35 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/02 05:43:32 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_c_tab			*tab_binary(t_c_tab *list, t_shell *shell)
 	if (!path || !(paths = ft_strsplit(path, ':')))
 		return (NULL);
 	while (paths[++i])
-		list = search_on_dir(paths[i], shell, list);
+		list = search_on_dir(paths[i], shell, list, 0);
 	ft_str2del(&paths);
 	return (list);
 }
@@ -33,9 +33,7 @@ void			tab_term(int v)
 {
 	if (v == 1)
 	{
-		MOVE_DOWN;
 		DEL_LINES;
-		MOVE_UP;
 	}
 	else if (v == 2)
 	{
@@ -50,6 +48,7 @@ void			tab_term(int v)
 	else if (v == 4)
 	{
 		ft_putstr(tgetstr("sc", NULL));
+		MOVE_DOWN;
 		MOVE_DOWN;
 	}
 }

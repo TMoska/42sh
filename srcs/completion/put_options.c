@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/03/31 04:42:09 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/02 07:01:00 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void				put_2_page(t_c_tab *list, struct s_put *p)
 {
+
+	ft_putstr(tgoto(tgetstr("ch", NULL), 0, (*p).max_len + 1));
 	(*p).c_line++;
 	(*p).len = ft_strlen(list->content);
 	((*p).len > (*p).m_len ? (*p).m_len = (*p).len : (*p).m_len);
@@ -29,11 +31,11 @@ static void				put_2_page(t_c_tab *list, struct s_put *p)
 
 static int				print_page(size_t c_page, size_t a_page)
 {
-	ft_putstr("\033[95m You're not on page ");
+	ft_putstr(" \033[95m PAGE:");
 	ft_putnbr(c_page);
-	ft_putstr(" and there isn't ");
+	ft_putstr(" / ");
 	ft_putnbr(a_page);
-	ft_putstr(" pages :)\033[0m");
+	ft_putstr("\033[0m");
 	return (1);
 }
 
@@ -44,6 +46,7 @@ static void				put_page(t_c_tab *tmp, size_t c_page, size_t a_page)
 
 	p.max_len = 0;
 	p.c_col = 1;
+	MOVE_UP;
 	while (tmp && tmp->page == c_page)
 	{
 		move_up = 0;
@@ -51,7 +54,6 @@ static void				put_page(t_c_tab *tmp, size_t c_page, size_t a_page)
 		p.m_len = 0;
 		while (tmp && tmp->col == p.c_col && tmp->page == c_page)
 		{
-			ft_putstr(tgoto(tgetstr("ch", NULL), 0, p.max_len + 1));
 			put_2_page(tmp, &p);
 			tmp = tmp->next;
 			MOVE_DOWN;
@@ -63,6 +65,7 @@ static void				put_page(t_c_tab *tmp, size_t c_page, size_t a_page)
 		p.max_len += p.m_len + 2;
 		p.c_col++;
 	}
+	MOVE_DOWN;
 }
 
 static size_t			nb_pages(t_c_tab *tmp)
@@ -72,19 +75,17 @@ static size_t			nb_pages(t_c_tab *tmp)
 	return (tmp->page);
 }
 
-int						put_options(t_c_tab *tmp)
+int						put_options(t_c_tab *list)
 {
 	size_t				c_page;
 	size_t				a_page;
-	t_c_tab				*list;
 
-	list = tmp;
 	MOVE_DOWN;
 	while (list && list->cursor != 1)
 		list = list->next;
 	if (!list)
 		return (0);
-	a_page = nb_pages(tmp);
+	a_page = nb_pages(list);
 	c_page = list->page;
 	while (list->prev && list->page == c_page)
 		list = list->prev;

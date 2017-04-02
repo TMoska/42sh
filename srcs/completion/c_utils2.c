@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/03/31 04:02:53 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/02 07:02:21 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 static t_c_tab		*cmd_option_2(t_c_tab *tmp, char *cmd)
 {
-	if (tmp->prev)
-		tmp->cursor = 0;
-	else
-		tmp->cursor = 1;
+	tmp->cursor = 0;
 	tmp->place = 0;
 	tmp->col = 0;
 	tmp->page = 0;
@@ -75,6 +72,7 @@ void				clean_c_list(t_c_tab **lst)
 void				put_question(size_t i)
 {
 	DEL_LINES;
+	MOVE_UP;
 	ft_putstr("\033[1;91m Bro, there is a lot of possibilities O.O like ");
 	ft_putnbr(i);
 	ft_putstr(" possibilities O.O Are you sure about that? (y or n)\033[0m");
