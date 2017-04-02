@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 21:17:52 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/29 05:11:51 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/02 01:33:36 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ static int	fork_and_execute(t_shell **shell, char *exec)
 	return (ret);
 }
 
-int			get_and_test_executable(t_shell **shell, char **exec)
+int			get_and_test_executable(t_shell **shell, char **exec, char **env)
 {
 	char	*path;
 	int		i;
 
 	i = 0;
-	path = get_env_val(shell, "PATH");
+	path = get_env_val_2str(env, "PATH");
 	if ((*exec = get_full_executable(shell, *exec, path)))
 		return (fork_and_execute(shell, *exec));
 	else

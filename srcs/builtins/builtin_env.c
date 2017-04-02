@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 18:27:17 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/01 03:12:22 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/04/02 11:02:14 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ static t_env_s	*create_env_struct(char **cmd)
 	env_s = NULL;
 	if ((env_s = (t_env_s *)malloc(sizeof(t_env_s))))
 	{
-		env_s->null = op_null(cmd);
-		env_s->unset = op_unset(cmd);
 		env_s->set = op_setenv(cmd);
 		env_s->ignore = op_ignore(cmd);
 		env_s->cmd = op_cmd(cmd);
@@ -86,7 +84,7 @@ int				builtin_env(t_shell **shell)
 	t_env_s	*env_s;
 
 	if ((*shell)->cmd_len == 1)
-		print_env((*shell)->env_list);
+		print_setenv((*shell)->env);
 	else if ((env_s = create_env_struct((*shell)->cmd)))
 	{
 		if (has_errors(shell, env_s, (*shell)->cmd))
@@ -101,7 +99,7 @@ int				builtin_env(t_shell **shell)
 		else if (env_s->cmd == 1)
 			work_with_alterenv((*shell)->cmd, shell);
 		else if (env_s->cmd == 0)
-			work_environ_and_display((*shell)->cmd, shell);
+			work_environ_and_display((*shell)->cmd, shell, env_s);
 		free(env_s);
 	}
 	return (0);

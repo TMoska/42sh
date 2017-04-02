@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 14:00:23 by moska             #+#    #+#             */
-/*   Updated: 2017/04/02 01:21:27 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/02 04:40:33 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,31 +31,31 @@ void	do_setenv(t_shell **shell, char *name, char *value)
 	rebuild_str2env(shell);
 }
 
-int		error_checking(t_shell **shell)
+int		env_var_error_checking(char *env_str)
 {
 	int		i;
 	int		ret;
 
 	i = 0;
 	ret = 0;
-	if (!(ft_isalpha((*shell)->cmd[1][i]) || (*shell)->cmd[1][i] == '_'))
+	if (!(ft_isalpha(env_str[i]) || env_str[i] == '_'))
 	{
 		ft_putstr_fd("setenv: bad env var name: ", 2);
-		ft_putendl_fd((*shell)->cmd[1], 2);
+		ft_putendl_fd(env_str, 2);
 		ret = -1;
 	}
 	i++;
-	while ((*shell)->cmd[1][i])
+	while (env_str[i])
 	{
-		if (!(ft_isalnum((*shell)->cmd[1][i]) || (*shell)->cmd[1][i] == '_'))
+		if (!(ft_isalnum(env_str[i]) || env_str[i] == '_'))
 		{
 			ft_putstr_fd("setenv: bad env var name: ", 2);
-			ft_putendl_fd((*shell)->cmd[1], 2);
+			ft_putendl_fd(env_str, 2);
 			ret = -1;
+			break ;
 		}
 		i++;
 	}
-	(*shell)->ret = ret;
 	g_exit_code = ret;
 	return (ret);
 }
@@ -76,7 +76,7 @@ int		builtin_setenv(t_shell **shell)
 	}
 	else
 	{
-		if (error_checking(shell) == -1)
+		if (env_var_error_checking((*shell)->cmd[1]) == -1)
 			return (-1);
 		do_setenv(shell, (*shell)->cmd[1], (*shell)->cmd[2]);
 	}

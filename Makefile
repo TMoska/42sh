@@ -6,7 +6,7 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/03/31 03:59:13 by tmoska           ###   ########.fr        #
+#    Updated: 2017/04/02 06:59:45 by tmoska           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ history/history_search.c history/exclamation.c terminal/edition.c \
 terminal/edition_cursor_right.c reading/env_vals.c \
 execution/left_redirections2.c reading/prompt_utils.c history/history_search.c \
 history/exclamation.c history/single_exclamation_utils.c \
+builtins/builtin_env_prints2.c \
 
 SOURCES		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
