@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 05:55:01 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/02 12:15:02 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/02 14:43:11 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,8 @@ char			**split_command(char *cmd)
 		c = &cmd[offset + len];
 		if (*c == ' ' && is_fd_aggregator(&cmds, cmd, &offset, &len) == 0)
 		{
-			if (*(c = &cmd[offset + len]) == ' ')
-			{
-				offset++;
-				c = &cmd[offset + len];
-			}
+			if (*(c = &	cmd[offset]) == ' ')
+				c = &cmd[offset++];
 			len = 0;
 			continue ;
 		}
