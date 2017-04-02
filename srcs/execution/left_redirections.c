@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 20:58:35 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/28 19:27:23 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/01 00:28:35 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ static void	execute_single_left(t_tkn *node, int fd)
 	int		stdin;
 
 	stdin = dup(0);
-	close(0);
-	dup(fd);
+	dup2(fd, 0);
 	execute_node(node->left);
 	dup2(stdin, 0);
 	close(stdin);

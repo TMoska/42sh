@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:32:46 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/02 05:25:48 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/02 11:50:59 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ void		work_buffer(t_shell **shell, char *buffer)
 	i = ft_strlen(buffer);
 	write_buffer(shell, buffer);
 	(*shell)->term->tc_in -= i;
-	while (i--)
+	while (i)
+	{
 		move_right(shell, NULL, 1);
+		i--;
+	}
 	ft_printbuffer(shell);
 }

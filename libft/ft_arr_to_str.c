@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arr_del_at.c                                    :+:      :+:    :+:   */
+/*   ft_arr_to_str.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/04 16:02:53 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/02 05:01:21 by tmoska           ###   ########.fr       */
+/*   Created: 2017/04/02 09:56:54 by tmoska            #+#    #+#             */
+/*   Updated: 2017/04/02 10:00:05 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_arr_del_at(char **arr, int index)
+char	*ft_arr_to_str(char **arr)
 {
-	int		len;
+	char	*res;
+	char	*tmp;
 	int		i;
-	char	**new_arr;
 
-	if (!arr || !(len = ft_str2len(arr)))
+	if (!arr || !*arr)
 		return (NULL);
-	i = 0;
-	new_arr = ft_str2new(len - 1);
-	while (i < len)
+	res = ft_strdup(arr[0]);
+	i = 1;
+	while (arr[i])
 	{
-		new_arr[i] = ft_strdup(arr[((i + 1) <= index) ? i : (i + 1)]);
+		tmp = res;
+		res = ft_str3join(res, " ", arr[i]);
+		ft_strdel(&tmp);
 		i++;
 	}
-	ft_str2del(&arr);
-	return (new_arr);
+	return (res);
 }

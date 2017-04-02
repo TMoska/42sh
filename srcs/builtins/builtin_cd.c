@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 22:01:59 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/11 17:41:24 by moska            ###   ########.fr       */
+/*   Updated: 2017/04/01 18:08:24 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		builtin_cd(t_shell **shell)
 {
 	if (!(get_env_val(shell, "PWD")))
 		set_env_var(shell);
-	if ((fix_path_if_going_home(shell) == -1) || (prep_and_change(shell) == -1))
+	if ((prep_and_change(shell) == -1))
 		return (-1);
 	rebuild_str2env(shell);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 23:14:32 by moska             #+#    #+#             */
-/*   Updated: 2017/03/31 05:55:29 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/01 00:30:06 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ int		execute_right(t_tkn *node, int fd)
 	int		ret;
 
 	stdout = dup(1);
-	close(1);
-	dup(fd);
+	dup2(fd, 1);
 	ret = execute_node(node->left);
 	dup2(stdout, 1);
 	close(stdout);

@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:33:19 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/02 07:25:04 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/02 11:51:46 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,4 +156,5 @@ void				ft_print_list(t_list *lst);
 void				ft_str_replace(char **str, char *old, char *new,\
 					int only_one);
 char				**ft_splitquotes(char const *s, char c);
+char				*ft_arr_to_str(char **arr);
 #endif
