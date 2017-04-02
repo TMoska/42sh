@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/03/31 05:44:29 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/02 05:23:32 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ static int	execute(t_shell **shell, char *exec, char **ptr, char **env)
 		ret = -1;
 	else if (!pid)
 	{
-		execve(exec, ptr, env);
+		if (execve(exec, ptr, env) == -1)
+			ft_putstr("42sh: exec format error.");
 		ret = -1;
+		exit(-1);
 	}
 	else
 	{

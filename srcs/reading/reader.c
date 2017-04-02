@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/25 19:37:58 by moska             #+#    #+#             */
-/*   Updated: 2017/03/31 05:10:16 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/02 05:16:23 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	identify_key(t_shell **shell, char *buff, unsigned int key,\
 	(key == BTN_UP || key == BTN_DOWN) ? history(shell, key) : (0);
 	(key == BTN_CTRL_K || key == BTN_CTRL_L) ? cut_line(shell, key) : (0);
 	(key == BTN_CTRL_P) ? work_buffer(shell, (*shell)->clipboard) : (0);
-	(key == BTN_CTRL_I) ? copy(shell) : (0);
+	(key == BTN_CTRL_U) ? cmd_rewrite(shell) : (0);
 	if (key == BTN_LEFT || key == BTN_RIGHT ||
 		key == BTN_END || key == BTN_HOME)
 		move_cursor_sides(shell, key);
