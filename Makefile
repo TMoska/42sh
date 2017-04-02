@@ -6,7 +6,7 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/03/31 03:59:13 by tmoska           ###   ########.fr        #
+#    Updated: 2017/04/02 11:33:15 by adeletan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,3 +73,5 @@ fclean: clean
 	@make fclean -C $(LIB_PATH)
 
 re: fclean all
+
+.PHONY : re fclean clean all

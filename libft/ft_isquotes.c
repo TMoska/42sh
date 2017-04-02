@@ -6,7 +6,7 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 03:43:56 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/30 04:24:10 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/02 08:12:26 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,7 @@
 int		ft_isquotes(int c)
 {
 	c = (unsigned char)c;
-	return (c == '\'' || c == '`' || c == '\"');
+	if (c == '\'' || c == '`' || c == '\"')
+		return (1);
+	return (0);
 }

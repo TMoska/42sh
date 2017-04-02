@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 05:12:13 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/02 05:22:46 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/02 11:24:56 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ void	back_to_prompt(t_shell **shell, int keep)
 	int line;
 
 	line = (*shell)->term->tc_in;
+	if ((*shell)->term->tc_len == 0)
+	{
+		(*shell)->term->tc_in = 0;
+		return ;
+	}
 	while ((*shell)->term->tc_in > 0)
 		move_left(shell);
 	if (keep == 1)

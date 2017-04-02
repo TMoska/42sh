@@ -6,13 +6,13 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:52:28 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/30 04:23:46 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/02 10:20:10 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char			*ft_strncpyquo(char *dst, const char *src, size_t len)
+char			*ft_strncpyquo(char *dst, const char *src, size_t len)
 {
 	size_t	i;
 	char	d;
@@ -43,34 +43,16 @@ static char			*ft_strncpyquo(char *dst, const char *src, size_t len)
 
 int					ft_endquo(const char *str, int i)
 {
-	int		quotes_count;
-	char	c;
-	int		current_end;
-	int		temp_end;
+	char c;
 
 	c = str[i];
-	quotes_count = 1;
-	current_end = i;
-	temp_end = current_end;
-	while (str[++i])
-	{
-		if (str[i] == c && !ft_isspace(str[i + 1]) && str[i - 1] != '\\')
-		{
-			++quotes_count;
-			temp_end = i;
-		}
-		if (str[i] == c && ft_isspace(str[i + 1]) && str[i - 1] != '\\')
-		{
-			--quotes_count;
-			current_end = i;
-		}
-		if (quotes_count == 0)
-			return (current_end);
-	}
-	return (temp_end);
+	++i;
+	while (str[i] && (((str[i] == c && str[i - 1] == '\\') || (str[i] == '\'' && c != '\'')) || c != str[i]))
+		++i;
+	return (i + 1);
 }
 
-static size_t		ft_strlen_quo(const char *str, char c)
+size_t		ft_strlen_quo(const char *str, char c)
 {
 	int			i;
 

@@ -6,7 +6,7 @@
 #    By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/22 15:11:22 by tmoska            #+#    #+#              #
-#    Updated: 2017/03/30 21:06:18 by adeletan         ###   ########.fr        #
+#    Updated: 2017/04/02 11:33:37 by adeletan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,3 +58,5 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all
+
+.PHONY : all clean fclean re
