@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/02 11:27:54 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/03 23:40:57 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,6 +231,7 @@ char				**join_envs(char **env, char **new);
 char				**remove_duplicate_envs(char **env);
 void				execute_further(t_shell **shell, char **cmd, char **env);
 char				**get_command(char **command);
+size_t			setenvs_count(char **cmd);
 
 /*
 **	Reading
