@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edition_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 05:07:59 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/31 04:09:10 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/03 17:21:54 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int			ft_linesize(void)
 	struct winsize w;
 
 	ioctl(0, TIOCGWINSZ, &w);
-	return (w.ws_col);
+	return (100);
 }
 
 int			ft_currentline(t_shell **shell)
