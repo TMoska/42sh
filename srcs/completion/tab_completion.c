@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/02 05:53:31 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/03 17:18:07 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void				put_tab(t_c_tab *list, t_shell **shell, size_t val)
 		clear_cmdline(shell);
 		ft_bzero((*shell)->buff, ft_strlen((*shell)->buff));
 		reset_line(shell);
-		res = (val == 47 ? ft_str3join(tmp, list->content, "/") :
-				ft_str3join(tmp, list->content, " "));
+        res = (check_dir(list->content) ? ft_strjoin(tmp, list->content) :
+                ft_str3join(tmp, list->content, " "));
 		ft_strdel(&tmp);
 		work_buffer(shell, res);
 		ft_strdel(&res);
@@ -83,7 +83,7 @@ void				tab_completion(t_shell **shell, t_c_tab *list, size_t val)
 
 	ft_memset(buff, 0, 5);
 	tab_term(4);
-	while (val == 0 || (read(0, buff, 5)
+	while (val == 0 || (val != 69 && read(0, buff, 5)
 				&& (val = verify_btn((unsigned int)*buff)) > 1 && val < 9))
 	{
 		tab_term(1);
@@ -95,9 +95,9 @@ void				tab_completion(t_shell **shell, t_c_tab *list, size_t val)
 		}
 		else if (val == 0 && !(list = search_on_dir(".", *shell, NULL, 1)))
 			return (ft_putstr(tgetstr("rc", NULL)));
-		if (val == 0 && !(list = define_pading(list)))
+        if (val == 0 && !(list = define_pading(list, &val)))
 			break ;
-		if ((val = 1) && put_options(list) == 0)
+		if ((val = (val != 69 ? (1) : (69))) && put_options(list) == 0)
 			break ;
 		ft_memset(buff, 0, 5);
 	}

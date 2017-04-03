@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/02 07:07:18 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/03 17:16:36 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -398,7 +398,7 @@ char				*search_cmd(t_shell *shell);
 t_c_tab				*search_on_dir(char *path, t_shell *shell, t_c_tab *list,
                                         size_t bin);
 t_c_tab				*cmd_option(char *cmd, t_c_tab *list);
-t_c_tab				*define_pading(t_c_tab *list);
+t_c_tab				*define_pading(t_c_tab *list, size_t *val);
 int					put_options(t_c_tab *list);
 void				put_question(size_t i);
 struct s_pad		start_pad(struct winsize w, size_t nb_files);
@@ -410,5 +410,6 @@ t_c_tab				**init_right(t_c_tab **tmp, size_t *c, size_t *l,
 								size_t *page);
 void				tab_term(int v);
 void			    tab_lst_sort(t_c_tab **begin_list);
+int                 check_dir(char *tmp);
 
 #endif

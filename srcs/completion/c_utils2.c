@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/02 07:02:21 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/03 17:33:20 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ static t_c_tab		*cmd_option_2(t_c_tab *tmp, char *cmd)
 	tmp->place = 0;
 	tmp->col = 0;
 	tmp->page = 0;
-	tmp->content = ft_strdup(cmd);
+    if (check_dir(cmd) == 1)
+        tmp->content = ft_strjoin(cmd, "/");
+    else
+	   tmp->content = ft_strdup(cmd);
 	return (tmp);
 }
 

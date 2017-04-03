@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/02 07:01:00 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/03 16:51:32 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ int						put_options(t_c_tab *list)
 
 	MOVE_DOWN;
 	while (list && list->cursor != 1)
-		list = list->next;
-	if (!list)
+        list = list->next;
+    if (!list)
 		return (0);
 	a_page = nb_pages(list);
 	c_page = list->page;

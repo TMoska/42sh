@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/02 07:07:37 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/03 17:31:26 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,16 @@ t_c_tab				*option_dir(DIR *dir, t_c_tab *list, char **cmd)
 	tmp = list;
 	while (tmp)
 	{
-		tmp2 = ft_strdup(tmp->content);
+		tmp2 = ft_strjoin((*cmd), tmp->content);
 		ft_strdel(&tmp->content);
-		tmp->content = ft_strjoin((*cmd), tmp2);
-		ft_strdel(&tmp2);
+        if (check_dir(tmp2) == 1)
+    		tmp->content = ft_strjoin(tmp2, "/");
+        else
+            tmp->content = ft_strdup(tmp2);
 		tmp = tmp->next;
 	}
 	ft_strdel(cmd);
-	return (list);
+    return (list);
 }
 
 
@@ -99,7 +101,7 @@ t_c_tab				*search_on_dir(char *path, t_shell *shell, t_c_tab *list,
 
 	cmd = search_cmd(shell);
 	len = ft_strlen(cmd);
-	if (bin == 1 && cmd[len - 1] == '/' && (dir = opendir(cmd)))
+	if (bin == 1 && (dir = opendir(cmd)))
 		return ((list = option_dir(dir, list, &cmd)));
 	else if (!(dir = opendir(path)))
 		return (NULL);
@@ -110,6 +112,7 @@ t_c_tab				*search_on_dir(char *path, t_shell *shell, t_c_tab *list,
 	closedir(dir);
 	ft_strdel(&cmd);
     tab_lst_sort(&list);
-    ((list) ? (list->cursor = 1) : (0));
+    if (list && list->content)
+        list->cursor = 1;
 	return (list);
 }
