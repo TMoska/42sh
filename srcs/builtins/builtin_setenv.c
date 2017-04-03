@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 14:00:23 by moska             #+#    #+#             */
-/*   Updated: 2017/04/02 04:40:33 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/04 01:47:33 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ int		env_var_error_checking(char *env_str)
 
 	i = 0;
 	ret = 0;
-	if (!(ft_isalpha(env_str[i]) || env_str[i] == '_'))
+	if (env_str && (!(ft_isalpha(env_str[i]) || env_str[i] == '_')))
 	{
 		ft_putstr_fd("setenv: bad env var name: ", 2);
 		ft_putendl_fd(env_str, 2);
 		ret = -1;
 	}
 	i++;
-	while (env_str[i])
+	while (env_str && env_str[i])
 	{
 		if (!(ft_isalnum(env_str[i]) || env_str[i] == '_'))
 		{

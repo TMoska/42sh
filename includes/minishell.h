@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/02 11:53:28 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/04 00:22:57 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,7 @@ t_envl				*built_env_list(char **env);
 void				no_file_or_dir(t_shell **shell, t_bool name);
 void				not_a_dir(t_shell **shell);
 void				sig_callback(int s_num);
+void				catch_signals(int f);
 
 /*
 **	Cleaning
