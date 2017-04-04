@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 22:38:50 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/31 05:29:34 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/04 06:39:06 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		builtin_echo(char *cmd)
 		++i;
 	while (array[i])
 	{
-		ft_putstr(array[i]);
+		ft_putstr(treat_quotes(array[i]));
 		++i;
 		(array[i]) ? ft_putchar(' ') : (0);
 	}

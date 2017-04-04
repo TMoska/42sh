@@ -6,12 +6,12 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:52:28 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/04 06:18:50 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/04 06:38:33 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
+/*
 char		*ft_strncpyquo(char *dst, const char *src, size_t len)
 {
 	size_t	i;
@@ -40,7 +40,7 @@ char		*ft_strncpyquo(char *dst, const char *src, size_t len)
 		*(dst++) = '\0';
 	return (tmp);
 }
-
+*/
 int			ft_endquo(const char *str, int i)
 {
 	char c;
@@ -114,7 +114,7 @@ char		**ft_splitquotes(char const *s, char c)
 		while (*s == c && *s != '\0')
 			s++;
 		substr_len = ft_strlen_quo(s, c);
-		table[i] = ft_strncpyquo(ft_strnew(substr_len), s, substr_len);
+		table[i] = ft_strncpy(ft_strnew(substr_len), s, substr_len);
 		if (!table[i])
 			return (NULL);
 		s += substr_len;
