@@ -6,13 +6,13 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:52:28 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/02 10:20:10 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/04 04:56:46 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_strncpyquo(char *dst, const char *src, size_t len)
+char		*ft_strncpyquo(char *dst, const char *src, size_t len)
 {
 	size_t	i;
 	char	d;
@@ -41,13 +41,14 @@ char			*ft_strncpyquo(char *dst, const char *src, size_t len)
 	return (tmp);
 }
 
-int					ft_endquo(const char *str, int i)
+int			ft_endquo(const char *str, int i)
 {
 	char c;
 
 	c = str[i];
 	++i;
-	while (str[i] && (((str[i] == c && str[i - 1] == '\\') || (str[i] == '\'' && c != '\'')) || c != str[i]))
+	while (str[i] && (((str[i] == c && str[i - 1] == '\\')
+		|| (str[i] == '\'' && c != '\'')) || c != str[i]))
 		++i;
 	return (i + 1);
 }
@@ -68,7 +69,7 @@ size_t		ft_strlen_quo(const char *str, char c)
 	return (i);
 }
 
-static int			ft_count_quo(char const *s, char c)
+static int	ft_count_quo(char const *s, char c)
 {
 	int		i;
 	int		wc;
@@ -94,7 +95,7 @@ static int			ft_count_quo(char const *s, char c)
 	return (wc);
 }
 
-char				**ft_splitquotes(char const *s, char c)
+char		**ft_splitquotes(char const *s, char c)
 {
 	char	**table;
 	int		size;

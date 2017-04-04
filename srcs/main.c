@@ -6,7 +6,7 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 11:05:54 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/04 01:10:21 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/04 03:45:48 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,13 @@ void	sig_callback(int s_num)
 		clean_buffer(&shell);
 }
 
-void	catch_signals(int f)
+void	catch_signals(void)
 {
 	int i;
 
 	i = 32;
 	while (i > 0)
 		signal(i--, sig_callback);
-	(void)f;
 }
 
 int		run_shell(t_shell **shell)
@@ -41,7 +40,7 @@ int		run_shell(t_shell **shell)
 	{
 		(*shell)->history->at_index = -1;
 		print_prompt(shell, NULL);
-		catch_signals(1);
+		catch_signals();
 		if ((*shell)->term->tc_ok)
 			read_input(shell, NULL);
 		else

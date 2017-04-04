@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   treatquotes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 07:01:22 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/02 11:32:45 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/04 03:33:13 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "../../libft/includes/libft.h"
 
 char	*remove_quotes(char *temp)
 {
@@ -28,11 +27,9 @@ char	*remove_quotes(char *temp)
 	end = ft_strdup(end);
 	while (end[index])
 	{
-		if ((end[index] == '\\' && end[index + 1] == '\"' && c != '\'') 
+		if ((end[index] == '\\' && end[index + 1] == '\"' && c != '\'')
 				|| (end[index] == '\'' && c == '\'' && end[index + 1]))
-		{
 			end = ft_strndelat(end, index, 1);
-		}
 		else
 			++index;
 	}
@@ -50,7 +47,8 @@ char	*get_new_part(char *cmd, char **temp)
 	{
 		if (ft_isquotes(cmd[index]) == 0)
 		{
-			while (cmd[index] && (!ft_isquotes(cmd[index]) || (ft_isquotes(cmd[index]) && cmd[index - 1] == '\\')))
+			while (cmd[index] && (!ft_isquotes(cmd[index]) ||\
+						(ft_isquotes(cmd[index]) && cmd[index - 1] == '\\')))
 				++index;
 			*temp = ft_strsub(cmd, 0, index);
 			return (&cmd[index]);
@@ -74,12 +72,8 @@ char	*treat_quotes(char *cmd)
 	while (cmd && cmd[0] != '\0')
 	{
 		cmd = get_new_part(cmd, &temp);
-	//	ft_putendl(temp);
-	//	ft_putendl("h");
 		temp = remove_quotes(temp);
-//		ft_putendl(temp);
 		endcmd = ft_strjoin(endcmd, temp);
 	}
-		return (endcmd);
-
+	return (endcmd);
 }

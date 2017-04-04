@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 06:57:35 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/04 01:42:08 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/04 04:36:30 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,23 +80,27 @@ char		**remove_duplicate_envs(char **env)
 
 void		execute_further(t_shell **shell, char **cmd, char **env)
 {
-	char	**tmp_env;
-	char	**ptr;
-	char	*commands;
-	char	**cmd_tmp;
-	int		cmd_len_tmp;
+	char		**tmp_env;
+	char		**ptr;
+	char		*commands;
+	char		**cmd_tmp;
+	t_envl		*envl_list;
 
 	ptr = get_command(cmd);
 	cmd_tmp = (*shell)->cmd;
-	cmd_len_tmp = (*shell)->cmd_len;
 	commands = ft_arr_to_str(ptr);
 	tmp_env = (*shell)->env;
 	(*shell)->cmd = ft_splitquotes(commands, ' ');
 	(*shell)->cmd_len = ft_str2len((*shell)->cmd);
 	(*shell)->env = env;
+	envl_list = (*shell)->env_list;
+	(*shell)->env_list = built_env_list(env);
 	ft_strdel(&commands);
 	test_n_execute(ptr[0], ptr[0], ptr, env);
+	ft_str2del(&(*shell)->cmd);
 	(*shell)->cmd = cmd_tmp;
-	(*shell)->cmd_len = cmd_len_tmp;
+	(*shell)->cmd_len = ft_str2len(cmd_tmp);
 	(*shell)->env = tmp_env;
+	clean_env_list(&(*shell)->env_list);
+	(*shell)->env_list = envl_list;
 }

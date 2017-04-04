@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/04/04 01:13:37 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/04 05:05:06 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	execute(t_shell **shell, char *exec, char **ptr, char **env)
 		if (execve(exec, ptr, env) == -1)
 			ft_putstr("42sh: exec format error.");
 		ret = -1;
-		exit(-1);
+		exit(ret);
 	}
 	else
 	{
@@ -34,12 +34,8 @@ static int	execute(t_shell **shell, char *exec, char **ptr, char **env)
 		signal(SIGINT, SIG_IGN);
 		waitpid(pid, &status, 0);
 		(*shell)->ret = WEXITSTATUS(status);
-		if (WIFEXITED(status))
-		{
+		if (WIFEXITED(status) && !(ret = -1))
 			g_exit_code = WEXITSTATUS(status);
-			if (WEXITSTATUS(status))
-				ret = -1;
-		}
 	}
 	return (ret);
 }
@@ -51,7 +47,7 @@ int			test_n_execute(char *cmd, char *exec, char **ptr, char **env)
 
 	shell = get_shell(NULL);
 	ret = 0;
-	if (fix_path_if_going_home(&shell) == -1)
+	if (ft_strcmp(ptr[0], "env") != 0 && fix_path_if_going_home(&shell) == -1)
 		return (-1);
 	if ((ret = try_a_builtin(&shell, ptr[0], cmd)) < 1)
 	{

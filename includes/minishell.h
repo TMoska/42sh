@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/04 02:38:50 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/04 04:53:45 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ t_envl				*built_env_list(char **env);
 void				no_file_or_dir(t_shell **shell, t_bool name);
 void				not_a_dir(t_shell **shell);
 void				sig_callback(int s_num);
-void				catch_signals(int f);
+void				catch_signals(void);
 
 /*
 **	Cleaning
@@ -233,6 +233,7 @@ char				**join_envs(char **env, char **new);
 char				**remove_duplicate_envs(char **env);
 void				execute_further(t_shell **shell, char **cmd, char **env);
 char				**get_command(char **command);
+size_t				setenvs_count(char **cmd);
 
 /*
 **	Reading
@@ -302,6 +303,7 @@ int					single_excl_type(char *str);
 */
 
 int					do_quotes(t_shell **shell);
+int					ft_isescapechar(char c);
 char				**splitquote_str2(char *cmd);
 
 /*

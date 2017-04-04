@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:25:57 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/04 02:45:54 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/04 04:58:28 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,11 @@ void		move_cursor_alt(t_shell **s, unsigned int key)
 		return ;
 	if (key == BTN_ALEFT)
 	{
-		if (ft_isspace((*s)->buff[(*s)->term->tc_in - 1]) && (*s)->term->tc_in != 0)
+		if (ft_isspace((*s)->buff[(*s)->term->tc_in - 1])
+			&& (*s)->term->tc_in != 0)
 			move_left(s);
-		while (ft_isspace((*s)->buff[(*s)->term->tc_in]) && (*s)->term->tc_in != 0)
+		while (ft_isspace((*s)->buff[(*s)->term->tc_in])
+			&& (*s)->term->tc_in != 0)
 			move_left(s);
 		while (!(ft_isspace((*s)->buff[(*s)->term->tc_in - 1]) ||
 			(*s)->term->tc_in == 0))

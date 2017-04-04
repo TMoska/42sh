@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str2del.c                                       :+:      :+:    :+:   */
+/*   ft_isescapechar.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/16 22:13:47 by moska             #+#    #+#             */
-/*   Updated: 2017/04/04 04:22:39 by moska            ###   ########.fr       */
+/*   Created: 2017/04/03 22:21:51 by ryaoi             #+#    #+#             */
+/*   Updated: 2017/04/03 22:25:09 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_str2del(char ***tab)
+int			ft_isescapechar(char c)
 {
-	int i;
-
-	i = 0;
-	if (!tab || !(*tab) || !*(*tab))
-		return ;
-	while ((*tab)[i])
-	{
-		ft_strdel(&((*tab)[i]));
-		i++;
-	}
-	free(*tab);
+	return ((c == 't' || c == 'a' || c == 'b' ||
+			c == 'c' || c == 'e' || c == 'f' || c == 'n'
+			|| c == 'r' || c == 'v') || c == '\n');
 }

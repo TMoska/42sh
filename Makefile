@@ -6,7 +6,7 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/04/04 00:12:17 by adeletan         ###   ########.fr        #
+#    Updated: 2017/04/04 03:48:40 by moska            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ history/history_search.c history/exclamation.c terminal/edition.c \
 terminal/edition_cursor_right.c reading/env_vals.c quotes/splitquote_str2.c \
 execution/left_redirections2.c reading/prompt_utils.c history/history_search.c \
 history/exclamation.c history/single_exclamation_utils.c \
-builtins/builtin_env_prints2.c \
+builtins/builtin_env_prints2.c quotes/ft_isescapechar.c \
 
 SOURCES		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
@@ -56,7 +56,7 @@ all: $(NAME)
 
 $(NAME): $(LIB) $(OBJECTS)
 	@$(GCC) $(FLAGS) -o $@ $^ $(LIB_LINK) $(EXTRA_LIB)
-	@echo "\033[0;32mSuccess: \033[0mminishell compiled"
+	@echo "\033[0;32mSuccess: \033[0m21sh compiled"
 	@echo "\033[0;32mDone\033[0m"
 
 $(LIB):
