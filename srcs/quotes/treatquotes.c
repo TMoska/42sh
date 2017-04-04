@@ -6,13 +6,23 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 07:01:22 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/04 03:33:13 by moska            ###   ########.fr       */
+/*   Updated: 2017/04/04 11:12:12 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*remove_quotes(char *temp)
+static char	*ft_delatfree(char **str, int index)
+{
+	char	*tmp;
+
+	tmp = *str;
+	*str = ft_strndelat(*str, index, 1);
+	ft_strdel(&tmp);
+	return (*str);
+}
+
+char		*remove_quotes(char *temp)
 {
 	int		index;
 	char	c;
@@ -20,25 +30,50 @@ char	*remove_quotes(char *temp)
 
 	index = 0;
 	c = temp[0];
-	if (ft_isquotes(c))
-		end = &temp[index + 1];
-	else
-		end = &temp[index];
+	end = &temp[index + ft_isquotes(c)];
 	end = ft_strdup(end);
 	while (end[index])
-	{
-		if ((end[index] == '\\' && end[index + 1] == '\"' && c != '\'')
+		if ((end[index] == '\\' && end[index + 1] == '\"' && c != '\'') ||
+		(end[index] == '\\' && end[index + 1] == '`' && c != '\'')
 				|| (end[index] == '\'' && c == '\'' && end[index + 1]))
-			end = ft_strndelat(end, index, 1);
+			end = ft_delatfree(&end, index);
+		else if (end[index] == '\\' && end[index + 1] == '\\')
+		{
+			end = ft_delatfree(&end, index);
+			if (end[index] == '\\')
+				++index;
+		}
 		else
 			++index;
-	}
 	if (ft_isquotes(end[index - 1]) && ft_isquotes(c))
 		end[index - 1] = '\0';
+	ft_strdel(&temp);
 	return (end);
 }
 
-char	*get_new_part(char *cmd, char **temp)
+static char	*test(char *cmd)
+{
+	int		index;
+	char	*str;
+
+	index = 0;
+	while (cmd[index])
+	{
+		if (cmd[index] == '\\')
+		{
+			str = cmd;
+			cmd = ft_strndelat(cmd, index, 1);
+			ft_strdel(&str);
+			if (cmd[index] == '\\')
+				++index;
+		}
+		else
+			++index;
+	}
+	return (cmd);
+}
+
+char		*get_new_part(char *cmd, char **temp)
 {
 	int index;
 
@@ -62,9 +97,9 @@ char	*get_new_part(char *cmd, char **temp)
 	return (NULL);
 }
 
-char	*treat_quotes(char *cmd)
+char		*treat_quotes(char *cmd)
 {
-	char	*newcmd;
+	char	*tmp;
 	char	*endcmd;
 	char	*temp;
 
@@ -72,8 +107,14 @@ char	*treat_quotes(char *cmd)
 	while (cmd && cmd[0] != '\0')
 	{
 		cmd = get_new_part(cmd, &temp);
-		temp = remove_quotes(temp);
+		if (ft_isquotes(temp[0]))
+			temp = remove_quotes(temp);
+		else
+			temp = test(temp);
+		tmp = endcmd;
 		endcmd = ft_strjoin(endcmd, temp);
+		ft_strdel(&temp);
+		ft_strdel(&tmp);
 	}
 	return (endcmd);
 }

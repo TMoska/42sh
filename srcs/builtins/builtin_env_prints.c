@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 18:16:30 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/04 03:47:45 by moska            ###   ########.fr       */
+/*   Updated: 2017/04/04 05:22:38 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void		work_environ_and_display(char **cmd, t_shell **shell,\
 {
 	char		**tmp;
 	char		**joint;
-	t_envl	*env_list;
+	t_envl		*env_list;
 
 	if (setenvs_count(cmd) != 0)
 	{

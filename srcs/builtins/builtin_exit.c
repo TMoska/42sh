@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 23:32:19 by moska             #+#    #+#             */
-/*   Updated: 2017/04/02 00:54:08 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/04 07:23:16 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int			builtin_exit(t_shell **shell)
 		manage_return_code(shell);
 	mid_clean_shell(shell);
 	clean_shell(shell);
+	term_trigger(shell, 1);
 	exit((*shell)->ret);
 	return (0);
 }

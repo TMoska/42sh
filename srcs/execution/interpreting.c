@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/04/04 04:03:42 by moska            ###   ########.fr       */
+/*   Updated: 2017/04/04 05:58:51 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,8 @@ static int	execute(t_shell **shell, char *exec, char **ptr, char **env)
 	else if (!pid)
 	{
 		if (execve(exec, ptr, env) == -1)
-		{
-			ft_putstr("42sh: exec format error.");
-			ret = -1;
-		}
+			ft_putendl_fd("42sh: exec format error.", 2);
+		ret = -1;
 		exit(ret);
 	}
 	else
@@ -36,12 +34,8 @@ static int	execute(t_shell **shell, char *exec, char **ptr, char **env)
 		signal(SIGINT, SIG_IGN);
 		waitpid(pid, &status, 0);
 		(*shell)->ret = WEXITSTATUS(status);
-		if (WIFEXITED(status))
-		{
+		if (WIFEXITED(status) && !(ret = -1))
 			g_exit_code = WEXITSTATUS(status);
-			if (WEXITSTATUS(status))
-				ret = -1;
-		}
 	}
 	return (ret);
 }

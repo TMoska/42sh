@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/04 03:50:44 by moska            ###   ########.fr       */
+/*   Updated: 2017/04/04 06:37:43 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,7 @@ void				clean_shell(t_shell **shell);
 void				mid_clean_shell(t_shell **shell);
 void				clean_btree(t_tkn *tree);
 void				del_lst_str(void **content, size_t *content_size);
+char				*treat_quotes(char *cmd);
 
 /*
 **	Environment list custom struct & functions
@@ -233,7 +234,7 @@ char				**join_envs(char **env, char **new);
 char				**remove_duplicate_envs(char **env);
 void				execute_further(t_shell **shell, char **cmd, char **env);
 char				**get_command(char **command);
-size_t			setenvs_count(char **cmd);
+size_t				setenvs_count(char **cmd);
 
 /*
 **	Reading
