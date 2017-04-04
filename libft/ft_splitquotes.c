@@ -6,7 +6,7 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:52:28 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/04 08:19:56 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/04 10:25:51 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ size_t		ft_strlen_quo(const char *str, char c)
 	{
 		if ((str[i] == '"' || str[i] == '`' || str[i] == 39) &&
 				(str[i - 1] != '\\'))
-			i = ft_endquo(str, i);
+			i = ft_endquo(str, i) + 1;
 		else
 			++i;
 	}
