@@ -6,7 +6,7 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 07:01:22 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/04 06:41:52 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/04 07:51:48 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,25 @@ char	*remove_quotes(char *temp)
 	if (ft_isquotes(end[index - 1]) && ft_isquotes(c))
 		end[index - 1] = '\0';
 	return (end);
+}
+
+static char *test(char *cmd)
+{
+	int index;
+
+	index = 0;
+	while (cmd[index])
+	{
+		if (cmd[index] == '\\')
+		{
+			cmd = ft_strndelat(cmd, index, 1);
+			if (cmd[index] == '\\')
+				++index;
+		}
+		else
+			++index;
+	}
+	return (cmd);
 }
 
 char	*get_new_part(char *cmd, char **temp)
@@ -72,7 +91,10 @@ char	*treat_quotes(char *cmd)
 	while (cmd && cmd[0] != '\0')
 	{
 		cmd = get_new_part(cmd, &temp);
-		temp = remove_quotes(temp);
+		if (ft_isquotes(temp[0]))
+			temp = remove_quotes(temp);
+		else
+			temp = test(temp);
 		endcmd = ft_strjoin(endcmd, temp);
 	}
 	return (endcmd);
