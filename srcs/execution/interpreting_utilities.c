@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 17:52:25 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/02 01:42:37 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/04 04:38:51 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ char	*get_env_val_2str(char **env, char *name)
 	int		y;
 
 	i = 0;
+	if (!env || !(*env) || !*(*env))
+		return (NULL);
 	while (env[i])
 	{
 		y = 0;
