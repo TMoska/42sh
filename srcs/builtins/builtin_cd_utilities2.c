@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 22:10:26 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/12 23:36:19 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/04 04:25:48 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static char	*fix_path_special_cases(t_shell **shell, char *path)
 	if (!path)
 	{
 		if (!home)
-			ft_putendl_fd("cd: no HOME env variable set", 2);
+			ft_putendl_fd("error: no HOME env variable set", 2);
 		return (home);
 	}
 	else if (ft_strcmp(path, "-") == 0)
@@ -78,7 +78,7 @@ static char	*fix_path_special_cases(t_shell **shell, char *path)
 		else
 		{
 			if (!home)
-				ft_putendl_fd("cd: no HOME env variable set", 2);
+				ft_putendl_fd("error: no HOME env variable set", 2);
 			return (home);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 22:01:59 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/01 18:08:24 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/04 04:25:20 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		fix_path_if_going_home(t_shell **shell)
 			ft_strdel(&tmp);
 			if (!home)
 			{
-				ft_putendl_fd("cd: no HOME env variable set", 2);
+				ft_putendl_fd("error: no HOME env variable set", 2);
 				return (-1);
 			}
 		}
