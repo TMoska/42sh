@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 21:17:52 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/03 17:31:20 by moska            ###   ########.fr       */
+/*   Updated: 2017/04/04 05:18:22 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ static char	*get_full_executable(t_shell **shell, char *exec, char *path)
 		return (tmp);
 	}
 	if (access(cmd, F_OK) == 0)
+	{
+		ft_str2del(&paths);
 		return (ft_strdup(cmd));
+	}
 	ft_str2del(&paths);
 	return (NULL);
 }
