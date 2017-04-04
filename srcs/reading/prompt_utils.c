@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 00:54:38 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/31 01:34:42 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/04 06:28:09 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	build_prompt(t_shell **shell)
 
 	git = get_git_branch();
 	path = ft_strdup(get_env_val(shell, "PWD"));
-	if ((home = get_env_val(shell, "HOME")) && ft_strcmp(home, path) != 0)
+	home = get_env_val(shell, "HOME");
+	if (home && home[0] != '\0' && ft_strstr(path, home))
 		ft_str_replace(&path, home, "~", 0);
 	ft_putstr("\033[0;35m");
 	if ((logname = get_env_val(shell, "LOGNAME")))
