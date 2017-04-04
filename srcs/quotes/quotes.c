@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 15:14:49 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/30 05:54:17 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/03 22:24:09 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,26 @@ t_quotes	**init_quotes(t_quotes **q)
 int			quote_incomplete(t_quotes **q, char *buff)
 {
 	q = init_quotes(q);
-	while (buff && *buff)
+	if (*buff == '\\' && !*(buff + 1))
+		(*q)->oneline ^= 1;
+	while (buff && *buff && (*q)->oneline != 1)
 	{
-		if (*buff == '\\' && !*(buff + 1))
-			(*q)->oneline ^= 1;
-		else if (*buff == '\\' && *(buff - 1) != '\\')
-			(*q)->escape ^= 1;
-		else if (*buff == '"' && *(buff - 1) != '\\'
-				&& !(*q)->squote && !(*q)->bquote)
-			(*q)->dquote ^= !(*q)->escape;
-		else if (*buff == '\'' && *(buff - 1) != '\\'
-				&& !(*q)->dquote && !(*q)->bquote)
-			(*q)->squote ^= !(*q)->escape;
+		if ((*q)->dquote && ft_isescapechar(*buff) && *(buff - 1) == '\\')
+			(*q)->escape = 0;
+		if (*buff == '\\')
+			(*q)->escape = ~(*q)->escape;
+		else if (((*buff) == '\"' || (*buff) == '\'' || (*buff) == '`')
+				&& *(buff - 1) == '\\' && (*q)->dquote && (*q)->escape
+				&& !(*q)->bquote && !(*q)->squote)
+			(*q)->escape = ~(*q)->escape;
+		else if (*buff == '\"' && !(*q)->escape
+				&& !(*q)->bquote && !(*q)->squote)
+			(*q)->dquote = ~(*q)->dquote;
+		else if (*buff == '\'' && !(*q)->dquote && !(*q)->bquote)
+			(*q)->squote = ~(*q)->squote;
 		else if (*buff == '`' && *(buff - 1) != '\\'
 				&& !(*q)->squote)
-			(*q)->bquote ^= !(*q)->escape;
-		else
-			(*q)->escape = 0;
+			(*q)->bquote = ~(*q)->bquote;
 		buff++;
 	}
 	return ((*q)->oneline || (*q)->bquote || (*q)->squote || (*q)->dquote);

@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 03:57:10 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/31 04:00:49 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/03 20:02:12 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,20 @@ static void	join_words_to_buff(t_shell **shell, char **words)
 	}
 }
 
+int			status_env(t_shell **shell, char ***words, int i)
+{
+	char	*tmp;
+
+	if (ft_strstr((*words)[i], "$?"))
+	{
+		tmp = ft_itoa((*shell)->ret);
+		ft_str_replace(&(*words)[i], "$?", tmp, 1);
+		ft_strdel(&tmp);
+		return (1);
+	}
+	return (0);
+}
+
 int			replace_env_vals(t_shell **shell)
 {
 	char	**words;
@@ -80,6 +94,8 @@ int			replace_env_vals(t_shell **shell)
 	{
 		if (!within_single_q(words[i]) && (pt = ft_strchr(words[i], '$')))
 		{
+			if (status_env(shell, &words, i))
+				continue ;
 			if (!(tmp = dup_env_val(pt)))
 				return (-1);
 			if ((env_val = get_env_val(shell, &(tmp[1]))))
