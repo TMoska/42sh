@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/04 00:49:11 by moska            ###   ########.fr       */
+/*   Updated: 2017/04/04 03:50:44 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@
 # define BTN_CTRL_P 16
 # define BTN_CTRL_I 9
 # define BTN_CTRL_K 11
-# define BTN_CTRL_L	12
+# define BTN_CTRL_L 12
+# define BTN_CTRL_U	21
 
 /*
 **	Termcaps commands
@@ -174,6 +175,7 @@ t_envl				*built_env_list(char **env);
 void				no_file_or_dir(t_shell **shell, t_bool name);
 void				not_a_dir(t_shell **shell);
 void				sig_callback(int s_num);
+void				catch_signals(void);
 
 /*
 **	Cleaning
@@ -277,6 +279,7 @@ void				goto_endcmdline(t_shell **shell);
 int					ft_isfirstline(t_shell **shell);
 int					ft_currentline(t_shell **shell);
 int					ft_getpart(t_shell **shell, char **str);
+void				cmd_rewrite(t_shell **shell);
 
 /*
 **	History
