@@ -6,13 +6,13 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 07:01:22 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/04 07:51:48 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/04 08:21:57 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*remove_quotes(char *temp)
+char		*remove_quotes(char *temp)
 {
 	int		index;
 	char	c;
@@ -39,7 +39,7 @@ char	*remove_quotes(char *temp)
 	return (end);
 }
 
-static char *test(char *cmd)
+static char	*test(char *cmd)
 {
 	int index;
 
@@ -58,7 +58,7 @@ static char *test(char *cmd)
 	return (cmd);
 }
 
-char	*get_new_part(char *cmd, char **temp)
+char		*get_new_part(char *cmd, char **temp)
 {
 	int index;
 
@@ -82,7 +82,7 @@ char	*get_new_part(char *cmd, char **temp)
 	return (NULL);
 }
 
-char	*treat_quotes(char *cmd)
+char		*treat_quotes(char *cmd)
 {
 	char	*endcmd;
 	char	*temp;

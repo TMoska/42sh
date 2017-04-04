@@ -6,41 +6,12 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:52:28 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/04 06:38:33 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/04 08:19:56 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-/*
-char		*ft_strncpyquo(char *dst, const char *src, size_t len)
-{
-	size_t	i;
-	char	d;
-	char	*tmp;
 
-	i = 0;
-	tmp = (char *)dst;
-	d = *src;
-	while (i++ < len && *src)
-	{
-		if ((*(src + 1) == d || !ft_isquotes(d)) && *src == '\\' && (*(src + 1)
-		== '"' || *(src + 1) == '`' || *(src + 1) == 39) && (d = *(src + 1)))
-			++src;
-		if ((*src == '"' || *src == '`' || *src == 39) && *(src - 1) != '\\' &&
-			(*src == d || !ft_isquotes(d)) && (d = *src))
-			++src;
-		else
-		{
-			*dst = *src;
-			dst++;
-			src++;
-		}
-	}
-	while (i++ < len)
-		*(dst++) = '\0';
-	return (tmp);
-}
-*/
 int			ft_endquo(const char *str, int i)
 {
 	char c;
