@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   semicolon.c                                        :+:      :+:    :+:   */
+/*   ft_isinquotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/11 23:21:50 by moska             #+#    #+#             */
-/*   Updated: 2017/04/05 06:23:48 by adeletan         ###   ########.fr       */
+/*   Created: 2017/04/05 06:30:27 by adeletan          #+#    #+#             */
+/*   Updated: 2017/04/05 06:35:23 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	execute_semicolon(t_tkn *node)
+int		ft_isinquotes(char *cmd, int pos)
 {
-	int	left;
-	int	right;
+	int index;
 
-	left = execute_node(node->left);
-	right = execute_node(node->right);
-	return (!left && !right);
+	index = 0;
+	while (index < pos)
+	{
+		if (ft_isquotes(cmd[index]))
+		{
+			index = ft_endquo(cmd, index);
+			if (index > pos)
+				return (1);
+		}
+		++index;
+	}
+	return (0);
 }
