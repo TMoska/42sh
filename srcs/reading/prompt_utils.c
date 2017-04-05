@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 00:54:38 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/04 06:53:35 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/05 06:44:23 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	build_prompt(t_shell **shell)
 	char	*home;
 
 	git = get_git_branch();
-	path = ft_strdup(get_env_val(shell, "PWD"));
+	path = getcwd(NULL, 0);
 	home = get_env_val(shell, "HOME");
 	if (home && home[0] != '\0' && ft_strstr(path, home))
 		ft_str_replace(&path, home, "~", 0);
