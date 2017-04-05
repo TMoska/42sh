@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 06:57:35 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/05 20:39:07 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/06 01:33:07 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void		execute_further(t_shell **shell, char **cmd, char ***env)
 	commands = ft_arr_to_str(ptr);
 	tmp_env = (*shell)->env;
 	(*shell)->env = *env;
-	(*shell)->cmd = ft_splitquotes(commands, ' ');
+	(*shell)->cmd = ft_splittreat(commands, ' ');
 	(*shell)->cmd_len = ft_str2len((*shell)->cmd);
 	envl_list = (*shell)->env_list;
 	(*shell)->env_list = built_env_list(*env);
