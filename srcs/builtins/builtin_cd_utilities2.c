@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 22:10:26 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/12 23:36:19 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/05 04:47:19 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,7 @@ static void	start_moving(t_shell **shell, char *path, struct stat *stats,\
 		if (S_ISLNK(stats->st_mode) && p_option == 0)
 			change_symlink_directory(shell, path);
 		else
-		{
-			if (p_option)
-				path = (*shell)->cmd[2];
 			change_directory(shell, path);
-		}
 	}
 }
 
@@ -72,7 +68,7 @@ static char	*fix_path_special_cases(t_shell **shell, char *path)
 	if (!path)
 	{
 		if (!home)
-			ft_putendl_fd("cd: no HOME env variable set", 2);
+			ft_putendl_fd("error: no HOME env variable set", 2);
 		return (home);
 	}
 	else if (ft_strcmp(path, "-") == 0)
@@ -82,7 +78,7 @@ static char	*fix_path_special_cases(t_shell **shell, char *path)
 		else
 		{
 			if (!home)
-				ft_putendl_fd("cd: no HOME env variable set", 2);
+				ft_putendl_fd("error: no HOME env variable set", 2);
 			return (home);
 		}
 	}
@@ -99,14 +95,13 @@ int			prep_and_change(t_shell **shell)
 	int			ret;
 
 	ret = -1;
-	path = (*shell)->cmd[1];
 	p_option = 0;
+	if (parse_cd_options(shell, &p_option, &path) == -1)
+		return (ret);
 	if (!(path = fix_path_special_cases(shell, path)))
 		return (ret);
 	if ((stats = (struct stat *)malloc(sizeof(struct stat))))
 	{
-		if ((*shell)->cmd[1])
-			p_option = (ft_strcmp((*shell)->cmd[1], "-P") == 0);
 		if ((opened = opendir(path)) || p_option)
 		{
 			start_moving(shell, path, stats, p_option);

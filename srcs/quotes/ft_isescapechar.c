@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_isescapechar.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/18 12:35:25 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/02 07:53:18 by adeletan         ###   ########.fr       */
+/*   Created: 2017/04/03 22:21:51 by ryaoi             #+#    #+#             */
+/*   Updated: 2017/04/03 22:25:09 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strchr(const char *s, int c)
+#include "minishell.h"
+
+int			ft_isescapechar(char c)
 {
-	while (*s)
-	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
-	}
-	if (*s == c)
-		return ((char *)s);
-	return (0);
+	return ((c == 't' || c == 'a' || c == 'b' ||
+			c == 'c' || c == 'e' || c == 'f' || c == 'n'
+			|| c == 'r' || c == 'v') || c == '\n');
 }

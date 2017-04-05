@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 23:43:13 by moska             #+#    #+#             */
-/*   Updated: 2017/03/30 17:46:55 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/05 23:34:36 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void		re_assign_to_tkns(t_shell **shell, t_tkn *sorted)
 	}
 	ft_strdel(&(*shell)->buff);
 	(*shell)->buff = res;
-	get_tokens(shell, 0);
+	get_tokens(shell);
 	clean_btree(sorted);
 }
 

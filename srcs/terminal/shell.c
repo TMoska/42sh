@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:29:07 by moska             #+#    #+#             */
-/*   Updated: 2017/03/29 01:59:26 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/04 04:15:30 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_envl		*built_env_list(char **env)
 
 	tmp_env = NULL;
 	new = NULL;
+	if (!env)
+		return (NULL);
 	while (*env)
 	{
 		tmp_env = ft_strsplit(*env, '=');

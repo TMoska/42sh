@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:33:19 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/28 22:06:40 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/05 07:25:08 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef	struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+int					ft_isinquotes(char const *cmd, int pos);
+char				**ft_strsplitin(char const *str, char c);
 size_t				ft_strlen(const char *str);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -63,6 +65,8 @@ char				*ft_strcat(char *s1, const char *s2);
 char				*ft_strncat(char *s1, const char *s2, size_t n);
 size_t				ft_strlcat(char *dst, const char *src,
 					size_t size);
+char				*ft_strncpyquo(char *dst, const char *src, size_t len);
+size_t				ft_strlen_quo(const char *str, char c);
 int					ft_endquo(const char *str, int i);
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
@@ -152,4 +156,5 @@ void				ft_print_list(t_list *lst);
 void				ft_str_replace(char **str, char *old, char *new,\
 					int only_one);
 char				**ft_splitquotes(char const *s, char c);
+char				*ft_arr_to_str(char **arr);
 #endif

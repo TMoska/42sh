@@ -6,7 +6,7 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 11:06:18 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/30 04:29:47 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/05 19:41:19 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void			history(t_shell **shell, unsigned int key)
 	(key == BTN_DOWN && (h->at_index == -1)))
 		return ;
 	clear_cmdline(shell);
-	(*shell)->term->tc_len = 0;
+	reset_line(shell);
 	(key == BTN_UP) ? find_next_hist(shell) : find_prev_hist(shell);
 	set_hist_of_index(shell, (*shell)->history->at_index);
 }

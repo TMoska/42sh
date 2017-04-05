@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*   ft_splittreat.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/16 21:42:06 by moska             #+#    #+#             */
-/*   Updated: 2017/04/05 23:34:21 by ede-sous         ###   ########.fr       */
+/*   Created: 2017/04/05 05:40:47 by adeletan          #+#    #+#             */
+/*   Updated: 2017/04/05 06:29:25 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			tokenize(t_shell **shell)
+char	**ft_splittreat(char *cmd, char c)
 {
-	if (get_tokens(shell) == 1)
-		return (1);
-	reorganize_tokens(shell);
-	scan_heredocs(shell);
-	(*shell)->tree = build_tree((*shell)->tkns);
-	(*shell)->tkns = NULL;
-	return (0);
+	char	**array;
+	char	*tmp;
+	int		i;
+
+	array = ft_splitquotes(cmd, c);
+	i = 0;
+	while (array[i])
+	{
+		tmp = treat_quotes(array[i]);
+		ft_strdel(&array[i]);
+		array[i] = tmp;
+		++i;
+	}
+	return (array);
 }

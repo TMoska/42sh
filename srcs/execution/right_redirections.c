@@ -6,22 +6,23 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 23:14:32 by moska             #+#    #+#             */
-/*   Updated: 2017/03/18 19:05:09 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/01 00:30:06 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	execute_right(t_tkn *node, int fd)
+int		execute_right(t_tkn *node, int fd)
 {
 	int		stdout;
+	int		ret;
 
 	stdout = dup(1);
-	close(1);
-	dup(fd);
-	execute_node(node->left);
+	dup2(fd, 1);
+	ret = execute_node(node->left);
 	dup2(stdout, 1);
 	close(stdout);
+	return (ret);
 }
 
 int		execute_right_redirection(t_tkn *node)
@@ -37,10 +38,10 @@ int		execute_right_redirection(t_tkn *node)
 		f = (right_most->left) ? right_most->left->data : right_most->data;
 		ops = O_WRONLY | O_CREAT;
 		ops |= ft_strcmp(node->data, ">") == 0 ? O_TRUNC : O_APPEND;
-		fd = open(f, ops, 0644);
+		if ((fd = open(f, ops, 0644)) == -1)
+			return (-1);
 		(right_most->left && right_most->right) ? close(fd) : (0);
 		right_most = right_most->right;
 	}
-	execute_right(node, fd);
-	return (0);
+	return (execute_right(node, fd));
 }

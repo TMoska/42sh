@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 17:52:25 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/29 05:06:58 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/04 04:38:51 by moska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,30 @@ char	*loop_through_paths(char ***paths, int *i, char *cmd)
 		(*i)++;
 	}
 	return (0);
+}
+
+char	*get_env_val_2str(char **env, char *name)
+{
+	char	*env_name;
+	int		i;
+	int		y;
+
+	i = 0;
+	if (!env || !(*env) || !*(*env))
+		return (NULL);
+	while (env[i])
+	{
+		y = 0;
+		while (env[i][y] && env[i][y] != '=')
+			y++;
+		env_name = ft_strndup(env[i], (size_t)y);
+		if (ft_strcmp(env_name, name) == 0)
+		{
+			ft_strdel(&env_name);
+			return (&env[i][y + 1]);
+		}
+		ft_strdel(&env_name);
+		i++;
+	}
+	return (NULL);
 }

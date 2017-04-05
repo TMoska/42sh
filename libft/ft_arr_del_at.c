@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:02:53 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/05 14:59:29 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/02 05:01:21 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ char	**ft_arr_del_at(char **arr, int index)
 	int		i;
 	char	**new_arr;
 
-	if (!arr)
-		return (NULL);
-	if (!(len = ft_str2len(arr)))
+	if (!arr || !(len = ft_str2len(arr)))
 		return (NULL);
 	i = 0;
 	new_arr = ft_str2new(len - 1);

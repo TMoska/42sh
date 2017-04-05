@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/03/30 17:40:58 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/05 23:37:04 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,38 +23,48 @@ static int	execute(t_shell **shell, char *exec, char **ptr, char **env)
 		ret = -1;
 	else if (!pid)
 	{
-		execve(exec, ptr, env);
+		if (execve(exec, ptr, env) == -1)
+			ft_putendl_fd("42sh: exec format error.", 2);
 		ret = -1;
+		exit(ret);
 	}
 	else
 	{
+		signal(SIGTSTP, sig_callback);
 		signal(SIGINT, SIG_IGN);
 		waitpid(pid, &status, 0);
 		(*shell)->ret = WEXITSTATUS(status);
-		if (WIFEXITED(status))
-		{
-			g_exit_code = WIFEXITED(status);
-			if (WEXITSTATUS(status))
-				ret = -1;
-		}
+		if (WIFEXITED(status) && !(ret = -1))
+			g_exit_code = WEXITSTATUS(status);
 	}
 	return (ret);
 }
 
-int			test_n_execute(t_shell **shell, char *exec, char **ptr, char **env)
+int			test_n_execute(char *cmd, char *exec, char **ptr, char **env)
 {
+	t_shell	*shell;
 	int		ret;
 
+	shell = get_shell(NULL);
 	ret = 0;
-	if (get_and_test_executable(shell, &exec) == 0)
+	if (ft_strcmp(ptr[0], "env") != 0 && fix_path_if_going_home(&shell) == -1)
+		return (-1);
+	if ((ret = try_a_builtin(&shell, ptr[0], cmd)) < 1)
 	{
-		term_trigger(shell, 1);
-		ret = execute(shell, exec, ptr, env);
+		ft_str2del(&(shell->cmd));
+		return (ret);
+	}
+	if (get_and_test_executable(&shell, &exec, env) == 0)
+	{
+		term_trigger(&shell, 1);
+		ret = execute(&shell, exec, ptr, env);
 		ft_strdel(&exec);
-		term_trigger(shell, 0);
+		term_trigger(&shell, 0);
+		ft_str2del(&(shell->cmd));
 		return (ret);
 	}
 	ft_strdel(&exec);
+	ft_str2del(&(shell->cmd));
 	return (-1);
 }
 
@@ -67,18 +77,12 @@ int			interpret_line(char *cmd)
 	int		ret;
 
 	shell = get_shell(NULL);
-	shell->cmd = ft_splitquotes(cmd, ' ');
+	shell->cmd = ft_splittreat(cmd, ' ');
 	shell->cmd_len = ft_str2len(shell->cmd);
 	exec = NULL;
 	ptr = shell->cmd;
 	rebuild_str2env(&shell);
 	env = shell->env;
-	if ((ret = try_a_builtin(&shell, ptr[0], cmd)) < 1)
-	{
-		ft_str2del(&(shell->cmd));
-		return (ret);
-	}
-	ret = test_n_execute(&shell, exec, ptr, env);
-	ft_str2del(&(shell->cmd));
+	ret = test_n_execute(cmd, exec, ptr, env);
 	return (ret);
 }

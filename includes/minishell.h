@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/05 23:22:27 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/06 00:40:06 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # define BUFF_SIZE 1024
 
 /*
-**	Button Key codes
-*/
+ **	Button Key codes
+ */
 
 # define BTN_DEL	2117294875
 # define BTN_BACK	127
@@ -56,14 +56,15 @@
 # define BTN_CTRL_P 16
 # define BTN_CTRL_I 9
 # define BTN_CTRL_K 11
-# define BTN_CTRL_L	12
+# define BTN_CTRL_L 12
+# define BTN_CTRL_U	21
 
 # define BTN_Y      121
 # define BTN_N      110
 # define BTN_SLASH  47
 /*
-**	Termcaps commands
-*/
+ **	Termcaps commands
+ */
 
 # define MOVE_UP	ft_putstr(tgetstr("up", NULL));
 # define MOVE_LEFT	ft_putstr(tgetstr("le", NULL));
@@ -80,8 +81,8 @@
 # define DEL_LINES	ft_putstr(tgetstr("cd", NULL));
 
 /*
-**	Types and Structs
-*/
+ **	Types and Structs
+ */
 
 extern int g_exit_code;
 
@@ -200,8 +201,8 @@ struct				s_pad
 }					;
 
 /*
-**	Core function prototypes
-*/
+ **	Core function prototypes
+ */
 
 void				print_prompt(t_shell **shell, char *prompt);
 char				*get_git_branch(void);
@@ -219,20 +220,23 @@ t_envl				*built_env_list(char **env);
 void				no_file_or_dir(t_shell **shell, t_bool name);
 void				not_a_dir(t_shell **shell);
 void				sig_callback(int s_num);
+void				catch_signals(void);
 
 /*
-**	Cleaning
-*/
+ **	Cleaning
+ */
 
 void				clean_shell(t_shell **shell);
 void				mid_clean_shell(t_shell **shell);
 void				clean_btree(t_tkn *tree);
 void				del_lst_str(void **content, size_t *content_size);
 void				clean_c_list(t_c_tab **lst);
+char				*treat_quotes(char *cmd);
+char				**ft_splittreat(char *cmd, char c);
 
 /*
-**	Environment list custom struct & functions
-*/
+ **	Environment list custom struct & functions
+ */
 
 void				envladd(t_envl **begin_list, t_envl *new);
 t_envl				*envlnew(char *name, char *value);
@@ -243,8 +247,8 @@ int					env_lst_size(t_envl *begin_list);
 void				rebuild_str2env(t_shell **shell);
 
 /*
-**	Builtins
-*/
+ **	Builtins
+ */
 
 int					try_a_builtin(t_shell **shell, char *base_cmd,\
 		char *full_cmd);
@@ -254,43 +258,50 @@ int					builtin_getenv (t_shell **shell);
 int					builtin_setenv(t_shell **shell);
 int					builtin_unsetenv(t_shell **shell);
 int					builtin_cd(t_shell **shell);
-int					op_null(char **cmd);
-int					op_unset(char **cmd);
 int					op_setenv(char **cmd);
 int					op_ignore(char **cmd);
 int					op_cmd(char **cmd);
 int					is_setenv(char *a);
-int					is_null(char *a);
 int					is_ignore(char *a);
 char				**build_tmp_environment(char **cmd);
 void				print_setenv(char **cmd);
 void				work_as_newenv(char **cmd, t_shell **shell);
 void				work_with_alterenv(char **cmd, t_shell **shell);
-void				work_environ_and_display(char **cmd, t_shell **shell);
+void				work_environ_and_display(char **cmd, t_shell **shell,\
+		t_env_s *env_s);
 void				do_setenv(t_shell **shell, char *name, char *value);
 void				change_symlink_directory(t_shell **shell, char *path);
 int					prep_and_change(t_shell **shell);
-int					builtin_echo(t_shell **shell, char *cmd);
+int					builtin_echo(char *cmd);
 void				join_back(char ***split_tab, char **new, int *size, int *i);
+int					parse_cd_options(t_shell **shell, int *p_option,\
+		char **path);
 void				builtin_export(t_shell **shell);
+char				**join_envs(char **env, char **new);
+char				**remove_duplicate_envs(char **env);
+void				execute_further(t_shell **shell, char **cmd, char ***env);
+char				**get_command(char **command);
+size_t				setenvs_count(char **cmd);
 
 /*
-**	Reading
-*/
+ **	Reading
+ */
 
+char				*quotes_env(char *temp);
 void				read_input(t_shell **shell, char *heredoc);
+int					replace_env_vals(t_shell **shell);
 void				work_buffer(t_shell **shell, char *buffer);
 int					reset_line(t_shell **shell);
 
 /*
-**	Heredoc
-*/
+ **	Heredoc
+ */
 
 void				scan_heredocs(t_shell **shell);
 
 /*
-**	Terminall
-*/
+ **	Terminall
+ */
 
 int					term_init(t_shell **shell);
 int					term_trigger(t_shell **shell, int off);
@@ -304,8 +315,8 @@ void				copy(t_shell **shell);
 int					clean_terminal(void);
 
 /*
-**	Edition
-*/
+ **	Edition
+ */
 
 void				ft_printbuffer(t_shell **shell);
 int					ft_linesize(void);
@@ -317,10 +328,11 @@ void				goto_endcmdline(t_shell **shell);
 int					ft_isfirstline(t_shell **shell);
 int					ft_currentline(t_shell **shell);
 int					ft_getpart(t_shell **shell, char **str);
+void				cmd_rewrite(t_shell **shell);
 
 /*
-**	History
-*/
+ **	History
+ */
 
 void				hist_add(t_shell **shell);
 void				history(t_shell **shell, unsigned int key);
@@ -336,21 +348,23 @@ char				*history_search_first_arg_match(t_shell **shell, char *s);
 int					single_excl_type(char *str);
 
 /*
-**	Quotes
-*/
+ **	Quotes
+ */
 
 int					do_quotes(t_shell **shell);
+int					ft_isescapechar(char c);
+char				**splitquote_str2(char *cmd);
 
 /*
-**	Tokenizing
-*/
+ **	Tokenizing
+ */
 
 t_tkn				*tkn_new(char *data, int type);
 int					tkn_new_to_back(t_tkn **lst, char *data, int type);
 char				**split_command(char *cmd);
 int					if_op_find_priority(char *s);
 int					tokenize(t_shell **shell);
-int					get_tokens(t_shell **shell, int first);
+int					get_tokens(t_shell **shell);
 void				tkn_move_args_to_start(t_tkn **dst, t_tkn **src);
 void				reorganize_tokens(t_shell **shell);
 void				move_pointers(t_tkn *init, t_tkn **start, t_tkn **ptr1, \
@@ -369,10 +383,10 @@ void				skip_and_sort(t_tkn **tkns, t_tkn **lst_sep);
 void				tkns_sort(t_tkn **begin_list);
 
 /*
-**	Execution
-*/
+ **	Execution
+ */
 
-int					test_n_execute(t_shell **shell, char *exec, char **ptr, \
+int					test_n_execute(char *cmd, char *exec, char **ptr,\
 		char **env);
 int					execute_node(t_tkn *node);
 int					execute_right_redirection(t_tkn *node);
@@ -381,22 +395,25 @@ int					execute_semicolon(t_tkn *node);
 int					execute_left_redirection(t_tkn *node);
 int					execute_pipe(t_tkn *node);
 int					execute_fd_aggregation(t_tkn *node);
-int					get_and_test_executable(t_shell **shell, char **exec);
+int					get_and_test_executable(t_shell **shell, char **exec, \
+		char **env);
 int					open_tmp_heredoc(int *fd);
 int					redirection_type(t_tkn *node);
 int					execute_two_left(t_tkn *node, char *out);
 int					fork_error(void);
-void				print_tokens(t_tkn *tokens);
+int					fix_path_if_going_home(t_shell **shell);
+char				*get_env_val_2str(char **env, char *name);
+int					env_var_error_checking(char *env_str);
 
 /*
-**	Completion
-*/
+ **	Completion
+ */
 
 void				tab_completion(t_shell **shell, t_c_tab *list, size_t val);
 size_t				binary_directories(t_shell *shell);
 char				*search_cmd(t_shell *shell);
 t_c_tab				*search_on_dir(char *path, t_shell *shell, t_c_tab *list,
-                                        size_t bin);
+		size_t bin);
 t_c_tab				*cmd_option(char *cmd, t_c_tab *list);
 t_c_tab				*define_pading(t_c_tab *list, size_t *val);
 int					put_options(t_c_tab *list);
@@ -405,11 +422,11 @@ struct s_pad		start_pad(struct winsize w, size_t nb_files);
 t_c_tab				*move_select(t_c_tab *list, size_t val);
 t_c_tab				*tab_binary(t_c_tab *list, t_shell *shell);
 t_c_tab				**init_left(t_c_tab **tmp, size_t *c, size_t *l,
-								size_t *page);
+		size_t *page);
 t_c_tab				**init_right(t_c_tab **tmp, size_t *c, size_t *l,
-								size_t *page);
+		size_t *page);
 void				tab_term(int v, t_shell *shell, int put);
-void			    tab_lst_sort(t_c_tab **begin_list);
-int                 check_dir(char *tmp);
+void				tab_lst_sort(t_c_tab **begin_list);
+int					check_dir(char *tmp);
 
 #endif

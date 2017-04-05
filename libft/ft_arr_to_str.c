@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsplit.c                                      :+:      :+:    :+:   */
+/*   ft_arr_to_str.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/18 09:18:00 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/31 04:15:06 by tmoska           ###   ########.fr       */
+/*   Created: 2017/04/02 09:56:54 by tmoska            #+#    #+#             */
+/*   Updated: 2017/04/02 10:00:05 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		**ft_strsplit(char const *s, char c)
+char	*ft_arr_to_str(char **arr)
 {
-	char	**table;
-	int		size;
+	char	*res;
+	char	*tmp;
 	int		i;
-	int		substr_len;
 
-	if (!s)
-		return (0);
-	size = ft_word_count(s, c);
-	substr_len = 0;
-	i = 0;
-	if (!(table = (char **)malloc((sizeof(char *) * (size + 1)))))
+	if (!arr || !*arr)
 		return (NULL);
-	while (size--)
+	res = ft_strdup(arr[0]);
+	i = 1;
+	while (arr[i])
 	{
-		while (*s == c && *s != '\0')
-			s++;
-		substr_len = ft_strlen_until(s, c);
-		table[i] = ft_strsub(s, 0, substr_len);
-		if (!table[i])
-			return (NULL);
-		s += substr_len;
+		tmp = res;
+		res = ft_str3join(res, " ", arr[i]);
+		ft_strdel(&tmp);
 		i++;
 	}
-	table[i] = NULL;
-	return (table);
+	return (res);
 }

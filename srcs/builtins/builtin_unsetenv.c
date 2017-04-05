@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 20:27:38 by moska             #+#    #+#             */
-/*   Updated: 2017/03/11 17:36:05 by moska            ###   ########.fr       */
+/*   Updated: 2017/04/05 14:12:44 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	hanlde_cmd(t_shell **shell, char **cmd)
 
 	tmp = (*shell)->env_list;
 	prev = NULL;
+	if (!tmp)
+		return ;
 	while (!(ft_strcmp(tmp->name, *cmd) == 0) && tmp->next != NULL)
 	{
 		prev = tmp;

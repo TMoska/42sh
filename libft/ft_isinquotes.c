@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_isinquotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/18 12:35:25 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/02 07:53:18 by adeletan         ###   ########.fr       */
+/*   Created: 2017/04/05 06:30:27 by adeletan          #+#    #+#             */
+/*   Updated: 2017/04/05 07:28:44 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strchr(const char *s, int c)
+#include "libft.h"
+
+int		ft_isinquotes(char const *cmd, int pos)
 {
-	while (*s)
+	int index;
+
+	index = 0;
+	while (index < pos)
 	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
+		if (ft_isquotes(cmd[index]) && cmd[index - 1] != '\\')
+		{
+			index = ft_endquo(cmd, index);
+			if (index > pos)
+				return (1);
+		}
+		++index;
 	}
-	if (*s == c)
-		return ((char *)s);
 	return (0);
 }
