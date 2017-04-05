@@ -6,7 +6,7 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 07:01:22 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/04 11:12:12 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/05 02:53:28 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,15 +102,22 @@ char		*treat_quotes(char *cmd)
 	char	*tmp;
 	char	*endcmd;
 	char	*temp;
+	int		bol;
 
 	endcmd = ft_strnew(1);
 	while (cmd && cmd[0] != '\0')
 	{
 		cmd = get_new_part(cmd, &temp);
+		bol = (temp[0] != '\'');
 		if (ft_isquotes(temp[0]))
 			temp = remove_quotes(temp);
 		else
 			temp = test(temp);
+		if (bol == 1)
+		{
+			temp = quotes_env(temp);
+			bol = 0;
+		}
 		tmp = endcmd;
 		endcmd = ft_strjoin(endcmd, temp);
 		ft_strdel(&temp);

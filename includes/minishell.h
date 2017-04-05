@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/04 06:37:43 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/05 02:19:51 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,6 +240,7 @@ size_t				setenvs_count(char **cmd);
 **	Reading
 */
 
+char				*quotes_env(char *temp);
 void				read_input(t_shell **shell, char *heredoc);
 int					replace_env_vals(t_shell **shell);
 void				work_buffer(t_shell **shell, char *buffer);
