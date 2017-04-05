@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/04/05 05:49:11 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/05 22:34:40 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int			test_n_execute(char *cmd, char *exec, char **ptr, char **env)
 	ret = 0;
 	if (ft_strcmp(ptr[0], "env") != 0 && fix_path_if_going_home(&shell) == -1)
 		return (-1);
+	if (ft_strcmp(ptr[0], "env") != 0 && ft_strchr(cmd, '$'))
+		replace_env_vals(&shell, &cmd);
 	if ((ret = try_a_builtin(&shell, ptr[0], cmd)) < 1)
 	{
 		ft_str2del(&(shell->cmd));

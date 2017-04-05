@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 22:32:02 by moska             #+#    #+#             */
-/*   Updated: 2017/04/05 02:39:17 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/05 15:48:57 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ int			validate_and_prep_cmd(t_shell **shell)
 		ft_strdel(&tmp);
 		if (ft_strchr((*shell)->buff, '!') &&
 		(replace_single_exclamation(&(*shell)->buff) == -1))
-			return (-1);
-		if (ft_strchr((*shell)->buff, '$') &&
-		(replace_env_vals(shell) == -1))
 			return (-1);
 		return (0);
 	}

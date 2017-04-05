@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 03:57:10 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/05 02:54:49 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/05 16:19:33 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int			status_env(t_shell **shell, char ***words, int i)
 	return (0);
 }
 
-int			replace_env_vals(t_shell **shell)
+int			replace_env_vals(t_shell **shell, char **cmd)
 {
 	char	**words;
 	char	*pt;
@@ -89,7 +89,7 @@ int			replace_env_vals(t_shell **shell)
 	int		i;
 
 	i = 0;
-	words = ft_strsplit((*shell)->buff, ' ');
+	words = ft_strsplit(*cmd, ' ');
 	while (words[i])
 	{
 		if (!within_single_q(words[i]) && (pt = ft_strchr(words[i], '$')))
@@ -100,6 +100,8 @@ int			replace_env_vals(t_shell **shell)
 				return (-1);
 			if ((env_val = get_env_val(shell, &(tmp[1]))))
 				ft_str_replace(&words[i], tmp, env_val, 1);
+			else
+				ft_str_replace(&words[i], pt, "", 1);
 			ft_strdel(&tmp);
 		}
 		i++;
