@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 18:33:26 by moska             #+#    #+#             */
-/*   Updated: 2017/04/04 02:35:21 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/05 19:59:17 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	print_prompt(t_shell **shell, char *prompt)
 	{
 		ft_putstr(prompt);
 		ft_putstr("\033[0;33m]\033[0m ");
-		(*shell)->term->prompt_len = ft_strlen(prompt) + 2;
+		(*shell)->term->prompt_len = ft_strlen(prompt) + 3;
 	}
 	ft_strdel(&prompt);
 }
