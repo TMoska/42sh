@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 06:30:27 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/05 06:41:02 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/05 06:46:53 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		ft_isinquotes(char *cmd, int pos)
 	index = 0;
 	while (index < pos)
 	{
-		if (ft_isquotes(cmd[index]))
+		if (ft_isquotes(cmd[index]) && cmd[index - 1] != '\\')
 		{
 			index = ft_endquo(cmd, index);
 			if (index > pos)
