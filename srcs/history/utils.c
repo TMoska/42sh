@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:09:26 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/05 02:51:34 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/05 19:47:03 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ static t_h_lst	*hist_new_node(char *cmd)
 {
 	t_h_lst	*lst;
 
-	if (!(lst = (t_h_lst *)ft_memalloc(sizeof(t_h_lst))) || !cmd)
+	if (!cmd)
+		return (NULL);
+	if (!(lst = (t_h_lst *)ft_memalloc(sizeof(t_h_lst))))
 		return (NULL);
 	lst->cmd = ft_strdup(cmd);
 	lst->next = NULL;

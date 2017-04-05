@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/05 16:19:40 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/06 00:56:46 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,8 +204,7 @@ void				rebuild_str2env(t_shell **shell);
 **	Builtins
 */
 
-int					try_a_builtin(t_shell **shell, char *base_cmd,\
-					char *full_cmd);
+int					try_a_builtin(t_shell **shell, char *base_cmd);
 int					builtin_exit(t_shell **shell);
 int					builtin_env(t_shell **shell);
 int					builtin_getenv (t_shell **shell);
@@ -226,7 +225,7 @@ void				work_environ_and_display(char **cmd, t_shell **shell,\
 void				do_setenv(t_shell **shell, char *name, char *value);
 void				change_symlink_directory(t_shell **shell, char *path);
 int					prep_and_change(t_shell **shell);
-int					builtin_echo(char *cmd);
+int					builtin_echo(t_shell **shell);
 void				join_back(char ***split_tab, char **new, int *size, int *i);
 int					parse_cd_options(t_shell **shell, int *p_option,\
 					char **path);
@@ -241,9 +240,8 @@ size_t				setenvs_count(char **cmd);
 **	Reading
 */
 
-char				*quotes_env(char *temp);
 void				read_input(t_shell **shell, char *heredoc);
-int					replace_env_vals(t_shell **shell, char **cmd);
+int					replace_env_vals(t_shell **shell);
 void				work_buffer(t_shell **shell, char *buffer);
 int					reset_line(t_shell **shell);
 

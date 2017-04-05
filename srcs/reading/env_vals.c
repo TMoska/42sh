@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 03:57:10 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/05 16:19:33 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/06 00:56:25 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,23 +49,6 @@ static char	*dup_env_val(char *pt)
 	return (ft_strndup(pt, sz));
 }
 
-static void	join_words_to_buff(t_shell **shell, char **words)
-{
-	char	*tmp;
-	int		i;
-
-	i = 1;
-	ft_strdel(&(*shell)->buff);
-	(*shell)->buff = ft_strdup(words[0]);
-	while (words[i])
-	{
-		tmp = (*shell)->buff;
-		(*shell)->buff = ft_str3join((*shell)->buff, " ", words[i]);
-		ft_strdel(&tmp);
-		i++;
-	}
-}
-
 int			status_env(t_shell **shell, char ***words, int i)
 {
 	char	*tmp;
@@ -80,33 +63,29 @@ int			status_env(t_shell **shell, char ***words, int i)
 	return (0);
 }
 
-int			replace_env_vals(t_shell **shell, char **cmd)
+int			replace_env_vals(t_shell **shell)
 {
-	char	**words;
 	char	*pt;
 	char	*env_val;
 	char	*tmp;
 	int		i;
 
 	i = 0;
-	words = ft_strsplit(*cmd, ' ');
-	while (words[i])
+	while ((*shell)->cmd[i])
 	{
-		if (!within_single_q(words[i]) && (pt = ft_strchr(words[i], '$')))
+		if (!within_single_q((*shell)->cmd[i]) && (pt = ft_strchr((*shell)->cmd[i], '$')))
 		{
-			if (status_env(shell, &words, i))
+			if (status_env(shell, &(*shell)->cmd, i))
 				continue ;
 			if (!(tmp = dup_env_val(pt)))
 				return (-1);
 			if ((env_val = get_env_val(shell, &(tmp[1]))))
-				ft_str_replace(&words[i], tmp, env_val, 1);
+				ft_str_replace(&(*shell)->cmd[i], tmp, env_val, 1);
 			else
-				ft_str_replace(&words[i], pt, "", 1);
+				ft_str_replace(&(*shell)->cmd[i], pt, "", 1);
 			ft_strdel(&tmp);
 		}
 		i++;
 	}
-	join_words_to_buff(shell, words);
-	ft_str2del(&words);
 	return (0);
 }

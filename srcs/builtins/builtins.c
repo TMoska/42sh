@@ -6,13 +6,13 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 22:56:19 by moska             #+#    #+#             */
-/*   Updated: 2017/03/31 02:49:36 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/06 00:48:17 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	try_a_builtin(t_shell **shell, char *base_cmd, char *full_cmd)
+int	try_a_builtin(t_shell **shell, char *base_cmd)
 {
 	if (ft_strcmp(base_cmd, "exit") == 0)
 		return (builtin_exit(shell));
@@ -27,7 +27,7 @@ int	try_a_builtin(t_shell **shell, char *base_cmd, char *full_cmd)
 	else if (ft_strcmp(base_cmd, "cd") == 0)
 		return (builtin_cd(shell));
 	else if (ft_strcmp(base_cmd, "echo") == 0)
-		return (builtin_echo(full_cmd));
+		return (builtin_echo(shell));
 	else if (ft_strcmp(base_cmd, "history") == 0)
 		return (print_history(shell));
 	else if (ft_strcmp(base_cmd, "clean") == 0)
