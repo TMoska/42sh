@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_echo.c                                     :+:      :+:    :+:   */
+/*   ft_splittreat.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/23 22:38:50 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/05 05:48:27 by adeletan         ###   ########.fr       */
+/*   Created: 2017/04/05 05:40:47 by adeletan          #+#    #+#             */
+/*   Updated: 2017/04/05 05:45:24 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		builtin_echo(char *cmd)
+char	**ft_splittreat(char *cmd, char c)
 {
-	int		i;
 	char	**array;
+	char	*tmp;
+	int		i;
 
-	i = 1;
-	array = ft_splittreat(cmd, ' ');
-	if (ft_strcmp(array[1], "-n") == 0)
-		++i;
+	array = ft_splitquotes(cmd, c);
+	i = 0;
 	while (array[i])
 	{
-		ft_putstr(array[i]);
+		tmp = treat_quotes(array[i]);
+		ft_strdel(&array[i]);
+		array[i] = tmp;
 		++i;
-		(array[i]) ? ft_putchar(' ') : (0);
 	}
-	if (ft_strcmp(array[1], "-n") != 0)
-		ft_putchar('\n');
-	ft_str2del(&array);
-	return (0);
+	return (array);
 }

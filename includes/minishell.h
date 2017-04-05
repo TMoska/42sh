@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/05 04:57:32 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/05 05:44:06 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ void				mid_clean_shell(t_shell **shell);
 void				clean_btree(t_tkn *tree);
 void				del_lst_str(void **content, size_t *content_size);
 char				*treat_quotes(char *cmd);
+char				**ft_splittreat(char *cmd, char c);
 
 /*
 **	Environment list custom struct & functions
