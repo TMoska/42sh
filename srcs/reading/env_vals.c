@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 03:57:10 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/06 00:56:25 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/06 01:49:09 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ int			replace_env_vals(t_shell **shell)
 				return (-1);
 			if ((env_val = get_env_val(shell, &(tmp[1]))))
 				ft_str_replace(&(*shell)->cmd[i], tmp, env_val, 1);
-			else
-				ft_str_replace(&(*shell)->cmd[i], pt, "", 1);
 			ft_strdel(&tmp);
 		}
 		i++;
