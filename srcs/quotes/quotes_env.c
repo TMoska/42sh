@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 03:57:10 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/05 02:58:56 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/05 22:36:17 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char			*quotes_env(char *temp)
 	pt = temp;
 	while (pt)
 	{
-		if ((pt = ft_strchr(pt, '$')))
+		if ((pt = ft_strchr(temp, '$')))
 		{
 			if (quostatus_env(&shell, &temp))
 				continue ;
@@ -61,7 +61,6 @@ char			*quotes_env(char *temp)
 			if ((env_val = get_env_val(&shell, &(tmp[1]))))
 				ft_str_replace(&temp, tmp, env_val, 1);
 			ft_strdel(&tmp);
-			++pt;
 		}
 		i++;
 	}
