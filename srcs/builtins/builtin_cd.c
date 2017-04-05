@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 22:01:59 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/05 05:48:52 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/05 13:41:50 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	set_env_var(t_shell **shell)
 {
 	char	*rdr;
 
-	if ((rdr = (char*)malloc(sizeof(char) * BUFF_SIZE)))
+	if ((rdr = ft_strnew(BUFF_SIZE)))
 	{
 		do_setenv(shell, "PWD", getcwd(rdr, BUFF_SIZE));
-		free(rdr);
+		ft_strdel(&rdr);
 	}
 }
 

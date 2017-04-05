@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 23:28:01 by moska             #+#    #+#             */
-/*   Updated: 2017/04/05 07:19:17 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/05 14:15:10 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ size_t	setenvs_count(char **cmd)
 	i = 0;
 	size = 0;
 	found = 0;
+	if (!cmd)
+		return (0);
 	while (cmd[i])
 	{
 		if (ft_strchr(cmd[i], '='))

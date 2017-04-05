@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 22:13:47 by moska             #+#    #+#             */
-/*   Updated: 2017/04/04 04:22:39 by moska            ###   ########.fr       */
+/*   Updated: 2017/04/05 14:39:51 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	ft_str2del(char ***tab)
 	int i;
 
 	i = 0;
-	if (!tab || !(*tab) || !*(*tab))
+	if (!tab && !(*tab))
 		return ;
-	while ((*tab)[i])
+	while (*tab && (*tab)[i])
 	{
 		ft_strdel(&((*tab)[i]));
 		i++;

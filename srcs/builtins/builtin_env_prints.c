@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 18:16:30 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/05 05:40:01 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/05 14:16:10 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,18 @@ void		print_setenv(char **cmd)
 	char	**env;
 	int		i;
 
+	i = 0;
 	if (setenvs_count(cmd) != 0)
 	{
 		env = build_tmp_environment(cmd);
 		env = remove_duplicate_envs(env);
+		while (env[i])
+		{
+			ft_putendl(env[i]);
+			i++;
+		}
+		ft_str2del(&env);
 	}
-	else
-		env = NULL;
-	i = 0;
-	while (env[i])
-	{
-		ft_putendl(env[i]);
-		i++;
-	}
-	ft_str2del(&env);
 }
 
 char		**get_command(char **command)
@@ -71,8 +69,6 @@ void		work_as_newenv(char **cmd, t_shell **shell)
 	else
 		tmp = NULL;
 	execute_further(shell, cmd, &tmp);
-	if (size != 0)
-		ft_str2del(&tmp);
 }
 
 void		work_with_alterenv(char **cmd, t_shell **shell)
@@ -90,7 +86,6 @@ void		work_with_alterenv(char **cmd, t_shell **shell)
 	else
 		joint = ft_str2dup((*shell)->env);
 	execute_further(shell, cmd, &joint);
-	ft_str2del(&joint);
 }
 
 void		work_environ_and_display(char **cmd, t_shell **shell,\

@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 06:57:35 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/05 05:43:22 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/05 15:02:20 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,11 @@ void		execute_further(t_shell **shell, char **cmd, char ***env)
 	(*shell)->env = *env;
 	envl_list = (*shell)->env_list;
 	(*shell)->env_list = built_env_list(*env);
+	test_n_execute(commands, ptr[0], ptr, *env);
 	ft_strdel(&commands);
-	test_n_execute(ptr[0], ptr[0], ptr, *env);
-	ft_str2del(&(*shell)->cmd);
 	(*shell)->cmd = cmd_tmp;
 	(*shell)->cmd_len = ft_str2len(cmd_tmp);
-	(*shell) = get_shell(NULL);
-	*env = (*shell)->env;
+	ft_str2del(&(*shell)->env);
 	(*shell)->env = tmp_env;
 	clean_env_list(&(*shell)->env_list);
 	(*shell)->env_list = envl_list;
