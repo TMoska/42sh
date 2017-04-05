@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/03 16:50:50 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/05 23:10:55 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,10 @@ static struct s_pad		init_pading(size_t nb_files, struct winsize w,
 	return (pad);
 }
 
-static size_t			too_much_file(t_c_tab *list)
+static size_t			too_much_file(t_c_tab *list, size_t i, size_t key)
 {
-	size_t				i;
 	char				*buff[5];
 
-	i = 1;
 	ft_putstr(tgetstr("vi", NULL));
 	while (list && list->next)
 	{
@@ -94,14 +92,15 @@ static size_t			too_much_file(t_c_tab *list)
 	}
 	if (i > 99)
 	{
-		put_question(i);
-		ft_memset(buff, 0, 5);
-		while (read(0, buff, 5) && (unsigned int)*buff != BTN_Y &&
-				(unsigned int)*buff != BTN_N && (unsigned int)*buff != BTN_TAB)
+        put_question(i);
+        ft_memset(buff, 0, 5);
+		while (read(0, buff, 5) && (key = (unsigned int)*buff) != BTN_Y &&
+				key != BTN_N && key != BTN_TAB && key != BTN_BACK)
 			ft_memset(buff, 0, 5);
 		MOVE_UP;
 		DEL_LINES;
 		MOVE_DOWN;
+        MOVE_DOWN;
 		return (((unsigned int)*buff == BTN_Y || (unsigned int)*buff == BTN_TAB)
 				? (i) : (0));
 	}
@@ -111,11 +110,15 @@ static size_t			too_much_file(t_c_tab *list)
 t_c_tab					*define_pading(t_c_tab *list, size_t *val)
 {
 	size_t				nb_files;
+    size_t              key;
+    size_t              i;
 	struct s_pad		pad;
 	struct winsize		w;
 
 	nb_files = 0;
-	if (!list || ((nb_files = too_much_file(list)) == 0))
+    key = 0;
+    i = 1;
+    if (!list || ((nb_files = too_much_file(list, i, key)) == 0))
 		return (NULL);
     if (nb_files < 2)
         (*val) = 69;

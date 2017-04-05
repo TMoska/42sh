@@ -6,9 +6,10 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/25 19:37:58 by moska             #+#    #+#             */
-/*   Updated: 2017/03/31 03:52:12 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/05 23:28:40 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -29,7 +30,7 @@ static int	identify_key(t_shell **shell, char *buff, unsigned int key,\
 	(key == BTN_CTRL_K || key == BTN_CTRL_L) ? cut_line(shell, key) : (0);
 	(key == BTN_CTRL_P) ? work_buffer(shell, (*shell)->clipboard) : (0);
 	(key == BTN_CTRL_I) ? copy(shell) : (0);
-    (key == BTN_TAB) ? tab_completion(shell, NULL, 0) : (0);
+    (key == BTN_TAB && !heredoc) ? tab_completion(shell, NULL, 0) : (0);
 	if (key == BTN_LEFT || key == BTN_RIGHT ||
 		key == BTN_END || key == BTN_HOME)
 		move_cursor_sides(shell, key);

@@ -6,7 +6,7 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 11:05:54 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/30 17:40:35 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/03 18:06:57 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	sig_callback(int s_num)
 	if (s_num == SIGQUIT)
 		exit(g_exit_code);
 	else if (s_num == SIGINT)
-		clean_buffer(&shell);
+    {
+        DEL_LINES;
+        clean_buffer(&shell);
+    }
 }
 
 void	catch_signals(void)

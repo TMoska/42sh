@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/03 17:12:55 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/05 23:24:56 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_c_tab			*tab_binary(t_c_tab *list, t_shell *shell)
 	return (list);
 }
 
-void			tab_term(int v)
+void			tab_term(int v, t_shell *shell, int put)
 {
 	if (v == 1)
 	{
@@ -38,7 +38,13 @@ void			tab_term(int v)
 	else if (v == 2)
 	{
 		ft_putstr(tgetstr("ve", NULL));
+        MOVE_DOWN;
 		DEL_LINES;
+        MOVE_UP;
+        (put == 1 ? (ft_putstr(tgetstr("up", NULL))) : (0));
+        (put == 1 ? (ft_putstr(tgetstr("up", NULL))) : (0));
+        ft_putstr(tgoto(tgetstr("ch", NULL), 0,
+                shell->term->tc_in + shell->term->prompt_len));
 	}
 	else if (v == 3)
 	{
@@ -47,7 +53,6 @@ void			tab_term(int v)
 	}
 	else if (v == 4)
 	{
-		ft_putstr(tgetstr("sc", NULL));
 		MOVE_DOWN;
 		MOVE_DOWN;
 	}

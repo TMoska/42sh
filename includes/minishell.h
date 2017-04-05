@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/03 17:16:36 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/05 23:22:27 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -408,7 +408,7 @@ t_c_tab				**init_left(t_c_tab **tmp, size_t *c, size_t *l,
 								size_t *page);
 t_c_tab				**init_right(t_c_tab **tmp, size_t *c, size_t *l,
 								size_t *page);
-void				tab_term(int v);
+void				tab_term(int v, t_shell *shell, int put);
 void			    tab_lst_sort(t_c_tab **begin_list);
 int                 check_dir(char *tmp);
 

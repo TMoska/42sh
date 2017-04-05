@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/03 17:31:26 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/05 23:26:39 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ char				*search_cmd(t_shell *shell)
 			shell->buff[in] != '&' && shell->buff[in] != ';')
 		in--;
 	(in != 0 ? in++ : 0);
-	if (shell->term->tc_in == 0 || shell->buff[in] == ' ')
+	if (shell->term->tc_in == 0 || (shell->buff[in] == ' ' &&
+        shell->buff[in + 1] == '\0'))
 		return (ft_strdup(""));
 	i = shell->term->tc_in;
 	in = i;
@@ -72,7 +73,7 @@ t_c_tab				*option_dir(DIR *dir, t_c_tab *list, char **cmd)
 	char			*tmp2;
 
 	while ((dp = readdir(dir)) != NULL)
-		if (dp->d_name[0] != '.' || dp->d_name[1] == '.')
+		if (dp->d_name[0] != '.')
 			list = cmd_option(dp->d_name, list);
 	closedir(dir);
 	tmp = list;
