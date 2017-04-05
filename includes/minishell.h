@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/05 06:36:45 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/05 07:25:23 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,7 +246,6 @@ void				read_input(t_shell **shell, char *heredoc);
 int					replace_env_vals(t_shell **shell);
 void				work_buffer(t_shell **shell, char *buffer);
 int					reset_line(t_shell **shell);
-int					ft_isinquotes(char *cmd, int pos);
 
 /*
 **	Heredoc

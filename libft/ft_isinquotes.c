@@ -6,13 +6,13 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 06:30:27 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/05 06:46:53 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/05 07:28:44 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int		ft_isinquotes(char *cmd, int pos)
+int		ft_isinquotes(char const *cmd, int pos)
 {
 	int index;
 
