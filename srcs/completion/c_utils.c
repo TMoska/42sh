@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/05 23:26:39 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/06 02:21:02 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ t_c_tab				*option_dir(DIR *dir, t_c_tab *list, char **cmd)
 			list = cmd_option(dp->d_name, list);
 	closedir(dir);
 	tmp = list;
-	while (tmp)
+	while (tmp && tmp->content)
 	{
 		tmp2 = ft_strjoin((*cmd), tmp->content);
 		ft_strdel(&tmp->content);
-        if (check_dir(tmp2) == 1)
+        if (tmp2[ft_strlen(tmp2) - 1] != '/' && check_dir(tmp2) == 1)
     		tmp->content = ft_strjoin(tmp2, "/");
         else
             tmp->content = ft_strdup(tmp2);
