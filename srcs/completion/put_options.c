@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/03 16:51:32 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/06 02:47:39 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,13 @@ static void				put_2_page(t_c_tab *list, struct s_put *p)
 
 static int				print_page(size_t c_page, size_t a_page)
 {
-	ft_putstr(" \033[95m PAGE:");
+    MOVE_DOWN;
+	ft_putstr(" \033[95mPAGE:");
 	ft_putnbr(c_page);
 	ft_putstr(" / ");
 	ft_putnbr(a_page);
 	ft_putstr("\033[0m");
+    MOVE_UP;
 	return (1);
 }
 
