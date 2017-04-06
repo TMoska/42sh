@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/06 00:40:06 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/06 07:16:17 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include <sys/ioctl.h>
+# include <sys/acl.h>
 
 # define BUFF_SIZE 1024
 
@@ -58,6 +59,7 @@
 # define BTN_CTRL_K 11
 # define BTN_CTRL_L 12
 # define BTN_CTRL_U	21
+# define BTN_CTRL_H	8
 
 # define BTN_Y      121
 # define BTN_N      110
@@ -79,6 +81,21 @@
 # define CURS_LEFT	ft_putstr(tgetstr("cr", NULL));
 # define DEL_LINE	ft_putstr(tgetstr("ce", NULL));
 # define DEL_LINES	ft_putstr(tgetstr("cd", NULL));
+
+/*
+** COLOR codes
+*/
+
+# define RED "\e[91m"
+# define YELL "\e[33m"
+# define LCYA "\e[1m\e[1;96m"
+# define MAGE "\e[35m"
+# define CHAR "\e[31m\e[93m"
+# define DGRE "\e[46m\e[34m"
+# define BLCK "\e[46m\e[34m"
+# define TEMP "\e[42m\e[30m"
+# define NORM "\e[00m\e[40m"
+# define LGRE "\e[1;92m"
 
 /*
  **	Types and Structs
@@ -170,6 +187,8 @@ typedef struct		s_env_s
 typedef struct		s_tab
 {
 	char			*content;
+	char			*name;
+	char			*perm;
 	size_t			cursor;
 	size_t			place;
 	size_t			col;
@@ -428,5 +447,10 @@ t_c_tab				**init_right(t_c_tab **tmp, size_t *c, size_t *l,
 void				tab_term(int v, t_shell *shell, int put);
 void				tab_lst_sort(t_c_tab **begin_list);
 int					check_dir(char *tmp);
-
+t_c_tab				*tab_name(t_c_tab *list, char *cmd);
+void				ft_print(t_c_tab *list);
+void				get_info(t_c_tab *list);
+void				get_acl(t_c_tab *list);
+void				get_extention(t_c_tab *list);
+int					get_dir(t_shell **shell);
 #endif

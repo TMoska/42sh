@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/05 23:33:15 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/06 06:59:38 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ void				tab_completion(t_shell **shell, t_c_tab *list, size_t val)
 	while (val == 0 || (val != 69 && read(0, buff, 5)
 				&& (val = verify_btn((unsigned int)*buff)) > 1 && val < 9))
 	{
+		if (get_dir(shell))
+			return ;
 		tab_term(1, NULL, 0);
 		(list ? list = move_select(list, val) : NULL);
 		if (val == 0 && (binary_directories(*shell)))

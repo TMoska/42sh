@@ -6,17 +6,17 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/06 02:53:09 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/06 05:13:19 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 static t_c_tab			*tpad(t_c_tab *tmp, struct s_pad *pad)
 {
 	size_t				len;
 
-	len = ft_strlen(tmp->content);
+	len = ft_strlen(tmp->name) + 1;
 	(len > (*pad).len_x ? (*pad).len_x = len : (*pad).len_x);
 	tmp->place = (*pad).line_s++;
 	tmp->col = (*pad).col_s;
@@ -69,7 +69,7 @@ static struct s_pad		init_pading(size_t nb_files, struct winsize w,
 		{
 			max_len = 0;
 			while (tmp && max_len < pad.max_x - 2)
-				if ((max_len += ft_strlen(tmp->content) + 3) < pad.max_x - 5)
+				if ((max_len += ft_strlen(tmp->name) + 3) < pad.max_x - 5)
 					tmp = tmp->next;
 			opt_y++;
 		}

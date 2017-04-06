@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/06 02:47:39 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/06 07:12:40 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@ static void				put_2_page(t_c_tab *list, struct s_put *p)
 
 	ft_putstr(tgoto(tgetstr("ch", NULL), 0, (*p).max_len + 1));
 	(*p).c_line++;
-	(*p).len = ft_strlen(list->content);
+	(*p).len = ft_strlen(list->name) + 1;
 	((*p).len > (*p).m_len ? (*p).m_len = (*p).len : (*p).m_len);
 	if (list->cursor == 0)
-		ft_putstr(list->content);
+		ft_print(list);
 	else
 	{
 		ft_putstr("\033[7;92m");
-		ft_putstr(list->content);
+		ft_putstr(list->name);
+		get_extention(list);
 		ft_putstr("\033[0m");
 	}
 }
@@ -32,7 +33,7 @@ static void				put_2_page(t_c_tab *list, struct s_put *p)
 static int				print_page(size_t c_page, size_t a_page)
 {
     MOVE_DOWN;
-	ft_putstr(" \033[95mPAGE:");
+	ft_putstr(" \033[95mPAGE : ");
 	ft_putnbr(c_page);
 	ft_putstr(" / ");
 	ft_putnbr(a_page);
