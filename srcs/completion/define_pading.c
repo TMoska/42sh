@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/05 23:10:55 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/06 02:53:09 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,7 @@ static size_t			too_much_file(t_c_tab *list, size_t i, size_t key)
 		while (read(0, buff, 5) && (key = (unsigned int)*buff) != BTN_Y &&
 				key != BTN_N && key != BTN_TAB && key != BTN_BACK)
 			ft_memset(buff, 0, 5);
-		MOVE_UP;
 		DEL_LINES;
-		MOVE_DOWN;
         MOVE_DOWN;
 		return (((unsigned int)*buff == BTN_Y || (unsigned int)*buff == BTN_TAB)
 				? (i) : (0));

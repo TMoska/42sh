@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/06 02:17:26 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/06 02:52:45 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,9 @@ void				put_question(size_t i)
 {
 	DEL_LINES;
 	MOVE_UP;
+	ft_putstr(tgetstr("sc", NULL));
 	ft_putstr("\033[1;91m Bro, there is a lot of possibilities O.O like ");
 	ft_putnbr(i);
 	ft_putstr(" possibilities O.O Are you sure about that? (y or n)\033[0m");
+	ft_putstr(tgetstr("rc", NULL));
 }
