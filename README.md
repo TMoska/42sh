@@ -1,4 +1,4 @@
-minishell - TMoska
+minishell / 21sh / 42sh - TMoska, Ede-sous, Ryaoi, Adeletan
 ===
 
 Recreation of `/bin/bash` with executable interpretation and some of the builtins.
@@ -6,31 +6,37 @@ Recreation of `/bin/bash` with executable interpretation and some of the builtin
 ```
 Mandatory part:
 
-1. Prompt, correct error management etc.
+1. Prompt, correct error management, no leaks, etc ...
 2. Interpretor of executables by searching env var PATH.
-3. Builtins: echo, cd, setenv, unsetenv, env, exit.
+3. POSIX standard builtins: echo, cd, setenv, unsetenv, env, exit.
+4. Termcaps implementation (moving around word, modifying words).
+5. HOME, END, ALT + left/right word jumping.
+6. Multi command management by separation and operators ( ';', '&&', '||');
+7. Input redirections (<);
+8. Heredoc (<<);
+9. Output redirections (>>, >);
+10. Output fd aggregation (1>&2, 2>&-, etc ...);
+11. Pipes (|);
 
 Bonus part:
 
-1. Coloring
-2. Termcaps implementation (moving around word, modifying words)
-3. HOME & END buttons
-4. alt + left/right jumping by words
-5. Multi command management by ; separation (cd ; ls)
-6. getenv builtin to read ENV var
+1. Dynamic Auto-completion;
+2. Multi Lines management;
+3. Completely managed quotes and escaping characters.
+4. All history management (!!, !1, !-1, !?param?, !arg, history);
 
 ```
 
-This projects has been a part of curriculum for [42 University](https://www.42.us.org) minishell project.
+This projects has been a part of curriculum for [42 University](https://www.42.us.org) minishell / 21sh / 42sh project.
 
 Usage
 ---
 
 ```
-git clone https://github.com/TMoska/minishell.git
-cd minishell
+git clone https://github.com/TMoska/minishell.git shell
+cd shell
 make
-./minishell
+./21sh
 enjoy the shell
 ```
 
@@ -75,4 +81,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
