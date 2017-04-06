@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/04/06 00:58:02 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/06 02:51:06 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,16 @@ int			test_n_execute(char *cmd, char *exec, char **ptr, char **env)
 		ft_str2del(&(shell->cmd));
 		return (ret);
 	}
+	ret = -1;
 	if (get_and_test_executable(&shell, &exec, env) == 0)
 	{
 		term_trigger(&shell, 1);
 		ret = execute(&shell, exec, ptr, env);
-		ft_strdel(&exec);
 		term_trigger(&shell, 0);
-		ft_str2del(&(shell->cmd));
-		return (ret);
 	}
 	ft_strdel(&exec);
 	ft_str2del(&(shell->cmd));
-	return (-1);
+	return (ret);
 }
 
 int			interpret_line(char *cmd)

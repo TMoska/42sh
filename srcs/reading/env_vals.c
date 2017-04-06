@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 03:57:10 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/06 01:49:09 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/06 02:44:08 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int			replace_env_vals(t_shell **shell)
 	i = 0;
 	while ((*shell)->cmd[i])
 	{
-		if (!within_single_q((*shell)->cmd[i]) && (pt = ft_strchr((*shell)->cmd[i], '$')))
+		if (!within_single_q((*shell)->cmd[i])
+			&& (pt = ft_strchr((*shell)->cmd[i], '$')))
 		{
 			if (status_env(shell, &(*shell)->cmd, i))
 				continue ;
