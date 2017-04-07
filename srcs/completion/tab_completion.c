@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/06 06:59:38 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/07 06:39:42 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void				put_tab(t_c_tab *list, t_shell **shell, size_t val)
 			i--;
 		((i != 0) ? (tmp = ft_strsub((*shell)->buff, 0, i + 1)) : (tmp));
         ft_putstr(tgoto(tgetstr("ch", NULL), 0, (*shell)->term->prompt_len));
+		try_up(shell);
 		ft_bzero((*shell)->buff, ft_strlen((*shell)->buff));
 		reset_line(shell);
         if (!(res = NULL) && list && list->content)
@@ -84,11 +85,12 @@ void				tab_completion(t_shell **shell, t_c_tab *list, size_t val)
 
 	ft_memset(buff, 0, 5);
 	tab_term(4, NULL, 0);
-	while (val == 0 || (val != 69 && read(0, buff, 5)
-				&& (val = verify_btn((unsigned int)*buff)) > 1 && val < 9))
+	if (get_dir(shell))
+		return ;
+	while ((!list || (list && (get_list(NULL, 0)))) &&
+		(val == 0 || (val != 69 && read(0, buff, 5)
+		&& (val = verify_btn((unsigned int)*buff)) > 1 && val < 9)))
 	{
-		if (get_dir(shell))
-			return ;
 		tab_term(1, NULL, 0);
 		(list ? list = move_select(list, val) : NULL);
 		if (val == 0 && (binary_directories(*shell)))
@@ -105,7 +107,10 @@ void				tab_completion(t_shell **shell, t_c_tab *list, size_t val)
 			break ;
 		ft_memset(buff, 0, 5);
 	}
+	if (!get_list(NULL, 0))
+		return ;
     MOVE_UP;
 	put_tab(list, shell, val);
-	(list ? clean_c_list(&list) : NULL);
+	(list ? clean_list(list) : NULL);
+	get_list(NULL, 1);
 }

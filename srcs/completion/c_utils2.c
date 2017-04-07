@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/06 06:18:04 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/07 06:23:06 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static t_c_tab		*cmd_option_2(t_c_tab *tmp, char *cmd)
 	tmp->place = 0;
 	tmp->col = 0;
 	tmp->page = 0;
+	tmp->name = NULL;
+	tmp->perm = NULL;
     if (check_dir(cmd) == 1)
         tmp->content = ft_strjoin(cmd, "/");
     else
@@ -36,6 +38,7 @@ t_c_tab				*cmd_option(char *cmd, t_c_tab *list)
 			return (NULL);
 		list = tmp;
 		tmp->prev = NULL;
+		get_list(tmp, 1);
 	}
 	else
 	{
@@ -52,24 +55,6 @@ t_c_tab				*cmd_option(char *cmd, t_c_tab *list)
 	tmp = cmd_option_2(tmp, cmd);
 	tmp->next = NULL;
 	return (list);
-}
-
-static void			clean_c_tab_node(t_c_tab **node)
-{
-	ft_strdel(&(*node)->content);
-	free(*node);
-}
-
-void				clean_c_list(t_c_tab **lst)
-{
-	t_c_tab			*tmp;
-
-	while (*lst)
-	{
-		tmp = *lst;
-		*lst = (*lst)->next;
-		clean_c_tab_node(&tmp);
-	}
 }
 
 void				put_question(size_t i)

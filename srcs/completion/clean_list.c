@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_dir.c                                          :+:      :+:    :+:   */
+/*   clean_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/06 06:59:20 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/07 06:24:01 by adeletan         ###   ########.fr       */
+/*   Created: 2017/04/07 01:26:58 by adeletan          #+#    #+#             */
+/*   Updated: 2017/04/07 01:44:45 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		get_dir(t_shell **shell)
+void	clean_list(t_c_tab *list)
 {
-	char *tmp;
+	t_c_tab *tmp;
 
-	tmp = search_cmd(*shell);
-	if (check_dir(tmp))
+	tmp = list;
+	while (list)
 	{
-		if (tmp[ft_strlen(tmp) - 1] != '/')
-		{
-			ft_strdel(&tmp);
-			MOVE_UP;
-			MOVE_UP;
-			ft_putstr(tgoto(tgetstr("ch", NULL), 0, (*shell)->term->prompt_len
-						+ (*shell)->term->tc_in));
-			work_buffer(shell, "/");
-			return (1);
-		}
-		ft_strdel(&tmp);
-		return (0);
+		ft_strdel(&list->content);
+		ft_strdel(&list->name);
+		ft_strdel(&list->perm);
+		tmp = list->next;
+		free(list);
+		list = tmp;
 	}
-	ft_strdel(&tmp);
-	return (0);
 }

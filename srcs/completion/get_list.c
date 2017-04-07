@@ -1,37 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_dir.c                                          :+:      :+:    :+:   */
+/*   get_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/06 06:59:20 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/07 06:24:01 by adeletan         ###   ########.fr       */
+/*   Created: 2017/04/07 01:18:37 by adeletan          #+#    #+#             */
+/*   Updated: 2017/04/07 01:58:17 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		get_dir(t_shell **shell)
+t_c_tab		*get_list(t_c_tab *list, int i)
 {
-	char *tmp;
+	static t_c_tab	*lst;
 
-	tmp = search_cmd(*shell);
-	if (check_dir(tmp))
-	{
-		if (tmp[ft_strlen(tmp) - 1] != '/')
-		{
-			ft_strdel(&tmp);
-			MOVE_UP;
-			MOVE_UP;
-			ft_putstr(tgoto(tgetstr("ch", NULL), 0, (*shell)->term->prompt_len
-						+ (*shell)->term->tc_in));
-			work_buffer(shell, "/");
-			return (1);
-		}
-		ft_strdel(&tmp);
-		return (0);
-	}
-	ft_strdel(&tmp);
-	return (0);
+	if (i)
+		lst = list;
+	return (lst);
 }

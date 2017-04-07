@@ -6,7 +6,7 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 11:05:54 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/05 23:36:35 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/07 02:44:46 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,22 @@ int g_exit_code;
 void	sig_callback(int s_num)
 {
 	t_shell *shell;
+	t_c_tab	*list;
 
 	shell = get_shell(NULL);
+	list = get_list(NULL, 0);
 	if (s_num == SIGQUIT)
 		exit(g_exit_code);
 	else if (s_num == SIGINT)
     {
         DEL_LINES;
+		if (list)
+		{
+			tab_term(2, shell, 1);
+			clean_list(list);
+			get_list(NULL, 1);
+			ioctl(0, TIOCSTI, "n");
+		}
         clean_buffer(&shell);
     }
 }

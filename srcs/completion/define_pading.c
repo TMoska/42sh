@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/06 05:13:19 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/07 02:49:58 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,40 +90,40 @@ static size_t			too_much_file(t_c_tab *list, size_t i, size_t key)
 		list = list->next;
 		i++;
 	}
-	if (i > 99)
-	{
-        put_question(i);
-        ft_memset(buff, 0, 5);
-		while (read(0, buff, 5) && (key = (unsigned int)*buff) != BTN_Y &&
-				key != BTN_N && key != BTN_TAB && key != BTN_BACK)
-			ft_memset(buff, 0, 5);
-		DEL_LINES;
-        MOVE_DOWN;
-		return (((unsigned int)*buff == BTN_Y || (unsigned int)*buff == BTN_TAB)
-				? (i) : (0));
-	}
-	return (i);
+	if (i <= 99)
+		return (i);
+	put_question(i);
+	ft_memset(buff, 0, 5);
+	read(0, buff, 5);
+	key = (unsigned int)*buff;
+	ft_memset(buff, 0, 5);
+	if (!get_list(NULL, 0))
+		return (0);
+	DEL_LINES;
+	MOVE_DOWN;
+	return ((key == BTN_Y || key == BTN_TAB)
+			? (i) : (0));
 }
 
 t_c_tab					*define_pading(t_c_tab *list, size_t *val)
 {
 	size_t				nb_files;
-    size_t              key;
-    size_t              i;
+	size_t              key;
+	size_t              i;
 	struct s_pad		pad;
 	struct winsize		w;
 
 	nb_files = 0;
-    key = 0;
-    i = 1;
-    if (!list || ((nb_files = too_much_file(list, i, key)) == 0))
+	key = 0;
+	i = 1;
+	if (!list || ((nb_files = too_much_file(list, i, key)) == 0))
 		return (NULL);
-    if (nb_files < 2)
-        (*val) = 69;
+	if (nb_files < 2)
+		(*val) = 69;
 	ioctl(0, TIOCGWINSZ, &w);
 	pad = init_pading(nb_files, w, list);
 	list = treat_pading(list, pad);
-    if (list)
-        list->cursor = 1;
+	if (list)
+		list->cursor = 1;
 	return (list);
 }

@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/06 07:16:17 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/07 06:38:37 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -453,4 +453,7 @@ void				get_info(t_c_tab *list);
 void				get_acl(t_c_tab *list);
 void				get_extention(t_c_tab *list);
 int					get_dir(t_shell **shell);
+t_c_tab				*get_list(t_c_tab *list, int i);
+void				clean_list(t_c_tab *list);
+void				try_up(t_shell **shell);
 #endif

@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/06 07:25:14 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/07 06:14:56 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ t_c_tab				*option_dir(DIR *dir, t_c_tab *list, char **cmd)
     		tmp->content = ft_strjoin(tmp2, "/");
         else
             tmp->content = ft_strdup(tmp2);
+		ft_strdel(&tmp2);
 		tmp = tmp->next;
 	}
 	tab_lst_sort(&list);
