@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/07 06:39:42 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/07 09:24:24 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,22 @@ void				put_tab(t_c_tab *list, t_shell **shell, size_t val)
 	size_t			i;
 
 	tmp = NULL;
-    MOVE_UP;
+	MOVE_UP;
 	if (val == 1 || val > 9)
 	{
 		while (list && list->cursor != 1)
 			list = list->next;
-	    i = ft_strlen((*shell)->buff);
+		i = ft_strlen((*shell)->buff);
 		while (i > 0 && (*shell)->buff[i] != ' ')
 			i--;
 		((i != 0) ? (tmp = ft_strsub((*shell)->buff, 0, i + 1)) : (tmp));
-        ft_putstr(tgoto(tgetstr("ch", NULL), 0, (*shell)->term->prompt_len));
+		ft_putstr(tgoto(tgetstr("ch", NULL), 0, (*shell)->term->prompt_len));
 		try_up(shell);
 		ft_bzero((*shell)->buff, ft_strlen((*shell)->buff));
 		reset_line(shell);
-        if (!(res = NULL) && list && list->content)
-            res = (check_dir(list->content) ? ft_strjoin(tmp, list->content) :
-                    ft_str3join(tmp, list->content, " "));
+		if (!(res = NULL) && list && list->content)
+			res = (check_dir(list->content) ? ft_strjoin(tmp, list->content) :
+					ft_str3join(tmp, list->content, " "));
 		ft_strdel(&tmp);
 		work_buffer(shell, res);
 		ft_strdel(&res);
@@ -88,8 +88,8 @@ void				tab_completion(t_shell **shell, t_c_tab *list, size_t val)
 	if (get_dir(shell))
 		return ;
 	while ((!list || (list && (get_list(NULL, 0)))) &&
-		(val == 0 || (val != 69 && read(0, buff, 5)
-		&& (val = verify_btn((unsigned int)*buff)) > 1 && val < 9)))
+			(val == 0 || (val != 69 && read(0, buff, 5)
+			&& (val = verify_btn((unsigned int)*buff)) > 1 && val < 9)))
 	{
 		tab_term(1, NULL, 0);
 		(list ? list = move_select(list, val) : NULL);
@@ -99,9 +99,9 @@ void				tab_completion(t_shell **shell, t_c_tab *list, size_t val)
 				return (tab_term(2, *shell, 1));
 		}
 		else if (val == 0 && (!(list = search_on_dir(".", *shell, NULL, 1))
-                || !list->content))
+					|| !list->content))
 			return (tab_term(2, *shell, 1));
-        if (val == 0 && !(list = define_pading(list, &val)))
+		if (val == 0 && !(list = define_pading(list, &val)))
 			break ;
 		if ((val = (val != 69 ? (1) : (69))) && put_options(list) == 0)
 			break ;
@@ -109,7 +109,7 @@ void				tab_completion(t_shell **shell, t_c_tab *list, size_t val)
 	}
 	if (!get_list(NULL, 0))
 		return ;
-    MOVE_UP;
+	MOVE_UP;
 	put_tab(list, shell, val);
 	(list ? clean_list(list) : NULL);
 	get_list(NULL, 1);

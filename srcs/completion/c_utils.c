@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/07 06:14:56 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/07 09:15:39 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ size_t				binary_directories(t_shell *shell)
 	in = shell->term->tc_in;
 	if (in != 0 && ((shell->buff[in] == '/' && shell->buff[in - 1] == '.') ||
 			(shell->buff[in - 1] == '/' && shell->buff[in - 2] == '.' &&
-			 (shell->buff[in] == ' ' || shell->buff[in] == '\0'))))
+			(shell->buff[in] == ' ' || shell->buff[in] == '\0'))))
 		return (0);
 	while (in > 0 && shell->buff[in] != '|' && shell->buff[in] != '`' &&
 			shell->buff[in] != '&' && shell->buff[in] != ';')
@@ -53,7 +53,7 @@ char				*search_cmd(t_shell *shell)
 		in--;
 	(in != 0 ? in++ : 0);
 	if (shell->term->tc_in == 0 || (shell->buff[in] == ' ' &&
-        shell->buff[in + 1] == '\0'))
+				shell->buff[in + 1] == '\0'))
 		return (ft_strdup(""));
 	i = shell->term->tc_in;
 	in = i;
@@ -81,19 +81,18 @@ t_c_tab				*option_dir(DIR *dir, t_c_tab *list, char **cmd)
 	{
 		tmp2 = ft_strjoin((*cmd), tmp->content);
 		ft_strdel(&tmp->content);
-        if (tmp2[ft_strlen(tmp2) - 1] != '/' && check_dir(tmp2) == 1)
-    		tmp->content = ft_strjoin(tmp2, "/");
-        else
-            tmp->content = ft_strdup(tmp2);
+		if (tmp2[ft_strlen(tmp2) - 1] != '/' && check_dir(tmp2) == 1)
+			tmp->content = ft_strjoin(tmp2, "/");
+		else
+			tmp->content = ft_strdup(tmp2);
 		ft_strdel(&tmp2);
 		tmp = tmp->next;
 	}
 	tab_lst_sort(&list);
 	list = tab_name(list, *cmd);
 	ft_strdel(cmd);
-    return (list);
+	return (list);
 }
-
 
 t_c_tab				*search_on_dir(char *path, t_shell *shell, t_c_tab *list,
 		size_t bin)
@@ -117,8 +116,8 @@ t_c_tab				*search_on_dir(char *path, t_shell *shell, t_c_tab *list,
 	tab_lst_sort(&list);
 	if (list && list->content)
 		list = tab_name(list, cmd);
-    if (list && list->content && list->name)
-        list->cursor = 1;
+	if (list && list->content && list->name)
+		list->cursor = 1;
 	ft_strdel(&cmd);
 	return (list);
 }

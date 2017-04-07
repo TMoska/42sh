@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/06 06:04:49 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/07 09:11:13 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static void		swap_nodes(char **one, char **two)
 
 void			tab_lst_sort(t_c_tab **begin_list)
 {
-	t_c_tab    *tmp;
-	int		   sorted;
+	t_c_tab		*tmp;
+	int			sorted;
 
 	if (!(*begin_list))
 		return ;

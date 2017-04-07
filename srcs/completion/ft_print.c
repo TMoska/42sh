@@ -6,13 +6,13 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 04:03:08 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/06 07:23:00 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/07 09:16:38 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    get_extention(t_c_tab *list)
+void			get_extention(t_c_tab *list)
 {
 	struct stat buf;
 
@@ -34,7 +34,6 @@ void    get_extention(t_c_tab *list)
 		ft_putchar('%');
 	else if (list->perm[0] == 'b')
 		ft_putchar('#');
-
 }
 
 static void		set_color(t_c_tab *list)
@@ -62,5 +61,5 @@ static void		set_color(t_c_tab *list)
 void			ft_print(t_c_tab *list)
 {
 	set_color(list);
-	get_extention(list);	
+	get_extention(list);
 }

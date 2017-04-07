@@ -6,10 +6,9 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/25 19:37:58 by moska             #+#    #+#             */
-/*   Updated: 2017/04/07 01:49:50 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/07 09:08:54 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -21,7 +20,7 @@ static int	cancel_heredoc(t_shell **shell, char *heredoc)
 }
 
 static int	identify_key(t_shell **shell, char *buff, unsigned int key,\
-			char *heredoc)
+		char *heredoc)
 {
 	(key != BTN_ENTER && ft_isprint(key)) ? work_buffer(shell, buff) : (0);
 	(key == BTN_BACK || key == BTN_DEL) ? modify_buffer(shell, key) : (0);
@@ -30,10 +29,10 @@ static int	identify_key(t_shell **shell, char *buff, unsigned int key,\
 	(key == BTN_CTRL_K || key == BTN_CTRL_L) ? cut_line(shell, key) : (0);
 	(key == BTN_CTRL_P) ? work_buffer(shell, (*shell)->clipboard) : (0);
 	(key == BTN_CTRL_H) ? copy(shell) : (0);
-    (key == BTN_TAB && !heredoc) ? tab_completion(shell, NULL, 0) : (0);
+	(key == BTN_TAB && !heredoc) ? tab_completion(shell, NULL, 0) : (0);
 	(key == BTN_CTRL_U) ? cmd_rewrite(shell) : (0);
 	if (key == BTN_LEFT || key == BTN_RIGHT ||
-		key == BTN_END || key == BTN_HOME)
+			key == BTN_END || key == BTN_HOME)
 		move_cursor_sides(shell, key);
 	else if (key == BTN_CTRL_D && heredoc)
 		return (cancel_heredoc(shell, heredoc));
@@ -53,7 +52,7 @@ void		read_input(t_shell **shell, char *heredoc)
 
 	ft_memset(buff, 0, 5);
 	while ((read(0, buff, 5)) > 0 &&
-		identify_key(shell, (char *)buff, (unsigned int)*buff, heredoc))
+			identify_key(shell, (char *)buff, (unsigned int)*buff, heredoc))
 		ft_memset(buff, 0, 5);
 	ft_putchar('\n');
 }

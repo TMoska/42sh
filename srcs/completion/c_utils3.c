@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/07 06:41:39 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/07 09:31:03 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ void			tab_term(int v, t_shell *shell, int put)
 	else if (v == 2)
 	{
 		ft_putstr(tgetstr("ve", NULL));
-        MOVE_DOWN;
+		MOVE_DOWN;
 		DEL_LINES;
-        MOVE_UP;
-        (put == 1 ? (ft_putstr(tgetstr("up", NULL))) : (0));
-        (put == 1 ? (ft_putstr(tgetstr("up", NULL))) : (0));
-        ft_putstr(tgoto(tgetstr("ch", NULL), 0,
-                shell->term->tc_in + shell->term->prompt_len));
+		MOVE_UP;
+		(put == 1 ? (ft_putstr(tgetstr("up", NULL))) : (0));
+		(put == 1 ? (ft_putstr(tgetstr("up", NULL))) : (0));
+		ft_putstr(tgoto(tgetstr("ch", NULL), 0,
+					shell->term->tc_in + shell->term->prompt_len));
 	}
 	else if (v == 3)
 	{

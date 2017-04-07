@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/07 06:38:37 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/07 09:35:22 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 # define BUFF_SIZE 1024
 
 /*
- **	Button Key codes
- */
+**	Button Key codes
+*/
 
 # define BTN_DEL	2117294875
 # define BTN_BACK	127
@@ -64,9 +64,10 @@
 # define BTN_Y      121
 # define BTN_N      110
 # define BTN_SLASH  47
+
 /*
- **	Termcaps commands
- */
+**	Termcaps commands
+*/
 
 # define MOVE_UP	ft_putstr(tgetstr("up", NULL));
 # define MOVE_LEFT	ft_putstr(tgetstr("le", NULL));
@@ -98,8 +99,8 @@
 # define LGRE "\e[1;92m"
 
 /*
- **	Types and Structs
- */
+**	Types and Structs
+*/
 
 extern int g_exit_code;
 
@@ -220,8 +221,8 @@ struct				s_pad
 }					;
 
 /*
- **	Core function prototypes
- */
+**	Core function prototypes
+*/
 
 void				print_prompt(t_shell **shell, char *prompt);
 char				*get_git_branch(void);
@@ -242,8 +243,8 @@ void				sig_callback(int s_num);
 void				catch_signals(void);
 
 /*
- **	Cleaning
- */
+**	Cleaning
+*/
 
 void				clean_shell(t_shell **shell);
 void				mid_clean_shell(t_shell **shell);
@@ -254,8 +255,8 @@ char				*treat_quotes(char *cmd);
 char				**ft_splittreat(char *cmd, char c);
 
 /*
- **	Environment list custom struct & functions
- */
+**	Environment list custom struct & functions
+*/
 
 void				envladd(t_envl **begin_list, t_envl *new);
 t_envl				*envlnew(char *name, char *value);
@@ -266,8 +267,8 @@ int					env_lst_size(t_envl *begin_list);
 void				rebuild_str2env(t_shell **shell);
 
 /*
- **	Builtins
- */
+**	Builtins
+*/
 
 int					try_a_builtin(t_shell **shell, char *base_cmd,\
 		char *full_cmd);
@@ -303,8 +304,8 @@ char				**get_command(char **command);
 size_t				setenvs_count(char **cmd);
 
 /*
- **	Reading
- */
+**	Reading
+*/
 
 char				*quotes_env(char *temp);
 void				read_input(t_shell **shell, char *heredoc);
@@ -313,14 +314,14 @@ void				work_buffer(t_shell **shell, char *buffer);
 int					reset_line(t_shell **shell);
 
 /*
- **	Heredoc
- */
+**	Heredoc
+*/
 
 void				scan_heredocs(t_shell **shell);
 
 /*
- **	Terminall
- */
+**	Terminall
+*/
 
 int					term_init(t_shell **shell);
 int					term_trigger(t_shell **shell, int off);
@@ -334,8 +335,8 @@ void				copy(t_shell **shell);
 int					clean_terminal(void);
 
 /*
- **	Edition
- */
+**	Edition
+*/
 
 void				ft_printbuffer(t_shell **shell);
 int					ft_linesize(void);
@@ -350,8 +351,8 @@ int					ft_getpart(t_shell **shell, char **str);
 void				cmd_rewrite(t_shell **shell);
 
 /*
- **	History
- */
+**	History
+*/
 
 void				hist_add(t_shell **shell);
 void				history(t_shell **shell, unsigned int key);
@@ -367,16 +368,16 @@ char				*history_search_first_arg_match(t_shell **shell, char *s);
 int					single_excl_type(char *str);
 
 /*
- **	Quotes
- */
+**	Quotes
+*/
 
 int					do_quotes(t_shell **shell);
 int					ft_isescapechar(char c);
 char				**splitquote_str2(char *cmd);
 
 /*
- **	Tokenizing
- */
+**	Tokenizing
+*/
 
 t_tkn				*tkn_new(char *data, int type);
 int					tkn_new_to_back(t_tkn **lst, char *data, int type);
@@ -402,8 +403,8 @@ void				skip_and_sort(t_tkn **tkns, t_tkn **lst_sep);
 void				tkns_sort(t_tkn **begin_list);
 
 /*
- **	Execution
- */
+**	Execution
+*/
 
 int					test_n_execute(char *cmd, char *exec, char **ptr,\
 		char **env);
@@ -425,8 +426,8 @@ char				*get_env_val_2str(char **env, char *name);
 int					env_var_error_checking(char *env_str);
 
 /*
- **	Completion
- */
+**	Completion
+*/
 
 void				tab_completion(t_shell **shell, t_c_tab *list, size_t val);
 size_t				binary_directories(t_shell *shell);

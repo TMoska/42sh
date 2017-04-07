@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/02 05:29:53 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/07 09:32:16 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,23 @@ static void	arrow_right(t_c_tab **tmp)
 	size_t			c;
 	size_t			l;
 	size_t			page;
+	t_c_tab			*lst;
 
 	if (!(tmp = init_right(tmp, &c, &l, &page)))
 		return ;
-	if ((*tmp)->page == 1)
-	{
-		while ((*tmp)->prev)
+	lst = *tmp;
+	while ((*tmp)->next && ((*tmp)->col != c || (*tmp)->place != l))
+		(*tmp) = (*tmp)->next;
+	if ((*tmp)->col == c || (*tmp)->place == c)
+		if (lst->next)
+		{
+			(*tmp)->cursor = 1;
+			return ;
+		}
+	if (!(*tmp)->next && page == (*tmp)->page)
+		while ((*tmp)->prev && ((*tmp)->page != 1 || (*tmp)->col != 1
+					|| (*tmp)->place != l))
 			(*tmp) = (*tmp)->prev;
-		while ((*tmp)->next && ((*tmp)->col != c || (*tmp)->place != l))
-			(*tmp) = (*tmp)->next;
-	}
-	else
-	{
-		while ((*tmp)->next && ((*tmp)->col != c || (*tmp)->place != l))
-			(*tmp) = (*tmp)->next;
-		if (!(*tmp)->next && page == (*tmp)->page)
-			while ((*tmp)->prev && ((*tmp)->page != 1 || (*tmp)->col != 1
-						|| (*tmp)->place != l))
-				(*tmp) = (*tmp)->prev;
-	}
 	(*tmp)->cursor = 1;
 }
 

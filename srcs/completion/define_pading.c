@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/07 02:49:58 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/07 09:14:12 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,8 @@ static size_t			too_much_file(t_c_tab *list, size_t i, size_t key)
 t_c_tab					*define_pading(t_c_tab *list, size_t *val)
 {
 	size_t				nb_files;
-	size_t              key;
-	size_t              i;
+	size_t				key;
+	size_t				i;
 	struct s_pad		pad;
 	struct winsize		w;
 

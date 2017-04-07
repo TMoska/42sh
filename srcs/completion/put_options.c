@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/06 07:12:40 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/07 09:13:05 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void				put_2_page(t_c_tab *list, struct s_put *p)
 {
-
 	ft_putstr(tgoto(tgetstr("ch", NULL), 0, (*p).max_len + 1));
 	(*p).c_line++;
 	(*p).len = ft_strlen(list->name) + 1;
@@ -32,13 +31,13 @@ static void				put_2_page(t_c_tab *list, struct s_put *p)
 
 static int				print_page(size_t c_page, size_t a_page)
 {
-    MOVE_DOWN;
+	MOVE_DOWN;
 	ft_putstr(" \033[95mPAGE : ");
 	ft_putnbr(c_page);
 	ft_putstr(" / ");
 	ft_putnbr(a_page);
 	ft_putstr("\033[0m");
-    MOVE_UP;
+	MOVE_UP;
 	return (1);
 }
 
@@ -85,8 +84,8 @@ int						put_options(t_c_tab *list)
 
 	MOVE_DOWN;
 	while (list && list->cursor != 1)
-        list = list->next;
-    if (!list)
+		list = list->next;
+	if (!list)
 		return (0);
 	a_page = nb_pages(list);
 	c_page = list->page;
