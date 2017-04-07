@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 23:14:32 by moska             #+#    #+#             */
-/*   Updated: 2017/04/01 00:30:06 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/06 02:16:35 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,16 @@ int		execute_right_redirection(t_tkn *node)
 	int		ops;
 
 	right_most = node->right;
+	ops = O_WRONLY | O_CREAT;
+	ops |= ft_strcmp(node->data, ">") == 0 ? O_TRUNC : O_APPEND;
 	while (right_most)
 	{
+		if (right_most->type == 1)
+		{
+			ops = O_WRONLY | O_CREAT;
+			ops |= ft_strcmp(right_most->data, ">") == 0 ? O_TRUNC : O_APPEND;
+		}
 		f = (right_most->left) ? right_most->left->data : right_most->data;
-		ops = O_WRONLY | O_CREAT;
-		ops |= ft_strcmp(node->data, ">") == 0 ? O_TRUNC : O_APPEND;
 		if ((fd = open(f, ops, 0644)) == -1)
 			return (-1);
 		(right_most->left && right_most->right) ? close(fd) : (0);
