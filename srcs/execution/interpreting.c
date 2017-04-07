@@ -14,19 +14,21 @@
 
 static int	execute(t_shell **shell, char *exec, char **ptr, char **env)
 {
-	int		ret;
 	int		status;
 	pid_t	pid;
 
-	ret = 0;
 	if (((pid = fork()) == -1) && fork_error())
-		ret = -1;
+		(*shell)->ret = -1;
 	else if (!pid)
 	{
 		if (execve(exec, ptr, env) == -1)
+		{
 			ft_putendl_fd("42sh: exec format error.", 2);
-		ret = -1;
-		exit(ret);
+			(*shell)->ret = -1;
+			exit((*shell)->ret);
+		}
+		(*shell)->ret = 0;
+		exit((*shell)->ret);
 	}
 	else
 	{
@@ -34,10 +36,8 @@ static int	execute(t_shell **shell, char *exec, char **ptr, char **env)
 		signal(SIGINT, SIG_IGN);
 		waitpid(pid, &status, 0);
 		(*shell)->ret = WEXITSTATUS(status);
-		if (WIFEXITED(status) && !(ret = -1))
-			g_exit_code = WEXITSTATUS(status);
 	}
-	return (ret);
+	return ((*shell)->ret);
 }
 
 int			test_n_execute(char *cmd, char *exec, char **ptr, char **env)
