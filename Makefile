@@ -6,7 +6,7 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/04/07 06:38:12 by adeletan         ###   ########.fr        #
+#    Updated: 2017/04/07 23:38:21 by ede-sous         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ terminal/edition_cursor_right.c reading/env_vals.c quotes/splitquote_str2.c \
 execution/left_redirections2.c reading/prompt_utils.c history/history_search.c \
 history/exclamation.c history/single_exclamation_utils.c \
 builtins/builtin_env_prints2.c quotes/ft_isescapechar.c \
-quotes/treatquotes.c quotes/quotes_env.c quotes/ft_splittreat.c \
+quotes/treatquotes.c quotes/ft_splittreat.c \
 completion/tab_name.c completion/ft_print.c completion/get_info.c \
 completion/get_dir.c completion/get_list.c \
 completion/clean_list.c completion/try_up.c

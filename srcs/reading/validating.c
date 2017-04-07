@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 22:32:02 by moska             #+#    #+#             */
-/*   Updated: 2017/04/05 20:16:29 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/05 23:14:57 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ int			validate_and_prep_cmd(t_shell **shell)
 			return (-1);
 		}
 		ft_strdel(&tmp);
+		if (ft_strchr((*shell)->buff, '!') &&
+		(replace_single_exclamation(&(*shell)->buff) == -1))
+			return (-1);
 		return (0);
 	}
 	return (-1);

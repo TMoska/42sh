@@ -6,11 +6,11 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/07 09:13:05 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/08 01:19:38 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 static void				put_2_page(t_c_tab *list, struct s_put *p)
 {
@@ -70,29 +70,43 @@ static void				put_page(t_c_tab *tmp, size_t c_page, size_t a_page)
 	MOVE_DOWN;
 }
 
-static size_t			nb_pages(t_c_tab *tmp)
-{
-	while (tmp->next)
-		tmp = tmp->next;
-	return (tmp->page);
-}
-
-int						put_options(t_c_tab *list)
+int						put_options_2(t_c_tab *list, size_t a_page, size_t val)
 {
 	size_t				c_page;
-	size_t				a_page;
+	char				*buff[5];
 
-	MOVE_DOWN;
-	while (list && list->cursor != 1)
-		list = list->next;
-	if (!list)
-		return (0);
-	a_page = nb_pages(list);
 	c_page = list->page;
 	while (list->prev && list->page == c_page)
 		list = list->prev;
 	(list->prev ? list = list->next : list);
 	put_page(list, c_page, a_page);
 	MOVE_UP;
+	if (val == 0 && read(0, buff, 5) && (unsigned int)*buff != BTN_TAB)
+		return (0);
+	else if (val == 0)
+	{
+		list->cursor = 1;
+		put_options(list, 1);
+	}
 	return (1);
+}
+
+/*
+**			nb_pages is on c_utils4.c
+*/
+
+int						put_options(t_c_tab *list, size_t val)
+{
+	size_t				a_page;
+
+	MOVE_DOWN;
+	if (val == 0)
+		list->cursor = 0;
+	else
+		while (list && list->cursor != 1)
+			list = list->next;
+	if (!list)
+		return (0);
+	a_page = nb_pages(list);
+	return (put_options_2(list, a_page, val));
 }

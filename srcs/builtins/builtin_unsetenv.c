@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 20:27:38 by moska             #+#    #+#             */
-/*   Updated: 2017/04/05 14:12:44 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/05 15:45:45 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	hanlde_cmd(t_shell **shell, char **cmd)
 			prev->next = tmp->next;
 		else
 			(*shell)->env_list = tmp->next;
-		free(tmp->name);
-		free(tmp->value);
+		ft_strdel(&(tmp->name));
+		ft_strdel(&(tmp->value));
 		free(tmp);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/07 09:35:22 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/08 00:48:02 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,8 +270,7 @@ void				rebuild_str2env(t_shell **shell);
 **	Builtins
 */
 
-int					try_a_builtin(t_shell **shell, char *base_cmd,\
-		char *full_cmd);
+int					try_a_builtin(t_shell **shell, char *base_cmd);
 int					builtin_exit(t_shell **shell);
 int					builtin_env(t_shell **shell);
 int					builtin_getenv (t_shell **shell);
@@ -292,7 +291,7 @@ void				work_environ_and_display(char **cmd, t_shell **shell,\
 void				do_setenv(t_shell **shell, char *name, char *value);
 void				change_symlink_directory(t_shell **shell, char *path);
 int					prep_and_change(t_shell **shell);
-int					builtin_echo(char *cmd);
+int					builtin_echo(t_shell **shell);
 void				join_back(char ***split_tab, char **new, int *size, int *i);
 int					parse_cd_options(t_shell **shell, int *p_option,\
 		char **path);
@@ -307,7 +306,6 @@ size_t				setenvs_count(char **cmd);
 **	Reading
 */
 
-char				*quotes_env(char *temp);
 void				read_input(t_shell **shell, char *heredoc);
 int					replace_env_vals(t_shell **shell);
 void				work_buffer(t_shell **shell, char *buffer);
@@ -436,7 +434,7 @@ t_c_tab				*search_on_dir(char *path, t_shell *shell, t_c_tab *list,
 		size_t bin);
 t_c_tab				*cmd_option(char *cmd, t_c_tab *list);
 t_c_tab				*define_pading(t_c_tab *list, size_t *val);
-int					put_options(t_c_tab *list);
+int					put_options(t_c_tab *list, size_t val);
 void				put_question(size_t i);
 struct s_pad		start_pad(struct winsize w, size_t nb_files);
 t_c_tab				*move_select(t_c_tab *list, size_t val);
@@ -457,4 +455,6 @@ int					get_dir(t_shell **shell);
 t_c_tab				*get_list(t_c_tab *list, int i);
 void				clean_list(t_c_tab *list);
 void				try_up(t_shell **shell);
+size_t              nb_pages(t_c_tab *tmp);
+
 #endif

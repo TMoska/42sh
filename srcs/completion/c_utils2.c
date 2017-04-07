@@ -6,11 +6,28 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/07 09:22:41 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/08 01:14:13 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+struct s_pad		start_pad(struct winsize w, size_t nb_files)
+{
+	struct s_pad	pad;
+
+	pad.line_s = 1;
+	pad.col_s = 1;
+	pad.page_s = 1;
+	pad.pages = 1;
+	pad.cols = 1;
+	pad.max_x = w.ws_col - 2;
+	pad.max_y = 10;
+	while (nb_files > pad.cols * pad.pages)
+		(pad.cols < 5 ? pad.cols++ : pad.pages++);
+	pad.len_x = 0;
+	return (pad);
+}
 
 static t_c_tab		*cmd_option_2(t_c_tab *tmp, char *cmd)
 {
@@ -55,15 +72,4 @@ t_c_tab				*cmd_option(char *cmd, t_c_tab *list)
 	}
 	tmp->next = NULL;
 	return (list);
-}
-
-void				put_question(size_t i)
-{
-	DEL_LINES;
-	MOVE_UP;
-	ft_putstr(tgetstr("sc", NULL));
-	ft_putstr("\033[1;91m Bro, there is a lot of possibilities O.O like ");
-	ft_putnbr(i);
-	ft_putstr(" possibilities O.O Are you sure about that? (y or n)\033[0m");
-	ft_putstr(tgetstr("rc", NULL));
 }

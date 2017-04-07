@@ -6,28 +6,11 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/07 09:24:24 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/08 01:22:36 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-struct s_pad		start_pad(struct winsize w, size_t nb_files)
-{
-	struct s_pad	pad;
-
-	pad.line_s = 1;
-	pad.col_s = 1;
-	pad.page_s = 1;
-	pad.pages = 1;
-	pad.cols = 1;
-	pad.max_x = w.ws_col - 2;
-	pad.max_y = 10;
-	while (nb_files > pad.cols * pad.pages)
-		(pad.cols < 5 ? pad.cols++ : pad.pages++);
-	pad.len_x = 0;
-	return (pad);
-}
 
 static size_t		verify_btn(unsigned int key)
 {
@@ -48,7 +31,7 @@ static size_t		verify_btn(unsigned int key)
 	return (0);
 }
 
-void				put_tab(t_c_tab *list, t_shell **shell, size_t val)
+static void			put_tab(t_c_tab *list, t_shell **shell, size_t v)
 {
 	char			*res;
 	char			*tmp;
@@ -56,30 +39,32 @@ void				put_tab(t_c_tab *list, t_shell **shell, size_t val)
 
 	tmp = NULL;
 	MOVE_UP;
-	if (val == 1 || val > 9)
-	{
-		while (list && list->cursor != 1)
-			list = list->next;
-		i = ft_strlen((*shell)->buff);
-		while (i > 0 && (*shell)->buff[i] != ' ')
-			i--;
-		((i != 0) ? (tmp = ft_strsub((*shell)->buff, 0, i + 1)) : (tmp));
-		ft_putstr(tgoto(tgetstr("ch", NULL), 0, (*shell)->term->prompt_len));
-		try_up(shell);
-		ft_bzero((*shell)->buff, ft_strlen((*shell)->buff));
-		reset_line(shell);
-		if (!(res = NULL) && list && list->content)
-			res = (check_dir(list->content) ? ft_strjoin(tmp, list->content) :
-					ft_str3join(tmp, list->content, " "));
-		ft_strdel(&tmp);
-		work_buffer(shell, res);
-		ft_strdel(&res);
-	}
-	else
-		tab_term(2, *shell, 0);
+	if (v != 1 && v <= 9)
+		return (tab_term(2, *shell, 0));
+	while (list && list->cursor != 1)
+		list = list->next;
+	i = ft_strlen((*shell)->buff);
+	while (i > 0 && (*shell)->buff[i] != ' ')
+		i--;
+	((i != 0) ? (tmp = ft_strsub((*shell)->buff, 0, i + 1)) : (tmp));
+	ft_putstr(tgoto(tgetstr("ch", NULL), 0, (*shell)->term->prompt_len));
+	try_up(shell);
+	ft_bzero((*shell)->buff, ft_strlen((*shell)->buff));
+	reset_line(shell);
+	if (!(res = NULL) && list && list->content)
+		res = (check_dir(list->content) ? ft_strjoin(tmp, list->content) :
+				ft_str3join(tmp, list->content, " "));
+	ft_strdel(&tmp);
+	work_buffer(shell, res);
+	ft_strdel(&res);
 }
 
-void				tab_completion(t_shell **shell, t_c_tab *list, size_t val)
+/*
+**		binary_directories && search_on_dir are in c_utils.c
+**			tab_term && tab_binary is on c_utils3.c
+*/
+
+void				tab_completion(t_shell **shell, t_c_tab *list, size_t v)
 {
 	char			*buff[5];
 
@@ -88,29 +73,30 @@ void				tab_completion(t_shell **shell, t_c_tab *list, size_t val)
 	if (get_dir(shell))
 		return ;
 	while ((!list || (list && (get_list(NULL, 0)))) &&
-			(val == 0 || (val != 69 && read(0, buff, 5)
-			&& (val = verify_btn((unsigned int)*buff)) > 1 && val < 9)))
+			(v == 0 || (v != 69 && read(0, buff, 5)
+			&& (v = verify_btn((unsigned int)*buff)) > 1 && v < 9)))
 	{
 		tab_term(1, NULL, 0);
-		(list ? list = move_select(list, val) : NULL);
-		if (val == 0 && (binary_directories(*shell)))
+		(list ? list = move_select(list, v) : NULL);
+		if (v == 0 && (binary_directories(*shell)))
 		{
 			if (!(list = tab_binary(list, *shell)) || !list->content)
 				return (tab_term(2, *shell, 1));
 		}
-		else if (val == 0 && (!(list = search_on_dir(".", *shell, NULL, 1))
+		else if (v == 0 && (!(list = search_on_dir(".", *shell, NULL, 1))
 					|| !list->content))
 			return (tab_term(2, *shell, 1));
-		if (val == 0 && !(list = define_pading(list, &val)))
+		if (v == 0 && !(list = define_pading(list, &v)))
 			break ;
-		if ((val = (val != 69 ? (1) : (69))) && put_options(list) == 0)
+		if (((v = (v != 69 ? (v) : (69))) || !v) && !put_options(list, v))
 			break ;
+		(v = (v != 69 ? (1) : (69)));
 		ft_memset(buff, 0, 5);
 	}
 	if (!get_list(NULL, 0))
 		return ;
 	MOVE_UP;
-	put_tab(list, shell, val);
+	put_tab(list, shell, v);
 	(list ? clean_list(list) : NULL);
 	get_list(NULL, 1);
 }

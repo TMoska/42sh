@@ -6,7 +6,7 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:52:28 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/05 07:28:48 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/06 02:11:14 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,13 @@ static int	ft_count_quo(char const *s, char c)
 	found = 0;
 	while (s[i] && i < ft_strlen(s))
 	{
-		if (s[i] == c && !ft_isinquotes(s, i))
+		if (s[i] == c && !ft_isinquotes(s, i) && found == 0)
+		{
+			found = 1;
 			++wc;
+		}
+		if (s[i] != c)
+			found = 0;
 		++i;
 	}
 	return (wc);

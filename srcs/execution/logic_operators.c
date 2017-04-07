@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 23:20:00 by moska             #+#    #+#             */
-/*   Updated: 2017/03/12 18:00:56 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/07 07:32:50 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	execute_logic_operators(t_tkn *node)
 	ret = execute_node(node->left);
 	if ((ft_strcmp(node->data, "||") == 0 && ret != 0)
 		|| (ft_strcmp(node->data, "&&") == 0 && ret == 0))
-		ret = execute_node(node->right);
+		{
+			ret = execute_node(node->right);
+		}
 	return (ret);
 }

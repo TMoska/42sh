@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/07 09:14:12 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/08 01:14:24 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ static t_c_tab			*treat_pading(t_c_tab *list, struct s_pad pad)
 	return (list);
 }
 
+/*
+**			start_pad is on c_utils2.c
+*/
+
 static struct s_pad		init_pading(size_t nb_files, struct winsize w,
 		t_c_tab *tmp)
 {
@@ -80,43 +84,27 @@ static struct s_pad		init_pading(size_t nb_files, struct winsize w,
 	return (pad);
 }
 
-static size_t			too_much_file(t_c_tab *list, size_t i, size_t key)
+static size_t			too_much_file(t_c_tab *list, size_t i)
 {
-	char				*buff[5];
-
 	ft_putstr(tgetstr("vi", NULL));
 	while (list && list->next)
 	{
 		list = list->next;
 		i++;
 	}
-	if (i <= 99)
-		return (i);
-	put_question(i);
-	ft_memset(buff, 0, 5);
-	read(0, buff, 5);
-	key = (unsigned int)*buff;
-	ft_memset(buff, 0, 5);
-	if (!get_list(NULL, 0))
-		return (0);
-	DEL_LINES;
-	MOVE_DOWN;
-	return ((key == BTN_Y || key == BTN_TAB)
-			? (i) : (0));
+	return (i);
 }
 
 t_c_tab					*define_pading(t_c_tab *list, size_t *val)
 {
 	size_t				nb_files;
-	size_t				key;
 	size_t				i;
 	struct s_pad		pad;
 	struct winsize		w;
 
 	nb_files = 0;
-	key = 0;
 	i = 1;
-	if (!list || ((nb_files = too_much_file(list, i, key)) == 0))
+	if (!list || ((nb_files = too_much_file(list, i)) == 0))
 		return (NULL);
 	if (nb_files < 2)
 		(*val) = 69;

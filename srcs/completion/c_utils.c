@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/07 09:15:39 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/08 01:19:34 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,10 @@ t_c_tab				*option_dir(DIR *dir, t_c_tab *list, char **cmd)
 	ft_strdel(cmd);
 	return (list);
 }
+
+/*
+**				cmd_options is on c_utils2.c
+*/
 
 t_c_tab				*search_on_dir(char *path, t_shell *shell, t_c_tab *list,
 		size_t bin)

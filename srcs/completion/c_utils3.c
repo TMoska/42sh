@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/07 09:31:03 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/08 01:20:18 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ t_c_tab			*tab_binary(t_c_tab *list, t_shell *shell)
 void			tab_term(int v, t_shell *shell, int put)
 {
 	if (v == 1)
-	{
 		DEL_LINES;
-	}
 	else if (v == 2)
 	{
 		ft_putstr(tgetstr("ve", NULL));
@@ -44,7 +42,7 @@ void			tab_term(int v, t_shell *shell, int put)
 		(put == 1 ? (ft_putstr(tgetstr("up", NULL))) : (0));
 		(put == 1 ? (ft_putstr(tgetstr("up", NULL))) : (0));
 		ft_putstr(tgoto(tgetstr("ch", NULL), 0,
-					shell->term->tc_in + shell->term->prompt_len));
+		shell->term->tc_in + shell->term->prompt_len));
 	}
 	else if (v == 3)
 	{
@@ -83,7 +81,9 @@ t_c_tab			**init_right(t_c_tab **tmp, size_t *c, size_t *l, size_t *page)
 	(*page) = (*tmp)->page;
 	while ((*tmp)->next && (*tmp)->col == (*c) - 1)
 		(*tmp) = (*tmp)->next;
-	if ((*c) != (*tmp)->col)
+	if (!(*tmp)->next && (*c) != (*tmp)->col)
+		(*c) = 1;
+	else if ((*c) != (*tmp)->col)
 		(*c) = 1;
 	return (tmp);
 }

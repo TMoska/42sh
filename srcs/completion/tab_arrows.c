@@ -6,15 +6,15 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/07 09:32:16 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/08 01:12:21 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	arrow_up(t_c_tab **tmp)
+static void			arrow_up(t_c_tab **tmp)
 {
-	size_t	c_col;
+	size_t			c_col;
 
 	c_col = (*tmp)->col;
 	if ((*tmp)->prev && (*tmp)->prev->col == c_col)
@@ -25,9 +25,9 @@ static void	arrow_up(t_c_tab **tmp)
 	}
 }
 
-static void	arrow_down(t_c_tab **tmp)
+static void			arrow_down(t_c_tab **tmp)
 {
-	size_t	c_col;
+	size_t			c_col;
 
 	c_col = (*tmp)->col;
 	if ((*tmp)->next && (*tmp)->next->col == c_col)
@@ -38,7 +38,11 @@ static void	arrow_down(t_c_tab **tmp)
 	}
 }
 
-static void	arrow_right(t_c_tab **tmp)
+/*
+**			For both init_*arrow* functions go to c_utils3.c
+*/
+
+static void			arrow_right(t_c_tab **tmp)
 {
 	size_t			c;
 	size_t			l;
@@ -47,10 +51,12 @@ static void	arrow_right(t_c_tab **tmp)
 
 	if (!(tmp = init_right(tmp, &c, &l, &page)))
 		return ;
+	if (!(*tmp)->next && c == (*tmp)->col && ((*tmp)->cursor = 1))
+		return ;
 	lst = *tmp;
 	while ((*tmp)->next && ((*tmp)->col != c || (*tmp)->place != l))
 		(*tmp) = (*tmp)->next;
-	if ((*tmp)->col == c || (*tmp)->place == c)
+	if ((*tmp)->col == c || (*tmp)->place == l)
 		if (lst->next)
 		{
 			(*tmp)->cursor = 1;
@@ -63,7 +69,7 @@ static void	arrow_right(t_c_tab **tmp)
 	(*tmp)->cursor = 1;
 }
 
-static void	arrow_left(t_c_tab **tmp)
+static void			arrow_left(t_c_tab **tmp)
 {
 	size_t			c;
 	size_t			l;
@@ -91,7 +97,7 @@ static void	arrow_left(t_c_tab **tmp)
 	(*tmp)->cursor = 1;
 }
 
-t_c_tab		*move_select(t_c_tab *list, size_t val)
+t_c_tab				*move_select(t_c_tab *list, size_t val)
 {
 	t_c_tab			*tmp;
 
