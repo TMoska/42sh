@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/06 00:56:46 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/08 04:48:11 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,6 +303,7 @@ int					single_excl_type(char *str);
 **	Quotes
 */
 
+char				*quotes_env(char *str);
 int					do_quotes(t_shell **shell);
 int					ft_isescapechar(char c);
 char				**splitquote_str2(char *cmd);

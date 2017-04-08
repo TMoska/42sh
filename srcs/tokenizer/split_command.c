@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 05:55:01 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/05 06:59:37 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/08 06:14:59 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ char			**split_command(char *cmd)
 			len = 0;
 			continue ;
 		}
-		else if ((is_op(c) && !ft_isinquotes(cmd, offset + len)) || *c == '\0')
+		else if ((is_op(c) && !ft_isescaped(cmd, offset + len)
+			&& !ft_isinquotes(cmd, offset + len)) || *c == '\0')
 			add_cmds(&cmds, cmd, &offset, &len);
 		else
 			len++;

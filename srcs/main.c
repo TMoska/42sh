@@ -6,7 +6,7 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 11:05:54 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/06 04:19:39 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/08 03:54:24 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ int		main(int ac, char **av, char **env)
 	g_exit_code = 0;
 	shell = get_shell(env);
 	if (term_init(&shell))
+	{
+		ft_putendl_fd("Error: shell could not be initialized", 2);
 		return (1);
+	}
 	clean_terminal();
 	run_shell(&shell);
 	clean_shell(&shell);

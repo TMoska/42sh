@@ -6,7 +6,7 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 07:01:22 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/05 23:13:54 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/08 06:11:08 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ char		*remove_quotes(char *temp)
 		(end[index] == '\\' && end[index + 1] == '`' && c != '\'')
 				|| (end[index] == '\'' && c == '\'' && end[index + 1]))
 			end = ft_delatfree(&end, index);
-		else if (end[index] == '\\' && end[index + 1] == '\\')
+		else if ((end[index] == '\\' && end[index + 1] == '\\')
+			|| (ft_isescaped(end, index + 1) && end[index + 1] == '$'))
 		{
 			end = ft_delatfree(&end, index);
 			if (end[index] == '\\')
@@ -83,7 +84,7 @@ char		*get_new_part(char *cmd, char **temp)
 		if (ft_isquotes(cmd[index]) == 0)
 		{
 			while (cmd[index] && (!ft_isquotes(cmd[index]) ||\
-						(ft_isquotes(cmd[index]) && cmd[index - 1] == '\\')))
+						(ft_isquotes(cmd[index]) && ft_isescaped(cmd, index))))
 				++index;
 			*temp = ft_strsub(cmd, 0, index);
 			return (&cmd[index]);
@@ -107,6 +108,8 @@ char		*treat_quotes(char *cmd)
 	while (cmd && cmd[0] != '\0')
 	{
 		cmd = get_new_part(cmd, &temp);
+		if (temp[0] != '\'')
+			temp = quotes_env(temp);
 		if (ft_isquotes(temp[0]))
 			temp = remove_quotes(temp);
 		else
