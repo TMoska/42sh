@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/08 01:12:21 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/08 04:47:55 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void			arrow_right(t_c_tab **tmp)
 
 	if (!(tmp = init_right(tmp, &c, &l, &page)))
 		return ;
-	if (!(*tmp)->next && c == (*tmp)->col && ((*tmp)->cursor = 1))
+	if (!(*tmp)->next && c == (*tmp)->col && c != 1 && ((*tmp)->cursor = 1))
 		return ;
 	lst = *tmp;
 	while ((*tmp)->next && ((*tmp)->col != c || (*tmp)->place != l))

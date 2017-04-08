@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/08 04:08:40 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/08 04:42:27 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -457,5 +457,6 @@ t_c_tab				*get_list(t_c_tab *list, int i);
 void				clean_list(t_c_tab *list);
 void				try_up(t_shell **shell);
 size_t				nb_pages(t_c_tab *tmp);
+int					check_winsize(t_shell **shell);
 
 #endif
