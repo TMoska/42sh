@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/08 07:14:06 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/08 22:02:43 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -339,7 +339,7 @@ void				tkns_sort(t_tkn **begin_list);
 **	Execution
 */
 
-int					test_n_execute(char *cmd, char *exec, char **ptr,\
+int					test_n_execute(char *exec, char **ptr,\
 					char **env);
 int					execute_node(t_tkn *node);
 int					execute_right_redirection(t_tkn *node);
