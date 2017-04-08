@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 15:14:49 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/08 00:55:24 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/04/08 06:18:16 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ t_quotes	**init_quotes(t_quotes **q)
 int			quote_incomplete(t_quotes **q, char *buff)
 {
 	q = init_quotes(q);
-	if (*buff == '\\' && !*(buff + 1))
-		(*q)->oneline ^= 1;
+	(*buff == '\\' && !*(buff + 1)) ? (*q)->oneline ^= 1 : (0);
 	while (buff && *buff && (*q)->oneline != 1)
 	{
 		if ((*q)->dquote && ft_isescapechar(*buff) && *(buff - 1) == '\\')
