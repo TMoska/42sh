@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:09:26 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/05 19:47:03 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/08 22:31:06 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ void			hist_add(t_shell **shell)
 {
 	t_h_lst	*new;
 
+	if ((*shell)->history->list &&
+		ft_strcmp((*shell)->buff, (*shell)->history->list->cmd) == 0)
+		return ;
 	if (!(new = hist_new_node((*shell)->buff)))
 		return ;
 	new->next = (*shell)->history->list;

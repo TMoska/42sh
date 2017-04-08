@@ -6,7 +6,7 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 11:05:54 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/08 03:54:24 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/08 22:31:31 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ int		run_shell(t_shell **shell)
 				return (0);
 		}
 		do_quotes(shell);
-		hist_add(shell);
 		if (validate_and_prep_cmd(shell) == -1)
 		{
 			ft_strdel(&((*shell)->buff));
 			continue ;
 		}
+		hist_add(shell);
 		(tokenize(shell) == 1) ? syn_error() : execute_node((*shell)->tree);
 		mid_clean_shell(shell);
 	}
