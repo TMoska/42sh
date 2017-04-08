@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 15:14:49 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/08 06:18:16 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/08 23:53:05 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ t_quotes	**init_quotes(t_quotes **q)
 
 int			quote_incomplete(t_quotes **q, char *buff)
 {
-	q = init_quotes(q);
-	(*buff == '\\' && !*(buff + 1)) ? (*q)->oneline ^= 1 : (0);
 	while (buff && *buff && (*q)->oneline != 1)
 	{
 		if ((*q)->dquote && ft_isescapechar(*buff) && *(buff - 1) == '\\')
@@ -52,6 +50,8 @@ int			quote_incomplete(t_quotes **q, char *buff)
 		else if (*buff == '`' && *(buff - 1) != '\\'
 				&& !(*q)->squote)
 			(*q)->bquote = ~(*q)->bquote;
+		else
+			(*q)->escape = 0;
 		buff++;
 	}
 	if ((*q)->escape && buff[ft_strlen(buff) - 1] == '\\')
@@ -96,7 +96,8 @@ int			do_quotes(t_shell **shell)
 {
 	char		*tmp;
 
-	while ((*shell)->buff && quote_incomplete(&(*shell)->q, (*shell)->buff))
+	while ((*shell)->buff && quote_incomplete(init_quotes(&(*shell)->q)
+			, (*shell)->buff))
 	{
 		(*shell)->tmp_buff = ft_strdup((*shell)->buff);
 		tmp = ask_for_more_input(shell, &(*shell)->q);
