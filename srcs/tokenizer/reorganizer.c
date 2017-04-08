@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 23:32:59 by moska             #+#    #+#             */
-/*   Updated: 2017/04/01 19:19:18 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/09 01:43:04 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,14 @@ static void	move_args_around(t_shell **shell)
 	{
 		while (ptr2 && !in_range(ptr1->type, 4, 6))
 		{
-			if (ptr2 && in_range(ptr1->type, 1, 3)
-				&& ft_word_count(ptr2->data, ' ') >= 2)
+			if ((ptr2 && in_range(ptr1->type, 1, 3)
+				&& ft_word_count(ptr2->data, ' ') >= 2) ||
+				(ptr1->type == 3 && ptr2->type == 0))
+			{
 				tkn_move_args_to_start(&start, &ptr2);
+				move_args_around(shell);
+				return ;
+			}
 			ptr1 = ptr1->right;
 			ptr2 = ptr2->right;
 		}

@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/08 22:02:43 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/09 01:42:56 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -334,6 +334,8 @@ t_tkn				*tkn_search_node(t_tkn *node, char *data);
 t_tkn				*tkn_last(t_tkn *node);
 void				skip_and_sort(t_tkn **tkns, t_tkn **lst_sep);
 void				tkns_sort(t_tkn **begin_list);
+int					prev_node_not_fd_aggr(t_tkn *start, t_tkn *end);
+void				tkn_del(t_tkn *start, t_tkn **tkn);
 
 /*
 **	Execution

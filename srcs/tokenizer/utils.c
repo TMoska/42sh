@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 03:34:21 by tmoska            #+#    #+#             */
-/*   Updated: 2017/03/22 15:50:56 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/09 01:27:38 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,19 @@ void	tkn_move_args_to_start(t_tkn **dst, t_tkn **src)
 	tmp_dst = (*dst)->data;
 	tmp_src = (*src)->data;
 	src_data_tab = ft_strsplit((*src)->data, ' ');
-	tmp = ft_join_arr_to_str(&(src_data_tab[1]));
+	if (prev_node_not_fd_aggr(*dst, *src))
+	{
+		tmp = ft_join_arr_to_str(&(src_data_tab[1]));
+		(*src)->data = ft_strdup(src_data_tab[0]);
+		ft_strdel(&tmp_src);
+	}
+	else
+	{
+		tmp = ft_join_arr_to_str(&(src_data_tab[0]));
+		tkn_del(*dst, src);
+	}
 	(*dst)->data = ft_str3join(tmp_dst, " ", tmp);
-	(*src)->data = ft_strdup(src_data_tab[0]);
 	ft_strdel(&tmp_dst);
-	ft_strdel(&tmp_src);
 	ft_strdel(&tmp);
 	ft_str2del(&src_data_tab);
 }
