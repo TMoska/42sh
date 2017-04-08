@@ -52,6 +52,8 @@ int			quote_incomplete(t_quotes **q, char *buff)
 		else if (*buff == '`' && *(buff - 1) != '\\'
 				&& !(*q)->squote)
 			(*q)->bquote = ~(*q)->bquote;
+		else
+			(*q)->escape = 0;
 		buff++;
 	}
 	if ((*q)->escape && buff[ft_strlen(buff) - 1] == '\\')
