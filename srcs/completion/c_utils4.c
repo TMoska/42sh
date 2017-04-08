@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/08 00:58:02 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/08 04:03:13 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,25 @@ size_t				nb_pages(t_c_tab *tmp)
 	while (tmp->next)
 		tmp = tmp->next;
 	return (tmp->page);
+}
+
+int					treat_tab_c(size_t *v, t_shell **shell, t_c_tab **list)
+{
+	tab_term(1, NULL, 0);
+	(((*list)) ? ((*list)) = move_select(((*list)), (*v)) : NULL);
+	if ((*v) == 0 && (binary_directories(*shell)))
+	{
+		if (!(((*list)) = tab_binary(((*list)), *shell)) || !((*list))->content)
+			return (-1);
+	}
+	else if ((*v) == 0 && (!(((*list)) = search_on_dir(".", *shell, NULL, 1))
+				|| !((*list))->content))
+		return (-1);
+	if ((*v) == 0 && !(((*list)) = define_pading(((*list)), &(*v))))
+		return (0);
+	if ((((*v) = ((*v) != 69 ? ((*v)) : (69))) || !(*v))
+			&& !put_options(((*list)), (*v)))
+		return (0);
+	((*v) = ((*v) != 69 ? (1) : (69)));
+	return (1);
 }

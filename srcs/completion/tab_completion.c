@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/08 01:22:36 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/08 04:03:34 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static void			put_tab(t_c_tab *list, t_shell **shell, size_t v)
 void				tab_completion(t_shell **shell, t_c_tab *list, size_t v)
 {
 	char			*buff[5];
+	int             ttc;
 
 	ft_memset(buff, 0, 5);
 	tab_term(4, NULL, 0);
@@ -74,24 +75,13 @@ void				tab_completion(t_shell **shell, t_c_tab *list, size_t v)
 		return ;
 	while ((!list || (list && (get_list(NULL, 0)))) &&
 			(v == 0 || (v != 69 && read(0, buff, 5)
-			&& (v = verify_btn((unsigned int)*buff)) > 1 && v < 9)))
+						&& (v = verify_btn((unsigned int)*buff)) > 1 && v < 9)))
 	{
-		tab_term(1, NULL, 0);
-		(list ? list = move_select(list, v) : NULL);
-		if (v == 0 && (binary_directories(*shell)))
-		{
-			if (!(list = tab_binary(list, *shell)) || !list->content)
-				return (tab_term(2, *shell, 1));
-		}
-		else if (v == 0 && (!(list = search_on_dir(".", *shell, NULL, 1))
-					|| !list->content))
-			return (tab_term(2, *shell, 1));
-		if (v == 0 && !(list = define_pading(list, &v)))
-			break ;
-		if (((v = (v != 69 ? (v) : (69))) || !v) && !put_options(list, v))
-			break ;
-		(v = (v != 69 ? (1) : (69)));
 		ft_memset(buff, 0, 5);
+		if ((ttc = treat_tab_c(&v, shell, &list)) == 0)
+			break;
+		else if (ttc == -1)
+			return (tab_term(2, *shell, 1));
 	}
 	if (!get_list(NULL, 0))
 		return ;
