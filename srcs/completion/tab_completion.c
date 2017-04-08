@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/08 04:03:34 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/08 04:09:35 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void			put_tab(t_c_tab *list, t_shell **shell, size_t v)
 void				tab_completion(t_shell **shell, t_c_tab *list, size_t v)
 {
 	char			*buff[5];
-	int             ttc;
+	int				ttc;
 
 	ft_memset(buff, 0, 5);
 	tab_term(4, NULL, 0);
@@ -79,7 +79,7 @@ void				tab_completion(t_shell **shell, t_c_tab *list, size_t v)
 	{
 		ft_memset(buff, 0, 5);
 		if ((ttc = treat_tab_c(&v, shell, &list)) == 0)
-			break;
+			break ;
 		else if (ttc == -1)
 			return (tab_term(2, *shell, 1));
 	}

@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/08 03:58:52 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/08 04:09:07 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ t_c_tab			*tab_binary(t_c_tab *list, t_shell *shell)
 void			tab_term(int v, t_shell *shell, int put)
 {
 	if (v == 1)
-    {
+	{
 		DEL_LINES;
 	}
-    else if (v == 2)
+	else if (v == 2)
 	{
 		ft_putstr(tgetstr("ve", NULL));
 		MOVE_DOWN;
