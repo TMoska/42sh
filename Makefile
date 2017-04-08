@@ -6,7 +6,7 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/04/07 23:38:21 by ede-sous         ###   ########.fr        #
+#    Updated: 2017/04/08 06:37:16 by adeletan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,8 @@ builtins/builtin_env_prints2.c quotes/ft_isescapechar.c \
 quotes/treatquotes.c quotes/ft_splittreat.c \
 completion/tab_name.c completion/ft_print.c completion/get_info.c \
 completion/get_dir.c completion/get_list.c \
-completion/clean_list.c completion/try_up.c
+completion/clean_list.c completion/try_up.c completion/name_completion.c \
+completion/name_utils.c
 
 SOURCES		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 

@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/08 04:41:46 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/08 07:38:01 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int					check_winsize(t_shell **shell)
 		MOVE_DOWN;
 		print_prompt(shell, NULL);
 		ft_putstr((*shell)->buff);
+		(*shell)->term->tc_in = ft_strlen((*shell)->buff);
 		return (0);
 	}
 	return (1);

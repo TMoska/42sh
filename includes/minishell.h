@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/08 04:42:27 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/08 08:20:22 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -458,5 +458,8 @@ void				clean_list(t_c_tab *list);
 void				try_up(t_shell **shell);
 size_t				nb_pages(t_c_tab *tmp);
 int					check_winsize(t_shell **shell);
-
+t_c_tab				*name_completion(t_c_tab *list, char **str);
+char				*fix_cmdname(char **cmd);
+t_c_tab				*get_matching(t_c_tab *list, char *path, char *tofind);
+char				*completion_buffer(t_c_tab *list, t_shell *shell);
 #endif

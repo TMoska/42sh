@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/08 04:42:10 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/08 08:18:46 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,10 @@ static void			put_tab(t_c_tab *list, t_shell **shell, size_t v)
 	((i != 0) ? (tmp = ft_strsub((*shell)->buff, 0, i + 1)) : (tmp));
 	ft_putstr(tgoto(tgetstr("ch", NULL), 0, (*shell)->term->prompt_len));
 	try_up(shell);
-	ft_bzero((*shell)->buff, ft_strlen((*shell)->buff));
-	reset_line(shell);
 	if (!(res = NULL) && list && list->content)
-		res = (check_dir(list->content) ? ft_strjoin(tmp, list->content) :
-				ft_str3join(tmp, list->content, " "));
+		res = completion_buffer(list, *shell);
 	ft_strdel(&tmp);
+	reset_line(shell);
 	work_buffer(shell, res);
 	ft_strdel(&res);
 }
