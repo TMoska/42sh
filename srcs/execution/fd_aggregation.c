@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 20:49:15 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/01 00:29:03 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/08 22:50:35 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		perform_redirections(t_tkn *node, char *p1, char *p2)
 
 	i1 = ft_atoi(p1);
 	i2 = ft_atoi(p2);
-	if (!i1 || !p2 || (*p2 != '-' && !i2))
+	if ((!i1 && ft_strcmp(p1, "0") != 0) || !p2 || (*p2 != '-' && !i2))
 	{
 		syn_error();
 		return (-1);
