@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/08 08:06:17 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/09 12:21:42 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char				*search_cmd(t_shell *shell)
 		return (ft_strdup(""));
 	i = shell->term->tc_in;
 	in = i;
-	while (i != 0 && (((shell->buff)[i] != ' ') || i == in))
+	while (i != 0 && ((((shell->buff)[i] != ' ') && !ft_isquotes(shell->buff[i])) || i == in))
 		i--;
 	(i != 0 ? i++ : 0);
 	while ((shell->buff)[in] != '\0' && (shell->buff)[in] != ' ')
