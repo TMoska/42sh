@@ -6,11 +6,11 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/08 01:19:38 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/09 12:58:21 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 static void				put_2_page(t_c_tab *list, struct s_put *p)
 {

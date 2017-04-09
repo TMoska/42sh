@@ -6,14 +6,14 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/09 12:46:15 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/09 12:55:25 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "../libft/includes/libft.h"
+# include "libft.h"
 # include <stdio.h>
 # include <signal.h>
 # include <unistd.h>
