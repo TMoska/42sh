@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/08 06:26:54 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/09 19:41:48 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/09 23:16:57 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ t_c_tab				*binary_directory(t_c_tab *list, t_shell *shell)
 	(void)list;
 	path = search_cmd(shell);
 	if (!ft_strchr(path, '/'))
+	{
+		ft_strdel(&path);
 		return (NULL);
+	}
 	tofind = fix_cmdname(&path);
 	if (!(list = fill_binary(list, path, tofind)))
 	{
