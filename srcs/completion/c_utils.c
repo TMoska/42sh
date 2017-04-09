@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/09 12:58:10 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/09 19:06:52 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@ size_t				binary_directories(t_shell *shell)
 	size_t			in;
 
 	in = shell->term->tc_in;
-	if (in != 0 && ((shell->buff[in] == '/' && shell->buff[in - 1] == '.') ||
-			(shell->buff[in - 1] == '/' && shell->buff[in - 2] == '.' &&
-			(shell->buff[in] == ' ' || shell->buff[in] == '\0'))))
-		return (0);
 	while (in > 0 && shell->buff[in] != '|' && shell->buff[in] != '`' &&
 			shell->buff[in] != '&' && shell->buff[in] != ';')
 		in--;

@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/08 06:28:31 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/09 16:04:21 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/09 19:39:58 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,30 @@ t_c_tab		*get_matching(t_c_tab *list, char *path, char *tofind)
 			if (ft_strncmp(dp->d_name, tofind, ft_strlen(tofind)) == 0)
 				list = cmd_option(dp->d_name, list);
 	closedir(dir);
+	return (list);
+}
+
+t_c_tab		*get_matching_binary(t_c_tab *list, char *path, char *tofind)
+{
+	t_c_tab *tmp;
+	char	*temp;
+
+	list = NULL;
+	tmp = NULL;
+	if (!(tmp = name_fill(tmp, path, tofind)))
+		return (NULL);
+	while (tmp)
+	{
+		if (tmp->content[ft_strlen(tmp->content) - 1] == '/')
+		{
+			temp = ft_strndelat(tmp->content, ft_strlen(tmp->content) - 1, 1);
+			ft_strdel(&(tmp->content));
+			tmp->content = temp;
+		}
+		if (ft_strchr(tmp->perm, 'x') || ft_strchr(tmp->perm, 'd'))
+			list = cmd_option(tmp->content, list);
+		tmp = tmp->next;
+	}
+	clean_list(tmp);
 	return (list);
 }

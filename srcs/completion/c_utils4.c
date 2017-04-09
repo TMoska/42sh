@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/09 17:49:53 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/09 19:39:54 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,10 @@ int					treat_tab_c(size_t *v, t_shell **shell, t_c_tab **list)
 	(((*list)) ? ((*list)) = move_select(((*list)), (*v)) : NULL);
 	if ((*v) == 0 && (binary_directories(*shell)))
 	{
-		if (!(((*list)) = tab_binary(((*list)), *shell)) || !((*list))->content)
-			return (-1);
+		if (!(*list = binary_directory(*list, *shell)))
+			if (!(((*list)) = tab_binary(((*list)), *shell))
+				|| !((*list))->content)
+				return (-1);
 	}
 	else if ((*v) == 0 && (!(((*list)) = search_on_dir(".", *shell, NULL, 1))
 				|| !((*list))->content))

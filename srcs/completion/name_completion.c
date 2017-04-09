@@ -6,13 +6,49 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/08 06:26:54 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/09 12:49:38 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/09 19:41:48 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_c_tab		*name_fill(t_c_tab *list, char *path, char *tofind)
+static t_c_tab		*fill_binary(t_c_tab *list, char *path, char *tofind)
+{
+	char	*tmp;
+
+	tmp = ft_strdup(path);
+	if (!(list = get_matching_binary(list, path, tofind)))
+	{
+		ft_strdel(&tmp);
+		return (NULL);
+	}
+	tab_lst_sort(&list);
+	list = tab_name(list, tmp);
+	ft_strdel(&tmp);
+	return (list);
+}
+
+t_c_tab				*binary_directory(t_c_tab *list, t_shell *shell)
+{
+	char *tofind;
+	char *path;
+
+	(void)list;
+	path = search_cmd(shell);
+	if (!ft_strchr(path, '/'))
+		return (NULL);
+	tofind = fix_cmdname(&path);
+	if (!(list = fill_binary(list, path, tofind)))
+	{
+		ft_strdel(&tofind);
+		return (NULL);
+	}
+	ft_strdel(&tofind);
+	get_list(list, 1);
+	return (list);
+}
+
+t_c_tab				*name_fill(t_c_tab *list, char *path, char *tofind)
 {
 	t_c_tab			*tmp;
 	char			*tmp2;
