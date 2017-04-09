@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/09 13:48:43 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/09 14:06:17 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -464,5 +464,6 @@ int					check_winsize(t_shell **shell);
 t_c_tab				*name_completion(t_c_tab *list, char **str);
 char				*fix_cmdname(char **cmd);
 t_c_tab				*get_matching(t_c_tab *list, char *path, char *tofind);
-char				*completion_buffer(t_c_tab *list, t_shell *shell);
+char				*completion_buffer(t_c_tab *list, t_shell *shell,
+		char *tmp);
 #endif

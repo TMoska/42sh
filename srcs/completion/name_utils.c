@@ -6,33 +6,35 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/08 06:28:31 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/09 13:37:41 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/09 14:05:17 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char		*completion_buffer(t_c_tab *list, t_shell *shell)
+char		*completion_buffer(t_c_tab *list, t_shell *shell, char *tmp)
 {
-	char *tmp;
 	char *start;
 	char *end;
+	char *newcontent;
 
-	tmp = search_cmd(shell);
+	list->content[ft_strlen(list->content) - 1] == '/' ? newcontent =
+	ft_strdup(list->content) : (newcontent = ft_strjoin(list->content, " "));
 	if (!tmp || tmp[0] == '\0')
 	{
 		start = ft_strsub(shell->buff, 0, shell->term->tc_in);
 		end = ft_strsub(shell->buff, shell->term->tc_in,
 			shell->term->tc_len - shell->term->tc_in);
 		ft_strdel(&shell->buff);
-		shell->buff = ft_str3join(start, list->content, end);
+		shell->buff = ft_str3join(start, newcontent, end);
 		ft_strdel(&start);
 		ft_strdel(&end);
 	}
 	else
-		ft_strnreplace(&(shell->buff), tmp, list->content, shell->term->tc_in -
+		ft_strnreplace(&(shell->buff), tmp, newcontent, shell->term->tc_in -
 		ft_strlen(tmp));
 	ft_strdel(&tmp);
+	ft_strdel(&newcontent);
 	tmp = ft_strdup(shell->buff);
 	ft_bzero(shell->buff, ft_strlen(shell->buff));
 	return (tmp);
