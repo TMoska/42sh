@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/08 06:28:31 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/09 19:39:58 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/09 19:54:45 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,14 @@ t_c_tab		*get_matching(t_c_tab *list, char *path, char *tofind)
 t_c_tab		*get_matching_binary(t_c_tab *list, char *path, char *tofind)
 {
 	t_c_tab *tmp;
+	t_c_tab *tmpstart;
 	char	*temp;
 
 	list = NULL;
 	tmp = NULL;
 	if (!(tmp = name_fill(tmp, path, tofind)))
 		return (NULL);
+	tmpstart = tmp;
 	while (tmp)
 	{
 		if (tmp->content[ft_strlen(tmp->content) - 1] == '/')
@@ -104,6 +106,6 @@ t_c_tab		*get_matching_binary(t_c_tab *list, char *path, char *tofind)
 			list = cmd_option(tmp->content, list);
 		tmp = tmp->next;
 	}
-	clean_list(tmp);
+	clean_list(tmpstart);
 	return (list);
 }

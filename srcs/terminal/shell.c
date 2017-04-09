@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:29:07 by moska             #+#    #+#             */
-/*   Updated: 2017/04/04 04:15:30 by moska            ###   ########.fr       */
+/*   Updated: 2017/04/09 19:54:10 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ t_shell		*get_shell(char **env)
 		shell->term = ft_memalloc(sizeof(t_term));
 		shell->history = ft_memalloc(sizeof(t_hist));
 		shell->history->list = NULL;
+		shell->clipboard = NULL;
 		ft_bzero(&shell->commands, sizeof(t_list));
 	}
 	if (env)
