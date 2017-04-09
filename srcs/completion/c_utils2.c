@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/08 07:07:35 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/09 17:28:18 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ struct s_pad		start_pad(struct winsize w, size_t nb_files)
 	pad.page_s = 1;
 	pad.pages = 1;
 	pad.cols = 1;
-	pad.max_x = w.ws_col - 2;
+	pad.max_x = w.ws_col;
 	pad.max_y = 10;
+	pad.largest = 0;
 	while (nb_files > pad.cols * pad.pages)
 		(pad.cols < 5 ? pad.cols++ : pad.pages++);
 	pad.len_x = 0;

@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/08 04:47:55 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/09 17:51:29 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,16 @@ t_c_tab				*move_select(t_c_tab *list, size_t val)
 	tmp = list;
 	while (tmp->next && tmp->cursor != 1)
 		tmp = tmp->next;
-	if (val == 8)
+	if (val == 9)
+	{
+		tmp->cursor = 0;
+		if (tmp->next)
+			tmp = tmp->next;
+		else
+			tmp = list;
+		tmp->cursor = 1;
+	}
+	else if (val == 8)
 		arrow_up(&tmp);
 	else if (val == 6)
 		arrow_right(&tmp);

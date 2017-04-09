@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/08 01:14:24 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/09 17:51:44 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static struct s_pad		init_pading(size_t nb_files, struct winsize w,
 
 	pad = start_pad(w, nb_files);
 	opt_y = 0;
+	pad = get_largest(pad, tmp);
 	if ((pad.len_y = ((nb_files / pad.cols))) > pad.max_y)
 		pad.len_y = pad.max_y;
 	if (pad.len_y <= 5)
@@ -72,12 +73,12 @@ static struct s_pad		init_pading(size_t nb_files, struct winsize w,
 		while (tmp)
 		{
 			max_len = 0;
-			while (tmp && max_len < pad.max_x - 2)
-				if ((max_len += ft_strlen(tmp->name) + 3) < pad.max_x - 5)
-					tmp = tmp->next;
+			while (tmp && max_len + pad.largest <= pad.max_x &&
+				(max_len += pad.largest))
+				tmp = tmp->next;
 			opt_y++;
 		}
-		(!tmp ? pad.len_y = opt_y : pad.len_y);
+		pad.len_y = opt_y;
 	}
 	if (pad.len_y > pad.max_y + 4)
 		pad.len_y = pad.max_y + 4;

@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/09 14:06:17 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/09 17:52:22 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,7 @@ struct				s_pad
 	size_t			page_s;
 	size_t			cols;
 	size_t			pages;
+	size_t			largest;
 	size_t			len_x;
 	size_t			len_y;
 	size_t			max_x;
@@ -460,10 +461,11 @@ t_c_tab				*get_list(t_c_tab *list, int i);
 void				clean_list(t_c_tab *list);
 void				try_up(t_shell **shell);
 size_t				nb_pages(t_c_tab *tmp);
-int					check_winsize(t_shell **shell);
+int					check_winsize(t_shell **shell, t_c_tab *list);
 t_c_tab				*name_completion(t_c_tab *list, char **str);
 char				*fix_cmdname(char **cmd);
 t_c_tab				*get_matching(t_c_tab *list, char *path, char *tofind);
 char				*completion_buffer(t_c_tab *list, t_shell *shell,
 		char *tmp);
+struct s_pad		get_largest(struct s_pad pad, t_c_tab *list);
 #endif

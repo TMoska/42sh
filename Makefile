@@ -6,7 +6,7 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/04/09 12:46:32 by adeletan         ###   ########.fr        #
+#    Updated: 2017/04/09 17:26:31 by adeletan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,8 @@ terminal/edition_cursor_right.c quotes/splitquote_str2.c \
 execution/left_redirections2.c reading/prompt_utils.c history/history_search.c \
 history/exclamation.c history/single_exclamation_utils.c \
 builtins/builtin_env_prints2.c quotes/ft_isescapechar.c \
-quotes/treatquotes.c quotes/ft_splittreat.c quotes/quotes_env.c
+quotes/treatquotes.c quotes/ft_splittreat.c quotes/quotes_env.c \
+completion/padding_utils.c
 
 SOURCES		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 

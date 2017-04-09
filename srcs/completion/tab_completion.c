@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/09 14:05:35 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/09 17:54:41 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@ static size_t		verify_btn(unsigned int key)
 {
 	if (key == BTN_UP)
 		return (8);
-	else if (key == BTN_RIGHT || key == BTN_TAB)
+	else if (key == BTN_RIGHT)
 		return (6);
+	else if (key == 9)
+		return (9);
 	else if (key == BTN_LEFT || key == BTN_S_TAB)
 		return (4);
 	else if (key == BTN_DOWN)
 		return (2);
 	else if (key == BTN_BACK)
-		return (9);
+		return (10);
 	else if (key == BTN_ENTER || key == BTN_SPACE)
 		return (1);
 	else if (key == BTN_SLASH)
@@ -39,7 +41,7 @@ static void			put_tab(t_c_tab *list, t_shell **shell, size_t v)
 
 	tmp = NULL;
 	MOVE_UP;
-	if (v != 1 && v <= 9)
+	if (v != 1 && v <= 10)
 		return (tab_term(2, *shell, 0));
 	while (list && list->cursor != 1)
 		list = list->next;
@@ -67,15 +69,13 @@ void				tab_completion(t_shell **shell, t_c_tab *list, size_t v)
 	char			*buff[5];
 	int				ttc;
 
-	if (check_winsize(shell) == 0)
-		return ;
 	ft_memset(buff, 0, 5);
 	tab_term(4, NULL, 0);
 	if (get_dir(shell))
 		return ;
 	while ((!list || (list && (get_list(NULL, 0)))) &&
 			(v == 0 || (v != 69 && read(0, buff, 5)
-			&& (v = verify_btn((unsigned int)*buff)) > 1 && v < 9)))
+			&& (v = verify_btn((unsigned int)*buff)) > 1 && v < 10)))
 	{
 		ft_memset(buff, 0, 5);
 		if ((ttc = treat_tab_c(&v, shell, &list)) == 0)

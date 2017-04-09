@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/08 07:38:01 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/09 17:49:53 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,33 @@ size_t				nb_pages(t_c_tab *tmp)
 	return (tmp->page);
 }
 
-int					check_winsize(t_shell **shell)
+int					check_winsize(t_shell **shell, t_c_tab *list)
 {
 	struct winsize	w;
+	t_c_tab			*tmp;
 
-	if (ioctl(0, TIOCGWINSZ, &w) == -1 || w.ws_col < 75)
+	tmp = list;
+	if (ioctl(0, TIOCGWINSZ, &w) == 0)
 	{
-		MOVE_DOWN;
-		MOVE_DOWN;
-		ft_putendl("\033[31m The window is too small ;/ \033[0m");
-		MOVE_DOWN;
-		print_prompt(shell, NULL);
-		ft_putstr((*shell)->buff);
-		(*shell)->term->tc_in = ft_strlen((*shell)->buff);
-		return (0);
+		while (tmp)
+		{
+			if (ft_strlen(tmp->name) > w.ws_col - 1)
+			{
+				ft_put2str(tgetstr("up", NULL), tgetstr("up", NULL));
+				try_up(shell);
+				ft_putstr(tgoto(tgetstr("ch", NULL), 0,
+				(*shell)->term->prompt_len));
+				ft_putstr((*shell)->buff);
+				(*shell)->term->tc_in = ft_strlen((*shell)->buff);
+				clean_list(list);
+				get_list(NULL, 1);
+				return (0);
+			}
+			tmp = tmp->next;
+		}
+		return (1);
 	}
-	return (1);
+	return (0);
 }
 
 int					treat_tab_c(size_t *v, t_shell **shell, t_c_tab **list)
@@ -60,6 +71,8 @@ int					treat_tab_c(size_t *v, t_shell **shell, t_c_tab **list)
 	else if ((*v) == 0 && (!(((*list)) = search_on_dir(".", *shell, NULL, 1))
 				|| !((*list))->content))
 		return (-1);
+	if (check_winsize(shell, *list) == 0)
+		return (0);
 	if ((*v) == 0 && !(((*list)) = define_pading(((*list)), &(*v))))
 		return (0);
 	if ((((*v) = ((*v) != 69 ? ((*v)) : (69))) || !(*v))
