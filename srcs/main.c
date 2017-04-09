@@ -6,7 +6,7 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 11:05:54 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/07 23:36:45 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/09 12:43:01 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ int		run_shell(t_shell **shell)
 				return (0);
 		}
 		do_quotes(shell);
-		hist_add(shell);
 		if (validate_and_prep_cmd(shell) == -1)
 		{
 			ft_strdel(&((*shell)->buff));
 			continue ;
 		}
+		hist_add(shell);
 		(tokenize(shell) == 1) ? syn_error() : execute_node((*shell)->tree);
 		mid_clean_shell(shell);
 	}
@@ -83,7 +83,10 @@ int		main(int ac, char **av, char **env)
 	g_exit_code = 0;
 	shell = get_shell(env);
 	if (term_init(&shell))
+	{
+		ft_putendl_fd("Error: shell could not be initialized", 2);
 		return (1);
+	}
 	clean_terminal();
 	run_shell(&shell);
 	clean_shell(&shell);

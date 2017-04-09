@@ -6,7 +6,7 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:52:28 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/06 02:11:14 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/08 03:57:03 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ size_t		ft_strlen_quo(const char *str, char c)
 	int			i;
 
 	i = 0;
-	while (str[i] != c && str[i])
+	while (str[i] && (str[i] != c || ft_isescaped(str, i)))
 	{
 		if ((str[i] == '"' || str[i] == '`' || str[i] == 39) &&
 				(str[i - 1] != '\\'))
@@ -51,7 +51,8 @@ static int	ft_count_quo(char const *s, char c)
 	found = 0;
 	while (s[i] && i < ft_strlen(s))
 	{
-		if (s[i] == c && !ft_isinquotes(s, i) && found == 0)
+		if (s[i] == c && !ft_isinquotes(s, i) && found == 0 &&
+			!ft_isescaped(s, i))
 		{
 			found = 1;
 			++wc;

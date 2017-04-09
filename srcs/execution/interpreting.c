@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/04/07 23:36:57 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/09 12:43:52 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	execute(t_shell **shell, char *exec, char **ptr, char **env)
 	return ((*shell)->ret);
 }
 
-int			test_n_execute(char *cmd, char *exec, char **ptr, char **env)
+int			test_n_execute(char *exec, char **ptr, char **env)
 {
 	t_shell	*shell;
 	int		ret;
@@ -48,9 +48,10 @@ int			test_n_execute(char *cmd, char *exec, char **ptr, char **env)
 	shell = get_shell(NULL);
 	ret = 0;
 	if (ft_strcmp(ptr[0], "env") != 0 && fix_path_if_going_home(&shell) == -1)
+	{
+		ft_str2del(&(shell->cmd));
 		return (-1);
-	if (ft_strcmp(ptr[0], "env") != 0 && ft_strchr(cmd, '$'))
-		replace_env_vals(&shell);
+	}
 	if ((ret = try_a_builtin(&shell, ptr[0])) < 1)
 	{
 		ft_str2del(&(shell->cmd));
@@ -83,6 +84,6 @@ int			interpret_line(char *cmd)
 	ptr = shell->cmd;
 	rebuild_str2env(&shell);
 	env = shell->env;
-	ret = test_n_execute(cmd, exec, ptr, env);
+	ret = test_n_execute(exec, ptr, env);
 	return (ret);
 }

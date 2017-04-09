@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 18:00:21 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/02 05:25:28 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/08 03:53:16 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void		cut_to_buff(t_shell **shell, int from, int size, char **tmp)
 {
+	if (!(*shell)->buff || (*shell)->buff[0] == '\0')
+		return ;
 	*tmp = ft_strndelat((*shell)->buff, from, size);
 	(*shell)->clipboard = ft_strndup(&(*shell)->buff[from], size);
 }
@@ -23,6 +25,8 @@ void		cut_line(t_shell **shell, unsigned int key)
 	char	*tmp;
 	char	*tmp1;
 
+	if (!(*shell)->buff || (*shell)->buff[0] == '\0')
+		return ;
 	tmp = (*shell)->buff;
 	tmp1 = (*shell)->clipboard;
 	if (key == BTN_CTRL_K)
@@ -44,6 +48,8 @@ void		copy(t_shell **shell)
 {
 	char	*tmp;
 
+	if (!(*shell)->buff || (*shell)->buff[0] == '\0')
+		return ;
 	tmp = (*shell)->clipboard;
 	(*shell)->clipboard = ft_strdup((*shell)->buff);
 	ft_strdel(&tmp);

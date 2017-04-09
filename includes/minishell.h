@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/08 08:20:22 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/09 12:44:18 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -369,6 +369,7 @@ int					single_excl_type(char *str);
 **	Quotes
 */
 
+char				*quotes_env(char *str, t_shell *shell);
 int					do_quotes(t_shell **shell);
 int					ft_isescapechar(char c);
 char				**splitquote_str2(char *cmd);
@@ -399,13 +400,20 @@ t_tkn				*tkn_search_node(t_tkn *node, char *data);
 t_tkn				*tkn_last(t_tkn *node);
 void				skip_and_sort(t_tkn **tkns, t_tkn **lst_sep);
 void				tkns_sort(t_tkn **begin_list);
+int					prev_node_not_fd_aggr(t_tkn *start, t_tkn *end);
+void				tkn_del(t_tkn *start, t_tkn **tkn);
 
 /*
 **	Execution
 */
 
+<<<<<<< HEAD
 int					test_n_execute(char *cmd, char *exec, char **ptr,\
 		char **env);
+=======
+int					test_n_execute(char *exec, char **ptr,\
+					char **env);
+>>>>>>> master
 int					execute_node(t_tkn *node);
 int					execute_right_redirection(t_tkn *node);
 int					execute_logic_operators(t_tkn *node);

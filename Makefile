@@ -6,7 +6,11 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2017/04/08 06:37:16 by adeletan         ###   ########.fr        #
+=======
+#    Updated: 2017/04/08 06:13:42 by adeletan         ###   ########.fr        #
+>>>>>>> master
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +47,7 @@ tokenizer/split_command_utils.c execution/left_redirection_utils.c \
 execution/interpreting_utilities.c reading/validating.c heredoc/heredoc.c \
 execution/left_redirections2.c reading/prompt_utils.c terminal/edition_utils.c \
 history/history_search.c history/exclamation.c terminal/edition.c \
+<<<<<<< HEAD
 terminal/edition_cursor_right.c history/single_exclamation_utils.c \
 completion/c_utils.c completion/c_utils2.c completion/put_options.c \
 completion/tab_completion.c completion/define_pading.c completion/tab_arrows.c \
@@ -56,6 +61,13 @@ completion/tab_name.c completion/ft_print.c completion/get_info.c \
 completion/get_dir.c completion/get_list.c \
 completion/clean_list.c completion/try_up.c completion/name_completion.c \
 completion/name_utils.c
+=======
+terminal/edition_cursor_right.c quotes/splitquote_str2.c \
+execution/left_redirections2.c reading/prompt_utils.c history/history_search.c \
+history/exclamation.c history/single_exclamation_utils.c \
+builtins/builtin_env_prints2.c quotes/ft_isescapechar.c \
+quotes/treatquotes.c quotes/ft_splittreat.c quotes/quotes_env.c
+>>>>>>> master
 
 SOURCES		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
