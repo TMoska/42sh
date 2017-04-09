@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/08 06:26:54 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/08 07:31:25 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/09 12:49:38 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static t_c_tab		*name_fill(t_c_tab *list, char *path, char *tofind)
 {
-	t_c_tab         *tmp;
-	char            *tmp2;
+	t_c_tab			*tmp;
+	char			*tmp2;
 
 	list = get_matching(list, path, tofind);
 	tmp = list;
@@ -36,13 +36,13 @@ static t_c_tab		*name_fill(t_c_tab *list, char *path, char *tofind)
 	return (list);
 }
 
-t_c_tab		*name_completion(t_c_tab *list, char **path)
+t_c_tab				*name_completion(t_c_tab *list, char **path)
 {
 	char *tofind;
 
 	(void)list;
 	tofind = fix_cmdname(path);
-	if(!(list = name_fill(list, *path, tofind)))
+	if (!(list = name_fill(list, *path, tofind)))
 	{
 		ft_strdel(&tofind);
 		return (NULL);

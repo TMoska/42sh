@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/08 06:28:31 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/08 08:29:40 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/09 12:52:53 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,24 @@ char		*completion_buffer(t_c_tab *list, t_shell *shell)
 	if (!tmp || tmp[0] == '\0')
 	{
 		start = ft_strsub(shell->buff, 0, shell->term->tc_in);
-		end = 	ft_strsub(shell->buff, shell->term->tc_in,
-				shell->term->tc_len - shell->term->tc_in);
+		end = ft_strsub(shell->buff, shell->term->tc_in,
+			shell->term->tc_len - shell->term->tc_in);
 		ft_strdel(&shell->buff);
 		shell->buff = ft_str3join(start, list->content, end);
 		ft_strdel(&start);
 		ft_strdel(&end);
 	}
-	else 
+	else
 		ft_str_replace(&(shell->buff), tmp, list->content, 1);
 	ft_strdel(&tmp);
 	tmp = ft_strdup(shell->buff);
 	ft_bzero(shell->buff, ft_strlen(shell->buff));
 	return (tmp);
-
 }
 
-char	*fix_cmdname(char **cmd)
+char		*fix_cmdname(char **cmd)
 {
-	char 	*tmp;
+	char	*tmp;
 	char	*to_find;
 	size_t	len;
 
@@ -53,7 +52,7 @@ char	*fix_cmdname(char **cmd)
 		*cmd = ft_strdup("");
 		return (to_find);
 	}
-	to_find = ft_strdup(tmp + 2); 
+	to_find = ft_strdup(tmp + 2);
 	len = len - (ft_strlen(tmp) - 2);
 	tmp = ft_strndup(*cmd, len);
 	ft_strdel(cmd);
@@ -63,8 +62,8 @@ char	*fix_cmdname(char **cmd)
 
 t_c_tab		*get_matching(t_c_tab *list, char *path, char *tofind)
 {
-	DIR             *dir;
-	struct dirent   *dp;
+	DIR				*dir;
+	struct dirent	*dp;
 
 	if (!path || path[0] == '\0')
 	{
