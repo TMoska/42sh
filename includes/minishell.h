@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/09 12:44:18 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/09 12:46:15 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -407,13 +407,8 @@ void				tkn_del(t_tkn *start, t_tkn **tkn);
 **	Execution
 */
 
-<<<<<<< HEAD
-int					test_n_execute(char *cmd, char *exec, char **ptr,\
-		char **env);
-=======
 int					test_n_execute(char *exec, char **ptr,\
 					char **env);
->>>>>>> master
 int					execute_node(t_tkn *node);
 int					execute_right_redirection(t_tkn *node);
 int					execute_logic_operators(t_tkn *node);
