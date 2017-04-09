@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/09 19:06:52 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/09 22:42:13 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,16 +111,16 @@ t_c_tab				*search_on_dir(char *path, t_shell *shell, t_c_tab *list,
 		return ((list = name_completion(list, &cmd)));
 	else if (!(dir = opendir(path)))
 		return (NULL);
+	signal(SIGINT, SIG_IGN);
 	while ((dp = readdir(dir)) != NULL)
 		if ((dp->d_name[0] != '.' || (cmd && cmd[0] == '.')) &&
 				!ft_strncmp(cmd, dp->d_name, len))
 			list = cmd_option(dp->d_name, list);
 	closedir(dir);
 	tab_lst_sort(&list);
-	if (list && list->content)
-		list = tab_name(list, cmd);
-	if (list && list->content && list->name)
-		list->cursor = 1;
+	(list && list->content) ? (list = tab_name(list, cmd)) : (0);
+	(list && list->content && list->name) ? (list->cursor = 1) : (0);
 	ft_strdel(&cmd);
+	signal(SIGINT, sig_callback);
 	return (list);
 }
