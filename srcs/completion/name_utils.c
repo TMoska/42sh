@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/08 06:28:31 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/09 12:52:53 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/09 13:37:41 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ char		*completion_buffer(t_c_tab *list, t_shell *shell)
 		ft_strdel(&end);
 	}
 	else
-		ft_str_replace(&(shell->buff), tmp, list->content, 1);
+		ft_strnreplace(&(shell->buff), tmp, list->content, shell->term->tc_in -
+		ft_strlen(tmp));
 	ft_strdel(&tmp);
 	tmp = ft_strdup(shell->buff);
 	ft_bzero(shell->buff, ft_strlen(shell->buff));

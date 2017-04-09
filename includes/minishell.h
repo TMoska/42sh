@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/09 12:55:25 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/09 13:48:43 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@
 # define DEL		ft_putstr(tgetstr("dc", NULL));
 # define CURS_LEFT	ft_putstr(tgetstr("cr", NULL));
 # define DEL_LINE	ft_putstr(tgetstr("ce", NULL));
-# define DEL_LINES	ft_putstr(tgetstr("cd", NULL));
+# define DEL_LINES	ft_putstr(tgetstr("cd", NULL))
 
 /*
 ** COLOR codes

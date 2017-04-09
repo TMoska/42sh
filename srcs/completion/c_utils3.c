@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/08 04:09:07 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/09 13:50:29 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,17 @@ void			tab_term(int v, t_shell *shell, int put)
 		MOVE_UP;
 		(put == 1 ? (ft_putstr(tgetstr("up", NULL))) : (0));
 		(put == 1 ? (ft_putstr(tgetstr("up", NULL))) : (0));
-		ft_putstr(tgoto(tgetstr("ch", NULL), 0,
-		shell->term->tc_in + shell->term->prompt_len));
+		if (shell->term->tc_in + shell->term->prompt_len <= ft_linesize())
+			ft_putstr(tgoto(tgetstr("ch", NULL), 0,
+			shell->term->tc_in + shell->term->prompt_len));
+		else
+			ft_putstr(tgoto(tgetstr("ch", NULL), 0, (shell->term->tc_in +
+			shell->term->prompt_len) % ft_linesize()));
 	}
 	else if (v == 3)
-	{
-		ft_putstr(tgetstr("ve", NULL));
-		DEL_LINES;
-	}
+		ft_put2str(tgetstr("ve", NULL), tgetstr("cd", NULL));
 	else if (v == 4)
-	{
-		MOVE_DOWN;
-		MOVE_DOWN;
-	}
+		ft_put2str(tgetstr("do", NULL), tgetstr("do", NULL));
 }
 
 t_c_tab			**init_left(t_c_tab **tmp, size_t *c, size_t *l, size_t *page)

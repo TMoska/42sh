@@ -6,7 +6,7 @@
 #    By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/22 15:11:22 by tmoska            #+#    #+#              #
-#    Updated: 2017/04/08 03:24:31 by adeletan         ###   ########.fr        #
+#    Updated: 2017/04/09 13:35:05 by adeletan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SOURCES =	ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 					ft_arr_push.c ft_arr_del_at.c ft_arr_includes.c ft_arr_inner_join.c \
 					ft_word_count.c ft_lst_new_add_back.c ft_print_list.c ft_str_replace.c \
 					ft_splitquotes.c ft_isspace.c ft_isquotes.c ft_put2str.c ft_strsplitin.c \
-					ft_arr_to_str.c ft_isinquotes.c ft_isescaped.c
+					ft_arr_to_str.c ft_isinquotes.c ft_isescaped.c ft_strnreplace.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
