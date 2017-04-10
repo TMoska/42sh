@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/08 04:46:30 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/08 07:14:15 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/10 07:20:22 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char			*quotes_env(char *temp, t_shell *shell)
 				return (temp);
 			if ((env_val = get_env_val(&shell, &(tmp[1]))))
 			{
-				ft_str_replace(&temp, tmp, env_val, 1);
+				ft_strnreplace(&temp, tmp, env_val, pt - temp);
 				pt = temp;
 			}
 			else
