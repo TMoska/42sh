@@ -6,11 +6,29 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 05:07:59 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/07 06:23:19 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/10 05:21:46 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int			ft_numberline(t_shell **shell)
+{
+	char	*tmp;
+	size_t	len;
+	int		i;
+
+	i = 0;
+	ft_getpart(shell, &tmp);
+	len = ft_strlen(tmp);
+	while (len >= (size_t)ft_linesize())
+	{
+		len -= ft_linesize();
+		++i;
+	}
+	ft_strdel(&tmp);
+	return (i);
+}
 
 int			ft_linesize(void)
 {
@@ -24,23 +42,24 @@ int			ft_currentline(t_shell **shell)
 {
 	char	**argv;
 	int		i;
-	int		len;
+	int		i2;
+	int		i3;
 	char	*tmp;
 
 	i = -1;
 	argv = ft_strsplitin((*shell)->buff, '\n');
-	len = (*shell)->term->tc_in;
-	i = -1;
 	ft_getpart(shell, &tmp);
-	while (argv[++i] && ft_strncmp(argv[i], tmp, ft_strlen(tmp)) != 0)
-	{
-		ft_strdel(&tmp);
-		ft_getpart(shell, &tmp);
-		len -= ft_strlen(argv[i]);
-	}
+	while (argv[++i] && ft_strncmp(argv[i], tmp, ft_strlen(argv[i])) != 0)
+		;
+	i3 = (*shell)->term->tc_in;
+	i2 = 0;
+	while (i2 < i)
+		i3 -= ft_strlen(argv[i2++]);
+	while (i3 > ft_linesize())
+		i3 -= ft_linesize();
 	ft_strdel(&tmp);
 	ft_str2del(&argv);
-	return (len);
+	return (i3);
 }
 
 int			ft_isfirstline(t_shell **shell)
@@ -52,11 +71,11 @@ int			ft_isfirstline(t_shell **shell)
 	i = (*shell)->term->tc_in;
 	if (i < 0)
 		i = 0;
-	while (i > 0 && (*shell)->buff[i])
+	while (i > 0)
 	{
 		if ((*shell)->buff[i] == '\n' && i != (*shell)->term->tc_in)
 			i2++;
-		if (i2 == 1)
+		if (i2 != 0)
 			return (0);
 		--i;
 	}
@@ -70,21 +89,24 @@ int			ft_getpart(t_shell **shell, char **str)
 	int		i2;
 	int		i3;
 
-	i = -1;
-	i2 = -1;
-	i3 = -1;
-	array = ft_strsplitin((*shell)->buff, '\n');
+	i = 0;
 	i2 = 0;
-	while (++i < (*shell)->term->tc_in)
-		if (!array || !array[i2])
-			break ;
-		else if (++i3 && !array[i2][i3])
-		{
-			i3 = 0;
-			++i2;
-		}
-	i3 = ft_strlen(array[i2]);
-	str ? *str = ft_strdup(array[i2]) : NULL;
+	i3 = 0;
+	if (!(array = ft_strsplitin((*shell)->buff, '\n')))
+	{
+		str ? ft_strdup("\0") : NULL;
+		return (0);
+	}
+	i2 = 0;
+	while (i2 < (*shell)->term->tc_in && (*shell)->term->tc_in != 0)
+	{
+		i2 += ft_strlen(array[i]);
+		i++;
+	}
+	if (i != 0)
+		i--;
+	i3 = ft_strlen(array[i]);
+	str ? *str = ft_strdup(array[i]) : NULL;
 	ft_str2del(&array);
 	return (i3);
 }

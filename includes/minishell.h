@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/09 19:44:34 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/10 05:00:06 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@
 # define DEL		ft_putstr(tgetstr("dc", NULL));
 # define CURS_LEFT	ft_putstr(tgetstr("cr", NULL));
 # define DEL_LINE	ft_putstr(tgetstr("ce", NULL));
-# define DEL_LINES	ft_putstr(tgetstr("cd", NULL))
+# define DEL_LINES	ft_putstr(tgetstr("cd", NULL));
 
 /*
 ** COLOR codes
@@ -324,6 +324,7 @@ void				scan_heredocs(t_shell **shell);
 
 int					term_init(t_shell **shell);
 int					term_trigger(t_shell **shell, int off);
+int					ft_numberline(t_shell **shell);
 void				move_cursor_sides(t_shell **shell, unsigned int key);
 void				move_cursor_alt(t_shell **shell, unsigned int key);
 void				modify_buffer(t_shell **shell, unsigned int key);

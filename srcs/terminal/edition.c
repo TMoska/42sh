@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 05:12:13 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/02 11:50:44 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/10 05:26:31 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	back_to_prompt(t_shell **shell, int keep)
 		(*shell)->term->tc_in = 0;
 		return ;
 	}
-	while ((*shell)->term->tc_in > 0)
+	while ((*shell)->term->tc_in != 0)
 		move_left(shell);
 	if (keep == 1)
 		(*shell)->term->tc_in = line;
@@ -55,14 +55,25 @@ void	back_to_prompt(t_shell **shell, int keep)
 void	ft_printbuffer(t_shell **shell)
 {
 	int i;
+	int i2;
 
 	i = (*shell)->term->tc_in;
+	i2 = (*shell)->term->tc_in;
 	ft_putstr(tgetstr("vi", NULL));
-	ft_putstr(tgetstr("sc", NULL));
 	clear_cmdline(shell);
-	ft_putstr((*shell)->buff);
-	ft_putchar(' ');
-	ft_putstr(tgetstr("rc", NULL));
-	ft_putstr(tgetstr("ve", NULL));
 	(*shell)->term->tc_in = i;
+	i = 0;
+	while (i < (*shell)->term->tc_in)
+		ft_putchar((*shell)->buff[i++]);
+	if (!ft_isfirstline(shell) && (ft_getpart(shell, NULL) %
+		(ft_linesize() + 1) == 0))
+	{
+		ft_putchar(' ');
+	}
+	while (i < (*shell)->term->tc_len)
+		ft_putchar((*shell)->buff[i++]);
+	(*shell)->term->tc_in = (*shell)->term->tc_len;
+	while ((*shell)->term->tc_in != i2)
+		move_left(shell);
+	ft_putstr(tgetstr("ve", NULL));
 }

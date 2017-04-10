@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 09:02:29 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/02 14:02:54 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/10 05:20:09 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ static int		find_end(t_shell **shell, int i)
 			ft_putstr(tgoto(tgetstr("ch", NULL), 0,
 			(ft_getpart(shell, NULL) + (*shell)->term->prompt_len)
 			% ft_linesize() - 1));
+		(*shell)->term->tc_in += 1;
 	}
 	else
 	{
-		if (ft_getpart(shell, NULL) < ft_linesize())
+		if (ft_getpart(shell, NULL) <= ft_linesize())
 			ft_putstr(tgoto(tgetstr("ch", NULL), 0,
 			ft_getpart(shell, NULL) - 1));
 		else
@@ -59,15 +60,17 @@ void			move_left(t_shell **shell)
 		{
 			(*shell)->term->tc_in += 1;
 			find_end(shell, 0);
-			(*shell)->term->tc_in -= 1;
 		}
+		(*shell)->term->tc_in -= 1;
 		return ;
 	}
 	if ((ft_isfirstline(shell) && ((*shell)->term->tc_in + (*shell)->term->
 	prompt_len) % ft_linesize() == 0) || (!ft_isfirstline(shell) &&
-	(ft_checkcurrentline(shell) % ft_linesize() == 0)))
+	(ft_checkcurrentline(shell) % (ft_linesize()) == 0)))
+	{
 		ft_put2str(tgetstr("up", NULL),
-		tgoto(tgetstr("ch", NULL), 0, ft_linesize() - 1));
+				tgoto(tgetstr("ch", NULL), 0, ft_linesize() - 1));
+	}
 	else
 		MOVE_LEFT;
 	(*shell)->term->tc_in -= 1;

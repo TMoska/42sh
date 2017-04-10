@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:32:46 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/05 23:36:19 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/10 05:26:32 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,23 @@ int			reset_line(t_shell **shell)
 
 void		work_buffer(t_shell **shell, char *buffer)
 {
-	int i;
+	size_t i;
 
+	i = 0;
 	if (!buffer)
 		return ;
-	i = ft_strlen(buffer);
+	ft_putstr(tgetstr("vi", NULL));
 	write_buffer(shell, buffer);
-	(*shell)->term->tc_in -= i;
-	while (i)
+	while (i < ft_strlen(buffer))
 	{
-		move_right(shell, NULL, 1);
-		i--;
+		ft_putchar(buffer[i++]);
 	}
+	if (ft_isfirstline(shell) &&
+	((ft_getpart(shell, NULL) + (*shell)->term->prompt_len)
+	% ft_linesize() == 0))
+		ft_putchar(' ');
+	else if (!ft_isfirstline(shell) &&
+		(ft_getpart(shell, NULL) % (ft_linesize() + 1) == 0))
+		ft_putchar(' ');
 	ft_printbuffer(shell);
 }

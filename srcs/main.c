@@ -6,13 +6,40 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 11:05:54 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/09 22:46:16 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/09 23:43:10 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int g_exit_code;
+
+void	sig_resize(int s_num)
+{
+	t_c_tab		*list;
+	t_shell		*shell;
+	size_t		number;
+
+	signal(SIGWINCH, SIG_IGN);
+	number = 0;
+	(void)s_num;
+	list = get_list(NULL, 0);
+	shell = get_shell(NULL);
+	if (list)
+	{
+		ioctl(0, TIOCSTI, "\t");
+		ft_putstr(tgetstr("cl", NULL));
+		print_prompt(&shell, NULL);
+		ft_putstr(shell->buff);
+		MOVE_DOWN;
+		MOVE_DOWN;
+		list = define_pading(list, &number);
+		put_options(list, number);
+		list = get_list(list, 1);
+	}
+	signal(SIGWINCH, sig_resize);
+	return ;
+}
 
 void	sig_callback(int s_num)
 {
@@ -44,6 +71,7 @@ void	catch_signals(void)
 	i = 32;
 	while (i > 0)
 		signal(i--, sig_callback);
+	signal(SIGWINCH, sig_resize);
 	signal(SIGTSTP, sig_callback);
 }
 
