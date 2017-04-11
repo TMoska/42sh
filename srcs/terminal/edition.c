@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 05:12:13 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/11 17:50:13 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/11 18:06:46 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 void	put_space(t_shell **shell)
 {
 	if (ft_isfirstline(shell) &&
-			((ft_getpart(shell, NULL) + (*shell)->term->prompt_len)
+			((ft_currentline(shell) + (*shell)->term->prompt_len)
 			% (ft_linesize()) == 0))
 	{
-		ft_putchar('m');
+		ft_putchar(' ');
 		ft_putstr(tgetstr("le", NULL));
 	}
 	else if (!ft_isfirstline(shell) &&
@@ -78,6 +78,7 @@ void	ft_printbuffer(t_shell **shell)
 	while ((*shell)->term->tc_in != (*shell)->term->tc_len)
 		ft_putchar((*shell)->buff[(*shell)->term->tc_in++]);
 	ft_putstr(tgetstr("ve", NULL));
+	put_space(shell);
 	while ((*shell)->term->tc_in != i)
 		move_left(shell);
 }
