@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:32:46 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/10 05:26:32 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/11 17:38:18 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,6 @@ void		work_buffer(t_shell **shell, char *buffer)
 	{
 		ft_putchar(buffer[i++]);
 	}
-	if (ft_isfirstline(shell) &&
-	((ft_getpart(shell, NULL) + (*shell)->term->prompt_len)
-	% ft_linesize() == 0))
-		ft_putchar(' ');
-	else if (!ft_isfirstline(shell) &&
-		(ft_getpart(shell, NULL) % (ft_linesize() + 1) == 0))
-		ft_putchar(' ');
+	put_space(shell);
 	ft_printbuffer(shell);
 }

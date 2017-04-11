@@ -6,7 +6,7 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 05:07:59 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/10 05:21:46 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/11 14:59:48 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ int			ft_currentline(t_shell **shell)
 	i2 = 0;
 	while (i2 < i)
 		i3 -= ft_strlen(argv[i2++]);
-	while (i3 > ft_linesize())
-		i3 -= ft_linesize();
 	ft_strdel(&tmp);
 	ft_str2del(&argv);
 	return (i3);

@@ -6,7 +6,7 @@
 /*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 09:02:29 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/10 05:20:09 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/11 14:50:51 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int		ft_checkcurrentline(t_shell **shell)
 
 	i = ft_currentline(shell);
 	if (i == 0)
-		i = 1;
+		i = 0;
 	return (i);
 }
 
