@@ -6,7 +6,7 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 11:05:54 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/09 23:43:10 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/11 03:24:33 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	catch_signals(void)
 	while (i > 0)
 		signal(i--, sig_callback);
 	signal(SIGWINCH, sig_resize);
-	signal(SIGTSTP, sig_callback);
 }
 
 int		run_shell(t_shell **shell)

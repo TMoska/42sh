@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 20:58:50 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/06 04:13:24 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/11 03:22:11 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void		exec_parent(t_tkn *node, int fds[2], int stdin)
 	dup2(fds[0], 0);
 	close(fds[1]);
 	signal(SIGINT, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
 	execute_node(node->right);
 	dup2(stdin, 0);
 	close(stdin);

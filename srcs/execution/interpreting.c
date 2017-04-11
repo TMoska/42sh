@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 21:57:06 by moska             #+#    #+#             */
-/*   Updated: 2017/04/09 12:43:52 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/11 03:23:02 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	execute(t_shell **shell, char *exec, char **ptr, char **env)
 	}
 	else
 	{
-		signal(SIGTSTP, sig_callback);
+		signal(SIGTSTP, SIG_IGN);
 		signal(SIGINT, SIG_IGN);
 		waitpid(pid, &status, 0);
 		(*shell)->ret = WEXITSTATUS(status);
