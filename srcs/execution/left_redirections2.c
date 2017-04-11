@@ -6,36 +6,29 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 17:26:22 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/02 00:51:21 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/11 16:49:44 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void		print_heredoc(char *f)
+
+
+void		print_heredoc(char *f)
 {
 	t_shell		*shell;
 	t_list		*tmp;
+	t_list		*hd_lst;
 
 	shell = get_shell(NULL);
 	tmp = shell->heredoc;
-	while (ft_strcmp(shell->heredoc->content, f) != 0)
+	hd_lst = last_matching_opening(&shell, f);
+	hd_lst = hd_lst->next;
+	while (((t_heredoc*)(hd_lst->content))->type != 2)
 	{
-		tmp = shell->heredoc;
-		shell->heredoc = shell->heredoc->next;
-		ft_lstdelone(&tmp, &del_lst_str);
+		ft_putendl(((t_heredoc*)(hd_lst->content))->txt);
+		hd_lst = hd_lst->next;
 	}
-	shell->heredoc = shell->heredoc->next;
-	ft_lstdelone(&tmp, &del_lst_str);
-	while (ft_strcmp(shell->heredoc->content, f) != 0)
-	{
-		ft_putendl(shell->heredoc->content);
-		tmp = shell->heredoc;
-		shell->heredoc = shell->heredoc->next;
-		ft_lstdelone(&tmp, &del_lst_str);
-	}
-	shell->heredoc = shell->heredoc->next;
-	ft_lstdelone(&tmp, &del_lst_str);
 }
 
 static void		left_redir_child(int fds[2], int stdout, char *f)
