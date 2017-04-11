@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/10 05:00:06 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/11 12:16:53 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -474,4 +474,6 @@ t_c_tab				*get_matching_binary(t_c_tab *list, char *path,
 		char *tofind);
 t_c_tab				*binary_directory(t_c_tab *list, t_shell *shell);
 t_c_tab				*name_fill(t_c_tab *list, char *path, char *tofind);
+void				tab_cursor_fix(t_c_tab **list);
+
 #endif

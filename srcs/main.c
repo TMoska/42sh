@@ -6,7 +6,7 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 11:05:54 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/11 03:24:33 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/11 12:17:41 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,16 @@ void	sig_resize(int s_num)
 	shell = get_shell(NULL);
 	if (list)
 	{
-		ioctl(0, TIOCSTI, "\t");
 		ft_putstr(tgetstr("cl", NULL));
 		print_prompt(&shell, NULL);
 		ft_putstr(shell->buff);
 		MOVE_DOWN;
 		MOVE_DOWN;
-		list = define_pading(list, &number);
-		put_options(list, number);
-		list = get_list(list, 1);
+		tab_cursor_fix(&list);
+		ioctl(0, TIOCSTI, "\t");
+		if ((list = define_pading(list, &number)))
+			if (put_options(list, number))
+				list = get_list(list, 1);
 	}
 	signal(SIGWINCH, sig_resize);
 	return ;
