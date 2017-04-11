@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/11 17:20:45 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/11 17:24:32 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,12 @@
 */
 
 extern int g_exit_code;
+
+typedef struct		s_heredoc
+{
+	int				type;
+	char			*txt;
+}					t_heredoc;
 
 typedef struct		s_envl
 {
@@ -317,6 +323,7 @@ int					reset_line(t_shell **shell);
 */
 
 void				scan_heredocs(t_shell **shell);
+t_list				*last_matching_opening(t_shell **shell, char *txt);
 
 /*
 **	Terminall
@@ -478,4 +485,5 @@ void				tab_cursor_fix(t_c_tab **list);
 int					big_enough(t_c_tab *list);
 void				begin_resize_tab(t_c_tab **list, size_t number);
 int					compare_tab_str(char *s1, char *s2, size_t len);
+
 #endif
