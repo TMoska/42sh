@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:05:08 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/11 17:25:52 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/11 17:28:40 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ t_list		*last_matching_opening(t_shell **shell, char *txt)
 	tmp = (*shell)->heredoc;
 	while (tmp)
 	{
-		if (((t_heredoc*)(tmp->content))->type == 1 && ft_strcmp(((t_heredoc*)(tmp->content))->txt, txt) == 0)
+		if (((t_heredoc*)(tmp->content))->type == 1\
+			&& ft_strcmp(((t_heredoc*)(tmp->content))->txt, txt) == 0)
 			ret = tmp;
 		tmp = tmp->next;
 	}

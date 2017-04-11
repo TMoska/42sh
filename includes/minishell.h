@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/11 17:24:32 by ede-sous         ###   ########.fr       */
+/*   Updated: 2017/04/11 17:30:16 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,6 +260,7 @@ void				del_lst_str(void **content, size_t *content_size);
 void				clean_c_list(t_c_tab **lst);
 char				*treat_quotes(char *cmd);
 char				**ft_splittreat(char *cmd, char c);
+void				del_heredoc(void **content, size_t *content_size);
 
 /*
 **	Environment list custom struct & functions

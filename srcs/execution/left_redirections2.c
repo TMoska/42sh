@@ -6,15 +6,13 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 17:26:22 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/11 16:49:44 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/11 17:31:56 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-
-void		print_heredoc(char *f)
+void			print_heredoc(char *f)
 {
 	t_shell		*shell;
 	t_list		*tmp;
