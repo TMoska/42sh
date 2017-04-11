@@ -6,12 +6,12 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/04/09 17:26:31 by adeletan         ###   ########.fr        #
+#    Updated: 2017/04/11 11:55:45 by ede-sous         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 GCC 		= gcc
-NAME 		= 21sh
+NAME 		= 42sh
 FLAGS 		= -Wall -Werror -Wextra -g
 
 LIB_PATH	= libft
