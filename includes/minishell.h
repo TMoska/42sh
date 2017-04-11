@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/11 17:16:52 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/11 17:24:32 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -484,5 +484,6 @@ t_c_tab				*name_fill(t_c_tab *list, char *path, char *tofind);
 void				tab_cursor_fix(t_c_tab **list);
 int					big_enough(t_c_tab *list);
 void				begin_resize_tab(t_c_tab **list, size_t number);
+int					compare_tab_str(char *s1, char *s2, size_t len);
 
 #endif

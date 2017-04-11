@@ -6,7 +6,7 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/09 17:28:18 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/11 17:22:08 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,24 @@ t_c_tab				*cmd_option(char *cmd, t_c_tab *list)
 	}
 	tmp->next = NULL;
 	return (list);
+}
+
+int					compare_tab_str(char *s1, char *s2, size_t len)
+{
+	char			*tmp;
+	char			*tmp2;
+
+	if (!s1 || !s2)
+		return (1);
+	tmp = ft_strdup(s1);
+	tmp2 = ft_strdup(s2);
+	if (!ft_strncmp(ft_strlower(tmp), ft_strlower(tmp2), len))
+	{
+		ft_strdel(&tmp);
+		ft_strdel(&tmp2);
+		return (0);
+	}
+	ft_strdel(&tmp);
+	ft_strdel(&tmp2);
+	return (1);
 }
