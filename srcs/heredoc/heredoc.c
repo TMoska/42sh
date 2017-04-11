@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:05:08 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/11 17:12:50 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/11 17:25:52 by tmoska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void		read_heredoc(char *f, t_shell **shell)
 	while (1)
 	{
 		print_prompt(shell, ft_str3join("heredoc: ", f, " >"));
+		signal(SIGINT, SIG_IGN);
 		read_input(shell, f);
 		hd = new_heredoc_node((*shell)->buff, 0);
 		if (ft_strcmp((*shell)->buff, f) == 0)
