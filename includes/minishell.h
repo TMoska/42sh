@@ -6,14 +6,14 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/11 17:43:49 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/11 17:48:42 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libft.h"
+# include "../libft/includes/libft.h"
 # include <stdio.h>
 # include <signal.h>
 # include <unistd.h>
@@ -485,10 +485,7 @@ t_c_tab				*name_fill(t_c_tab *list, char *path, char *tofind);
 void				tab_cursor_fix(t_c_tab **list);
 int					big_enough(t_c_tab *list);
 void				begin_resize_tab(t_c_tab **list, size_t number);
-<<<<<<< HEAD
 void				put_space(t_shell **shell);
-=======
 int					compare_tab_str(char *s1, char *s2, size_t len);
->>>>>>> 859ae6a6ba09dae8005cbe9c9e9426e587b7c421
 
 #endif

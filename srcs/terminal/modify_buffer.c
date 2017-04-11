@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:29:48 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/07 23:22:19 by tmoska           ###   ########.fr       */
+/*   Updated: 2017/04/11 17:51:13 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,11 @@ void		modify_buffer(t_shell **shell, unsigned int key)
 			(*shell)->term->tc_in, (size_t)1);
 	ft_printbuffer(shell);
 	ft_strdel(&tmp);
+}
+
+void		cmd_rewrite(t_shell **shell)
+{
+	clear_cmdline(shell);
+	ft_putstr((*shell)->buff);
+	(*shell)->term->tc_in = (*shell)->term->tc_len;
 }
