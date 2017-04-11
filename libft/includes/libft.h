@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:33:19 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/09 13:35:51 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/11 16:53:05 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef	struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+char				*ft_strlower(char *str);
 void				ft_strnreplace(char **str, char *old, char *new, int index);
 int					ft_isescaped(char const *str, size_t index);
 int					ft_isinquotes(char const *cmd, int pos);

@@ -6,7 +6,7 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/04/11 13:54:14 by ede-sous         ###   ########.fr        #
+#    Updated: 2017/04/11 17:30:29 by tmoska           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ terminal/edition_cursor_right.c history/single_exclamation_utils.c \
 completion/c_utils.c completion/c_utils2.c completion/put_options.c \
 completion/tab_completion.c completion/define_pading.c completion/tab_arrows.c \
 completion/c_utils3.c completion/tab_lst_sort.c completion/c_utils4.c \
-terminal/edition_cursor_right.c quotes/splitquote_str2.c \
+terminal/edition_cursor_right.c quotes/splitquote_str2.c cleanup/cleaning2.c\
 execution/left_redirections2.c reading/prompt_utils.c history/history_search.c \
 history/exclamation.c history/single_exclamation_utils.c \
 builtins/builtin_env_prints2.c quotes/ft_isescapechar.c \

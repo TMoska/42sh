@@ -6,7 +6,7 @@
 /*   By: moska <moska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:57:49 by moska             #+#    #+#             */
-/*   Updated: 2017/04/11 13:58:36 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/11 17:43:49 by adeletan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,12 @@
 */
 
 extern int g_exit_code;
+
+typedef struct		s_heredoc
+{
+	int				type;
+	char			*txt;
+}					t_heredoc;
 
 typedef struct		s_envl
 {
@@ -254,6 +260,7 @@ void				del_lst_str(void **content, size_t *content_size);
 void				clean_c_list(t_c_tab **lst);
 char				*treat_quotes(char *cmd);
 char				**ft_splittreat(char *cmd, char c);
+void				del_heredoc(void **content, size_t *content_size);
 
 /*
 **	Environment list custom struct & functions
@@ -317,6 +324,7 @@ int					reset_line(t_shell **shell);
 */
 
 void				scan_heredocs(t_shell **shell);
+t_list				*last_matching_opening(t_shell **shell, char *txt);
 
 /*
 **	Terminall
@@ -477,6 +485,10 @@ t_c_tab				*name_fill(t_c_tab *list, char *path, char *tofind);
 void				tab_cursor_fix(t_c_tab **list);
 int					big_enough(t_c_tab *list);
 void				begin_resize_tab(t_c_tab **list, size_t number);
+<<<<<<< HEAD
 void				put_space(t_shell **shell);
+=======
+int					compare_tab_str(char *s1, char *s2, size_t len);
+>>>>>>> 859ae6a6ba09dae8005cbe9c9e9426e587b7c421
 
 #endif

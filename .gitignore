@@ -1,5 +1,6 @@
 *.o
 21sh
+42sh
 minishell
 libft/libft.a
 notes.md
