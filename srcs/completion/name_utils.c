@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   name_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/08 06:28:31 by adeletan          #+#    #+#             */
-/*   Updated: 2017/04/09 19:54:45 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/11 17:21:42 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char		*completion_buffer(t_c_tab *list, t_shell *shell, char *tmp)
 	{
 		start = ft_strsub(shell->buff, 0, shell->term->tc_in);
 		end = ft_strsub(shell->buff, shell->term->tc_in,
-			shell->term->tc_len - shell->term->tc_in);
+				shell->term->tc_len - shell->term->tc_in);
 		ft_strdel(&shell->buff);
 		shell->buff = ft_str3join(start, newcontent, end);
 		ft_strdel(&start);
@@ -32,7 +32,7 @@ char		*completion_buffer(t_c_tab *list, t_shell *shell, char *tmp)
 	}
 	else
 		ft_strnreplace(&(shell->buff), tmp, newcontent, shell->term->tc_in -
-		ft_strlen(tmp));
+				ft_strlen(tmp));
 	ft_strdel(&tmp);
 	ft_strdel(&newcontent);
 	tmp = ft_strdup(shell->buff);
@@ -77,7 +77,7 @@ t_c_tab		*get_matching(t_c_tab *list, char *path, char *tofind)
 		return (NULL);
 	while ((dp = readdir(dir)) != NULL)
 		if (dp->d_name[0] != '.')
-			if (ft_strncmp(dp->d_name, tofind, ft_strlen(tofind)) == 0)
+			if (!compare_tab_str(dp->d_name, tofind, ft_strlen(tofind)))
 				list = cmd_option(dp->d_name, list);
 	closedir(dir);
 	return (list);
