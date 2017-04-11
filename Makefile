@@ -6,12 +6,12 @@
 #    By: moska <moska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 21:40:09 by moska             #+#    #+#              #
-#    Updated: 2017/04/09 17:26:31 by adeletan         ###   ########.fr        #
+#    Updated: 2017/04/11 13:54:14 by ede-sous         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 GCC 		= gcc
-NAME 		= 21sh
+NAME 		= 42sh
 FLAGS 		= -Wall -Werror -Wextra -g
 
 LIB_PATH	= libft
@@ -71,7 +71,7 @@ all: $(NAME)
 
 $(NAME): $(LIB) $(OBJECTS)
 	@$(GCC) $(FLAGS) -o $@ $^ $(LIB_LINK) $(EXTRA_LIB)
-	@echo "\033[0;32mSuccess: \033[0m21sh compiled"
+	@echo "\033[0;32mSuccess: \033[0m42sh compiled"
 	@echo "\033[0;32mDone\033[0m"
 
 $(LIB):

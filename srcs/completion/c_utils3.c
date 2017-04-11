@@ -6,11 +6,21 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/09 13:50:29 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/11 13:48:15 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void			begin_resize_tab(t_c_tab **list, size_t number)
+{
+	ioctl(0, TIOCSTI, "\t");
+	MOVE_DOWN;
+	MOVE_DOWN;
+	tab_cursor_fix(list);
+	put_options(((*list) = define_pading((*list), &number)), number);
+	(*list) = get_list((*list), 1);
+}
 
 t_c_tab			*tab_binary(t_c_tab *list, t_shell *shell)
 {

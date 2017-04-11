@@ -6,11 +6,26 @@
 /*   By: ede-sous <ede-sous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 23:42:55 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/04/09 23:13:26 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/11 12:15:16 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void				tab_cursor_fix(t_c_tab **list)
+{
+	t_c_tab			*tmp;
+
+	tmp = (*list);
+	while (tmp)
+	{
+		if (tmp->prev == NULL)
+			tmp->cursor = 1;
+		else
+			tmp->cursor = 0;
+		tmp = tmp->next;
+	}
+}
 
 int					check_dir(char *tmp)
 {
@@ -45,7 +60,7 @@ int					check_winsize(t_shell **shell, t_c_tab *list)
 				ft_put2str(tgetstr("up", NULL), tgetstr("up", NULL));
 				try_up(shell);
 				ft_putstr(tgoto(tgetstr("ch", NULL), 0,
-				(*shell)->term->prompt_len));
+							(*shell)->term->prompt_len));
 				ft_putstr((*shell)->buff);
 				(*shell)->term->tc_in = ft_strlen((*shell)->buff);
 				clean_list(list);
@@ -67,7 +82,7 @@ int					treat_tab_c(size_t *v, t_shell **shell, t_c_tab **list)
 	{
 		if (!(*list = binary_directory(*list, *shell)))
 			if (!(((*list)) = tab_binary(((*list)), *shell))
-				|| !((*list))->content)
+					|| !((*list))->content)
 				return (-1);
 	}
 	else if ((*v) == 0 && (!(((*list)) = search_on_dir(".", *shell, NULL, 1))
