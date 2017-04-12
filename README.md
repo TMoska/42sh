@@ -1,7 +1,7 @@
-minishell / 21sh / 42sh - TMoska, Ede-sous, Ryaoi, Adeletan
+42sh - TMoska, Ede-sous, Ryaoi, Adeletan
 ===
 
-Recreation of `/bin/bash` with executable interpretation and some of the builtins.
+Recreation of `/bin/bash` with executable interpretation, and POSIX standard builtins.
 
 ```
 Mandatory part:
