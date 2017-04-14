@@ -21,7 +21,7 @@ struct s_pad		start_pad(struct winsize w, size_t nb_files)
 	pad.page_s = 1;
 	pad.pages = 1;
 	pad.cols = 1;
-	pad.max_x = w.ws_col;
+	pad.max_x = w.ws_col - 5;
 	pad.max_y = 10;
 	pad.largest = 0;
 	while (nb_files > pad.cols * pad.pages)

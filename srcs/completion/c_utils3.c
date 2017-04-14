@@ -18,7 +18,8 @@ void			begin_resize_tab(t_c_tab **list, size_t number)
 	MOVE_DOWN;
 	MOVE_DOWN;
 	tab_cursor_fix(list);
-	put_options(((*list) = define_pading((*list), &number)), number);
+	if (((*list) = define_pading((*list), &number)))
+		put_options((*list), number);
 	(*list) = get_list((*list), 1);
 }
 
