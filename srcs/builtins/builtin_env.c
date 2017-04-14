@@ -6,7 +6,7 @@
 /*   By: tmoska <tmoska@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 18:27:17 by tmoska            #+#    #+#             */
-/*   Updated: 2017/04/05 04:17:57 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/04/14 23:56:51 by ede-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ int				has_errors(t_shell **shell, t_env_s *env_s, char **cmd)
 		if (*cmd[0] == '-' && *(*cmd + 1) && \
 				!(*(*cmd + 1) == 'i' || *(*cmd + 1) == '0' ||
 				ft_strcmp(*cmd, "--null") == 0) && (ret = 1))
-			{
-				ft_putstr_fd("env: illegal option -- ", 2);
-				ft_putchar_fd((*(*cmd + 1)), 2);
-				ft_putstr_fd("\nusage: env [-i] [name=value ...] ", 2);
-				ft_putendl_fd("[utility [argument ...]]", 2);
-			}
+		{
+			ft_putstr_fd("env: illegal option -- ", 2);
+			ft_putchar_fd((*(*cmd + 1)), 2);
+			ft_putstr_fd("\nusage: env [-i] [name=value ...] ", 2);
+			ft_putendl_fd("[utility [argument ...]]", 2);
+		}
 		cmd++;
 	}
 	set_error_flag(shell, env_s, &ret);
