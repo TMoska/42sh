@@ -69,9 +69,8 @@ int				has_errors(t_shell **shell, t_env_s *env_s, char **cmd)
 		if (bin == 2)
 			break ;
 		if (*cmd[0] == '-' && *(*cmd + 1) && \
-				!(*(*cmd + 1) == 'u' || *(*cmd + 1) == 'i'
-			|| *(*cmd + 1) == '0' || ft_strcmp(*cmd, "--null") == 0)
-			&& (ret = 1))
+				!(*(*cmd + 1) == 'i' || *(*cmd + 1) == '0' ||
+				ft_strcmp(*cmd, "--null") == 0) && (ret = 1))
 			ft_putendl_fd("env: illegal argument", 2);
 		cmd++;
 	}
