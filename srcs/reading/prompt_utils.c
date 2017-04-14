@@ -41,7 +41,7 @@ void	build_prompt(t_shell **shell)
 	git = get_git_branch();
 	path = getcwd(NULL, 0);
 	home = get_env_val(shell, "HOME");
-	if (home && home[0] != '\0' && ft_strstr(path, home))
+	if (path && home && home[0] != '\0' && ft_strstr(path, home))
 		ft_str_replace(&path, home, "~", 1);
 	ft_putstr("\033[0;35m");
 	if ((logname = get_env_val(shell, "LOGNAME")))
